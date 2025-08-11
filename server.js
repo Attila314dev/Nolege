@@ -39,7 +39,7 @@ room = {
     questions: Array<...>,
     roundClosed:boolean,
     roundTimer:NodeJS.Timeout|null,
-    expected:number // ennyi aktív játékos válaszát várjuk
+    expected:number
   }
 }
 */
@@ -80,13 +80,11 @@ function pickTwentyQuestions() {
 }
 
 function broadcast(room, type, payload) {
-  // játékosok
   for (const p of room.players.values()) {
     if (p.ws && p.ws.readyState === 1) {
       p.ws.send(JSON.stringify({ type, ...payload }));
     }
   }
-  // spectátorok
   for (const s of room.spectators) {
     if (s.readyState === 1) {
       s.send(JSON.stringify({ type, ...payload }));
@@ -97,8 +95,8 @@ function broadcast(room, type, payload) {
 function roomSnapshot(room) {
   return {
     id: room.id,
-    players: Array.from(room.players.values()).map(p => ({ nick: p.nick, score: p.score })),
     admin: room.admin?.nick || null,
+    players: Array.from(room.players.values()).map(p => ({ nick: p.nick, score: p.score })),
     game: {
       running: room.game.running,
       questionIndex: room.game.questionIndex
@@ -136,10 +134,11 @@ app.post("/api/join", (req, res) => {
   res.json({ ok: true });
 });
 
-// Szobalista a lobbyhoz (név/jelszó NEM, csak meták)
+// Szobalista a lobbyhoz (admin nick is kell)
 app.get("/api/rooms", (_req, res) => {
   const list = Array.from(rooms.values()).map(r => ({
     id: r.id,
+    admin: r.admin?.nick || null,
     players: r.players.size,
     running: r.game.running,
     questionIndex: r.game.questionIndex
@@ -159,17 +158,20 @@ wss.on("connection", (ws) => {
 
     const { roomId, password, nick, isAdmin, spectator } = init;
     const room = rooms.get(roomId);
-    if (!room || room.password !== password) {
-      ws.send(JSON.stringify({ type: "error", error: "Bad room/password" }));
-      ws.close();
-      return;
-    }
+    if (!room) { ws.send(JSON.stringify({ type:"error", error:"No such room" })); ws.close(); return; }
 
-    // Spectator belépés (nick nem kötelező)
+    // SPECTATOR: jelszó NEM kell (kérésedre)
     if (spectator) {
       room.spectators.add(ws);
       ws.on("close", () => room.spectators.delete(ws));
       ws.send(JSON.stringify({ type: "joined", room: roomSnapshot(room), you: { spectator: true } }));
+      return;
+    }
+
+    // Játékos/admin: jelszó kell
+    if (room.password !== password) {
+      ws.send(JSON.stringify({ type: "error", error: "Bad room/password" }));
+      ws.close();
       return;
     }
 
@@ -193,7 +195,6 @@ wss.on("connection", (ws) => {
     player.ws = ws;
     room.players.set(nick, player);
 
-    // lobby update
     broadcast(room, "lobbyUpdate", { room: roomSnapshot(room) });
 
     ws.on("message", (raw) => {
@@ -225,12 +226,10 @@ wss.on("connection", (ws) => {
     });
 
     ws.on("close", () => {
-      // a játékos marad listában, csak offline
       if (player) player.ws = null;
       broadcast(room, "lobbyUpdate", { room: roomSnapshot(room) });
     });
 
-    // visszaigazolás
     ws.send(JSON.stringify({ type: "joined", room: roomSnapshot(room), you: { nick, isAdmin: !!isAdmin } }));
   });
 });
@@ -313,7 +312,7 @@ function finishRound(room) {
 // Health endpoint
 app.get("/healthz", (_req, res) => res.send("ok"));
 
-/** SPA fallback (deep linkek ne 404-eljenek) */
+/** SPA fallback */
 app.get("*", (req, res, next) => {
   if (req.method !== "GET") return next();
   const accept = req.headers.accept || "";
