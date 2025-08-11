@@ -3,11 +3,17 @@ import { WebSocketServer } from "ws";
 import http from "http";
 import { v4 as uuidv4 } from "uuid";
 import fs from "fs";
-
+import path from "path";
+import { fileURLToPath } from "url";
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 const app = express();
 app.use(express.json());
-app.use(express.static("public"));
-
+app.use(express.static(path.join(__dirname, "public")));
+import fs from "fs"; // már benne van nálad, ha nem, importáld
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "index.html"));
+});
 const questions = JSON.parse(fs.readFileSync("./questions.json", "utf8"));
 
 /** In-memory state (prototípus) **/
