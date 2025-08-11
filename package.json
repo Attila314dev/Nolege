@@ -1,0 +1,15 @@
+{
+  "name": "quiz-rooms",
+  "version": "1.0.0",
+  "description": "Szobás, gyorsasági kvízjáték (10 mp körök, leggyorsabb helyes kap pontot).",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "NODE_ENV=development node server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "uuid": "^9.0.1",
+    "ws": "^8.18.0"
+  }
+}
