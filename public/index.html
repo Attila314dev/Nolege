@@ -9,6 +9,7 @@
 <body>
   <main class="wrap">
     <h1>🧠 Kvízszobák</h1>
+
     <section class="card">
       <h2>Új szoba (Admin)</h2>
       <label>Admin nick:
@@ -22,7 +23,7 @@
     </section>
 
     <section class="card">
-      <h2>Csatlakozás meglévő szobához</h2>
+      <h2>Csatlakozás játékosként</h2>
       <label>Szobakód:
         <input id="joinRoom" placeholder="pl. ab12cd" maxlength="6" />
       </label>
@@ -35,12 +36,26 @@
       <button id="joinBtn">Belépés</button>
       <p id="joinOut" class="mono small"></p>
     </section>
+
+    <section class="card">
+      <h2>Elérhető szobák</h2>
+      <div class="flex space">
+        <button id="refreshRooms">Frissítés</button>
+        <span class="small mono">Automatikus frissítés 5 mp-enként</span>
+      </div>
+      <ul id="roomList" class="players topgap"></ul>
+
+      <div class="topgap small">Spectator belépés (csak nézés, TV-re):</div>
+      <label>Szobakód: <input id="specRoom" maxlength="6" /></label>
+      <label>Jelszó: <input id="specPass" type="password" /></label>
+      <button id="specBtn">Spectate</button>
+    </section>
   </main>
 
   <script>
+    // Új szoba
     const createBtn = document.getElementById('createBtn');
     const createOut = document.getElementById('createOut');
-
     createBtn.onclick = async () => {
       const adminNick = document.getElementById('adminNick').value.trim();
       const password = document.getElementById('adminPass').value.trim();
@@ -58,6 +73,7 @@
       setTimeout(()=> location.href = link, 700);
     };
 
+    // Join játékosként
     const joinBtn = document.getElementById('joinBtn');
     const joinOut = document.getElementById('joinOut');
     joinBtn.onclick = async () => {
@@ -74,6 +90,31 @@
       if (!res.ok) { joinOut.textContent = data.error || 'Hiba'; return; }
       const link = `${location.origin}/room.html?room=${roomId}&pw=${encodeURIComponent(password)}&nick=${encodeURIComponent(nick)}`;
       location.href = link;
+    };
+
+    // Szobalista
+    const roomList = document.getElementById('roomList');
+    const refreshBtn = document.getElementById('refreshRooms');
+    async function loadRooms(){
+      try{
+        const res = await fetch('/api/rooms');
+        const data = await res.json();
+        roomList.innerHTML = (data||[]).map(r =>
+          `<li><b>${r.id}</b><span>${r.players} játékos${r.running ? ' • folyamatban' : ''}</span></li>`
+        ).join('') || '<li>(nincs aktív szoba)</li>';
+      }catch(e){
+        roomList.innerHTML = '<li>(nem elérhető)</li>';
+      }
+    }
+    refreshBtn.onclick = loadRooms;
+    loadRooms(); setInterval(loadRooms, 5000);
+
+    // Spectator belépés
+    document.getElementById('specBtn').onclick = () => {
+      const room = document.getElementById('specRoom').value.trim().toLowerCase();
+      const pw = document.getElementById('specPass').value.trim();
+      if(!room || !pw) return alert('Add meg a szobakódot és a jelszót');
+      location.href = `${location.origin}/room.html?room=${room}&pw=${encodeURIComponent(pw)}&spectator=1`;
     };
   </script>
 </body>
