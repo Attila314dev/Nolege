@@ -10,7 +10,6 @@ const __dirname = path.dirname(__filename);
 const app = express();
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "public")));
-import fs from "fs"; // már benne van nálad, ha nem, importáld
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "index.html"));
 });
