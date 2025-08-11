@@ -22,8 +22,8 @@ const finalBoardEl = document.getElementById('finalBoard');
 const adminPanel = document.getElementById('adminPanel');
 const startBtn = document.getElementById('startBtn');
 
-// Paramok ellenőrzése: spectatornál NEM kell nick
-if (!roomId || !password || (!nick && !spectator)) {
+// Paramok: spectatornál elég roomId
+if (!roomId || (!spectator && (!password || !nick))) {
   alert("Hiányzó paraméterek. Menj vissza a főoldalra.");
   location.href = "/";
 }
@@ -50,7 +50,7 @@ function connectWS() {
     if (msg.type === "joined") {
       renderLobby(msg.room);
       if (msg.you?.isAdmin && !spectator) adminPanel.classList.remove('hide');
-      if (spectator) adminPanel.classList.add('hide'); // spectator ne indítson játékot
+      if (spectator) adminPanel.classList.add('hide');
     }
     if (msg.type === "lobbyUpdate") {
       renderLobby(msg.room);
@@ -125,11 +125,10 @@ function startCountdown(sec) {
 }
 
 function submitAnswer(option, btn) {
-  if (spectator) return; // biztonság kedvéért
+  if (spectator) return;
   if (answeredThisRound) return;
   answeredThisRound = true;
 
-  // vizu: disable minden opció, jelöld a választ
   Array.from(document.querySelectorAll('.opt')).forEach(el => el.disabled = true);
   btn.classList.add('chosen');
 
@@ -160,7 +159,7 @@ function showGameOver(m) {
 
 if (startBtn) {
   startBtn.onclick = () => {
-    if (spectator) return; // spectator nem indít
+    if (spectator) return;
     ws.send(JSON.stringify({ type: "startGame" }));
   };
 }
