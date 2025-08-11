@@ -1,0 +1,25 @@
+[
+  { "category": "Tudomány", "question": "Melyik a Föld legnagyobb óceánja?", "options": ["A) Csendes-óceán", "B) Atlanti-óceán", "C) Indiai-óceán", "D) Jeges-tenger"], "answer": "A" },
+  { "category": "Tudomány", "question": "Mi a periódusos rendszer első eleme?", "options": ["A) Hélium", "B) Hidrogén", "C) Lítium", "D) Oxigén"], "answer": "B" },
+  { "category": "Tudomány", "question": "Melyik emlős képes aktív repülésre?", "options": ["A) Denevér", "B) Mókus", "C) Delfin", "D) Vakond"], "answer": "A" },
+  { "category": "Tudomány", "question": "Melyik bolygó kering legközelebb a Naphoz?", "options": ["A) Vénusz", "B) Merkúr", "C) Mars", "D) Jupiter"], "answer": "B" },
+  { "category": "Tudomány", "question": "Mi a DNS fő szerepe?", "options": ["A) Energia termelés", "B) Információ tárolás", "C) Mozgás biztosítása", "D) Védelem"], "answer": "B" },
+
+  { "category": "Matematika", "question": "Mennyi 12 × 8?", "options": ["A) 96", "B) 88", "C) 100", "D) 112"], "answer": "A" },
+  { "category": "Matematika", "question": "A kör kerületének képlete:", "options": ["A) 2πr", "B) πr²", "C) πd", "D) r²"], "answer": "A" },
+  { "category": "Matematika", "question": "Mennyi a 144 négyzetgyöke?", "options": ["A) 10", "B) 11", "C) 12", "D) 13"], "answer": "C" },
+  { "category": "Matematika", "question": "Hány fok a háromszög belső szögeinek összege?", "options": ["A) 90", "B) 180", "C) 270", "D) 360"], "answer": "B" },
+  { "category": "Matematika", "question": "Mennyi 7! (7 faktoriális)?", "options": ["A) 720", "B) 5040", "C) 840", "D) 120"], "answer": "B" },
+
+  { "category": "Irodalom", "question": "Ki írta a \"Toldi\"-t?", "options": ["A) Petőfi Sándor", "B) Arany János", "C) Vörösmarty Mihály", "D) Jókai Mór"], "answer": "B" },
+  { "category": "Irodalom", "question": "Ki a \"Rómeó és Júlia\" szerzője?", "options": ["A) Wordsworth", "B) Shakespeare", "C) Orwell", "D) Jane Austen"], "answer": "B" },
+  { "category": "Irodalom", "question": "Műfaj: \"A Pál utcai fiúk\"?", "options": ["A) Tragédia", "B) Regény", "C) Novella", "D) Eposz"], "answer": "B" },
+  { "category": "Irodalom", "question": "Ki írta a \"Bűn és bűnhődés\"-t?", "options": ["A) Dosztojevszkij", "B) Tolsztoj", "C) Csehov", "D) Gorkij"], "answer": "A" },
+  { "category": "Irodalom", "question": "Ki írta a \"Nemzeti dalt\"?", "options": ["A) Petőfi Sándor", "B) Arany János", "C) Ady Endre", "D) József Attila"], "answer": "A" },
+
+  { "category": "Történelem", "question": "Mikor volt a mohácsi csata?", "options": ["A) 1521", "B) 1526", "C) 1541", "D) 1552"], "answer": "B" },
+  { "category": "Történelem", "question": "Ki volt az USA első elnöke?", "options": ["A) Abraham Lincoln", "B) George Washington", "C) Thomas Jefferson", "D) John Adams"], "answer": "B" },
+  { "category": "Történelem", "question": "Mikor tört ki az első világháború?", "options": ["A) 1912", "B) 1914", "C) 1916", "D) 1918"], "answer": "B" },
+  { "category": "Történelem", "question": "Melyik uralkodott a legtovább a felsoroltak közül?", "options": ["A) Szent István", "B) Hunyadi Mátyás", "C) Ferenc József", "D) IV. Béla"], "answer": "C" },
+  { "category": "Történelem", "question": "Mikor lett Magyarország EU tag?", "options": ["A) 2002", "B) 2003", "C) 2004", "D) 2005"], "answer": "C" }
+]
