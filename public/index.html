@@ -18,7 +18,7 @@
         <span class="small mono">Automatikus frissítés 5 mp-enként</span>
       </div>
       <ul id="roomList" class="players topgap"></ul>
-      <p class="small mono topgap">A Join gomb megnyomása után megadod a nicked és a szoba jelszavát.</p>
+      <p class="small mono topgap">A Join gomb megnyomása után megadod a nicked és a szoba jelszavát. Ha a játék már fut, automatikusan spectator módba lépsz.</p>
     </section>
 
     <!-- 2) Szoba létrehozás alatta -->
@@ -48,39 +48,58 @@
     const roomList = document.getElementById('roomList');
     const refreshBtn = document.getElementById('refreshRooms');
 
+    function esc(s){ return String(s ?? "").replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+
     async function loadRooms(){
       try{
-        const res = await fetch('/api/rooms');
+        const res = await fetch('/api/rooms', { cache: 'no-store' });
+        if (!res.ok) throw new Error('rooms fetch failed');
         const data = await res.json();
+
         roomList.innerHTML = (data||[]).map(r => `
           <li>
-            <b>${r.id}</b>
-            <span class="small">Főnök: ${r.admin || '-'}</span>
+            <b>${esc(r.id)}</b>
+            <span class="small">Főnök: ${esc(r.admin || '-')}</span>
             <span>${r.players} játékos${r.running ? ' • folyamatban' : ''}</span>
-            <button class="btn" data-room="${r.id}">Join</button>
+            <button class="btn join" data-room="${esc(r.id)}" data-running="${r.running ? '1':'0'}">
+              ${r.running ? 'Spectate' : 'Join'}
+            </button>
           </li>
         `).join('') || '<li>(nincs aktív szoba)</li>';
 
-        // Join gombok eseménye
-        roomList.querySelectorAll('button[data-room]').forEach(btn => {
+        // Join/Spectate logika szobánként
+        roomList.querySelectorAll('button.join').forEach(btn => {
           btn.onclick = async () => {
             const roomId = btn.getAttribute('data-room');
+            const running = btn.getAttribute('data-running') === '1';
+
+            if (running) {
+              // játék fut → spectator (jelszó NEM kell)
+              location.href = `${location.origin}/room.html?room=${encodeURIComponent(roomId)}&spectator=1`;
+              return;
+            }
+
+            // nem fut → Join játékosként
             const nick = prompt('Nick (3-12 karakter):')?.trim();
-            if (!nick || nick.length < 3 || nick.length > 12) return alert('Érvénytelen nick.');
+            if (!nick || nick.length < 3 || nick.length > 12) { alert('Érvénytelen nick.'); return; }
             const password = prompt('Szoba jelszó:')?.trim();
-            if (!password) return alert('Jelszó kell.');
+            if (!password) { alert('Jelszó kell.'); return; }
 
-            // REST join
-            const res = await fetch('/api/join', {
-              method: 'POST', headers: {'Content-Type':'application/json'},
-              body: JSON.stringify({ roomId, password, nick })
-            });
-            const data = await res.json();
-            if (!res.ok) { return alert(data.error || 'Hiba a join-nál'); }
+            try {
+              const jr = await fetch('/api/join', {
+                method: 'POST',
+                headers: {'Content-Type':'application/json'},
+                body: JSON.stringify({ roomId, password, nick })
+              });
+              const jd = await jr.json();
+              if (!jr.ok) { alert(jd.error || 'Hiba a join-nál'); return; }
 
-            // siker: mehet a szobanézet
-            const link = `${location.origin}/room.html?room=${roomId}&pw=${encodeURIComponent(password)}&nick=${encodeURIComponent(nick)}`;
-            location.href = link;
+              // siker: mehet a szobanézet
+              const link = `${location.origin}/room.html?room=${encodeURIComponent(roomId)}&pw=${encodeURIComponent(password)}&nick=${encodeURIComponent(nick)}`;
+              location.href = link;
+            } catch(e) {
+              alert('Csatlakozás sikertelen.');
+            }
           };
         });
       }catch(e){
@@ -98,24 +117,28 @@
       const password = document.getElementById('adminPass').value.trim();
       if (!adminNick || !password) { createOut.textContent = "Add meg a nevet és jelszót"; return; }
 
-      const res = await fetch('/api/createRoom', {
-        method: 'POST', headers: {'Content-Type':'application/json'},
-        body: JSON.stringify({ password, adminNick })
-      });
-      const data = await res.json();
-      if (!res.ok) { createOut.textContent = data.error || 'Hiba'; return; }
-      const roomId = data.roomId;
-      const link = `${location.origin}/room.html?room=${roomId}&admin=1&pw=${encodeURIComponent(password)}&nick=${encodeURIComponent(adminNick)}`;
-      createOut.textContent = `Kész! Szobakód: ${roomId}`;
-      setTimeout(()=> location.href = link, 700);
+      try{
+        const res = await fetch('/api/createRoom', {
+          method: 'POST', headers: {'Content-Type':'application/json'},
+          body: JSON.stringify({ password, adminNick })
+        });
+        const data = await res.json();
+        if (!res.ok) { createOut.textContent = data.error || 'Hiba'; return; }
+        const roomId = data.roomId;
+        const link = `${location.origin}/room.html?room=${encodeURIComponent(roomId)}&admin=1&pw=${encodeURIComponent(password)}&nick=${encodeURIComponent(adminNick)}`;
+        createOut.textContent = `Kész! Szobakód: ${roomId}`;
+        setTimeout(()=> location.href = link, 700);
+      }catch(e){
+        createOut.textContent = 'Hiba történt a létrehozás közben.';
+      }
     };
 
     // ========== Spectator ==========
     document.getElementById('specBtn').onclick = () => {
       const room = document.getElementById('specRoom').value.trim().toLowerCase();
-      if(!room) return alert('Add meg a szobakódot');
+      if(!room) { alert('Add meg a szobakódot'); return; }
       // jelszó NEM kell
-      location.href = `${location.origin}/room.html?room=${room}&spectator=1`;
+      location.href = `${location.origin}/room.html?room=${encodeURIComponent(room)}&spectator=1`;
     };
   </script>
 </body>
