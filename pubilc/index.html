@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="hu">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Kvízszobák • Lobby</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="wrap">
+    <h1>🧠 Kvízszobák</h1>
+    <section class="card">
+      <h2>Új szoba (Admin)</h2>
+      <label>Admin nick:
+        <input id="adminNick" placeholder="pl. Főnök" maxlength="12" />
+      </label>
+      <label>Szoba jelszó:
+        <input id="adminPass" type="password" placeholder="••••••" />
+      </label>
+      <button id="createBtn">Szoba létrehozása</button>
+      <p id="createOut" class="mono small"></p>
+    </section>
+
+    <section class="card">
+      <h2>Csatlakozás meglévő szobához</h2>
+      <label>Szobakód:
+        <input id="joinRoom" placeholder="pl. ab12cd" maxlength="6" />
+      </label>
+      <label>Jelszó:
+        <input id="joinPass" type="password" placeholder="••••••" />
+      </label>
+      <label>Nick:
+        <input id="joinNick" placeholder="pl. Pisti" maxlength="12" />
+      </label>
+      <button id="joinBtn">Belépés</button>
+      <p id="joinOut" class="mono small"></p>
+    </section>
+  </main>
+
+  <script>
+    const createBtn = document.getElementById('createBtn');
+    const createOut = document.getElementById('createOut');
+
+    createBtn.onclick = async () => {
+      const adminNick = document.getElementById('adminNick').value.trim();
+      const password = document.getElementById('adminPass').value.trim();
+      if (!adminNick || !password) { createOut.textContent = "Add meg a nevet és jelszót"; return; }
+
+      const res = await fetch('/api/createRoom', {
+        method: 'POST', headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({ password, adminNick })
+      });
+      const data = await res.json();
+      if (!res.ok) { createOut.textContent = data.error || 'Hiba'; return; }
+      const roomId = data.roomId;
+      const link = `${location.origin}/room.html?room=${roomId}&admin=1&pw=${encodeURIComponent(password)}&nick=${encodeURIComponent(adminNick)}`;
+      createOut.textContent = `Kész! Szobakód: ${roomId}`;
+      setTimeout(()=> location.href = link, 700);
+    };
+
+    const joinBtn = document.getElementById('joinBtn');
+    const joinOut = document.getElementById('joinOut');
+    joinBtn.onclick = async () => {
+      const roomId = document.getElementById('joinRoom').value.trim().toLowerCase();
+      const password = document.getElementById('joinPass').value.trim();
+      const nick = document.getElementById('joinNick').value.trim();
+      if (!roomId || !password || !nick) { joinOut.textContent = "Minden mező kötelező"; return; }
+
+      const res = await fetch('/api/join', {
+        method: 'POST', headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({ roomId, password, nick })
+      });
+      const data = await res.json();
+      if (!res.ok) { joinOut.textContent = data.error || 'Hiba'; return; }
+      const link = `${location.origin}/room.html?room=${roomId}&pw=${encodeURIComponent(password)}&nick=${encodeURIComponent(nick)}`;
+      location.href = link;
+    };
+  </script>
+</body>
+</html>
