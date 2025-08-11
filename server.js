@@ -2,23 +2,47 @@
 import express from "express";
 import { WebSocketServer } from "ws";
 import http from "http";
-import { v4 as uuidv4 } from "uuid";
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
 const app = express();
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "public")));
 
-app.get("/", (req, res) => {
+// Gyökér -> index
+app.get("/", (_req, res) => {
   res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 
-const questionsAll = JSON.parse(fs.readFileSync("./questions.json", "utf8"));
+// --- Kérdésbank betöltése (mezőnevek: category, question, correct, wrong[9]) ---
+const questionsAll = JSON.parse(fs.readFileSync(path.join(__dirname, "questions.json"), "utf8"));
+
+// --- In-memory állapot ---
 const rooms = new Map();
+/*
+room = {
+  id, password,
+  admin: { nick },
+  players: Map<nick, {nick, score, ws?, disconnected:boolean}>,
+  spectators: Set<WebSocket>,
+  game: {
+    running:boolean,
+    questionIndex:number,
+    currentQ:{ category, question, options[4], answerIndex },
+    questionStart:number,
+    answers: Array<{nick, option('A'|'B'|'C'|'D'), tsServer:number}>,
+    questions: Array< currentQ >,   // 15 elem
+    roundClosed:boolean,
+    roundTimer:NodeJS.Timeout|null,
+    expected:number,                // aktív játékosok száma a kör elején
+    rematchVotes:Set<nick>
+  }
+}
+*/
 
 function newRoom(password, adminNick) {
   const id = generateRoomCode();
@@ -52,17 +76,20 @@ function generateRoomCode() {
   return code;
 }
 
+// 15 random kérdés; mindegyiknél 1 jó + 3 rossz és ABCD keverés
 function pickRandomQuestions(count) {
   const shuffled = [...questionsAll].sort(() => Math.random() - 0.5);
   return shuffled.slice(0, count).map(q => {
-    const wrongs = [...q.wrongAnswers].sort(() => Math.random() - 0.5).slice(0, 3);
-    const answers = [{ opt: q.correct, correct: true }, ...wrongs.map(w => ({ opt: w, correct: false }))];
-    const shuffledAnswers = answers.sort(() => Math.random() - 0.5);
+    // a json-ben 'wrong' a kulcs — ha nálad 'wrongAnswers', itt cseréld
+    const wrongPool = Array.isArray(q.wrong) ? q.wrong : (q.wrongAnswers || []);
+    const wrongs = [...wrongPool].sort(() => Math.random() - 0.5).slice(0, 3);
+    const bundle = [{ text: q.correct, correct: true }, ...wrongs.map(w => ({ text: w, correct: false }))];
+    const options = bundle.sort(() => Math.random() - 0.5);
     return {
       category: q.category,
       question: q.question,
-      options: shuffledAnswers.map(a => a.opt),
-      answerIndex: shuffledAnswers.findIndex(a => a.correct) // 0-3
+      options: options.map(o => o.text),
+      answerIndex: options.findIndex(o => o.correct) // 0..3
     };
   });
 }
@@ -79,11 +106,11 @@ function broadcast(room, type, payload) {
 function roomSnapshot(room) {
   return {
     id: room.id,
+    admin: room.admin?.nick || null,
     players: Array.from(room.players.values()).map(p => ({
       nick: p.nick + (p.disconnected ? " (kilépett)" : ""),
       score: p.score
     })),
-    admin: room.admin?.nick || null,
     game: {
       running: room.game.running,
       questionIndex: room.game.questionIndex
@@ -91,12 +118,14 @@ function roomSnapshot(room) {
   };
 }
 
+// --- REST: szobalista + szoba létrehozás + join ---
 app.get("/api/rooms", (_req, res) => {
   const list = Array.from(rooms.values()).map(r => ({
     id: r.id,
+    admin: r.admin?.nick || null,
     players: r.players.size,
-    admin: r.admin.nick,
-    running: r.game.running
+    running: r.game.running,
+    questionIndex: r.game.questionIndex
   }));
   res.json(list);
 });
@@ -110,6 +139,24 @@ app.post("/api/createRoom", (req, res) => {
   res.json({ roomId: room.id });
 });
 
+// FONTOS: ez hiányzott — a Join gomb ezt hívja!
+app.post("/api/join", (req, res) => {
+  const { roomId, password, nick } = req.body || {};
+  const room = rooms.get(roomId);
+  if (!room) return res.status(404).json({ error: "Nincs ilyen szoba" });
+
+  // játék közben tiltsuk a belépést
+  if (room.game.running) return res.status(409).json({ error: "A játék már fut. Belépés csak spectator-ként." });
+
+  if (room.password !== password) return res.status(403).json({ error: "Rossz jelszó" });
+  if (!nick || nick.length < 3 || nick.length > 12) return res.status(400).json({ error: "A nick 3-12 karakter legyen." });
+  if (room.players.has(nick)) return res.status(409).json({ error: "Ez a nick már foglalt a szobában." });
+
+  room.players.set(nick, { nick, score: 0, ws: null, disconnected: false });
+  res.json({ ok: true });
+});
+
+// --- WS: játék ---
 const server = http.createServer(app);
 const wss = new WebSocketServer({ server });
 
@@ -120,8 +167,9 @@ wss.on("connection", (ws) => {
 
     const { roomId, password, nick, isAdmin, spectator } = init;
     const room = rooms.get(roomId);
-    if (!room || room.password !== password) { ws.send(JSON.stringify({ type: "error", error: "Bad room/password" })); ws.close(); return; }
+    if (!room) { ws.send(JSON.stringify({ type:"error", error:"No such room" })); ws.close(); return; }
 
+    // SPECTATOR: jelszó NEM kell
     if (spectator) {
       room.spectators.add(ws);
       ws.on("close", () => room.spectators.delete(ws));
@@ -129,15 +177,24 @@ wss.on("connection", (ws) => {
       return;
     }
 
+    // játék közben NEM lehet játékosként belépni
     if (room.game.running) {
       ws.send(JSON.stringify({ type: "error", error: "Game already started, join as spectator" }));
       ws.close();
       return;
     }
 
+    // játékos/admin belépésnél kell a jelszó
+    if (room.password !== password) {
+      ws.send(JSON.stringify({ type: "error", error: "Bad room/password" }));
+      ws.close();
+      return;
+    }
+
     if (isAdmin) {
-      if (room.admin?.nick !== nick) { ws.close(); return; }
+      if (room.admin?.nick !== nick) { ws.send(JSON.stringify({ type:"error", error:"Not admin" })); ws.close(); return; }
     } else {
+      // ha REST join kimaradt valamiért, itt felvesszük — de normál esetben már benne lesz
       if (!room.players.has(nick)) {
         room.players.set(nick, { nick, score: 0, ws: null, disconnected: false });
       }
@@ -150,23 +207,27 @@ wss.on("connection", (ws) => {
     broadcast(room, "lobbyUpdate", { room: roomSnapshot(room) });
 
     ws.on("message", (raw) => {
-      let msg;
-      try { msg = JSON.parse(raw.toString()); } catch { return; }
+      let msg; try { msg = JSON.parse(raw.toString()); } catch { return; }
 
-      if (msg.type === "startGame" && nick === room.admin?.nick) {
-        startGame(room);
-      }
+      if (msg.type === "startGame" && nick === room.admin?.nick) startGame(room);
       if (msg.type === "submitAnswer") handleAnswer(room, nick, msg.option);
       if (msg.type === "nextQuestion" && nick === room.admin?.nick) goNextQuestion(room);
+
       if (msg.type === "rematchVote") {
-        room.game.rematchVotes.add(nick);
-        if (room.game.rematchVotes.size === room.players.size) startGame(room);
+        if (msg.accept === true) {
+          room.game.rematchVotes.add(nick);
+          if (room.game.rematchVotes.size === room.players.size) startGame(room);
+        } else {
+          // 'nem' eset: kliens kilép a szobából (frontenden intézzük)
+        }
       }
     });
 
     ws.on("close", () => {
-      player.ws = null;
-      player.disconnected = true;
+      if (player) {
+        player.ws = null;
+        player.disconnected = true;
+      }
       broadcast(room, "lobbyUpdate", { room: roomSnapshot(room) });
     });
 
@@ -179,6 +240,7 @@ function startGame(room) {
   room.game.running = true;
   room.game.questionIndex = -1;
   room.game.questions = pickRandomQuestions(15);
+  room.game.rematchVotes.clear(); // <<< fontos!
   goNextQuestion(room);
 }
 
@@ -186,7 +248,7 @@ function goNextQuestion(room) {
   room.game.questionIndex++;
   room.game.answers = [];
   room.game.roundClosed = false;
-  if (room.game.roundTimer) clearTimeout(room.game.roundTimer);
+  if (room.game.roundTimer) { clearTimeout(room.game.roundTimer); room.game.roundTimer = null; }
 
   if (room.game.questionIndex >= room.game.questions.length) {
     room.game.running = false;
@@ -201,19 +263,23 @@ function goNextQuestion(room) {
   const q = room.game.questions[room.game.questionIndex];
   room.game.currentQ = q;
   room.game.questionStart = Date.now();
-  room.game.expected = Array.from(room.players.values()).filter(p => p.ws && p.ws.readyState === 1).length;
 
+  // a kör elején aktív játékosok száma
+  room.game.expected = Array.from(room.players.values())
+    .filter(p => p.ws && p.ws.readyState === 1).length;
+
+  // NE küldjük ki a helyes választ! Csak az opciókat és a metát.
   broadcast(room, "question", {
     index: room.game.questionIndex + 1,
     total: room.game.questions.length,
     category: q.category,
     question: q.question,
     options: q.options,
-    answerIndex: q.answerIndex,
     timeLimitSec: 10
   });
 
-  room.game.roundTimer = setTimeout(() => finishRound(room), 10000);
+  // max. 10 mp
+  room.game.roundTimer = setTimeout(() => finishRound(room), 10_000);
 }
 
 function handleAnswer(room, nick, option) {
@@ -223,6 +289,7 @@ function handleAnswer(room, nick, option) {
 
   room.game.answers.push({ nick, option, tsServer: Date.now() });
 
+  // ha minden aktív játékos válaszolt, zárjunk azonnal
   if (room.game.expected > 0 && room.game.answers.length >= room.game.expected) {
     finishRound(room);
   }
@@ -231,12 +298,12 @@ function handleAnswer(room, nick, option) {
 function finishRound(room) {
   if (room.game.roundClosed) return;
   room.game.roundClosed = true;
-  if (room.game.roundTimer) clearTimeout(room.game.roundTimer);
+  if (room.game.roundTimer) { clearTimeout(room.game.roundTimer); room.game.roundTimer = null; }
 
   const q = room.game.currentQ;
-  const correctIndex = q.answerIndex;
-  const correctLetter = ["A","B","C","D"][correctIndex];
+  const correctLetter = ["A","B","C","D"][q.answerIndex];
 
+  // leggyorsabb helyes 1 pont
   const correctOnes = room.game.answers.filter(a => a.option === correctLetter);
   let winner = null;
   if (correctOnes.length > 0) {
@@ -254,9 +321,12 @@ function finishRound(room) {
       .sort((a, b) => b.score - a.score)
   });
 
+  // 2 mp eredmény után következő
   setTimeout(() => goNextQuestion(room), 2000);
 }
 
-app.get("/healthz", (_, res) => res.send("ok"));
+// Health
+app.get("/healthz", (_req, res) => res.send("ok"));
+
 const PORT = process.env.PORT || 10000;
 server.listen(PORT, () => console.log("Server listening on", PORT));
