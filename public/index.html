@@ -2,12 +2,13 @@
 <html lang="hu">
 <head>
   <meta charset="UTF-8">
-  <title>Kvíz Szobák</title>
+  <title>Kvízjáték</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <h1>Kvízjáték</h1>
 
+  <!-- Szobalista -->
   <section id="roomListSection">
     <h2>Elérhető szobák</h2>
     <table id="roomListTable" border="1" cellpadding="5">
@@ -21,11 +22,12 @@
         </tr>
       </thead>
       <tbody id="roomListBody">
-        <!-- dinamikusan töltődik -->
+        <!-- Dinamikus tartalom -->
       </tbody>
     </table>
   </section>
 
+  <!-- Szoba létrehozás -->
   <section id="createRoomSection">
     <h2>Új szoba létrehozása</h2>
     <form id="createRoomForm">
@@ -35,6 +37,7 @@
     </form>
   </section>
 
+  <!-- Lobby -->
   <section id="lobbySection" style="display:none;">
     <h2>Lobby – Szoba <span id="roomIdLabel"></span></h2>
     <div>Admin: <span id="adminName"></span></div>
@@ -43,6 +46,7 @@
     <div id="lobbyButtons"></div>
   </section>
 
+  <!-- Játék képernyő -->
   <section id="gameSection" style="display:none;">
     <h2>Kérdés <span id="qIndex"></span>/<span id="qTotal"></span></h2>
     <div id="qCategory"></div>
@@ -51,6 +55,7 @@
     <div id="timer"></div>
   </section>
 
+  <!-- Eredmények -->
   <section id="scoreSection" style="display:none;">
     <h2>Eredmények</h2>
     <ul id="scoreList"></ul>
