@@ -1,19 +1,26 @@
+// server.js
 import express from "express";
 import { WebSocketServer } from "ws";
 import http from "http";
-import { v4 as uuidv4 } from "uuid";
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
 const app = express();
 app.use(express.json());
-app.use(express.static(path.join(__dirname, "public")));
-app.get("/", (req, res) => {
+app.use(express.static(path.join(__dirname, "public"))); // statikus fájlok biztosan
+
+// Gyökér -> index.html
+app.get("/", (_req, res) => {
   res.sendFile(path.join(__dirname, "public", "index.html"));
 });
-const questions = JSON.parse(fs.readFileSync("./questions.json", "utf8"));
+
+// Kérdések beolvasása abszolút úttal (Render-safe)
+const questionsPath = path.join(__dirname, "questions.json");
+const questions = JSON.parse(fs.readFileSync(questionsPath, "utf8"));
 
 /** In-memory state (prototípus) **/
 const rooms = new Map();
@@ -21,13 +28,14 @@ const rooms = new Map();
 room = {
   id, password,
   admin: { nick },
-  players: Map<nick, {nick, score, wsReady:boolean}>,
+  players: Map<nick, {nick, score, ws?}>,
   game: {
     running:boolean,
     questionIndex:number,
     currentQ: { ... },
     questionStart:number, // epoch ms
     answers: Array<{nick, option, tsServer}>,
+    questions: Array<...>
   }
 }
 */
@@ -44,7 +52,8 @@ function newRoom(password, adminNick) {
       questionIndex: -1,
       currentQ: null,
       questionStart: 0,
-      answers: []
+      answers: [],
+      questions: []
     }
   };
   rooms.set(id, room);
@@ -60,8 +69,7 @@ function generateRoomCode() {
 }
 
 function pickTwentyQuestions() {
-  // már előre válogatott 20 kérdés a questions.json-ben (4x5)
-  // ha később random kell, itt lehet keverni
+  // előre válogatott 20 kérdés (4x5); később randomizálható
   return questions.slice(0, 20);
 }
 
@@ -85,18 +93,23 @@ function roomSnapshot(room) {
   };
 }
 
+// --- mini log helper ---
+function log(...args) { console.log(new Date().toISOString(), "-", ...args); }
+
 /** REST: create / join **/
 app.post("/api/createRoom", (req, res) => {
+  log("POST /api/createRoom", req.body);
   const { password, adminNick } = req.body || {};
   if (!password || !adminNick) return res.status(400).json({ error: "password és adminNick kötelező" });
 
   const room = newRoom(password, adminNick);
-  // Admin is player too (score tracking), de UI-ban admin jogosultság
+  // Admin is player too
   room.players.set(adminNick, { nick: adminNick, score: 0, ws: null });
   res.json({ roomId: room.id });
 });
 
 app.post("/api/join", (req, res) => {
+  log("POST /api/join", req.body);
   const { roomId, password, nick } = req.body || {};
   const room = rooms.get(roomId);
   if (!room) return res.status(404).json({ error: "Nincs ilyen szoba" });
@@ -115,8 +128,8 @@ app.post("/api/join", (req, res) => {
 const server = http.createServer(app);
 const wss = new WebSocketServer({ server });
 
-wss.on("connection", (ws, req) => {
-  // a kliens első üzenete legyen egy "hello" join event
+wss.on("connection", (ws) => {
+  // az első üzenet legyen join
   ws.once("message", (msg) => {
     let init;
     try { init = JSON.parse(msg.toString()); } catch { ws.close(); return; }
@@ -124,7 +137,11 @@ wss.on("connection", (ws, req) => {
 
     const { roomId, password, nick, isAdmin } = init;
     const room = rooms.get(roomId);
-    if (!room || room.password !== password) { ws.send(JSON.stringify({ type: "error", error: "Bad room/password" })); ws.close(); return; }
+    if (!room || room.password !== password) {
+      ws.send(JSON.stringify({ type: "error", error: "Bad room/password" }));
+      ws.close();
+      return;
+    }
 
     // Admin validálás
     if (isAdmin) {
@@ -162,26 +179,25 @@ wss.on("connection", (ws, req) => {
         if (!room.game.running) return;
         if (!room.game.currentQ) return;
 
-        // csak egyszer rögzítsük egy játékos válaszát körönként
+        // csak egyszer rögzítsük körönként
         const already = room.game.answers.find(a => a.nick === nick);
         if (already) return;
 
         room.game.answers.push({
           nick,
-          option: msg.option,           // 'A' | 'B' | 'C' | 'D'
-          tsServer: Date.now()          // szerver-beli beérkezési idő = anti-cheat
+          option: msg.option,      // 'A' | 'B' | 'C' | 'D'
+          tsServer: Date.now()     // szerver oldali idő – anti-cheat
         });
       }
 
       if (msg.type === "nextQuestion") {
-        // csak admin léptetheti, de alapból automatikus 2 mp után
         if (nick !== room.admin?.nick) return;
         if (room.game.running) goNextQuestion(room);
       }
     });
 
     ws.on("close", () => {
-      // csak a ws kapcsolat zárult, a játékos maradhat a listában (vissza tud jönni)
+      // ws bezárult, a játékos marad (vissza tud jönni)
       player.ws = null;
       broadcast(room, "lobbyUpdate", { room: roomSnapshot(room) });
     });
@@ -192,7 +208,6 @@ wss.on("connection", (ws, req) => {
 });
 
 function startGame(room) {
-  // reset scores
   for (const p of room.players.values()) p.score = 0;
 
   room.game.running = true;
@@ -237,8 +252,7 @@ function finishRound(room) {
   const q = room.game.currentQ;
   if (!q) return;
 
-  const correct = q.answer; // 'A' 'B' 'C' 'D'
-  // csak a helyesek közül a legkisebb tsServer nyer
+  const correct = q.answer; // 'A' | 'B' | 'C' | 'D'
   const correctOnes = room.game.answers.filter(a => a.option === correct);
   let winner = null;
   if (correctOnes.length > 0) {
@@ -248,7 +262,6 @@ function finishRound(room) {
     if (player) player.score += 1;
   }
 
-  // eredmény
   broadcast(room, "roundResult", {
     correct,
     winner: winner ? winner.nick : null,
@@ -257,12 +270,26 @@ function finishRound(room) {
       .sort((a, b) => b.score - a.score)
   });
 
-  // 2 mp múlva automatikus következő kérdés
+  // 2 mp múlva automatikus következő
   setTimeout(() => goNextQuestion(room), 2000);
 }
 
-/** Health endpoint Renderhez */
-app.get("/healthz", (_, res) => res.send("ok"));
+// Health endpoint Renderhez
+app.get("/healthz", (_req, res) => res.send("ok"));
+
+/** SPA fallback:
+ * ha bármi más GET HTML-t kér és nincs külön route,
+ * adjuk vissza az index.html-t (deep linkek ne 404-eljenek).
+ * A statikus fájlokra ez nem hat, mert az express.static előrébb van.
+ */
+app.get("*", (req, res, next) => {
+  if (req.method !== "GET") return next();
+  const accept = req.headers.accept || "";
+  if (accept.includes("text/html")) {
+    return res.sendFile(path.join(__dirname, "public", "index.html"));
+  }
+  next();
+});
 
 const PORT = process.env.PORT || 10000;
 server.listen(PORT, () => {
