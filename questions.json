@@ -1,25 +1,146 @@
 [
-  { "category": "Tudomány", "question": "Melyik a Föld legnagyobb óceánja?", "options": ["A) Csendes-óceán", "B) Atlanti-óceán", "C) Indiai-óceán", "D) Jeges-tenger"], "answer": "A" },
-  { "category": "Tudomány", "question": "Mi a periódusos rendszer első eleme?", "options": ["A) Hélium", "B) Hidrogén", "C) Lítium", "D) Oxigén"], "answer": "B" },
-  { "category": "Tudomány", "question": "Melyik emlős képes aktív repülésre?", "options": ["A) Denevér", "B) Mókus", "C) Delfin", "D) Vakond"], "answer": "A" },
-  { "category": "Tudomány", "question": "Melyik bolygó kering legközelebb a Naphoz?", "options": ["A) Vénusz", "B) Merkúr", "C) Mars", "D) Jupiter"], "answer": "B" },
-  { "category": "Tudomány", "question": "Mi a DNS fő szerepe?", "options": ["A) Energia termelés", "B) Információ tárolás", "C) Mozgás biztosítása", "D) Védelem"], "answer": "B" },
-
-  { "category": "Matematika", "question": "Mennyi 12 × 8?", "options": ["A) 96", "B) 88", "C) 100", "D) 112"], "answer": "A" },
-  { "category": "Matematika", "question": "A kör kerületének képlete:", "options": ["A) 2πr", "B) πr²", "C) πd", "D) r²"], "answer": "A" },
-  { "category": "Matematika", "question": "Mennyi a 144 négyzetgyöke?", "options": ["A) 10", "B) 11", "C) 12", "D) 13"], "answer": "C" },
-  { "category": "Matematika", "question": "Hány fok a háromszög belső szögeinek összege?", "options": ["A) 90", "B) 180", "C) 270", "D) 360"], "answer": "B" },
-  { "category": "Matematika", "question": "Mennyi 7! (7 faktoriális)?", "options": ["A) 720", "B) 5040", "C) 840", "D) 120"], "answer": "B" },
-
-  { "category": "Irodalom", "question": "Ki írta a \"Toldi\"-t?", "options": ["A) Petőfi Sándor", "B) Arany János", "C) Vörösmarty Mihály", "D) Jókai Mór"], "answer": "B" },
-  { "category": "Irodalom", "question": "Ki a \"Rómeó és Júlia\" szerzője?", "options": ["A) Wordsworth", "B) Shakespeare", "C) Orwell", "D) Jane Austen"], "answer": "B" },
-  { "category": "Irodalom", "question": "Műfaj: \"A Pál utcai fiúk\"?", "options": ["A) Tragédia", "B) Regény", "C) Novella", "D) Eposz"], "answer": "B" },
-  { "category": "Irodalom", "question": "Ki írta a \"Bűn és bűnhődés\"-t?", "options": ["A) Dosztojevszkij", "B) Tolsztoj", "C) Csehov", "D) Gorkij"], "answer": "A" },
-  { "category": "Irodalom", "question": "Ki írta a \"Nemzeti dalt\"?", "options": ["A) Petőfi Sándor", "B) Arany János", "C) Ady Endre", "D) József Attila"], "answer": "A" },
-
-  { "category": "Történelem", "question": "Mikor volt a mohácsi csata?", "options": ["A) 1521", "B) 1526", "C) 1541", "D) 1552"], "answer": "B" },
-  { "category": "Történelem", "question": "Ki volt az USA első elnöke?", "options": ["A) Abraham Lincoln", "B) George Washington", "C) Thomas Jefferson", "D) John Adams"], "answer": "B" },
-  { "category": "Történelem", "question": "Mikor tört ki az első világháború?", "options": ["A) 1912", "B) 1914", "C) 1916", "D) 1918"], "answer": "B" },
-  { "category": "Történelem", "question": "Melyik uralkodott a legtovább a felsoroltak közül?", "options": ["A) Szent István", "B) Hunyadi Mátyás", "C) Ferenc József", "D) IV. Béla"], "answer": "C" },
-  { "category": "Történelem", "question": "Mikor lett Magyarország EU tag?", "options": ["A) 2002", "B) 2003", "C) 2004", "D) 2005"], "answer": "C" }
+  {
+    "category": "Tudomány",
+    "question": "Melyik bolygó a Naprendszer legnagyobb átmérőjű égitestje a Nap után?",
+    "correct": "Jupiter",
+    "wrong": ["Szaturnusz", "Neptunusz", "Föld", "Vénusz", "Mars", "Merkúr", "Uránusz", "Plútó", "Ceres"]
+  },
+  {
+    "category": "Tudomány",
+    "question": "Milyen kémiai elemet jelöl a 'Fe' vegyjel?",
+    "correct": "Vas",
+    "wrong": ["Fluor", "Fém", "Fermium", "Foszfor", "Francium", "Ferrit", "Finomítvány", "Folyadék", "Felium"]
+  },
+  {
+    "category": "Tudomány",
+    "question": "Mi a Föld légkörének legnagyobb arányban előforduló gázkomponense?",
+    "correct": "Nitrogén",
+    "wrong": ["Oxigén", "Szén-dioxid", "Argon", "Hidrogén", "Metán", "Ózon", "Hélium", "Neon", "Kén-dioxid"]
+  },
+  {
+    "category": "Tudomány",
+    "question": "Milyen egységben mérjük az elektromos áramerősséget?",
+    "correct": "Amper",
+    "wrong": ["Volt", "Watt", "Joule", "Ohm", "Tesla", "Kelvin", "Hertz", "Candela", "Lux"]
+  },
+  {
+    "category": "Tudomány",
+    "question": "Ki állította fel a három mozgástörvényt, melyek a klasszikus mechanika alapjai?",
+    "correct": "Isaac Newton",
+    "wrong": ["Galileo Galilei", "Albert Einstein", "Johannes Kepler", "Niels Bohr", "James Clerk Maxwell", "Nikola Tesla", "Marie Curie", "Stephen Hawking", "Erwin Schrödinger"]
+  },
+  {
+    "category": "Tudomány",
+    "question": "Melyik sejtalkotó tartalmazza az örökítőanyagot eukarióta sejtekben?",
+    "correct": "Sejtmag",
+    "wrong": ["Mitokondrium", "Riboszóma", "Golgi-készülék", "Sejthártya", "Lizoszóma", "Centriolum", "Kloroplasztisz", "Citoplazma", "Endoplazmatikus retikulum"]
+  },
+  {
+    "category": "Tudomány",
+    "question": "Mi a H2O kémiai neve?",
+    "correct": "Víz",
+    "wrong": ["Hidrogén-peroxid", "Sósav", "Hidrogéngáz", "Oxigéngáz", "Kénsav", "Metán", "Etanol", "Ammónia", "Szódabikarbóna"]
+  },
+  {
+    "category": "Tudomány",
+    "question": "Melyik tudományág vizsgálja az élőlények rendszertani besorolását?",
+    "correct": "Taxonómia",
+    "wrong": ["Ökológia", "Etológia", "Citológia", "Mikrobiológia", "Genetika", "Botanika", "Zoológia", "Földtan", "Biokémia"]
+  },
+  {
+    "category": "Tudomány",
+    "question": "Milyen részecskék alkotják az atommagot?",
+    "correct": "Protonok és neutronok",
+    "wrong": ["Protonok és elektronok", "Elektronok és neutronok", "Kvantumok és fotonok", "Neutronok és kvarkok", "Pozitronok és mezonok", "Atomok és molekulák", "Fotonok és gluonok", "Neutrinók és kvarkok", "Protonok és mezonok"]
+  },
+  {
+    "category": "Tudomány",
+    "question": "Melyik tudós alkotta meg a relativitáselméletet?",
+    "correct": "Albert Einstein",
+    "wrong": ["Isaac Newton", "Galileo Galilei", "Niels Bohr", "Max Planck", "Werner Heisenberg", "Marie Curie", "Stephen Hawking", "Michael Faraday", "Richard Feynman"]
+  },
+  {
+    "category": "Tudomány",
+    "question": "Melyik mértékegység jelöli a fény intenzitását?",
+    "correct": "Candela",
+    "wrong": ["Lux", "Lumen", "Watt", "Joule", "Kelvin", "Pascal", "Amper", "Volt", "Newton"]
+  },
+  {
+    "category": "Tudomány",
+    "question": "Mi a DNS fő feladata a sejtekben?",
+    "correct": "Genetikai információ tárolása",
+    "wrong": ["Energiatermelés", "Fehérjeszintézis", "Méregtelenítés", "Sejtosztódás", "Anyagcsere-szabályozás", "Vízszállítás", "Hőszabályozás", "Oxigénszállítás", "Tápanyag-raktározás"]
+  },
+  {
+    "category": "Tudomány",
+    "question": "Melyik a legkeményebb természetes anyag a Földön?",
+    "correct": "Gyémánt",
+    "wrong": ["Acél", "Titán", "Korund", "Kvarc", "Gránit", "Wolfram", "Obszidián", "Bazalt", "Topáz"]
+  },
+  {
+    "category": "Tudomány",
+    "question": "Melyik bolygón található az Olympus Mons, a Naprendszer legnagyobb vulkánja?",
+    "correct": "Mars",
+    "wrong": ["Föld", "Vénusz", "Jupiter", "Szaturnusz", "Merkúr", "Neptunusz", "Uránusz", "Io"]
+  },
+  {
+    "category": "Tudomány",
+    "question": "Milyen állapotban van az anyag a plazma?",
+    "correct": "Ionizált gáz",
+    "wrong": ["Szilárd", "Folyadék", "Gáz", "Szuperfolyadék", "Szuperkritikus folyadék", "Kondenzátum", "Kristály", "Fémes üveg", "Polimer"]
+  },
+  {
+    "category": "Tudomány",
+    "question": "Melyik a Föld leghosszabb folyója?",
+    "correct": "Nílus",
+    "wrong": ["Amazonas", "Jangce", "Mississippi", "Volga", "Gangesz", "Mekong", "Rajna", "Duna", "Lena"]
+  },
+  {
+    "category": "Tudomány",
+    "question": "Melyik tudományterület foglalkozik a csillagok és bolygók mozgásával?",
+    "correct": "Asztronómia",
+    "wrong": ["Asztrológia", "Asztrofizika", "Meteorológia", "Geológia", "Kozmológia", "Űrkutatás", "Geofizika", "Spektroszkópia", "Navigáció"]
+  },
+  {
+    "category": "Tudomány",
+    "question": "Mi a periódusos rendszer 1. rendszámú eleme?",
+    "correct": "Hidrogén",
+    "wrong": ["Hélium", "Lítium", "Bór", "Nitrogén", "Oxigén", "Fluor", "Neon", "Szén", "Foszfor"]
+  },
+  {
+    "category": "Tudomány",
+    "question": "Melyik fizikai állandó jele c, és m/s-ban mérik?",
+    "correct": "Fénysebesség",
+    "wrong": ["Gravitációs állandó", "Planck-állandó", "Avogadro-szám", "Boltzmann-állandó", "Elektron tömege", "Proton tömege", "Gázállandó", "Hővezetési tényező", "Refrakciós index"]
+  },
+  {
+    "category": "Tudomány",
+    "question": "Milyen részecskék töltése negatív?",
+    "correct": "Elektron",
+    "wrong": ["Proton", "Neutron", "Pozitron", "Kvark", "Gluon", "Foton", "Neutrínó", "Mezon", "Boszon"]
+  },
+  {
+    "category": "Tudomány",
+    "question": "Melyik mértékegység a nyomás SI-mértékegysége?",
+    "correct": "Pascal",
+    "wrong": ["Bar", "Hgmm", "Atm", "Newton", "Joule", "Watt", "Amper", "Volt", "Lux"]
+  },
+  {
+    "category": "Tudomány",
+    "question": "Milyen fém fő komponense a sárgaréz?",
+    "correct": "Réz",
+    "wrong": ["Alumínium", "Vas", "Ólom", "Cink", "Ezüst", "Nikkel", "Kadmium", "Króm", "Magnézium"]
+  },
+  {
+    "category": "Tudomány",
+    "question": "Melyik bolygón van a Nagy Vörös Folt nevű vihar?",
+    "correct": "Jupiter",
+    "wrong": ["Szaturnusz", "Neptunusz", "Vénusz", "Mars", "Uránusz", "Merkúr", "Föld", "Plútó", "Io"]
+  },
+  {
+    "category": "Tudomány",
+    "question": "Melyik az emberi test legnagyobb szerve?",
+    "correct": "Bőr",
+    "wrong": ["Máj", "Tüdő", "Szív", "Agy", "Vese", "Hasnyálmirigy", "Gyomor", "Lép", "Bél"]
+  }
 ]
