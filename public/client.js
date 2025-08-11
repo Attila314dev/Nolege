@@ -3,6 +3,7 @@ const roomId = qs.get('room');
 const password = qs.get('pw') || "";
 const nick = qs.get('nick') || "";
 const isAdmin = qs.get('admin') === '1';
+const spectator = qs.get('spectator') === '1';
 
 const playersEl = document.getElementById('players');
 const roomInfoEl = document.getElementById('roomInfo');
@@ -21,12 +22,13 @@ const finalBoardEl = document.getElementById('finalBoard');
 const adminPanel = document.getElementById('adminPanel');
 const startBtn = document.getElementById('startBtn');
 
-if (!roomId || !password || !nick) {
+// Paramok ellenőrzése: spectatornál NEM kell nick
+if (!roomId || !password || (!nick && !spectator)) {
   alert("Hiányzó paraméterek. Menj vissza a főoldalra.");
   location.href = "/";
 }
 
-roomInfoEl.textContent = `Szoba: ${roomId} • Belépve: ${nick} ${isAdmin ? "(admin)" : ""}`;
+roomInfoEl.textContent = `Szoba: ${roomId} • Belépve: ${spectator ? "spectator" : nick} ${isAdmin ? "(admin)" : ""}`;
 
 let ws;
 let answeredThisRound = false;
@@ -36,7 +38,7 @@ function connectWS() {
   const proto = location.protocol === 'https:' ? 'wss' : 'ws';
   ws = new WebSocket(`${proto}://${location.host}`);
   ws.onopen = () => {
-    ws.send(JSON.stringify({ type: "join", roomId, password, nick, isAdmin }));
+    ws.send(JSON.stringify({ type: "join", roomId, password, nick, isAdmin, spectator }));
   };
   ws.onmessage = (ev) => {
     const msg = JSON.parse(ev.data);
@@ -47,7 +49,8 @@ function connectWS() {
     }
     if (msg.type === "joined") {
       renderLobby(msg.room);
-      if (msg.you?.isAdmin) adminPanel.classList.remove('hide');
+      if (msg.you?.isAdmin && !spectator) adminPanel.classList.remove('hide');
+      if (spectator) adminPanel.classList.add('hide'); // spectator ne indítson játékot
     }
     if (msg.type === "lobbyUpdate") {
       renderLobby(msg.room);
@@ -63,7 +66,6 @@ function connectWS() {
     }
   };
   ws.onclose = () => {
-    // próbálkozhatna újracsatlakozással, de protóban elég egy jelzés
     roomInfoEl.textContent += " • (kapcsolat bontva)";
   };
 }
@@ -100,7 +102,11 @@ function showQuestion(m) {
     const btn = document.createElement('button');
     btn.textContent = m.options[i];
     btn.className = "opt";
-    btn.onclick = () => submitAnswer(key, btn);
+    if (!spectator) {
+      btn.onclick = () => submitAnswer(key, btn);
+    } else {
+      btn.disabled = true; // spectator csak néz
+    }
     optsEl.appendChild(btn);
   });
 
@@ -119,10 +125,11 @@ function startCountdown(sec) {
 }
 
 function submitAnswer(option, btn) {
+  if (spectator) return; // biztonság kedvéért
   if (answeredThisRound) return;
   answeredThisRound = true;
 
-  // vizuális jelzés: választott opció disable
+  // vizu: disable minden opció, jelöld a választ
   Array.from(document.querySelectorAll('.opt')).forEach(el => el.disabled = true);
   btn.classList.add('chosen');
 
@@ -135,7 +142,6 @@ function showRoundResult(m) {
 
   correctEl.textContent = m.correct;
   winnerEl.textContent = m.winner || "senki";
-  // ponttábla frissítése
   const list = (m.scoreboard || [])
     .sort((a, b) => b.score - a.score)
     .map(p => `<li><b>${escapeHtml(p.nick)}</b><span>${p.score}</span></li>`)
@@ -154,6 +160,7 @@ function showGameOver(m) {
 
 if (startBtn) {
   startBtn.onclick = () => {
+    if (spectator) return; // spectator nem indít
     ws.send(JSON.stringify({ type: "startGame" }));
   };
 }
