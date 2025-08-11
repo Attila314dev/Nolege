@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="hu">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Kvízszoba</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="wrap">
+    <header class="flex space">
+      <h1>🧩 Kvízszoba</h1>
+      <a class="btn ghost" href="/">Kilépés</a>
+    </header>
+
+    <section class="card">
+      <div id="roomInfo" class="mono small"></div>
+      <div class="grid2">
+        <div>
+          <h3>Játék</h3>
+          <div id="gameArea" class="game">
+            <div id="lobby">Várakozás a játék indítására…</div>
+
+            <div id="questionView" class="hide">
+              <div class="row">
+                <span id="qIndex"></span>
+                <span id="qCat" class="tag"></span>
+                <span id="timer" class="timer">10</span>
+              </div>
+              <h2 id="qText"></h2>
+              <div id="opts" class="opts"></div>
+            </div>
+
+            <div id="resultView" class="hide">
+              <h2>Eredmény</h2>
+              <p>Helyes válasz: <b id="correct"></b></p>
+              <p>Győztes (leggyorsabb helyes): <b id="winner"></b></p>
+              <p class="small mono">Következő kérdés érkezik…</p>
+            </div>
+
+            <div id="gameOverView" class="hide">
+              <h2>Vége!</h2>
+              <ol id="finalBoard"></ol>
+              <p><span class="small mono">Az admin új játékot indíthat.</span></p>
+            </div>
+          </div>
+
+          <div id="adminPanel" class="hide topgap">
+            <button id="startBtn">🎬 Játék indítása</button>
+          </div>
+        </div>
+
+        <div>
+          <h3>Játékosok</h3>
+          <ul id="players" class="players"></ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="client.js"></script>
+</body>
+</html>
