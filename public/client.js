@@ -1,169 +1,205 @@
-const qs = new URLSearchParams(location.search);
-const roomId = qs.get('room');
-const password = qs.get('pw') || "";
-const nick = qs.get('nick') || "";
-const isAdmin = qs.get('admin') === '1';
-const spectator = qs.get('spectator') === '1';
+// public/client.js
+let ws;
+let roomId, password, nick, isAdmin = false, spectator = false;
 
-const playersEl = document.getElementById('players');
-const roomInfoEl = document.getElementById('roomInfo');
-const lobbyEl = document.getElementById('lobby');
-const qView = document.getElementById('questionView');
-const qIndexEl = document.getElementById('qIndex');
-const qCatEl = document.getElementById('qCat');
-const qTextEl = document.getElementById('qText');
-const optsEl = document.getElementById('opts');
-const timerEl = document.getElementById('timer');
-const resultView = document.getElementById('resultView');
-const correctEl = document.getElementById('correct');
-const winnerEl = document.getElementById('winner');
-const gameOverView = document.getElementById('gameOverView');
-const finalBoardEl = document.getElementById('finalBoard');
-const adminPanel = document.getElementById('adminPanel');
-const startBtn = document.getElementById('startBtn');
+const roomListBody = document.getElementById("roomListBody");
+const createRoomForm = document.getElementById("createRoomForm");
+const adminNickInput = document.getElementById("adminNick");
+const roomPasswordInput = document.getElementById("roomPassword");
 
-// Paramok: spectatornál elég roomId
-if (!roomId || (!spectator && (!password || !nick))) {
-  alert("Hiányzó paraméterek. Menj vissza a főoldalra.");
-  location.href = "/";
+const lobbySection = document.getElementById("lobbySection");
+const gameSection = document.getElementById("gameSection");
+const scoreSection = document.getElementById("scoreSection");
+
+const roomIdLabel = document.getElementById("roomIdLabel");
+const adminNameLabel = document.getElementById("adminName");
+const playerList = document.getElementById("playerList");
+const lobbyButtons = document.getElementById("lobbyButtons");
+
+const qIndex = document.getElementById("qIndex");
+const qTotal = document.getElementById("qTotal");
+const qCategory = document.getElementById("qCategory");
+const qText = document.getElementById("qText");
+const optionsDiv = document.getElementById("options");
+const timerDiv = document.getElementById("timer");
+
+const scoreList = document.getElementById("scoreList");
+const rematchArea = document.getElementById("rematchArea");
+
+async function fetchRooms() {
+  const res = await fetch("/api/rooms");
+  const rooms = await res.json();
+  roomListBody.innerHTML = "";
+  rooms.forEach(r => {
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+      <td>${r.id}</td>
+      <td>${r.admin}</td>
+      <td>${r.players}</td>
+      <td>${r.running ? "Játékban" : "Várakozik"}</td>
+      <td>
+        <button onclick="joinRoomPrompt('${r.id}', ${r.running})">Csatlakozás</button>
+        <button onclick="spectateRoom('${r.id}')">Spectator</button>
+      </td>
+    `;
+    roomListBody.appendChild(tr);
+  });
+}
+setInterval(fetchRooms, 3000);
+fetchRooms();
+
+createRoomForm.addEventListener("submit", async e => {
+  e.preventDefault();
+  nick = adminNickInput.value.trim();
+  password = roomPasswordInput.value.trim();
+  if (!nick || !password) return alert("Adj meg minden mezőt!");
+  const res = await fetch("/api/createRoom", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ password, adminNick: nick })
+  });
+  const data = await res.json();
+  if (data.error) return alert(data.error);
+  roomId = data.roomId;
+  isAdmin = true;
+  connectWS();
+});
+
+function joinRoomPrompt(id, running) {
+  if (running) return alert("A játék már elindult, csak spectator módban lehet csatlakozni.");
+  const name = prompt("Add meg a nickneved:");
+  if (!name) return;
+  const pass = prompt("Add meg a szoba jelszavát:");
+  if (!pass) return;
+  nick = name;
+  password = pass;
+  roomId = id;
+  fetch("/api/join", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ roomId, password, nick })
+  }).then(r => r.json()).then(d => {
+    if (d.error) return alert(d.error);
+    connectWS();
+  });
 }
 
-roomInfoEl.textContent = `Szoba: ${roomId} • Belépve: ${spectator ? "spectator" : nick} ${isAdmin ? "(admin)" : ""}`;
-
-let ws;
-let answeredThisRound = false;
-let countdownInterval = null;
+function spectateRoom(id) {
+  spectator = true;
+  nick = null;
+  password = prompt("Add meg a szoba jelszavát (spectatorhoz is kell):");
+  if (!password) return;
+  roomId = id;
+  connectWS();
+}
 
 function connectWS() {
-  const proto = location.protocol === 'https:' ? 'wss' : 'ws';
-  ws = new WebSocket(`${proto}://${location.host}`);
+  ws = new WebSocket(location.origin.replace(/^http/, "ws"));
   ws.onopen = () => {
-    ws.send(JSON.stringify({ type: "join", roomId, password, nick, isAdmin, spectator }));
+    ws.send(JSON.stringify({
+      type: "join",
+      roomId, password, nick, isAdmin, spectator
+    }));
   };
-  ws.onmessage = (ev) => {
-    const msg = JSON.parse(ev.data);
-    if (msg.type === "error") {
-      alert(msg.error || "Hiba");
-      location.href = "/";
-      return;
-    }
-    if (msg.type === "joined") {
-      renderLobby(msg.room);
-      if (msg.you?.isAdmin && !spectator) adminPanel.classList.remove('hide');
-      if (spectator) adminPanel.classList.add('hide');
-    }
-    if (msg.type === "lobbyUpdate") {
-      renderLobby(msg.room);
-    }
-    if (msg.type === "question") {
-      showQuestion(msg);
-    }
-    if (msg.type === "roundResult") {
-      showRoundResult(msg);
-    }
-    if (msg.type === "gameOver") {
-      showGameOver(msg);
-    }
-  };
-  ws.onclose = () => {
-    roomInfoEl.textContent += " • (kapcsolat bontva)";
+  ws.onmessage = e => {
+    const msg = JSON.parse(e.data);
+    if (msg.type === "error") return alert(msg.error);
+    if (msg.type === "joined") showLobby(msg.room);
+    if (msg.type === "lobbyUpdate") showLobby(msg.room);
+    if (msg.type === "question") showQuestion(msg);
+    if (msg.type === "roundResult") showRoundResult(msg);
+    if (msg.type === "gameOver") showGameOver(msg);
   };
 }
-connectWS();
 
-function renderLobby(room) {
-  const list = (room.players || [])
-    .sort((a, b) => b.score - a.score)
-    .map(p => `<li><b>${escapeHtml(p.nick)}</b><span>${p.score}</span></li>`)
-    .join("");
-  playersEl.innerHTML = list || "<li>(még senki)</li>";
-
-  if (!room.game?.running || room.game?.questionIndex < 0) {
-    lobbyEl.classList.remove('hide');
-    qView.classList.add('hide');
-    resultView.classList.add('hide');
-    gameOverView.classList.add('hide');
+function showLobby(room) {
+  lobbySection.style.display = "block";
+  gameSection.style.display = "none";
+  scoreSection.style.display = "none";
+  roomIdLabel.textContent = room.id;
+  adminNameLabel.textContent = room.admin;
+  playerList.innerHTML = "";
+  room.players.forEach(p => {
+    const li = document.createElement("li");
+    li.textContent = `${p.nick} (${p.score})`;
+    playerList.appendChild(li);
+  });
+  lobbyButtons.innerHTML = "";
+  if (isAdmin) {
+    const startBtn = document.createElement("button");
+    startBtn.textContent = "Játék indítása";
+    startBtn.onclick = () => ws.send(JSON.stringify({ type: "startGame" }));
+    lobbyButtons.appendChild(startBtn);
   }
 }
 
-function showQuestion(m) {
-  answeredThisRound = false;
-
-  lobbyEl.classList.add('hide');
-  resultView.classList.add('hide');
-  gameOverView.classList.add('hide');
-  qView.classList.remove('hide');
-
-  qIndexEl.textContent = `Kérdés ${m.index}/${m.total}`;
-  qCatEl.textContent = m.category;
-  qTextEl.textContent = m.question;
-  optsEl.innerHTML = "";
-  ["A","B","C","D"].forEach((key, i) => {
-    const btn = document.createElement('button');
-    btn.textContent = m.options[i];
-    btn.className = "opt";
-    if (!spectator) {
-      btn.onclick = () => submitAnswer(key, btn);
-    } else {
-      btn.disabled = true; // spectator csak néz
-    }
-    optsEl.appendChild(btn);
+function showQuestion(msg) {
+  lobbySection.style.display = "none";
+  gameSection.style.display = "block";
+  scoreSection.style.display = "none";
+  qIndex.textContent = msg.index;
+  qTotal.textContent = msg.total;
+  qCategory.textContent = msg.category;
+  qText.textContent = msg.question;
+  optionsDiv.innerHTML = "";
+  ["A", "B", "C", "D"].forEach((letter, idx) => {
+    const btn = document.createElement("button");
+    btn.textContent = `${letter}: ${msg.options[idx]}`;
+    btn.onclick = () => {
+      ws.send(JSON.stringify({ type: "submitAnswer", option: letter }));
+    };
+    optionsDiv.appendChild(btn);
   });
-
-  startCountdown(m.timeLimitSec);
+  startTimer(msg.timeLimitSec);
 }
 
-function startCountdown(sec) {
-  clearInterval(countdownInterval);
-  let left = sec;
-  timerEl.textContent = left;
-  countdownInterval = setInterval(() => {
-    left -= 1;
-    timerEl.textContent = Math.max(0, left);
-    if (left <= 0) clearInterval(countdownInterval);
+function startTimer(sec) {
+  let remain = sec;
+  timerDiv.textContent = remain;
+  const intv = setInterval(() => {
+    remain--;
+    timerDiv.textContent = remain;
+    if (remain <= 0) clearInterval(intv);
   }, 1000);
 }
 
-function submitAnswer(option, btn) {
-  if (spectator) return;
-  if (answeredThisRound) return;
-  answeredThisRound = true;
-
-  Array.from(document.querySelectorAll('.opt')).forEach(el => el.disabled = true);
-  btn.classList.add('chosen');
-
-  ws.send(JSON.stringify({ type: "submitAnswer", option }));
+function showRoundResult(msg) {
+  const correctBtn = Array.from(optionsDiv.children).find(b => b.textContent.startsWith(msg.correct));
+  if (correctBtn) flashBorder(correctBtn, "green");
 }
 
-function showRoundResult(m) {
-  qView.classList.add('hide');
-  resultView.classList.remove('hide');
-
-  correctEl.textContent = m.correct;
-  winnerEl.textContent = m.winner || "senki";
-  const list = (m.scoreboard || [])
-    .sort((a, b) => b.score - a.score)
-    .map(p => `<li><b>${escapeHtml(p.nick)}</b><span>${p.score}</span></li>`)
-    .join("");
-  playersEl.innerHTML = list;
+function flashBorder(elem, color) {
+  let state = false;
+  const intv = setInterval(() => {
+    elem.style.border = state ? `3px solid ${color}` : "3px solid transparent";
+    state = !state;
+  }, 200);
+  setTimeout(() => {
+    clearInterval(intv);
+    elem.style.border = "";
+  }, 1000);
 }
 
-function showGameOver(m) {
-  qView.classList.add('hide');
-  resultView.classList.add('hide');
-  gameOverView.classList.remove('hide');
-  finalBoardEl.innerHTML = (m.scoreboard || [])
-    .map(p => `<li><b>${escapeHtml(p.nick)}</b> – ${p.score} pont</li>`)
-    .join("");
-}
-
-if (startBtn) {
-  startBtn.onclick = () => {
-    if (spectator) return;
-    ws.send(JSON.stringify({ type: "startGame" }));
-  };
-}
-
-function escapeHtml(s) {
-  return s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function showGameOver(msg) {
+  lobbySection.style.display = "none";
+  gameSection.style.display = "none";
+  scoreSection.style.display = "block";
+  scoreList.innerHTML = "";
+  msg.scoreboard.forEach(s => {
+    const li = document.createElement("li");
+    li.textContent = `${s.nick}: ${s.score}`;
+    scoreList.appendChild(li);
+  });
+  rematchArea.innerHTML = "";
+  if (isAdmin) {
+    const rematchBtn = document.createElement("button");
+    rematchBtn.textContent = "Újraindítás (Rematch)";
+    rematchBtn.onclick = () => ws.send(JSON.stringify({ type: "rematchVote" }));
+    rematchArea.appendChild(rematchBtn);
+  } else {
+    const acceptBtn = document.createElement("button");
+    acceptBtn.textContent = "Elfogadom a Rematch-et";
+    acceptBtn.onclick = () => ws.send(JSON.stringify({ type: "rematchVote" }));
+    rematchArea.appendChild(acceptBtn);
+  }
 }
