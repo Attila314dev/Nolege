@@ -24,6 +24,60 @@ const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
   ssl: process.env.DATABASE_URL?.includes("render.com") ? { rejectUnauthorized: false } : false
 });
+// --- schema + egyszeri seed indításkor (Shell nélkül) ---
+import fs from "fs";
+import { fileURLToPath } from "url";
+import path from "path";
+
+async function ensureSchema() {
+  await pool.query(`
+    create table if not exists questions (
+      id serial primary key,
+      category text not null,
+      question text not null,
+      correct text not null
+    );
+    create table if not exists wrong_answers (
+      id serial primary key,
+      question_id int not null references questions(id) on delete cascade,
+      text text not null
+    );
+    create index if not exists idx_wrong_answers_qid on wrong_answers(question_id);
+  `);
+}
+
+async function seedIfEmpty() {
+  const { rows } = await pool.query("select count(*)::int as n from questions");
+  if (rows[0].n > 0) return; // már van adat
+
+  // questions.json beolvasása a projekt gyökeréből
+  const jsonPath = path.join(__dirname, "questions.json");
+  if (!fs.existsSync(jsonPath)) {
+    console.warn("⚠️ questions.json nem található, seed kihagyva.");
+    return;
+  }
+  const data = JSON.parse(fs.readFileSync(jsonPath, "utf8"));
+  console.log(`📥 Importálás… (${data.length} kérdés)`);
+
+  // tiszta töltés – ha inkább hozzáfűznél, vedd ki a truncate-okat
+  await pool.query("truncate wrong_answers restart identity cascade;");
+  await pool.query("truncate questions restart identity cascade;");
+
+  for (const q of data) {
+    const wrong = Array.isArray(q.wrong) ? q.wrong : (q.wrongAnswers || []);
+    const insQ = await pool.query(
+      "insert into questions(category, question, correct) values ($1,$2,$3) returning id",
+      [q.category, q.question, q.correct]
+    );
+    const qid = insQ.rows[0].id;
+    if (wrong.length) {
+      const values = wrong.flatMap(w => [qid, w]);
+      const params = wrong.map((_, i) => `($${2*i+1}, $${2*i+2})`).join(",");
+      await pool.query(`insert into wrong_answers(question_id, text) values ${params}`, values);
+    }
+  }
+  console.log("✅ Seed kész.");
+}
 
 // --- In-memory rooms ---
 const rooms = new Map();
