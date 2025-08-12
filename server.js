@@ -17,30 +17,10 @@ app.get("/", (_req, res) => {
   res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 
-// questions.json mezők: category, question, correct, wrong[9]
+// questions.json mezők: category, question, correct, wrong[9] (vagy wrongAnswers)
 const questionsAll = JSON.parse(fs.readFileSync(path.join(__dirname, "questions.json"), "utf8"));
 
 const rooms = new Map();
-/*
-room = {
-  id, password,
-  admin: { nick },
-  players: Map<nick, {nick, score, ws?, disconnected:boolean}>,
-  spectators: Set<WebSocket>,
-  game: {
-    running:boolean,
-    questionIndex:number,
-    currentQ:{ category, question, options[4], answerIndex },
-    questionStart:number,
-    answers: Array<{nick, option('A'|'B'|'C'|'D'), tsServer:number}>,
-    questions: Array< currentQ >,   // 15 elem
-    roundClosed:boolean,
-    roundTimer:NodeJS.Timeout|null,
-    expected:number,
-    rematchVotes:Set<nick>
-  }
-}
-*/
 
 function newRoom(password, adminNick) {
   const id = generateRoomCode();
@@ -59,8 +39,7 @@ function newRoom(password, adminNick) {
       questions: [],
       roundClosed: false,
       roundTimer: null,
-      expected: 0,
-      rematchVotes: new Set()
+      expected: 0
     }
   };
   rooms.set(id, room);
@@ -74,7 +53,7 @@ function generateRoomCode() {
   return code;
 }
 
-// 15 random kérdés: 1 jó + 3 rossz, ABCD keverve
+// 15 random kérdés; 1 jó + 3 rossz, ABCD keverve
 function pickRandomQuestions(count) {
   const shuffled = [...questionsAll].sort(() => Math.random() - 0.5);
   return shuffled.slice(0, count).map(q => {
@@ -86,7 +65,7 @@ function pickRandomQuestions(count) {
       category: q.category,
       question: q.question,
       options: options.map(o => o.text),
-      answerIndex: options.findIndex(o => o.correct)
+      answerIndex: options.findIndex(o => o.correct) // 0..3
     };
   });
 }
@@ -115,7 +94,7 @@ function roomSnapshot(room) {
   };
 }
 
-// --- REST ---
+// REST
 app.get("/api/rooms", (_req, res) => {
   const list = Array.from(rooms.values()).map(r => ({
     id: r.id,
@@ -149,7 +128,7 @@ app.post("/api/join", (req, res) => {
   res.json({ ok: true });
 });
 
-// --- WS ---
+// WS
 const server = http.createServer(app);
 const wss = new WebSocketServer({ server });
 
@@ -162,7 +141,7 @@ wss.on("connection", (ws) => {
     const room = rooms.get(roomId);
     if (!room) { ws.send(JSON.stringify({ type:"error", error:"No such room" })); ws.close(); return; }
 
-    // SPECTATOR: jelszó NEM kell
+    // spectator: jelszó nem kell
     if (spectator) {
       room.spectators.add(ws);
       ws.on("close", () => room.spectators.delete(ws));
@@ -170,10 +149,10 @@ wss.on("connection", (ws) => {
       return;
     }
 
-    // futó játékba játékosként NEM lehet belépni
+    // futó játékba nem léphet be játékos
     if (room.game.running) { ws.send(JSON.stringify({ type: "error", error: "Game already started, join as spectator" })); ws.close(); return; }
 
-    // játékos/admin: jelszó szükséges
+    // játékos/admin: jelszó kell
     if (room.password !== password) { ws.send(JSON.stringify({ type: "error", error: "Bad room/password" })); ws.close(); return; }
 
     if (isAdmin) {
@@ -196,22 +175,7 @@ wss.on("connection", (ws) => {
       if (msg.type === "startGame" && nick === room.admin?.nick) startGame(room);
       if (msg.type === "submitAnswer") handleAnswer(room, nick, msg.option);
       if (msg.type === "nextQuestion" && nick === room.admin?.nick) goNextQuestion(room);
-
-      // Admin kéri, hogy menjen körbe a "visszavágó?" kérdés
-      if (msg.type === "requestRematch" && nick === room.admin?.nick) {
-        room.game.rematchVotes.clear();
-        broadcast(room, "rematchOffer", { });
-      }
-
-      // Játékos döntése a visszavágóról
-      if (msg.type === "rematchVote") {
-        if (msg.accept === true) {
-          room.game.rematchVotes.add(nick);
-          if (room.game.rematchVotes.size === room.players.size) startGame(room);
-        } else {
-          // kliens ilyenkor kilép a szobából
-        }
-      }
+      // (rematch/offer mechanika elhagyva a kérésedre)
     });
 
     ws.on("close", () => {
@@ -228,7 +192,6 @@ function startGame(room) {
   room.game.running = true;
   room.game.questionIndex = -1;
   room.game.questions = pickRandomQuestions(15);
-  room.game.rematchVotes.clear();
   goNextQuestion(room);
 }
 
@@ -255,6 +218,7 @@ function goNextQuestion(room) {
   room.game.expected = Array.from(room.players.values())
     .filter(p => p.ws && p.ws.readyState === 1).length;
 
+  // helyes index NEM megy ki
   broadcast(room, "question", {
     index: room.game.questionIndex + 1,
     total: room.game.questions.length,
@@ -264,6 +228,7 @@ function goNextQuestion(room) {
     timeLimitSec: 10
   });
 
+  // 10 mp max, utána értékelés
   room.game.roundTimer = setTimeout(() => finishRound(room), 10_000);
 }
 
@@ -273,6 +238,7 @@ function handleAnswer(room, nick, option) {
 
   room.game.answers.push({ nick, option, tsServer: Date.now() });
 
+  // ha minden aktív játékos válaszolt, zárjuk azonnal
   if (room.game.expected > 0 && room.game.answers.length >= room.game.expected) {
     finishRound(room);
   }
@@ -286,6 +252,7 @@ function finishRound(room) {
   const q = room.game.currentQ;
   const correctLetter = ["A","B","C","D"][q.answerIndex];
 
+  // leggyorsabb helyes 1 pont
   const correctOnes = room.game.answers.filter(a => a.option === correctLetter);
   let winner = null;
   if (correctOnes.length > 0) {
@@ -295,15 +262,26 @@ function finishRound(room) {
     if (player) player.score += 1;
   }
 
+  // kör-részletek minden játékosra (válaszidő és pont)
+  const details = Array.from(room.players.keys()).map(nk => {
+    const ans = room.game.answers.find(a => a.nick === nk);
+    const timeMs = ans ? (ans.tsServer - room.game.questionStart) : null;
+    const isCorrect = !!ans && ans.option === correctLetter;
+    const points = winner && winner.nick === nk ? 1 : 0;
+    return { nick: nk, timeMs, isCorrect, option: ans?.option ?? null, points };
+  });
+
   broadcast(room, "roundResult", {
     correct: correctLetter,
     winner: winner ? winner.nick : null,
+    details, // itt van mindenki ideje/pontja
     scoreboard: Array.from(room.players.values())
       .map(p => ({ nick: p.nick, score: p.score }))
       .sort((a, b) => b.score - a.score)
   });
 
-  setTimeout(() => goNextQuestion(room), 2000);
+  // 1s villogás + 2s infó = 3s összesen
+  setTimeout(() => goNextQuestion(room), 3000);
 }
 
 app.get("/healthz", (_req, res) => res.send("ok"));
