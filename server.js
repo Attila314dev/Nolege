@@ -402,4 +402,15 @@ function finishRound(room) {
 app.get("/healthz", (_req, res) => res.send("ok"));
 
 const PORT = process.env.PORT || 10000;
-server.listen(PORT, () => console.log("Server listening on", PORT));
+
+(async () => {
+  try {
+    await ensureSchema();
+    await seedIfEmpty();
+    server.listen(PORT, () => console.log("Server listening on", PORT));
+  } catch (e) {
+    console.error("Startup error:", e);
+    process.exit(1);
+  }
+})();
+
