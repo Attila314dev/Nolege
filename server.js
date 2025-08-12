@@ -1,9 +1,9 @@
-// server.js (DB-s verzió)
+// server.js — DB-alapú, JSON nélkül
 import express from "express";
 import { WebSocketServer } from "ws";
 import http from "http";
 import path from "path";
-import fs from "fs";
+import fs from "fs"; // (nem használjuk most, maradhat vagy kiveheted)
 import { fileURLToPath } from "url";
 import pg from "pg";
 
@@ -23,8 +23,9 @@ app.get("/", (_req, res) => {
 // --- Postgres pool ---
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
-  ssl: process.env.DATABASE_URL?.includes("render.com") ? { rejectUnauthorized: false } : false
+  ssl: process.env.DATABASE_URL ? { rejectUnauthorized: false } : false
 });
+
 // --- In-memory rooms ---
 const rooms = new Map();
 /*
@@ -80,7 +81,6 @@ function generateRoomCode() {
 
 // ---- DB kérdés lekérés: 15 random kérdés + 3 random wrong/kérdés ----
 async function pickRandomQuestions(count) {
-  // 1) 15 random kérdés
   const qRes = await pool.query(
     `select id, category, question, correct
      from questions
@@ -89,10 +89,8 @@ async function pickRandomQuestions(count) {
     [count]
   );
   const questions = qRes.rows;
-
   if (questions.length === 0) return [];
 
-  // 2) 3 random wrong / kérdés (window + row_number)
   const ids = questions.map(q => q.id);
   const wrongRes = await pool.query(
     `with ranked as (
@@ -106,7 +104,6 @@ async function pickRandomQuestions(count) {
     [ids]
   );
 
-  // Map wrongs
   const wrongMap = new Map();
   for (const row of wrongRes.rows) {
     const arr = wrongMap.get(row.question_id) || [];
@@ -114,7 +111,6 @@ async function pickRandomQuestions(count) {
     wrongMap.set(row.question_id, arr);
   }
 
-  // 3) ABCD keverés
   return questions.map(q => {
     const wrongs = wrongMap.get(q.id) || [];
     const options = shuffle([{ t: q.correct, ok: true }, ...wrongs.map(w => ({ t: w, ok: false }))]);
@@ -122,14 +118,14 @@ async function pickRandomQuestions(count) {
       category: q.category,
       question: q.question,
       options: options.map(o => o.t),
-      answerIndex: options.findIndex(o => o.ok)
+      answerIndex: options.findIndex(o => o.ok) // 0..3
     };
   });
 }
 
 function shuffle(arr) {
-  for (let i=arr.length-1; i>0; i--) {
-    const j = Math.floor(Math.random()*(i+1));
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
     [arr[i], arr[j]] = [arr[j], arr[i]];
   }
   return arr;
@@ -282,7 +278,6 @@ function goNextQuestion(room) {
   room.game.expected = Array.from(room.players.values())
     .filter(p => p.ws && p.ws.readyState === 1).length;
 
-  // helyes index NEM megy ki
   broadcast(room, "question", {
     index: room.game.questionIndex + 1,
     total: room.game.questions.length,
@@ -323,7 +318,6 @@ function finishRound(room) {
     if (player) player.score += 1;
   }
 
-  // részletek mindenkinek (idő + pont)
   const details = Array.from(room.players.keys()).map(nk => {
     const ans = room.game.answers.find(a => a.nick === nk);
     const timeMs = ans ? (ans.tsServer - room.game.questionStart) : null;
@@ -351,8 +345,7 @@ const PORT = process.env.PORT || 10000;
 
 (async () => {
   try {
-    await ensureSchema();
-    // await seedIfEmpty(); // <-- IDEIGLENESEN KIKAPCSOLVA
+    await ensureSchema(); // csak ellenőrzés, seed nincs
     server.listen(PORT, () => console.log("Server listening on", PORT));
   } catch (e) {
     console.error("Startup error:", e);
@@ -360,4 +353,20 @@ const PORT = process.env.PORT || 10000;
   }
 })();
 
-
+// --- csak sémát ellenőrzünk (seed NINCS) ---
+async function ensureSchema() {
+  await pool.query(`
+    create table if not exists questions (
+      id serial primary key,
+      category text not null,
+      question text not null,
+      correct text not null
+    );
+    create table if not exists wrong_answers (
+      id serial primary key,
+      question_id int not null references questions(id) on delete cascade,
+      text text not null
+    );
+    create index if not exists idx_wrong_answers_qid on wrong_answers(question_id);
+  `);
+}
