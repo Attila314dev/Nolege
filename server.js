@@ -44,34 +44,45 @@ async function ensureSchema() {
 }
 
 async function seedIfEmpty() {
-  const { rows } = await pool.query("select count(*)::int as n from questions");
-  if (rows[0].n > 0) return;
+  let needSeed = false;
 
-  const jsonPath = path.join(__dirname, "questions.json");
-  if (!fs.existsSync(jsonPath)) {
-    console.warn("⚠️ questions.json nem található, seed kihagyva.");
-    return;
+  try {
+    const { rows } = await pool.query("select count(*)::int as n from questions");
+    needSeed = (rows[0]?.n ?? 0) === 0;
+  } catch (e) {
+    // Ha a tábla még nincs is meg, akkor is seedelni fogunk (schema után)
+    needSeed = true;
   }
-  const data = JSON.parse(fs.readFileSync(jsonPath, "utf8"));
-  console.log(`📥 Importálás… (${data.length} kérdés)`);
 
-  await pool.query("truncate wrong_answers restart identity cascade;");
-  await pool.query("truncate questions restart identity cascade;");
+  if (!needSeed) {
+    console.log("ℹ️ Seed kihagyva: már van adat a DB-ben.");
+  } else {
+    const jsonPath = path.join(__dirname, "questions.json");
+    if (!fs.existsSync(jsonPath)) {
+      console.warn("⚠️ questions.json nem található, seed kihagyva (DB üres marad).");
+    } else {
+      const data = JSON.parse(fs.readFileSync(jsonPath, "utf8"));
+      console.log(`📥 Importálás… (${data.length} kérdés)`);
 
-  for (const q of data) {
-    const wrong = Array.isArray(q.wrong) ? q.wrong : (q.wrongAnswers || []);
-    const insQ = await pool.query(
-      "insert into questions(category, question, correct) values ($1,$2,$3) returning id",
-      [q.category, q.question, q.correct]
-    );
-    const qid = insQ.rows[0].id;
-    if (wrong.length) {
-      const values = wrong.flatMap(w => [qid, w]);
-      const params = wrong.map((_, i) => `($${2*i+1}, $${2*i+2})`).join(",");
-      await pool.query(`insert into wrong_answers(question_id, text) values ${params}`, values);
+      await pool.query("truncate wrong_answers restart identity cascade;");
+      await pool.query("truncate questions restart identity cascade;");
+
+      for (const q of data) {
+        const wrong = Array.isArray(q.wrong) ? q.wrong : (q.wrongAnswers || []);
+        const insQ = await pool.query(
+          "insert into questions(category, question, correct) values ($1,$2,$3) returning id",
+          [q.category, q.question, q.correct]
+        );
+        const qid = insQ.rows[0].id;
+        if (wrong.length) {
+          const values = wrong.flatMap(w => [qid, w]);
+          const params = wrong.map((_, i) => `($${2*i+1}, $${2*i+2})`).join(",");
+          await pool.query(`insert into wrong_answers(question_id, text) values ${params}`, values);
+        }
+      }
+      console.log("✅ Seed kész.");
     }
   }
-  console.log("✅ Seed kész.");
 }
 
   // questions.json beolvasása a projekt gyökeréből
