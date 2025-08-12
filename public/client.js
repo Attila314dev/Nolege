@@ -1,4 +1,4 @@
-// public/client.js – szoba nézet (room.html)
+// room nézet kliens
 
 const qs = new URLSearchParams(location.search);
 const roomId = qs.get('room');
@@ -24,11 +24,7 @@ const gameOverView = document.getElementById('gameOverView');
 const finalBoardEl = document.getElementById('finalBoard');
 const adminPanel   = document.getElementById('adminPanel');
 const startBtn     = document.getElementById('startBtn');
-const rematchStartBtn = document.getElementById('rematchStartBtn');
-const rematchButtons  = document.getElementById('rematchButtons');
-const rematchYes      = document.getElementById('rematchYes');
-const rematchNo       = document.getElementById('rematchNo');
-const rematchInfo     = document.getElementById('rematchInfo');
+const roundInfoBox = document.getElementById('roundInfo'); // dinamikusan létrehozva, ha nincs
 
 if (!roomId || (!spectator && (!password || !nick))) {
   alert("Hiányzó paraméterek. Menj vissza a főoldalra.");
@@ -45,41 +41,16 @@ let countdownInterval = null;
 function connectWS() {
   const proto = location.protocol === 'https:' ? 'wss' : 'ws';
   ws = new WebSocket(`${proto}://${location.host}`);
-  ws.onopen = () => {
-    ws.send(JSON.stringify({ type: "join", roomId, password, nick, isAdmin, spectator }));
-  };
+  ws.onopen = () => ws.send(JSON.stringify({ type: "join", roomId, password, nick, isAdmin, spectator }));
   ws.onmessage = (ev) => {
     const msg = JSON.parse(ev.data);
-    if (msg.type === "error") {
-      alert(msg.error || "Hiba"); location.href = "/"; return;
-    }
-    if (msg.type === "joined") {
-      renderLobby(msg.room);
-      toggleAdminButtons(msg.room);
-    }
-    if (msg.type === "lobbyUpdate") {
-      renderLobby(msg.room);
-      toggleAdminButtons(msg.room);
-    }
-    if (msg.type === "question") {
-      showQuestion(msg);
-      toggleAdminButtons({ game:{ running:true }});
-    }
-    if (msg.type === "roundResult") {
-      showRoundResult(msg);
-    }
-    if (msg.type === "gameOver") {
-      showGameOver(msg);
-      toggleAdminButtons({ game:{ running:false }});
-    }
-    if (msg.type === "rematchOffer") {
-      // admin kért visszavágót → jelenjen meg az Igen/Nem UI
-      showRematchPrompt();
-    }
+    if (msg.type === "error") { alert(msg.error || "Hiba"); location.href = "/"; return; }
+    if (msg.type === "joined" || msg.type === "lobbyUpdate") { renderLobby(msg.room); toggleAdminButtons(msg.room); }
+    if (msg.type === "question") { showQuestion(msg); toggleAdminButtons({ game:{ running:true }}); }
+    if (msg.type === "roundResult") { showRoundResult(msg); }
+    if (msg.type === "gameOver") { showGameOver(msg); toggleAdminButtons({ game:{ running:false }}); }
   };
-  ws.onclose = () => {
-    roomInfoEl && (roomInfoEl.textContent += " • (kapcsolat bontva)");
-  };
+  ws.onclose = () => { roomInfoEl && (roomInfoEl.textContent += " • (kapcsolat bontva)"); };
 }
 connectWS();
 
@@ -101,14 +72,20 @@ function renderLobby(room) {
 function toggleAdminButtons(roomLike) {
   if (!adminPanel) return;
   const running = !!roomLike?.game?.running;
-  if (startBtn) {
-    startBtn.disabled = running; // forduló közben inaktív
-    startBtn.title = running ? "Játék már fut" : "";
+
+  // csak admin lássa
+  if (!isAdmin || spectator) {
+    adminPanel.classList.add('hide');
+    return;
+  } else {
+    adminPanel.classList.remove('hide');
   }
-  if (rematchStartBtn) {
-    // csak meccs végén legyen értelme mutatni
-    rematchStartBtn.classList.toggle('hide', running);
-    rematchStartBtn.onclick = () => ws?.send(JSON.stringify({ type: "requestRematch" }));
+
+  // blur + tiltás futás közben
+  adminPanel.classList.toggle('disabled-blur', running);
+  if (startBtn) {
+    startBtn.disabled = running;
+    startBtn.title = running ? "A játék fut – új játék indítása csak a végén" : "";
   }
 }
 
@@ -158,8 +135,10 @@ function submitAnswer(option, btn) {
   answeredThisRound = true;
   chosenBtn = btn;
 
+  // minden opció letilt
   document.querySelectorAll('.opt').forEach(el => el.disabled = true);
-  btn.classList.add('chosen');
+  // narancssárga keret a saját tippre
+  btn.classList.add('chosen-orange');
 
   ws?.send(JSON.stringify({ type: "submitAnswer", option }));
 }
@@ -168,27 +147,54 @@ function showRoundResult(m) {
   const correct = m.correct; // 'A'/'B'/'C'/'D'
   const all = Array.from(document.querySelectorAll('.opt'));
   const correctBtn = all.find(b => b.dataset.letter === correct);
-  if (correctBtn) correctBtn.classList.add('blink-correct'); // 4 villanás / 1s
 
+  // helyes gomb 1s/4 villanás zölddel
+  if (correctBtn) correctBtn.classList.add('blink-correct');
+
+  // saját tipp: zöld/piros villogás, majd stabil keret
   if (chosenBtn) {
     if (chosenBtn.dataset.letter === correct) {
       chosenBtn.classList.add('blink-good');
+      setTimeout(() => { chosenBtn.classList.remove('chosen-orange','blink-good'); chosenBtn.classList.add('result-good'); }, 1000);
     } else {
-      chosenBtn.classList.add('blink-bad'); // piros villogás
+      chosenBtn.classList.add('blink-bad');
+      setTimeout(() => { chosenBtn.classList.remove('chosen-orange','blink-bad'); chosenBtn.classList.add('result-bad'); }, 1000);
     }
   }
 
+  // 1s villogás után 2s infópanel
   setTimeout(() => {
     qView.classList.add('hide');
     resultView.classList.remove('hide');
 
     correctEl.textContent = m.correct;
     winnerEl.textContent  = m.winner || "senki";
+
+    // scoreboard
     const list = (m.scoreboard || [])
       .sort((a, b) => b.score - a.score)
       .map(p => `<li><b>${escapeHtml(p.nick)}</b><span>${p.score}</span></li>`)
       .join("");
     playersEl.innerHTML = list;
+
+    // részletes körinfo (idő + pont)
+    let info = document.getElementById('roundInfo');
+    if (!info) {
+      info = document.createElement('div');
+      info.id = 'roundInfo';
+      info.className = 'round-info';
+      resultView.appendChild(info);
+    }
+    const rows = (m.details || []).map(d => {
+      const t = (d.timeMs==null) ? "—" : (d.timeMs/1000).toFixed(3)+"s";
+      const mark = d.isCorrect ? "✔" : (d.timeMs==null ? "—" : "✖");
+      return `<div class="rowline"><span class="nm">${escapeHtml(d.nick)}</span><span>${t}</span><span>${mark}</span><span>+${d.points}</span></div>`;
+    }).join("");
+    info.innerHTML = `
+      <div class="rowline head"><span class="nm">Játékos</span><span>Idő</span><span>Helyes</span><span>Pont</span></div>
+      ${rows}
+      <div class="small mono">Következő kérdés mindjárt érkezik…</div>
+    `;
   }, 1000);
 }
 
@@ -200,38 +206,13 @@ function showGameOver(m) {
   finalBoardEl.innerHTML = (m.scoreboard || [])
     .map(p => `<li><b>${escapeHtml(p.nick)}</b> – ${p.score} pont</li>`)
     .join("");
-
-  // meccs végén alapból csak üzenet — admin "Visszavágót kérek" gombra küld "rematchOffer"-t
-  if (rematchButtons) rematchButtons.classList.add('hide');
-  if (rematchInfo) rematchInfo.textContent = "Az admin kérhet visszavágót.";
 }
 
-function showRematchPrompt() {
-  if (spectator) {
-    rematchButtons?.classList.add('hide');
-    rematchInfo && (rematchInfo.textContent = "Spectator módban nincs szavazás.");
-    return;
-  }
-  if (rematchButtons) rematchButtons.classList.remove('hide');
-  if (rematchInfo) rematchInfo.textContent = "Visszavágó? Válassz!";
-
-  if (rematchYes) rematchYes.onclick = () => {
-    ws?.send(JSON.stringify({ type: "rematchVote", accept: true }));
-    rematchButtons?.classList.add('hide');
-    if (rematchInfo) rematchInfo.textContent = "Szavazat elküldve. Várakozás a többiekre…";
-  };
-  if (rematchNo) rematchNo.onclick = () => {
-    ws?.send(JSON.stringify({ type: "rematchVote", accept: false }));
-    location.href = "/";
-  };
-}
-
-function escapeHtml(s) {
-  return String(s ?? "").replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-}
-
-// admin start
 startBtn && (startBtn.onclick = () => {
   if (spectator || startBtn.disabled) return;
   ws?.send(JSON.stringify({ type: "startGame" }));
 });
+
+function escapeHtml(s) {
+  return String(s ?? "").replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
