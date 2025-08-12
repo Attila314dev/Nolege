@@ -441,11 +441,12 @@ const PORT = process.env.PORT || 10000;
 (async () => {
   try {
     await ensureSchema();
-    await seedIfEmpty();
+    // await seedIfEmpty(); // <-- IDEIGLENESEN KIKAPCSOLVA
     server.listen(PORT, () => console.log("Server listening on", PORT));
   } catch (e) {
     console.error("Startup error:", e);
     process.exit(1);
   }
 })();
+
 
