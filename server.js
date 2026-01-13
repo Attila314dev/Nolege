@@ -1,13 +1,13 @@
-// server.js — DB-alapú, JSON nélkül
+// server.js — JSON-alapú, DB NÉLKÜL
 import express from "express";
 import { WebSocketServer } from "ws";
 import http from "http";
 import path from "path";
-import fs from "fs"; // (nem használjuk most, maradhat vagy kiveheted)
+import fs from "fs";
 import { fileURLToPath } from "url";
-import pg from "pg";
 
-const { Pool } = pg;
+process.on("unhandledRejection", (e) => console.error("unhandledRejection", e));
+process.on("uncaughtException", (e) => console.error("uncaughtException", e));
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -20,13 +20,88 @@ app.get("/", (_req, res) => {
   res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 
-// --- Postgres pool ---
-const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
-  ssl: process.env.DATABASE_URL ? { rejectUnauthorized: false } : false
-});
+// --------------------
+// Questions from JSON
+// --------------------
+function loadQuestionsFromJson() {
+  const p = path.join(__dirname, "questions.json");
+  const raw = fs.readFileSync(p, "utf8");
+  const data = JSON.parse(raw);
 
-// --- In-memory rooms ---
+  const list = Array.isArray(data) ? data : Array.isArray(data?.questions) ? data.questions : null;
+  if (!list) throw new Error("questions.json must be an array or { questions: [...] }");
+
+  const normalized = list.map(normalizeQuestion).filter(Boolean);
+
+  if (normalized.length === 0) {
+    console.warn("Loaded 0 valid questions from questions.json");
+  } else {
+    console.log("Loaded questions:", normalized.length);
+  }
+
+  return normalized;
+}
+
+/**
+ * Expected (preferred) shape per question:
+ * { category, question, options: [A,B,C,D], answerIndex: 0..3 }
+ *
+ * If your JSON differs, adapt here.
+ */
+function normalizeQuestion(q, idx) {
+  if (!q || typeof q !== "object") return null;
+
+  const category = String(q.category ?? "").trim();
+  const question = String(q.question ?? "").trim();
+
+  const options = Array.isArray(q.options) ? q.options.map(x => String(x)) : null;
+  const answerIndex = Number.isInteger(q.answerIndex) ? q.answerIndex : null;
+
+  if (!category || !question) {
+    console.warn(`Question #${idx}: missing category/question`);
+    return null;
+  }
+  if (!options || options.length !== 4) {
+    console.warn(`Question #${idx}: options must be an array of 4 strings`);
+    return null;
+  }
+  if (answerIndex === null || answerIndex < 0 || answerIndex > 3) {
+    console.warn(`Question #${idx}: answerIndex must be 0..3`);
+    return null;
+  }
+
+  return {
+    category,
+    question,
+    options,
+    answerIndex
+  };
+}
+
+const ALL_QUESTIONS = loadQuestionsFromJson();
+
+function pickRandomQuestions(count) {
+  if (ALL_QUESTIONS.length === 0) return [];
+
+  // shuffle copy
+  const arr = ALL_QUESTIONS.slice();
+  shuffle(arr);
+
+  // if not enough, just return as many as we have
+  return arr.slice(0, Math.min(count, arr.length));
+}
+
+function shuffle(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+// --------------------
+// In-memory rooms
+// --------------------
 const rooms = new Map();
 /*
 room = {
@@ -79,64 +154,14 @@ function generateRoomCode() {
   return code;
 }
 
-// ---- DB kérdés lekérés: 15 random kérdés + 3 random wrong/kérdés ----
-async function pickRandomQuestions(count) {
-  const qRes = await pool.query(
-    `select id, category, question, correct
-     from questions
-     order by random()
-     limit $1`,
-    [count]
-  );
-  const questions = qRes.rows;
-  if (questions.length === 0) return [];
-
-  const ids = questions.map(q => q.id);
-  const wrongRes = await pool.query(
-    `with ranked as (
-       select wa.*, row_number() over (partition by question_id order by random()) as rn
-       from wrong_answers wa
-       where question_id = any($1)
-     )
-     select question_id, text
-     from ranked
-     where rn <= 3`,
-    [ids]
-  );
-
-  const wrongMap = new Map();
-  for (const row of wrongRes.rows) {
-    const arr = wrongMap.get(row.question_id) || [];
-    arr.push(row.text);
-    wrongMap.set(row.question_id, arr);
-  }
-
-  return questions.map(q => {
-    const wrongs = wrongMap.get(q.id) || [];
-    const options = shuffle([{ t: q.correct, ok: true }, ...wrongs.map(w => ({ t: w, ok: false }))]);
-    return {
-      category: q.category,
-      question: q.question,
-      options: options.map(o => o.t),
-      answerIndex: options.findIndex(o => o.ok) // 0..3
-    };
-  });
-}
-
-function shuffle(arr) {
-  for (let i = arr.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [arr[i], arr[j]] = [arr[j], arr[i]];
-  }
-  return arr;
-}
-
 function broadcast(room, type, payload) {
+  const msg = JSON.stringify({ type, ...payload });
+
   for (const p of room.players.values()) {
-    if (p.ws && p.ws.readyState === 1) p.ws.send(JSON.stringify({ type, ...payload }));
+    if (p.ws && p.ws.readyState === 1) p.ws.send(msg);
   }
   for (const s of room.spectators) {
-    if (s.readyState === 1) s.send(JSON.stringify({ type, ...payload }));
+    if (s.readyState === 1) s.send(msg);
   }
 }
 
@@ -144,7 +169,7 @@ function roomSnapshot(room) {
   return {
     id: room.id,
     admin: room.admin?.nick || null,
-    players: Array.from(room.players.values()).map(p => ({
+    players: Array.from(room.players.values()).map((p) => ({
       nick: p.nick + (p.disconnected ? " (kilépett)" : ""),
       score: p.score
     })),
@@ -155,9 +180,11 @@ function roomSnapshot(room) {
   };
 }
 
-// --- REST ---
+// --------------------
+// REST
+// --------------------
 app.get("/api/rooms", (_req, res) => {
-  const list = Array.from(rooms.values()).map(r => ({
+  const list = Array.from(rooms.values()).map((r) => ({
     id: r.id,
     admin: r.admin?.nick || null,
     players: r.players.size,
@@ -189,18 +216,33 @@ app.post("/api/join", (req, res) => {
   res.json({ ok: true });
 });
 
-// --- WS ---
+// --------------------
+// WS
+// --------------------
 const server = http.createServer(app);
 const wss = new WebSocketServer({ server });
 
 wss.on("connection", (ws) => {
   ws.once("message", (raw) => {
-    let init; try { init = JSON.parse(raw.toString()); } catch { ws.close(); return; }
-    if (init.type !== "join") { ws.close(); return; }
+    let init;
+    try {
+      init = JSON.parse(raw.toString());
+    } catch {
+      ws.close();
+      return;
+    }
+    if (init.type !== "join") {
+      ws.close();
+      return;
+    }
 
     const { roomId, password, nick, isAdmin, spectator } = init;
     const room = rooms.get(roomId);
-    if (!room) { ws.send(JSON.stringify({ type:"error", error:"No such room" })); ws.close(); return; }
+    if (!room) {
+      ws.send(JSON.stringify({ type: "error", error: "No such room" }));
+      ws.close();
+      return;
+    }
 
     // spectator: jelszó nem kell
     if (spectator) {
@@ -211,13 +253,25 @@ wss.on("connection", (ws) => {
     }
 
     // futó játékba nem léphet be játékos
-    if (room.game.running) { ws.send(JSON.stringify({ type: "error", error: "Game already started, join as spectator" })); ws.close(); return; }
+    if (room.game.running) {
+      ws.send(JSON.stringify({ type: "error", error: "Game already started, join as spectator" }));
+      ws.close();
+      return;
+    }
 
     // játékos/admin: jelszó kell
-    if (room.password !== password) { ws.send(JSON.stringify({ type: "error", error: "Bad room/password" })); ws.close(); return; }
+    if (room.password !== password) {
+      ws.send(JSON.stringify({ type: "error", error: "Bad room/password" }));
+      ws.close();
+      return;
+    }
 
     if (isAdmin) {
-      if (room.admin?.nick !== nick) { ws.send(JSON.stringify({ type:"error", error:"Not admin" })); ws.close(); return; }
+      if (room.admin?.nick !== nick) {
+        ws.send(JSON.stringify({ type: "error", error: "Not admin" }));
+        ws.close();
+        return;
+      }
     } else {
       if (!room.players.has(nick)) {
         room.players.set(nick, { nick, score: 0, ws: null, disconnected: false });
@@ -230,8 +284,13 @@ wss.on("connection", (ws) => {
 
     broadcast(room, "lobbyUpdate", { room: roomSnapshot(room) });
 
-    ws.on("message", (raw) => {
-      let msg; try { msg = JSON.parse(raw.toString()); } catch { return; }
+    ws.on("message", (raw2) => {
+      let msg;
+      try {
+        msg = JSON.parse(raw2.toString());
+      } catch {
+        return;
+      }
 
       if (msg.type === "startGame" && nick === room.admin?.nick) startGame(room);
       if (msg.type === "submitAnswer") handleAnswer(room, nick, msg.option);
@@ -239,7 +298,10 @@ wss.on("connection", (ws) => {
     });
 
     ws.on("close", () => {
-      if (player) { player.ws = null; player.disconnected = true; }
+      if (player) {
+        player.ws = null;
+        player.disconnected = true;
+      }
       broadcast(room, "lobbyUpdate", { room: roomSnapshot(room) });
     });
 
@@ -247,11 +309,21 @@ wss.on("connection", (ws) => {
   });
 });
 
-async function startGame(room) {
-  for (const p of room.players.values()) { p.score = 0; p.disconnected = false; }
+function startGame(room) {
+  if (ALL_QUESTIONS.length === 0) {
+    room.game.running = false;
+    broadcast(room, "gameOver", { scoreboard: [] });
+    return;
+  }
+
+  for (const p of room.players.values()) {
+    p.score = 0;
+    p.disconnected = false;
+  }
+
   room.game.running = true;
   room.game.questionIndex = -1;
-  room.game.questions = await pickRandomQuestions(15);
+  room.game.questions = pickRandomQuestions(15);
   goNextQuestion(room);
 }
 
@@ -259,13 +331,16 @@ function goNextQuestion(room) {
   room.game.questionIndex++;
   room.game.answers = [];
   room.game.roundClosed = false;
-  if (room.game.roundTimer) { clearTimeout(room.game.roundTimer); room.game.roundTimer = null; }
+  if (room.game.roundTimer) {
+    clearTimeout(room.game.roundTimer);
+    room.game.roundTimer = null;
+  }
 
   if (room.game.questionIndex >= room.game.questions.length) {
     room.game.running = false;
     broadcast(room, "gameOver", {
       scoreboard: Array.from(room.players.values())
-        .map(p => ({ nick: p.nick, score: p.score }))
+        .map((p) => ({ nick: p.nick, score: p.score }))
         .sort((a, b) => b.score - a.score)
     });
     return;
@@ -275,8 +350,7 @@ function goNextQuestion(room) {
   room.game.currentQ = q;
   room.game.questionStart = Date.now();
 
-  room.game.expected = Array.from(room.players.values())
-    .filter(p => p.ws && p.ws.readyState === 1).length;
+  room.game.expected = Array.from(room.players.values()).filter((p) => p.ws && p.ws.readyState === 1).length;
 
   broadcast(room, "question", {
     index: room.game.questionIndex + 1,
@@ -292,7 +366,7 @@ function goNextQuestion(room) {
 
 function handleAnswer(room, nick, option) {
   if (!room.game.running || !room.game.currentQ || room.game.roundClosed) return;
-  if (room.game.answers.find(a => a.nick === nick)) return;
+  if (room.game.answers.find((a) => a.nick === nick)) return;
 
   room.game.answers.push({ nick, option, tsServer: Date.now() });
 
@@ -304,12 +378,15 @@ function handleAnswer(room, nick, option) {
 function finishRound(room) {
   if (room.game.roundClosed) return;
   room.game.roundClosed = true;
-  if (room.game.roundTimer) { clearTimeout(room.game.roundTimer); room.game.roundTimer = null; }
+  if (room.game.roundTimer) {
+    clearTimeout(room.game.roundTimer);
+    room.game.roundTimer = null;
+  }
 
   const q = room.game.currentQ;
-  const correctLetter = ["A","B","C","D"][q.answerIndex];
+  const correctLetter = ["A", "B", "C", "D"][q.answerIndex];
 
-  const correctOnes = room.game.answers.filter(a => a.option === correctLetter);
+  const correctOnes = room.game.answers.filter((a) => a.option === correctLetter);
   let winner = null;
   if (correctOnes.length > 0) {
     correctOnes.sort((a, b) => a.tsServer - b.tsServer);
@@ -318,9 +395,9 @@ function finishRound(room) {
     if (player) player.score += 1;
   }
 
-  const details = Array.from(room.players.keys()).map(nk => {
-    const ans = room.game.answers.find(a => a.nick === nk);
-    const timeMs = ans ? (ans.tsServer - room.game.questionStart) : null;
+  const details = Array.from(room.players.keys()).map((nk) => {
+    const ans = room.game.answers.find((a) => a.nick === nk);
+    const timeMs = ans ? ans.tsServer - room.game.questionStart : null;
     const isCorrect = !!ans && ans.option === correctLetter;
     const points = winner && winner.nick === nk ? 1 : 0;
     return { nick: nk, timeMs, isCorrect, option: ans?.option ?? null, points };
@@ -331,7 +408,7 @@ function finishRound(room) {
     winner: winner ? winner.nick : null,
     details,
     scoreboard: Array.from(room.players.values())
-      .map(p => ({ nick: p.nick, score: p.score }))
+      .map((p) => ({ nick: p.nick, score: p.score }))
       .sort((a, b) => b.score - a.score)
   });
 
@@ -343,30 +420,6 @@ app.get("/healthz", (_req, res) => res.send("ok"));
 
 const PORT = process.env.PORT || 10000;
 
-(async () => {
-  try {
-    await ensureSchema(); // csak ellenőrzés, seed nincs
-    server.listen(PORT, () => console.log("Server listening on", PORT));
-  } catch (e) {
-    console.error("Startup error:", e);
-    process.exit(1);
-  }
-})();
-
-// --- csak sémát ellenőrzünk (seed NINCS) ---
-async function ensureSchema() {
-  await pool.query(`
-    create table if not exists questions (
-      id serial primary key,
-      category text not null,
-      question text not null,
-      correct text not null
-    );
-    create table if not exists wrong_answers (
-      id serial primary key,
-      question_id int not null references questions(id) on delete cascade,
-      text text not null
-    );
-    create index if not exists idx_wrong_answers_qid on wrong_answers(question_id);
-  `);
-}
+server.listen(PORT, "0.0.0.0", () => {
+  console.log("Server listening on", PORT);
+});
