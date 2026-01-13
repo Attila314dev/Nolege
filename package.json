@@ -4,12 +4,10 @@
   "type": "module",
   "scripts": {
     "start": "node server.js",
-    "seed": "node tools/import_questions.js"
   },
   "dependencies": {
     "express": "^4.19.2",
     "ws": "^8.18.0",
     "uuid": "^9.0.1",
-    "pg": "^8.12.0"
   }
 }
