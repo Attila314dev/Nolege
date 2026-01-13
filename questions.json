@@ -1,33 +1,882 @@
 [
   {
-    "category": "Tudomány",
-    "question": "Melyik bolygón van a Nagy Vörös Folt nevű vihar?",
-    "correct": "Jupiter",
+    "category": "Földrajz",
+    "question": "Mi Ausztrália fővárosa?",
+    "correct": "Canberra",
     "wrong": [
-      "Szaturnusz",
-      "Neptunusz",
-      "Uránusz",
-      "Mars",
-      "Vénusz",
-      "Merkúr",
-      "Föld",
-      "Plútó",
-      "Io"
+      "Koppenhága",
+      "Belgrád",
+      "Oslo",
+      "Madrid",
+      "Dublin",
+      "Bécs",
+      "Szöul",
+      "Brasília",
+      "Hamburg"
+    ]
+  },
+  {
+    "category": "Földrajz",
+    "question": "Mi Kanada fővárosa?",
+    "correct": "Ottawa",
+    "wrong": [
+      "Brasília",
+      "Ankara",
+      "Bangkok",
+      "Athén",
+      "Oslo",
+      "Jeruzsálem",
+      "Bécs",
+      "Dublin",
+      "Újdelhi"
+    ]
+  },
+  {
+    "category": "Földrajz",
+    "question": "Mi Brazília fővárosa?",
+    "correct": "Brasília",
+    "wrong": [
+      "Tallinn",
+      "Oslo",
+      "Canberra",
+      "Pretoria",
+      "Bukarest",
+      "Marseille",
+      "London",
+      "Dublin",
+      "Riga"
+    ]
+  },
+  {
+    "category": "Földrajz",
+    "question": "Mi Argentína fővárosa?",
+    "correct": "Buenos Aires",
+    "wrong": [
+      "Ankara",
+      "Madrid",
+      "Mexikóváros",
+      "Rijád",
+      "London",
+      "Genf",
+      "Stockholm",
+      "Helsinki",
+      "Pretoria"
+    ]
+  },
+  {
+    "category": "Földrajz",
+    "question": "Mi Mexikó fővárosa?",
+    "correct": "Mexikóváros",
+    "wrong": [
+      "Tokió",
+      "Belgrád",
+      "Brasília",
+      "Szófia",
+      "Stockholm",
+      "Bern",
+      "Koppenhága",
+      "Tallinn",
+      "Madrid"
+    ]
+  },
+  {
+    "category": "Földrajz",
+    "question": "Mi USA fővárosa?",
+    "correct": "Washington, D.C.",
+    "wrong": [
+      "Athén",
+      "Lisszabon",
+      "Marseille",
+      "Belgrád",
+      "Szófia",
+      "Reykjavík",
+      "Canberra",
+      "Kairó",
+      "Varsó"
+    ]
+  },
+  {
+    "category": "Földrajz",
+    "question": "Mi Japán fővárosa?",
+    "correct": "Tokió",
+    "wrong": [
+      "Buenos Aires",
+      "Peking",
+      "Ottawa",
+      "Athén",
+      "Bécs",
+      "Prága",
+      "Reykjavík",
+      "Bukarest",
+      "Brasília"
+    ]
+  },
+  {
+    "category": "Földrajz",
+    "question": "Mi Kína fővárosa?",
+    "correct": "Peking",
+    "wrong": [
+      "Szófia",
+      "Prága",
+      "Lisszabon",
+      "Koppenhága",
+      "Varsó",
+      "Rijád",
+      "Bukarest",
+      "Bern",
+      "Bécs"
+    ]
+  },
+  {
+    "category": "Földrajz",
+    "question": "Mi Dél-Korea fővárosa?",
+    "correct": "Szöul",
+    "wrong": [
+      "Jakarta",
+      "Prága",
+      "Zágráb",
+      "Bukarest",
+      "Ottawa",
+      "Tallinn",
+      "Washington, D.C.",
+      "Marseille",
+      "Brüsszel"
+    ]
+  },
+  {
+    "category": "Földrajz",
+    "question": "Mi India fővárosa?",
+    "correct": "Újdelhi",
+    "wrong": [
+      "Rijád",
+      "Riga",
+      "Varsó",
+      "Madrid",
+      "Koppenhága",
+      "Canberra",
+      "Bécs",
+      "Róma",
+      "Vilnius"
+    ]
+  },
+  {
+    "category": "Földrajz",
+    "question": "Mi Egyesült Királyság fővárosa?",
+    "correct": "London",
+    "wrong": [
+      "Bécs",
+      "Athén",
+      "Róma",
+      "Szófia",
+      "Madrid",
+      "Ottawa",
+      "Pretoria",
+      "Buenos Aires",
+      "Zágráb"
+    ]
+  },
+  {
+    "category": "Földrajz",
+    "question": "Mi Spanyolország fővárosa?",
+    "correct": "Madrid",
+    "wrong": [
+      "Pretoria",
+      "Bukarest",
+      "Amszterdam",
+      "Ljubljana",
+      "Stockholm",
+      "Lisszabon",
+      "Helsinki",
+      "Brüsszel",
+      "Szöul"
+    ]
+  },
+  {
+    "category": "Földrajz",
+    "question": "Mi Olaszország fővárosa?",
+    "correct": "Róma",
+    "wrong": [
+      "Dublin",
+      "Canberra",
+      "Marseille",
+      "Brüsszel",
+      "Ankara",
+      "Bangkok",
+      "Bukarest",
+      "Ljubljana",
+      "Varsó"
+    ]
+  },
+  {
+    "category": "Földrajz",
+    "question": "Mi Németország fővárosa?",
+    "correct": "Berlin",
+    "wrong": [
+      "Bécs",
+      "Szöul",
+      "Újdelhi",
+      "Amszterdam",
+      "Reykjavík",
+      "Vilnius",
+      "Belgrád",
+      "Helsinki",
+      "Rijád"
+    ]
+  },
+  {
+    "category": "Földrajz",
+    "question": "Mi Hollandia fővárosa?",
+    "correct": "Amszterdam",
+    "wrong": [
+      "Zágráb",
+      "London",
+      "Tallinn",
+      "Ottawa",
+      "Varsó",
+      "Bukarest",
+      "Jeruzsálem",
+      "Riga",
+      "Hamburg"
+    ]
+  },
+  {
+    "category": "Földrajz",
+    "question": "Mi Svédország fővárosa?",
+    "correct": "Stockholm",
+    "wrong": [
+      "Brüsszel",
+      "Marseille",
+      "Mexikóváros",
+      "Belgrád",
+      "Hamburg",
+      "Madrid",
+      "Genf",
+      "Bukarest",
+      "Prága"
+    ]
+  },
+  {
+    "category": "Földrajz",
+    "question": "Mi Norvégia fővárosa?",
+    "correct": "Oslo",
+    "wrong": [
+      "Bangkok",
+      "Washington, D.C.",
+      "Lisszabon",
+      "Mexikóváros",
+      "Madrid",
+      "Újdelhi",
+      "Peking",
+      "Koppenhága",
+      "Belgrád"
+    ]
+  },
+  {
+    "category": "Földrajz",
+    "question": "Mi Lengyelország fővárosa?",
+    "correct": "Varsó",
+    "wrong": [
+      "Koppenhága",
+      "Kairó",
+      "Jeruzsálem",
+      "Újdelhi",
+      "Tallinn",
+      "Peking",
+      "Helsinki",
+      "Bern",
+      "Rijád"
+    ]
+  },
+  {
+    "category": "Földrajz",
+    "question": "Mi Csehország fővárosa?",
+    "correct": "Prága",
+    "wrong": [
+      "Marseille",
+      "Hamburg",
+      "Mexikóváros",
+      "Tallinn",
+      "Genf",
+      "Amszterdam",
+      "Oslo",
+      "Belgrád",
+      "Varsó"
+    ]
+  },
+  {
+    "category": "Földrajz",
+    "question": "Mi Ausztria fővárosa?",
+    "correct": "Bécs",
+    "wrong": [
+      "Róma",
+      "Brüsszel",
+      "Vilnius",
+      "Stockholm",
+      "Buenos Aires",
+      "Reykjavík",
+      "Koppenhága",
+      "Amszterdam",
+      "Ottawa"
     ]
   },
   {
     "category": "Tudomány",
-    "question": "Mi a Föld légkörének legnagyobb arányban előforduló összetevője?",
-    "correct": "Nitrogén",
+    "question": "Melyik kémiai elemet jelöli a 'Fe' vegyjel?",
+    "correct": "Vas",
     "wrong": [
-      "Oxigén",
-      "Szén-dioxid",
-      "Argon",
+      "Hélium",
+      "Ezüst",
+      "Nitrogén",
+      "Higany",
+      "Klór",
+      "Fluor",
       "Hidrogén",
+      "Jód",
+      "Kalcium"
+    ]
+  },
+  {
+    "category": "Tudomány",
+    "question": "Melyik kémiai elemet jelöli a 'Au' vegyjel?",
+    "correct": "Arany",
+    "wrong": [
+      "Nikkel",
+      "Kén",
+      "Neon",
+      "Alumínium",
+      "Foszfor",
+      "Oxigén",
+      "Ezüst",
+      "Szilícium",
+      "Hélium"
+    ]
+  },
+  {
+    "category": "Tudomány",
+    "question": "Melyik kémiai elemet jelöli a 'Ag' vegyjel?",
+    "correct": "Ezüst",
+    "wrong": [
+      "Szilícium",
+      "Ólom",
+      "Magnézium",
+      "Fluor",
+      "Kálium",
+      "Kobalt",
+      "Ón",
+      "Kén",
+      "Szén"
+    ]
+  },
+  {
+    "category": "Tudomány",
+    "question": "Melyik kémiai elemet jelöli a 'Na' vegyjel?",
+    "correct": "Nátrium",
+    "wrong": [
+      "Higany",
+      "Nikkel",
+      "Jód",
+      "Bór",
+      "Kobalt",
+      "Réz",
+      "Vas",
+      "Arany",
+      "Neon"
+    ]
+  },
+  {
+    "category": "Tudomány",
+    "question": "Melyik kémiai elemet jelöli a 'K' vegyjel?",
+    "correct": "Kálium",
+    "wrong": [
+      "Arany",
+      "Cink",
+      "Nátrium",
+      "Króm",
+      "Szilícium",
+      "Alumínium",
+      "Réz",
+      "Jód",
+      "Klór"
+    ]
+  },
+  {
+    "category": "Tudomány",
+    "question": "Melyik kémiai elemet jelöli a 'Ca' vegyjel?",
+    "correct": "Kalcium",
+    "wrong": [
+      "Jód",
+      "Réz",
+      "Neon",
+      "Kobalt",
+      "Króm",
+      "Ezüst",
+      "Nikkel",
+      "Ólom",
+      "Fluor"
+    ]
+  },
+  {
+    "category": "Tudomány",
+    "question": "Melyik kémiai elemet jelöli a 'Mg' vegyjel?",
+    "correct": "Magnézium",
+    "wrong": [
+      "Kén",
+      "Oxigén",
+      "Arany",
+      "Higany",
+      "Szén",
+      "Vas",
+      "Hélium",
+      "Nitrogén",
+      "Cink"
+    ]
+  },
+  {
+    "category": "Tudomány",
+    "question": "Melyik kémiai elemet jelöli a 'Cu' vegyjel?",
+    "correct": "Réz",
+    "wrong": [
+      "Lítium",
+      "Kén",
+      "Nitrogén",
+      "Ón",
+      "Cink",
+      "Higany",
+      "Hélium",
+      "Fluor",
+      "Klór"
+    ]
+  },
+  {
+    "category": "Tudomány",
+    "question": "Melyik kémiai elemet jelöli a 'Zn' vegyjel?",
+    "correct": "Cink",
+    "wrong": [
+      "Magnézium",
+      "Ón",
+      "Jód",
+      "Hidrogén",
+      "Szén",
+      "Réz",
+      "Fluor",
+      "Kálium",
+      "Szilícium"
+    ]
+  },
+  {
+    "category": "Tudomány",
+    "question": "Melyik kémiai elemet jelöli a 'Pb' vegyjel?",
+    "correct": "Ólom",
+    "wrong": [
+      "Bór",
+      "Réz",
+      "Foszfor",
+      "Szén",
+      "Kobalt",
+      "Nitrogén",
+      "Cink",
+      "Oxigén",
+      "Szilícium"
+    ]
+  },
+  {
+    "category": "Tudomány",
+    "question": "Melyik kémiai elemet jelöli a 'Sn' vegyjel?",
+    "correct": "Ón",
+    "wrong": [
+      "Arany",
+      "Hidrogén",
+      "Higany",
+      "Foszfor",
+      "Kalcium",
+      "Nikkel",
+      "Jód",
+      "Cink",
+      "Króm"
+    ]
+  },
+  {
+    "category": "Tudomány",
+    "question": "Melyik kémiai elemet jelöli a 'Cl' vegyjel?",
+    "correct": "Klór",
+    "wrong": [
+      "Ón",
+      "Hélium",
+      "Neon",
+      "Ezüst",
+      "Bór",
+      "Réz",
+      "Alumínium",
+      "Lítium",
+      "Nátrium"
+    ]
+  },
+  {
+    "category": "Tudomány",
+    "question": "Melyik kémiai elemet jelöli a 'I' vegyjel?",
+    "correct": "Jód",
+    "wrong": [
+      "Króm",
+      "Szén",
+      "Klór",
+      "Cink",
+      "Kalcium",
+      "Foszfor",
+      "Hidrogén",
+      "Szilícium",
+      "Oxigén"
+    ]
+  },
+  {
+    "category": "Tudomány",
+    "question": "Melyik kémiai elemet jelöli a 'He' vegyjel?",
+    "correct": "Hélium",
+    "wrong": [
+      "Neon",
+      "Magnézium",
+      "Réz",
+      "Kalcium",
+      "Jód",
+      "Nátrium",
+      "Lítium",
+      "Nikkel",
+      "Ón"
+    ]
+  },
+  {
+    "category": "Tudomány",
+    "question": "Melyik kémiai elemet jelöli a 'Ne' vegyjel?",
+    "correct": "Neon",
+    "wrong": [
+      "Ólom",
+      "Foszfor",
+      "Fluor",
+      "Szilícium",
+      "Hélium",
+      "Ezüst",
+      "Kálium",
+      "Klór",
+      "Hidrogén"
+    ]
+  },
+  {
+    "category": "Tudomány",
+    "question": "Milyen egységben mérjük: Áramerősség?",
+    "correct": "Amper",
+    "wrong": [
+      "Lumen",
+      "Pascal",
+      "Siemens",
+      "Henry",
+      "Volt",
+      "Newton",
+      "Joule",
+      "Farad",
+      "Coulomb"
+    ]
+  },
+  {
+    "category": "Tudomány",
+    "question": "Milyen egységben mérjük: Feszültség?",
+    "correct": "Volt",
+    "wrong": [
+      "Joule",
+      "Ohm",
+      "Henry",
+      "Amper",
+      "Siemens",
+      "Coulomb",
+      "Tesla",
+      "Candela",
+      "Kelvin"
+    ]
+  },
+  {
+    "category": "Tudomány",
+    "question": "Milyen egységben mérjük: Ellenállás?",
+    "correct": "Ohm",
+    "wrong": [
+      "Newton",
+      "Candela",
+      "Pascal",
+      "Henry",
+      "Hertz",
+      "Kelvin",
+      "Joule",
+      "Lumen",
+      "Gray"
+    ]
+  },
+  {
+    "category": "Tudomány",
+    "question": "Milyen egységben mérjük: Teljesítmény?",
+    "correct": "Watt",
+    "wrong": [
+      "Candela",
+      "Farad",
+      "Kelvin",
+      "Ohm",
+      "Gray",
+      "Joule",
+      "Hertz",
+      "Weber",
+      "Siemens"
+    ]
+  },
+  {
+    "category": "Tudomány",
+    "question": "Milyen egységben mérjük: Energia?",
+    "correct": "Joule",
+    "wrong": [
+      "Hertz",
+      "Farad",
+      "Pascal",
+      "Becquerel",
+      "Candela",
+      "Lumen",
+      "Newton",
+      "Ohm",
+      "Amper"
+    ]
+  },
+  {
+    "category": "Tudomány",
+    "question": "Milyen egységben mérjük: Frekvencia?",
+    "correct": "Hertz",
+    "wrong": [
+      "Siemens",
+      "Tesla",
+      "Joule",
+      "Ohm",
+      "Volt",
+      "Gray",
+      "Becquerel",
+      "Weber",
+      "Kelvin"
+    ]
+  },
+  {
+    "category": "Tudomány",
+    "question": "Milyen egységben mérjük: Nyomás?",
+    "correct": "Pascal",
+    "wrong": [
+      "Ohm",
+      "Henry",
+      "Gray",
+      "Siemens",
+      "Becquerel",
+      "Watt",
+      "Kelvin",
+      "Candela",
+      "Coulomb"
+    ]
+  },
+  {
+    "category": "Tudomány",
+    "question": "Milyen egységben mérjük: Hőmérséklet (SI)?",
+    "correct": "Kelvin",
+    "wrong": [
+      "Hertz",
+      "Pascal",
+      "Tesla",
+      "Becquerel",
+      "Amper",
+      "Weber",
+      "Joule",
+      "Siemens",
+      "Volt"
+    ]
+  },
+  {
+    "category": "Tudomány",
+    "question": "Milyen egységben mérjük: Fényerősség?",
+    "correct": "Candela",
+    "wrong": [
+      "Henry",
+      "Hertz",
+      "Lumen",
+      "Watt",
+      "Amper",
+      "Kelvin",
+      "Coulomb",
+      "Lux",
+      "Siemens"
+    ]
+  },
+  {
+    "category": "Tudomány",
+    "question": "Milyen egységben mérjük: Töltés?",
+    "correct": "Coulomb",
+    "wrong": [
+      "Lumen",
+      "Farad",
+      "Siemens",
+      "Pascal",
+      "Joule",
+      "Watt",
+      "Candela",
+      "Hertz",
+      "Tesla"
+    ]
+  },
+  {
+    "category": "Biológia",
+    "question": "Melyik szerv termeli az inzulint?",
+    "correct": "Hasnyálmirigy",
+    "wrong": [
+      "Tüdő",
+      "Epehólyag",
+      "Gyomor",
+      "Máj",
+      "Szív",
+      "Lép",
+      "Vese",
+      "Vékonybél",
+      "Agy"
+    ]
+  },
+  {
+    "category": "Biológia",
+    "question": "Mi a DNS fő feladata a sejtben?",
+    "correct": "Genetikai információ tárolása",
+    "wrong": [
+      "Hőtermelés",
+      "Sejtfal felépítése",
+      "Emésztés",
+      "Izomösszehúzódás",
+      "Fehérjeszintézis",
+      "Méregtelenítés",
+      "Oxigénszállítás",
+      "Vízszállítás",
+      "Energiatermelés"
+    ]
+  },
+  {
+    "category": "Biológia",
+    "question": "Melyik sejtalkotó végzi a fehérjeszintézist?",
+    "correct": "Riboszóma",
+    "wrong": [
+      "Sejtmag",
+      "Citoplazma",
+      "Centriolum",
+      "Vakuólum",
+      "Sejthártya",
+      "Mitokondrium",
+      "Kloroplasztisz",
+      "Lizoszóma",
+      "Golgi-készülék"
+    ]
+  },
+  {
+    "category": "Biológia",
+    "question": "Melyik vitamin hiánya okozza a skorbutot?",
+    "correct": "C-vitamin",
+    "wrong": [
+      "B12-vitamin",
+      "A-vitamin",
+      "Biotin",
+      "Folsav",
+      "Niacin",
+      "K-vitamin",
+      "E-vitamin",
+      "D-vitamin",
+      "B1-vitamin"
+    ]
+  },
+  {
+    "category": "Biológia",
+    "question": "Mi az emberi test legnagyobb szerve?",
+    "correct": "Bőr",
+    "wrong": [
+      "Gyomor",
+      "Vékonybél",
+      "Vese",
+      "Lép",
+      "Tüdő",
+      "Hasnyálmirigy",
+      "Máj",
+      "Szív",
+      "Agy"
+    ]
+  },
+  {
+    "category": "Biológia",
+    "question": "Melyik rész felelős a növényi fotoszintézisért?",
+    "correct": "Kloroplasztisz",
+    "wrong": [
+      "Mitokondrium",
+      "Sejtmag",
+      "Sejthártya",
+      "Vakuólum",
+      "Golgi-készülék",
+      "Riboszóma",
+      "Sejtfal",
+      "Citoplazma",
+      "Lizoszóma"
+    ]
+  },
+  {
+    "category": "Biológia",
+    "question": "Melyik gáz szükséges a sejtlégzéshez?",
+    "correct": "Oxigén",
+    "wrong": [
+      "Argon",
+      "Nitrogén",
+      "Kén-dioxid",
+      "Neon",
+      "Szén-dioxid",
       "Metán",
       "Ózon",
       "Hélium",
-      "Neon"
+      "Hidrogén"
+    ]
+  },
+  {
+    "category": "Biológia",
+    "question": "Mi a hemoglobin szerepe?",
+    "correct": "Oxigén szállítása",
+    "wrong": [
+      "Emésztés",
+      "Idegingerület-átvitel",
+      "Véralvadás",
+      "Méregtelenítés",
+      "Immunvédelem",
+      "Hőszabályozás",
+      "Izommozgatás",
+      "Hormontermelés",
+      "Sejtosztódás"
+    ]
+  },
+  {
+    "category": "Biológia",
+    "question": "Melyik biomolekula a fő energia-raktározó rövid távon?",
+    "correct": "Szénhidrát",
+    "wrong": [
+      "Vitamin",
+      "Ásványi anyag",
+      "Enzim",
+      "Hormon",
+      "Lipid",
+      "RNS",
+      "Fehérje",
+      "Víz",
+      "DNS"
+    ]
+  },
+  {
+    "category": "Biológia",
+    "question": "Melyik vérsejt felelős elsősorban az oxigénszállításért?",
+    "correct": "Vörösvérsejt",
+    "wrong": [
+      "Plazmasejt",
+      "Limfocita",
+      "Fehérvérsejt",
+      "Bazofil",
+      "Eozinofil",
+      "Makrofág",
+      "Vérlemezke",
+      "Monocita",
+      "Neutrofil"
     ]
   },
   {
@@ -35,30 +884,159 @@
     "question": "Melyik évben zajlott a mohácsi csata?",
     "correct": "1526",
     "wrong": [
+      "1914",
       "1456",
-      "1490",
       "1541",
       "1606",
-      "1703",
       "1848",
-      "1914",
+      "1490",
       "1241",
-      "1686"
+      "1686",
+      "1703"
     ]
   },
   {
-    "category": "Földrajz",
-    "question": "Melyik a Föld legnagyobb óceánja?",
-    "correct": "Csendes-óceán",
+    "category": "Történelem",
+    "question": "Melyik évhez köthető az 1848–49-es forradalom kezdete?",
+    "correct": "1848",
     "wrong": [
-      "Atlanti-óceán",
-      "Indiai-óceán",
-      "Jeges-tenger",
-      "Déli-óceán",
-      "Karib-tenger",
-      "Földközi-tenger",
-      "Arab-tenger",
-      "Balti-tenger"
+      "1956",
+      "1703",
+      "1686",
+      "1918",
+      "1526",
+      "1867",
+      "1812",
+      "1606",
+      "1789"
+    ]
+  },
+  {
+    "category": "Történelem",
+    "question": "Mikor írták alá az Aranybullát?",
+    "correct": "1222",
+    "wrong": [
+      "1456",
+      "1867",
+      "1526",
+      "1301",
+      "1200",
+      "1686",
+      "1848",
+      "1100",
+      "1000"
+    ]
+  },
+  {
+    "category": "Történelem",
+    "question": "Melyik évben történt a honfoglalás hagyományos dátuma?",
+    "correct": "895",
+    "wrong": [
+      "997",
+      "1241",
+      "1054",
+      "1526",
+      "800",
+      "955",
+      "1000",
+      "700",
+      "1456"
+    ]
+  },
+  {
+    "category": "Történelem",
+    "question": "Melyik évben omlott le a berlini fal?",
+    "correct": "1989",
+    "wrong": [
+      "1991",
+      "1973",
+      "2004",
+      "2010",
+      "1999",
+      "1961",
+      "1956",
+      "2001",
+      "1945"
+    ]
+  },
+  {
+    "category": "Történelem",
+    "question": "Ki volt az első magyar király?",
+    "correct": "Szent István",
+    "wrong": [
+      "Könyves Kálmán",
+      "II. Lajos",
+      "I. Károly",
+      "Mátyás király",
+      "Géza fejedelem",
+      "Árpád",
+      "IV. Béla",
+      "Szent László",
+      "András herceg"
+    ]
+  },
+  {
+    "category": "Történelem",
+    "question": "Melyik évben írták alá a trianoni békeszerződést?",
+    "correct": "1920",
+    "wrong": [
+      "1945",
+      "1956",
+      "1918",
+      "1989",
+      "1968",
+      "1914",
+      "2004",
+      "1938",
+      "1990"
+    ]
+  },
+  {
+    "category": "Történelem",
+    "question": "Ki volt Napóleon?",
+    "correct": "Bonaparte Napóleon",
+    "wrong": [
+      "Robespierre",
+      "Pasteur",
+      "Richelieu",
+      "Danton",
+      "Voltaire",
+      "Descartes",
+      "De Gaulle",
+      "XVI. Lajos",
+      "XIV. Lajos"
+    ]
+  },
+  {
+    "category": "Történelem",
+    "question": "Melyik évben ért véget a II. világháború Európában?",
+    "correct": "1945",
+    "wrong": [
+      "1961",
+      "1944",
+      "1939",
+      "1950",
+      "1918",
+      "1947",
+      "1989",
+      "1975",
+      "1941"
+    ]
+  },
+  {
+    "category": "Történelem",
+    "question": "Melyik évben jött létre az EU (1993)?",
+    "correct": "1993",
+    "wrong": [
+      "2020",
+      "2012",
+      "1957",
+      "1999",
+      "1973",
+      "2007",
+      "2004",
+      "1992",
+      "1986"
     ]
   },
   {
@@ -66,1477 +1044,559 @@
     "question": "Ki írta az 'Egri csillagok' című regényt?",
     "correct": "Gárdonyi Géza",
     "wrong": [
-      "Jókai Mór",
-      "Mikszáth Kálmán",
+      "Karinthy Frigyes",
+      "Arany János",
+      "Petőfi Sándor",
+      "Kosztolányi Dezső",
+      "Ady Endre",
+      "Babits Mihály",
       "Móricz Zsigmond",
+      "Mikszáth Kálmán",
+      "Jókai Mór"
+    ]
+  },
+  {
+    "category": "Kultúra",
+    "question": "Ki festette a Mona Lisát?",
+    "correct": "Leonardo da Vinci",
+    "wrong": [
+      "Caravaggio",
+      "Goya",
+      "Rembrandt",
+      "Raffaello",
+      "Dürer",
+      "Van Gogh",
+      "Picasso",
+      "Michelangelo",
+      "Monet"
+    ]
+  },
+  {
+    "category": "Kultúra",
+    "question": "Ki komponálta a 'Für Elise' című darabot?",
+    "correct": "Ludwig van Beethoven",
+    "wrong": [
+      "Csajkovszkij",
+      "Bach",
+      "Schubert",
+      "Chopin",
+      "Debussy",
+      "Haydn",
+      "Vivaldi",
+      "Liszt",
+      "Mozart"
+    ]
+  },
+  {
+    "category": "Kultúra",
+    "question": "Melyik Shakespeare-tragédia?",
+    "correct": "Hamlet",
+    "wrong": [
+      "Bűn és bűnhődés",
+      "Az ember tragédiája",
+      "Isteni színjáték",
+      "Don Quijote",
+      "Anyegin",
+      "A Pál utcai fiúk",
+      "Odüsszeia",
+      "Candide",
+      "A varázshegy"
+    ]
+  },
+  {
+    "category": "Kultúra",
+    "question": "Ki írta 'Az ember tragédiája' című művet?",
+    "correct": "Madách Imre",
+    "wrong": [
+      "Jókai Mór",
       "Kosztolányi Dezső",
       "Ady Endre",
       "Arany János",
       "Petőfi Sándor",
-      "Babits Mihály"
+      "Babits Mihály",
+      "Móricz Zsigmond",
+      "Karinthy Frigyes",
+      "József Attila"
+    ]
+  },
+  {
+    "category": "Kultúra",
+    "question": "Melyik múzeum őrzi a Mona Lisát?",
+    "correct": "Louvre",
+    "wrong": [
+      "Rijksmuseum",
+      "British Museum",
+      "Uffizi",
+      "Vatikáni Múzeum",
+      "Metropolitan Museum",
+      "Tate Modern",
+      "Hermitage",
+      "Musée d'Orsay",
+      "Prado"
+    ]
+  },
+  {
+    "category": "Kultúra",
+    "question": "Ki írta a 'Harry Potter' sorozatot?",
+    "correct": "J. K. Rowling",
+    "wrong": [
+      "Stephen King",
+      "Agatha Christie",
+      "Neil Gaiman",
+      "Isaac Asimov",
+      "J. R. R. Tolkien",
+      "Dan Brown",
+      "George R. R. Martin",
+      "C. S. Lewis",
+      "Terry Pratchett"
+    ]
+  },
+  {
+    "category": "Kultúra",
+    "question": "Melyik festőhöz köthető a 'Guernica'?",
+    "correct": "Pablo Picasso",
+    "wrong": [
+      "Goya",
+      "Edvard Munch",
+      "Henri Matisse",
+      "Van Gogh",
+      "Salvador Dalí",
+      "Paul Cézanne",
+      "Kandinszkij",
+      "Rembrandt",
+      "Claude Monet"
+    ]
+  },
+  {
+    "category": "Kultúra",
+    "question": "Ki írta a '1984' című regényt?",
+    "correct": "George Orwell",
+    "wrong": [
+      "H. G. Wells",
+      "Isaac Asimov",
+      "Franz Kafka",
+      "Arthur C. Clarke",
+      "Ray Bradbury",
+      "Aldous Huxley",
+      "Philip K. Dick",
+      "Umberto Eco",
+      "Jules Verne"
+    ]
+  },
+  {
+    "category": "Kultúra",
+    "question": "Ki a 'Star Wars' eredeti alkotója?",
+    "correct": "George Lucas",
+    "wrong": [
+      "Ridley Scott",
+      "Tim Burton",
+      "Peter Jackson",
+      "Quentin Tarantino",
+      "Stanley Kubrick",
+      "J. J. Abrams",
+      "James Cameron",
+      "Christopher Nolan",
+      "Steven Spielberg"
+    ]
+  },
+  {
+    "category": "Sport",
+    "question": "Hány játékos van egyszerre a pályán egy focicsapatban?",
+    "correct": "11",
+    "wrong": [
+      "13",
+      "5",
+      "10",
+      "9",
+      "14",
+      "7",
+      "12",
+      "8",
+      "6"
+    ]
+  },
+  {
+    "category": "Sport",
+    "question": "Melyik sportágban van 'Grand Slam'?",
+    "correct": "Tenisz",
+    "wrong": [
+      "Foci",
+      "Atlétika",
+      "Kosárlabda",
+      "Golf",
+      "Úszás",
+      "Rögbi",
+      "Box",
+      "Jégkorong",
+      "Kézilabda"
+    ]
+  },
+  {
+    "category": "Sport",
+    "question": "Hány perc a kézilabda mérkőzés játékideje?",
+    "correct": "60",
+    "wrong": [
+      "45",
+      "55",
+      "80",
+      "70",
+      "50",
+      "65",
+      "40",
+      "75",
+      "90"
+    ]
+  },
+  {
+    "category": "Sport",
+    "question": "Melyik sportágban van les-szabály?",
+    "correct": "Labdarúgás",
+    "wrong": [
+      "Sakk",
+      "Tenisz",
+      "Birkózás",
+      "Kosárlabda",
+      "Úszás",
+      "Asztalitenisz",
+      "Golf",
+      "Röplabda",
+      "Kézilabda"
+    ]
+  },
+  {
+    "category": "Sport",
+    "question": "Melyik sportágban dobnak büntetőt (free throw)?",
+    "correct": "Kosárlabda",
+    "wrong": [
+      "Jégkorong",
+      "Foci",
+      "Atlétika",
+      "Röplabda",
+      "Sakk",
+      "Tenisz",
+      "Úszás",
+      "Baseball",
+      "Golf"
+    ]
+  },
+  {
+    "category": "Sport",
+    "question": "Melyik sportágban játszanak szettekre háló felett?",
+    "correct": "Röplabda",
+    "wrong": [
+      "Vízilabda",
+      "Darts",
+      "Birkózás",
+      "Jégkorong",
+      "Foci",
+      "Súlyemelés",
+      "Autóverseny",
+      "Kosárlabda",
+      "Kézilabda"
+    ]
+  },
+  {
+    "category": "Sport",
+    "question": "Hol rendezték az első modern olimpiát (1896)?",
+    "correct": "Görögország",
+    "wrong": [
+      "Franciaország",
+      "Svájc",
+      "Egyesült Királyság",
+      "Ausztria",
+      "USA",
+      "Törökország",
+      "Németország",
+      "Olaszország",
+      "Spanyolország"
+    ]
+  },
+  {
+    "category": "Sport",
+    "question": "Melyik sportágban van 'gém'?",
+    "correct": "Tenisz",
+    "wrong": [
+      "Baseball",
+      "Darts",
+      "Kosárlabda",
+      "Úszás",
+      "Jégkorong",
+      "Foci",
+      "Kézilabda",
+      "Röplabda",
+      "Birkózás"
+    ]
+  },
+  {
+    "category": "Sport",
+    "question": "Melyik sportágban van maraton?",
+    "correct": "Atlétika",
+    "wrong": [
+      "Tenisz",
+      "Röplabda",
+      "Kerékpár",
+      "Darts",
+      "Golf",
+      "Kézilabda",
+      "Jégkorong",
+      "Úszás",
+      "Sakk"
+    ]
+  },
+  {
+    "category": "Sport",
+    "question": "Melyik sportágban ütővel és labdával játszanak asztalon?",
+    "correct": "Asztalitenisz",
+    "wrong": [
+      "Jégkorong",
+      "Foci",
+      "Kosárlabda",
+      "Baseball",
+      "Golf",
+      "Röplabda",
+      "Rögbi",
+      "Kézilabda",
+      "Tenisz"
+    ]
+  },
+  {
+    "category": "Technológia",
+    "question": "Mit jelent a CPU rövidítés?",
+    "correct": "Central Processing Unit",
+    "wrong": [
+      "Cache Processing Unit",
+      "Computer Power Unit",
+      "Central Processor User",
+      "Central Program Utility",
+      "Core Performance Unit",
+      "Compute Power Unit",
+      "Core Processing User",
+      "Control Program Unit",
+      "Control Processing Unit"
+    ]
+  },
+  {
+    "category": "Technológia",
+    "question": "Melyik cég fejleszti a Windowst?",
+    "correct": "Microsoft",
+    "wrong": [
+      "Oracle",
+      "Samsung",
+      "Intel",
+      "Meta",
+      "Amazon",
+      "Sony",
+      "Apple",
+      "IBM",
+      "Google"
+    ]
+  },
+  {
+    "category": "Technológia",
+    "question": "Mire való a HTML?",
+    "correct": "Weboldalak szerkezetének leírása",
+    "wrong": [
+      "Programok fordítása",
+      "Zenelejátszás",
+      "Hardvervezérlés",
+      "Operációs rendszer futtatása",
+      "Képszerkesztés",
+      "Hálózati titkosítás",
+      "3D modellezés",
+      "Tömörítés",
+      "Adatbázis kezelése"
+    ]
+  },
+  {
+    "category": "Technológia",
+    "question": "Melyik protokoll a biztonságos webhez?",
+    "correct": "HTTPS",
+    "wrong": [
+      "RDP",
+      "SSH",
+      "SMTP",
+      "SNMP",
+      "POP3",
+      "Telnet",
+      "HTTP",
+      "IMAP",
+      "FTP"
+    ]
+  },
+  {
+    "category": "Technológia",
+    "question": "Mi a RAM szerepe?",
+    "correct": "Ideiglenes memória a futó programoknak",
+    "wrong": [
+      "Grafika megjelenítése",
+      "Processzor hűtése",
+      "Hangkártya vezérlése",
+      "Adatok végleges tárolása",
+      "Internetkapcsolat biztosítása",
+      "BIOS tárolása",
+      "Áramellátás",
+      "Fájlok tömörítése",
+      "Nyomtatás"
+    ]
+  },
+  {
+    "category": "Technológia",
+    "question": "Melyik port a HTTPS alapértelmezett portja?",
+    "correct": "443",
+    "wrong": [
+      "80",
+      "8080",
+      "21",
+      "22",
+      "25",
+      "110",
+      "53",
+      "143",
+      "3389"
+    ]
+  },
+  {
+    "category": "Technológia",
+    "question": "Mit jelent az URL?",
+    "correct": "Uniform Resource Locator",
+    "wrong": [
+      "Universal Route Link",
+      "User Request List",
+      "Unified Routing Link",
+      "Universal Resource List",
+      "Uniform Routing Locator",
+      "User Resource Link",
+      "Universal Resource Locator",
+      "Unique Reference Link",
+      "Unified Resource Language"
+    ]
+  },
+  {
+    "category": "Technológia",
+    "question": "Melyik nyelv fut a böngészőben kliensoldalon leggyakrabban?",
+    "correct": "JavaScript",
+    "wrong": [
+      "Java",
+      "Python",
+      "Ruby",
+      "C++",
+      "PHP",
+      "C#",
+      "Swift",
+      "Go",
+      "Rust"
+    ]
+  },
+  {
+    "category": "Technológia",
+    "question": "Mire való az SQL?",
+    "correct": "Adatbázis-lekérdezés és -kezelés",
+    "wrong": [
+      "Képszerkesztés",
+      "Titkosítás",
+      "Hangfeldolgozás",
+      "Hardver gyorsítás",
+      "Email küldés",
+      "3D renderelés",
+      "Játékfejlesztés",
+      "Operációs rendszer telepítés",
+      "Szövegszerkesztés"
+    ]
+  },
+  {
+    "category": "Technológia",
+    "question": "Mi az IPv4 példa formátuma?",
+    "correct": "192.168.0.1",
+    "wrong": [
+      "2001:db8::1",
+      "255.255.255.255.255",
+      "fe80::1",
+      "1234.567.89.0",
+      "172.16.0",
+      "1.2.3",
+      "10.10.10",
+      "localhost",
+      "8.8.8.8.8"
     ]
   },
   {
     "category": "Tudomány",
-    "question": "Melyik bolygón van a Nagy Vörös Folt nevű vihar? (változat 1)",
-    "correct": "Jupiter",
+    "question": "Melyik bolygó van legközelebb a Naphoz?",
+    "correct": "Merkúr",
+    "wrong": [
+      "Io",
+      "Hold",
+      "Titan",
+      "Callisto",
+      "Jupiter",
+      "Ceres",
+      "Neptunusz",
+      "Plútó",
+      "Europa"
+    ]
+  },
+  {
+    "category": "Tudomány",
+    "question": "Melyik bolygót nevezik vörös bolygónak?",
+    "correct": "Mars",
     "wrong": [
       "Szaturnusz",
+      "Callisto",
+      "Io",
       "Neptunusz",
-      "Uránusz",
-      "Mars",
-      "Vénusz",
+      "Hold",
+      "Titan",
       "Merkúr",
+      "Vénusz",
+      "Ganymedes"
+    ]
+  },
+  {
+    "category": "Tudomány",
+    "question": "Melyik bolygó híres a gyűrűiről?",
+    "correct": "Szaturnusz",
+    "wrong": [
+      "Mars",
+      "Europa",
+      "Hold",
+      "Jupiter",
+      "Callisto",
+      "Vénusz",
       "Föld",
-      "Plútó",
+      "Titan",
       "Io"
     ]
   },
   {
     "category": "Tudomány",
-    "question": "Mi a Föld légkörének legnagyobb arányban előforduló összetevője? (változat 1)",
-    "correct": "Nitrogén",
+    "question": "Melyik gáz a fotoszintézis mellékterméke?",
+    "correct": "Oxigén",
     "wrong": [
-      "Oxigén",
+      "Kén-dioxid",
       "Szén-dioxid",
-      "Argon",
-      "Hidrogén",
+      "Neon",
+      "Nitrogén",
       "Metán",
+      "Hidrogén",
       "Ózon",
       "Hélium",
-      "Neon"
-    ]
-  },
-  {
-    "category": "Történelem",
-    "question": "Melyik évben zajlott a mohácsi csata? (változat 1)",
-    "correct": "1526",
-    "wrong": [
-      "1456",
-      "1490",
-      "1541",
-      "1606",
-      "1703",
-      "1848",
-      "1914",
-      "1241",
-      "1686"
-    ]
-  },
-  {
-    "category": "Földrajz",
-    "question": "Melyik a Föld legnagyobb óceánja? (változat 1)",
-    "correct": "Csendes-óceán",
-    "wrong": [
-      "Atlanti-óceán",
-      "Indiai-óceán",
-      "Jeges-tenger",
-      "Déli-óceán",
-      "Karib-tenger",
-      "Földközi-tenger",
-      "Arab-tenger",
-      "Balti-tenger"
-    ]
-  },
-  {
-    "category": "Kultúra",
-    "question": "Ki írta az 'Egri csillagok' című regényt? (változat 1)",
-    "correct": "Gárdonyi Géza",
-    "wrong": [
-      "Jókai Mór",
-      "Mikszáth Kálmán",
-      "Móricz Zsigmond",
-      "Kosztolányi Dezső",
-      "Ady Endre",
-      "Arany János",
-      "Petőfi Sándor",
-      "Babits Mihály"
+      "Argon"
     ]
   },
   {
     "category": "Tudomány",
-    "question": "Melyik bolygón van a Nagy Vörös Folt nevű vihar? (változat 2)",
-    "correct": "Jupiter",
+    "question": "Mi a konyhasó képlete/vegyülete?",
+    "correct": "Nátrium-klorid",
     "wrong": [
-      "Szaturnusz",
-      "Neptunusz",
-      "Uránusz",
-      "Mars",
-      "Vénusz",
-      "Merkúr",
-      "Föld",
-      "Plútó",
-      "Io"
-    ]
-  },
-  {
-    "category": "Tudomány",
-    "question": "Mi a Föld légkörének legnagyobb arányban előforduló összetevője? (változat 2)",
-    "correct": "Nitrogén",
-    "wrong": [
-      "Oxigén",
-      "Szén-dioxid",
-      "Argon",
-      "Hidrogén",
+      "Kálium-klorid",
+      "Kénsav",
+      "Nátrium-hidroxid",
       "Metán",
-      "Ózon",
-      "Hélium",
-      "Neon"
-    ]
-  },
-  {
-    "category": "Történelem",
-    "question": "Melyik évben zajlott a mohácsi csata? (változat 2)",
-    "correct": "1526",
-    "wrong": [
-      "1456",
-      "1490",
-      "1541",
-      "1606",
-      "1703",
-      "1848",
-      "1914",
-      "1241",
-      "1686"
-    ]
-  },
-  {
-    "category": "Földrajz",
-    "question": "Melyik a Föld legnagyobb óceánja? (változat 2)",
-    "correct": "Csendes-óceán",
-    "wrong": [
-      "Atlanti-óceán",
-      "Indiai-óceán",
-      "Jeges-tenger",
-      "Déli-óceán",
-      "Karib-tenger",
-      "Földközi-tenger",
-      "Arab-tenger",
-      "Balti-tenger"
-    ]
-  },
-  {
-    "category": "Kultúra",
-    "question": "Ki írta az 'Egri csillagok' című regényt? (változat 2)",
-    "correct": "Gárdonyi Géza",
-    "wrong": [
-      "Jókai Mór",
-      "Mikszáth Kálmán",
-      "Móricz Zsigmond",
-      "Kosztolányi Dezső",
-      "Ady Endre",
-      "Arany János",
-      "Petőfi Sándor",
-      "Babits Mihály"
-    ]
-  },
-  {
-    "category": "Tudomány",
-    "question": "Melyik bolygón van a Nagy Vörös Folt nevű vihar? (változat 3)",
-    "correct": "Jupiter",
-    "wrong": [
-      "Szaturnusz",
-      "Neptunusz",
-      "Uránusz",
-      "Mars",
-      "Vénusz",
-      "Merkúr",
-      "Föld",
-      "Plútó",
-      "Io"
-    ]
-  },
-  {
-    "category": "Tudomány",
-    "question": "Mi a Föld légkörének legnagyobb arányban előforduló összetevője? (változat 3)",
-    "correct": "Nitrogén",
-    "wrong": [
-      "Oxigén",
+      "Ammónia",
+      "Etanol",
+      "Hidrogén-peroxid",
       "Szén-dioxid",
-      "Argon",
-      "Hidrogén",
-      "Metán",
-      "Ózon",
-      "Hélium",
-      "Neon"
-    ]
-  },
-  {
-    "category": "Történelem",
-    "question": "Melyik évben zajlott a mohácsi csata? (változat 3)",
-    "correct": "1526",
-    "wrong": [
-      "1456",
-      "1490",
-      "1541",
-      "1606",
-      "1703",
-      "1848",
-      "1914",
-      "1241",
-      "1686"
-    ]
-  },
-  {
-    "category": "Földrajz",
-    "question": "Melyik a Föld legnagyobb óceánja? (változat 3)",
-    "correct": "Csendes-óceán",
-    "wrong": [
-      "Atlanti-óceán",
-      "Indiai-óceán",
-      "Jeges-tenger",
-      "Déli-óceán",
-      "Karib-tenger",
-      "Földközi-tenger",
-      "Arab-tenger",
-      "Balti-tenger"
-    ]
-  },
-  {
-    "category": "Kultúra",
-    "question": "Ki írta az 'Egri csillagok' című regényt? (változat 3)",
-    "correct": "Gárdonyi Géza",
-    "wrong": [
-      "Jókai Mór",
-      "Mikszáth Kálmán",
-      "Móricz Zsigmond",
-      "Kosztolányi Dezső",
-      "Ady Endre",
-      "Arany János",
-      "Petőfi Sándor",
-      "Babits Mihály"
-    ]
-  },
-  {
-    "category": "Tudomány",
-    "question": "Melyik bolygón van a Nagy Vörös Folt nevű vihar? (változat 4)",
-    "correct": "Jupiter",
-    "wrong": [
-      "Szaturnusz",
-      "Neptunusz",
-      "Uránusz",
-      "Mars",
-      "Vénusz",
-      "Merkúr",
-      "Föld",
-      "Plútó",
-      "Io"
-    ]
-  },
-  {
-    "category": "Tudomány",
-    "question": "Mi a Föld légkörének legnagyobb arányban előforduló összetevője? (változat 4)",
-    "correct": "Nitrogén",
-    "wrong": [
-      "Oxigén",
-      "Szén-dioxid",
-      "Argon",
-      "Hidrogén",
-      "Metán",
-      "Ózon",
-      "Hélium",
-      "Neon"
-    ]
-  },
-  {
-    "category": "Történelem",
-    "question": "Melyik évben zajlott a mohácsi csata? (változat 4)",
-    "correct": "1526",
-    "wrong": [
-      "1456",
-      "1490",
-      "1541",
-      "1606",
-      "1703",
-      "1848",
-      "1914",
-      "1241",
-      "1686"
-    ]
-  },
-  {
-    "category": "Földrajz",
-    "question": "Melyik a Föld legnagyobb óceánja? (változat 4)",
-    "correct": "Csendes-óceán",
-    "wrong": [
-      "Atlanti-óceán",
-      "Indiai-óceán",
-      "Jeges-tenger",
-      "Déli-óceán",
-      "Karib-tenger",
-      "Földközi-tenger",
-      "Arab-tenger",
-      "Balti-tenger"
-    ]
-  },
-  {
-    "category": "Kultúra",
-    "question": "Ki írta az 'Egri csillagok' című regényt? (változat 4)",
-    "correct": "Gárdonyi Géza",
-    "wrong": [
-      "Jókai Mór",
-      "Mikszáth Kálmán",
-      "Móricz Zsigmond",
-      "Kosztolányi Dezső",
-      "Ady Endre",
-      "Arany János",
-      "Petőfi Sándor",
-      "Babits Mihály"
-    ]
-  },
-  {
-    "category": "Tudomány",
-    "question": "Melyik bolygón van a Nagy Vörös Folt nevű vihar? (változat 5)",
-    "correct": "Jupiter",
-    "wrong": [
-      "Szaturnusz",
-      "Neptunusz",
-      "Uránusz",
-      "Mars",
-      "Vénusz",
-      "Merkúr",
-      "Föld",
-      "Plútó",
-      "Io"
-    ]
-  },
-  {
-    "category": "Tudomány",
-    "question": "Mi a Föld légkörének legnagyobb arányban előforduló összetevője? (változat 5)",
-    "correct": "Nitrogén",
-    "wrong": [
-      "Oxigén",
-      "Szén-dioxid",
-      "Argon",
-      "Hidrogén",
-      "Metán",
-      "Ózon",
-      "Hélium",
-      "Neon"
-    ]
-  },
-  {
-    "category": "Történelem",
-    "question": "Melyik évben zajlott a mohácsi csata? (változat 5)",
-    "correct": "1526",
-    "wrong": [
-      "1456",
-      "1490",
-      "1541",
-      "1606",
-      "1703",
-      "1848",
-      "1914",
-      "1241",
-      "1686"
-    ]
-  },
-  {
-    "category": "Földrajz",
-    "question": "Melyik a Föld legnagyobb óceánja? (változat 5)",
-    "correct": "Csendes-óceán",
-    "wrong": [
-      "Atlanti-óceán",
-      "Indiai-óceán",
-      "Jeges-tenger",
-      "Déli-óceán",
-      "Karib-tenger",
-      "Földközi-tenger",
-      "Arab-tenger",
-      "Balti-tenger"
-    ]
-  },
-  {
-    "category": "Kultúra",
-    "question": "Ki írta az 'Egri csillagok' című regényt? (változat 5)",
-    "correct": "Gárdonyi Géza",
-    "wrong": [
-      "Jókai Mór",
-      "Mikszáth Kálmán",
-      "Móricz Zsigmond",
-      "Kosztolányi Dezső",
-      "Ady Endre",
-      "Arany János",
-      "Petőfi Sándor",
-      "Babits Mihály"
-    ]
-  },
-  {
-    "category": "Tudomány",
-    "question": "Melyik bolygón van a Nagy Vörös Folt nevű vihar? (változat 6)",
-    "correct": "Jupiter",
-    "wrong": [
-      "Szaturnusz",
-      "Neptunusz",
-      "Uránusz",
-      "Mars",
-      "Vénusz",
-      "Merkúr",
-      "Föld",
-      "Plútó",
-      "Io"
-    ]
-  },
-  {
-    "category": "Tudomány",
-    "question": "Mi a Föld légkörének legnagyobb arányban előforduló összetevője? (változat 6)",
-    "correct": "Nitrogén",
-    "wrong": [
-      "Oxigén",
-      "Szén-dioxid",
-      "Argon",
-      "Hidrogén",
-      "Metán",
-      "Ózon",
-      "Hélium",
-      "Neon"
-    ]
-  },
-  {
-    "category": "Történelem",
-    "question": "Melyik évben zajlott a mohácsi csata? (változat 6)",
-    "correct": "1526",
-    "wrong": [
-      "1456",
-      "1490",
-      "1541",
-      "1606",
-      "1703",
-      "1848",
-      "1914",
-      "1241",
-      "1686"
-    ]
-  },
-  {
-    "category": "Földrajz",
-    "question": "Melyik a Föld legnagyobb óceánja? (változat 6)",
-    "correct": "Csendes-óceán",
-    "wrong": [
-      "Atlanti-óceán",
-      "Indiai-óceán",
-      "Jeges-tenger",
-      "Déli-óceán",
-      "Karib-tenger",
-      "Földközi-tenger",
-      "Arab-tenger",
-      "Balti-tenger"
-    ]
-  },
-  {
-    "category": "Kultúra",
-    "question": "Ki írta az 'Egri csillagok' című regényt? (változat 6)",
-    "correct": "Gárdonyi Géza",
-    "wrong": [
-      "Jókai Mór",
-      "Mikszáth Kálmán",
-      "Móricz Zsigmond",
-      "Kosztolányi Dezső",
-      "Ady Endre",
-      "Arany János",
-      "Petőfi Sándor",
-      "Babits Mihály"
-    ]
-  },
-  {
-    "category": "Tudomány",
-    "question": "Melyik bolygón van a Nagy Vörös Folt nevű vihar? (változat 7)",
-    "correct": "Jupiter",
-    "wrong": [
-      "Szaturnusz",
-      "Neptunusz",
-      "Uránusz",
-      "Mars",
-      "Vénusz",
-      "Merkúr",
-      "Föld",
-      "Plútó",
-      "Io"
-    ]
-  },
-  {
-    "category": "Tudomány",
-    "question": "Mi a Föld légkörének legnagyobb arányban előforduló összetevője? (változat 7)",
-    "correct": "Nitrogén",
-    "wrong": [
-      "Oxigén",
-      "Szén-dioxid",
-      "Argon",
-      "Hidrogén",
-      "Metán",
-      "Ózon",
-      "Hélium",
-      "Neon"
-    ]
-  },
-  {
-    "category": "Történelem",
-    "question": "Melyik évben zajlott a mohácsi csata? (változat 7)",
-    "correct": "1526",
-    "wrong": [
-      "1456",
-      "1490",
-      "1541",
-      "1606",
-      "1703",
-      "1848",
-      "1914",
-      "1241",
-      "1686"
-    ]
-  },
-  {
-    "category": "Földrajz",
-    "question": "Melyik a Föld legnagyobb óceánja? (változat 7)",
-    "correct": "Csendes-óceán",
-    "wrong": [
-      "Atlanti-óceán",
-      "Indiai-óceán",
-      "Jeges-tenger",
-      "Déli-óceán",
-      "Karib-tenger",
-      "Földközi-tenger",
-      "Arab-tenger",
-      "Balti-tenger"
-    ]
-  },
-  {
-    "category": "Kultúra",
-    "question": "Ki írta az 'Egri csillagok' című regényt? (változat 7)",
-    "correct": "Gárdonyi Géza",
-    "wrong": [
-      "Jókai Mór",
-      "Mikszáth Kálmán",
-      "Móricz Zsigmond",
-      "Kosztolányi Dezső",
-      "Ady Endre",
-      "Arany János",
-      "Petőfi Sándor",
-      "Babits Mihály"
-    ]
-  },
-  {
-    "category": "Tudomány",
-    "question": "Melyik bolygón van a Nagy Vörös Folt nevű vihar? (változat 8)",
-    "correct": "Jupiter",
-    "wrong": [
-      "Szaturnusz",
-      "Neptunusz",
-      "Uránusz",
-      "Mars",
-      "Vénusz",
-      "Merkúr",
-      "Föld",
-      "Plútó",
-      "Io"
-    ]
-  },
-  {
-    "category": "Tudomány",
-    "question": "Mi a Föld légkörének legnagyobb arányban előforduló összetevője? (változat 8)",
-    "correct": "Nitrogén",
-    "wrong": [
-      "Oxigén",
-      "Szén-dioxid",
-      "Argon",
-      "Hidrogén",
-      "Metán",
-      "Ózon",
-      "Hélium",
-      "Neon"
-    ]
-  },
-  {
-    "category": "Történelem",
-    "question": "Melyik évben zajlott a mohácsi csata? (változat 8)",
-    "correct": "1526",
-    "wrong": [
-      "1456",
-      "1490",
-      "1541",
-      "1606",
-      "1703",
-      "1848",
-      "1914",
-      "1241",
-      "1686"
-    ]
-  },
-  {
-    "category": "Földrajz",
-    "question": "Melyik a Föld legnagyobb óceánja? (változat 8)",
-    "correct": "Csendes-óceán",
-    "wrong": [
-      "Atlanti-óceán",
-      "Indiai-óceán",
-      "Jeges-tenger",
-      "Déli-óceán",
-      "Karib-tenger",
-      "Földközi-tenger",
-      "Arab-tenger",
-      "Balti-tenger"
-    ]
-  },
-  {
-    "category": "Kultúra",
-    "question": "Ki írta az 'Egri csillagok' című regényt? (változat 8)",
-    "correct": "Gárdonyi Géza",
-    "wrong": [
-      "Jókai Mór",
-      "Mikszáth Kálmán",
-      "Móricz Zsigmond",
-      "Kosztolányi Dezső",
-      "Ady Endre",
-      "Arany János",
-      "Petőfi Sándor",
-      "Babits Mihály"
-    ]
-  },
-  {
-    "category": "Tudomány",
-    "question": "Melyik bolygón van a Nagy Vörös Folt nevű vihar? (változat 9)",
-    "correct": "Jupiter",
-    "wrong": [
-      "Szaturnusz",
-      "Neptunusz",
-      "Uránusz",
-      "Mars",
-      "Vénusz",
-      "Merkúr",
-      "Föld",
-      "Plútó",
-      "Io"
-    ]
-  },
-  {
-    "category": "Tudomány",
-    "question": "Mi a Föld légkörének legnagyobb arányban előforduló összetevője? (változat 9)",
-    "correct": "Nitrogén",
-    "wrong": [
-      "Oxigén",
-      "Szén-dioxid",
-      "Argon",
-      "Hidrogén",
-      "Metán",
-      "Ózon",
-      "Hélium",
-      "Neon"
-    ]
-  },
-  {
-    "category": "Történelem",
-    "question": "Melyik évben zajlott a mohácsi csata? (változat 9)",
-    "correct": "1526",
-    "wrong": [
-      "1456",
-      "1490",
-      "1541",
-      "1606",
-      "1703",
-      "1848",
-      "1914",
-      "1241",
-      "1686"
-    ]
-  },
-  {
-    "category": "Földrajz",
-    "question": "Melyik a Föld legnagyobb óceánja? (változat 9)",
-    "correct": "Csendes-óceán",
-    "wrong": [
-      "Atlanti-óceán",
-      "Indiai-óceán",
-      "Jeges-tenger",
-      "Déli-óceán",
-      "Karib-tenger",
-      "Földközi-tenger",
-      "Arab-tenger",
-      "Balti-tenger"
-    ]
-  },
-  {
-    "category": "Kultúra",
-    "question": "Ki írta az 'Egri csillagok' című regényt? (változat 9)",
-    "correct": "Gárdonyi Géza",
-    "wrong": [
-      "Jókai Mór",
-      "Mikszáth Kálmán",
-      "Móricz Zsigmond",
-      "Kosztolányi Dezső",
-      "Ady Endre",
-      "Arany János",
-      "Petőfi Sándor",
-      "Babits Mihály"
-    ]
-  },
-  {
-    "category": "Tudomány",
-    "question": "Melyik bolygón van a Nagy Vörös Folt nevű vihar? (változat 10)",
-    "correct": "Jupiter",
-    "wrong": [
-      "Szaturnusz",
-      "Neptunusz",
-      "Uránusz",
-      "Mars",
-      "Vénusz",
-      "Merkúr",
-      "Föld",
-      "Plútó",
-      "Io"
-    ]
-  },
-  {
-    "category": "Tudomány",
-    "question": "Mi a Föld légkörének legnagyobb arányban előforduló összetevője? (változat 10)",
-    "correct": "Nitrogén",
-    "wrong": [
-      "Oxigén",
-      "Szén-dioxid",
-      "Argon",
-      "Hidrogén",
-      "Metán",
-      "Ózon",
-      "Hélium",
-      "Neon"
-    ]
-  },
-  {
-    "category": "Történelem",
-    "question": "Melyik évben zajlott a mohácsi csata? (változat 10)",
-    "correct": "1526",
-    "wrong": [
-      "1456",
-      "1490",
-      "1541",
-      "1606",
-      "1703",
-      "1848",
-      "1914",
-      "1241",
-      "1686"
-    ]
-  },
-  {
-    "category": "Földrajz",
-    "question": "Melyik a Föld legnagyobb óceánja? (változat 10)",
-    "correct": "Csendes-óceán",
-    "wrong": [
-      "Atlanti-óceán",
-      "Indiai-óceán",
-      "Jeges-tenger",
-      "Déli-óceán",
-      "Karib-tenger",
-      "Földközi-tenger",
-      "Arab-tenger",
-      "Balti-tenger"
-    ]
-  },
-  {
-    "category": "Kultúra",
-    "question": "Ki írta az 'Egri csillagok' című regényt? (változat 10)",
-    "correct": "Gárdonyi Géza",
-    "wrong": [
-      "Jókai Mór",
-      "Mikszáth Kálmán",
-      "Móricz Zsigmond",
-      "Kosztolányi Dezső",
-      "Ady Endre",
-      "Arany János",
-      "Petőfi Sándor",
-      "Babits Mihály"
-    ]
-  },
-  {
-    "category": "Tudomány",
-    "question": "Melyik bolygón van a Nagy Vörös Folt nevű vihar? (változat 11)",
-    "correct": "Jupiter",
-    "wrong": [
-      "Szaturnusz",
-      "Neptunusz",
-      "Uránusz",
-      "Mars",
-      "Vénusz",
-      "Merkúr",
-      "Föld",
-      "Plútó",
-      "Io"
-    ]
-  },
-  {
-    "category": "Tudomány",
-    "question": "Mi a Föld légkörének legnagyobb arányban előforduló összetevője? (változat 11)",
-    "correct": "Nitrogén",
-    "wrong": [
-      "Oxigén",
-      "Szén-dioxid",
-      "Argon",
-      "Hidrogén",
-      "Metán",
-      "Ózon",
-      "Hélium",
-      "Neon"
-    ]
-  },
-  {
-    "category": "Történelem",
-    "question": "Melyik évben zajlott a mohácsi csata? (változat 11)",
-    "correct": "1526",
-    "wrong": [
-      "1456",
-      "1490",
-      "1541",
-      "1606",
-      "1703",
-      "1848",
-      "1914",
-      "1241",
-      "1686"
-    ]
-  },
-  {
-    "category": "Földrajz",
-    "question": "Melyik a Föld legnagyobb óceánja? (változat 11)",
-    "correct": "Csendes-óceán",
-    "wrong": [
-      "Atlanti-óceán",
-      "Indiai-óceán",
-      "Jeges-tenger",
-      "Déli-óceán",
-      "Karib-tenger",
-      "Földközi-tenger",
-      "Arab-tenger",
-      "Balti-tenger"
-    ]
-  },
-  {
-    "category": "Kultúra",
-    "question": "Ki írta az 'Egri csillagok' című regényt? (változat 11)",
-    "correct": "Gárdonyi Géza",
-    "wrong": [
-      "Jókai Mór",
-      "Mikszáth Kálmán",
-      "Móricz Zsigmond",
-      "Kosztolányi Dezső",
-      "Ady Endre",
-      "Arany János",
-      "Petőfi Sándor",
-      "Babits Mihály"
-    ]
-  },
-  {
-    "category": "Tudomány",
-    "question": "Melyik bolygón van a Nagy Vörös Folt nevű vihar? (változat 12)",
-    "correct": "Jupiter",
-    "wrong": [
-      "Szaturnusz",
-      "Neptunusz",
-      "Uránusz",
-      "Mars",
-      "Vénusz",
-      "Merkúr",
-      "Föld",
-      "Plútó",
-      "Io"
-    ]
-  },
-  {
-    "category": "Tudomány",
-    "question": "Mi a Föld légkörének legnagyobb arányban előforduló összetevője? (változat 12)",
-    "correct": "Nitrogén",
-    "wrong": [
-      "Oxigén",
-      "Szén-dioxid",
-      "Argon",
-      "Hidrogén",
-      "Metán",
-      "Ózon",
-      "Hélium",
-      "Neon"
-    ]
-  },
-  {
-    "category": "Történelem",
-    "question": "Melyik évben zajlott a mohácsi csata? (változat 12)",
-    "correct": "1526",
-    "wrong": [
-      "1456",
-      "1490",
-      "1541",
-      "1606",
-      "1703",
-      "1848",
-      "1914",
-      "1241",
-      "1686"
-    ]
-  },
-  {
-    "category": "Földrajz",
-    "question": "Melyik a Föld legnagyobb óceánja? (változat 12)",
-    "correct": "Csendes-óceán",
-    "wrong": [
-      "Atlanti-óceán",
-      "Indiai-óceán",
-      "Jeges-tenger",
-      "Déli-óceán",
-      "Karib-tenger",
-      "Földközi-tenger",
-      "Arab-tenger",
-      "Balti-tenger"
-    ]
-  },
-  {
-    "category": "Kultúra",
-    "question": "Ki írta az 'Egri csillagok' című regényt? (változat 12)",
-    "correct": "Gárdonyi Géza",
-    "wrong": [
-      "Jókai Mór",
-      "Mikszáth Kálmán",
-      "Móricz Zsigmond",
-      "Kosztolányi Dezső",
-      "Ady Endre",
-      "Arany János",
-      "Petőfi Sándor",
-      "Babits Mihály"
-    ]
-  },
-  {
-    "category": "Tudomány",
-    "question": "Melyik bolygón van a Nagy Vörös Folt nevű vihar? (változat 13)",
-    "correct": "Jupiter",
-    "wrong": [
-      "Szaturnusz",
-      "Neptunusz",
-      "Uránusz",
-      "Mars",
-      "Vénusz",
-      "Merkúr",
-      "Föld",
-      "Plútó",
-      "Io"
-    ]
-  },
-  {
-    "category": "Tudomány",
-    "question": "Mi a Föld légkörének legnagyobb arányban előforduló összetevője? (változat 13)",
-    "correct": "Nitrogén",
-    "wrong": [
-      "Oxigén",
-      "Szén-dioxid",
-      "Argon",
-      "Hidrogén",
-      "Metán",
-      "Ózon",
-      "Hélium",
-      "Neon"
-    ]
-  },
-  {
-    "category": "Történelem",
-    "question": "Melyik évben zajlott a mohácsi csata? (változat 13)",
-    "correct": "1526",
-    "wrong": [
-      "1456",
-      "1490",
-      "1541",
-      "1606",
-      "1703",
-      "1848",
-      "1914",
-      "1241",
-      "1686"
-    ]
-  },
-  {
-    "category": "Földrajz",
-    "question": "Melyik a Föld legnagyobb óceánja? (változat 13)",
-    "correct": "Csendes-óceán",
-    "wrong": [
-      "Atlanti-óceán",
-      "Indiai-óceán",
-      "Jeges-tenger",
-      "Déli-óceán",
-      "Karib-tenger",
-      "Földközi-tenger",
-      "Arab-tenger",
-      "Balti-tenger"
-    ]
-  },
-  {
-    "category": "Kultúra",
-    "question": "Ki írta az 'Egri csillagok' című regényt? (változat 13)",
-    "correct": "Gárdonyi Géza",
-    "wrong": [
-      "Jókai Mór",
-      "Mikszáth Kálmán",
-      "Móricz Zsigmond",
-      "Kosztolányi Dezső",
-      "Ady Endre",
-      "Arany János",
-      "Petőfi Sándor",
-      "Babits Mihály"
-    ]
-  },
-  {
-    "category": "Tudomány",
-    "question": "Melyik bolygón van a Nagy Vörös Folt nevű vihar? (változat 14)",
-    "correct": "Jupiter",
-    "wrong": [
-      "Szaturnusz",
-      "Neptunusz",
-      "Uránusz",
-      "Mars",
-      "Vénusz",
-      "Merkúr",
-      "Föld",
-      "Plútó",
-      "Io"
-    ]
-  },
-  {
-    "category": "Tudomány",
-    "question": "Mi a Föld légkörének legnagyobb arányban előforduló összetevője? (változat 14)",
-    "correct": "Nitrogén",
-    "wrong": [
-      "Oxigén",
-      "Szén-dioxid",
-      "Argon",
-      "Hidrogén",
-      "Metán",
-      "Ózon",
-      "Hélium",
-      "Neon"
-    ]
-  },
-  {
-    "category": "Történelem",
-    "question": "Melyik évben zajlott a mohácsi csata? (változat 14)",
-    "correct": "1526",
-    "wrong": [
-      "1456",
-      "1490",
-      "1541",
-      "1606",
-      "1703",
-      "1848",
-      "1914",
-      "1241",
-      "1686"
-    ]
-  },
-  {
-    "category": "Földrajz",
-    "question": "Melyik a Föld legnagyobb óceánja? (változat 14)",
-    "correct": "Csendes-óceán",
-    "wrong": [
-      "Atlanti-óceán",
-      "Indiai-óceán",
-      "Jeges-tenger",
-      "Déli-óceán",
-      "Karib-tenger",
-      "Földközi-tenger",
-      "Arab-tenger",
-      "Balti-tenger"
-    ]
-  },
-  {
-    "category": "Kultúra",
-    "question": "Ki írta az 'Egri csillagok' című regényt? (változat 14)",
-    "correct": "Gárdonyi Géza",
-    "wrong": [
-      "Jókai Mór",
-      "Mikszáth Kálmán",
-      "Móricz Zsigmond",
-      "Kosztolányi Dezső",
-      "Ady Endre",
-      "Arany János",
-      "Petőfi Sándor",
-      "Babits Mihály"
-    ]
-  },
-  {
-    "category": "Tudomány",
-    "question": "Melyik bolygón van a Nagy Vörös Folt nevű vihar? (változat 15)",
-    "correct": "Jupiter",
-    "wrong": [
-      "Szaturnusz",
-      "Neptunusz",
-      "Uránusz",
-      "Mars",
-      "Vénusz",
-      "Merkúr",
-      "Föld",
-      "Plútó",
-      "Io"
-    ]
-  },
-  {
-    "category": "Tudomány",
-    "question": "Mi a Föld légkörének legnagyobb arányban előforduló összetevője? (változat 15)",
-    "correct": "Nitrogén",
-    "wrong": [
-      "Oxigén",
-      "Szén-dioxid",
-      "Argon",
-      "Hidrogén",
-      "Metán",
-      "Ózon",
-      "Hélium",
-      "Neon"
-    ]
-  },
-  {
-    "category": "Történelem",
-    "question": "Melyik évben zajlott a mohácsi csata? (változat 15)",
-    "correct": "1526",
-    "wrong": [
-      "1456",
-      "1490",
-      "1541",
-      "1606",
-      "1703",
-      "1848",
-      "1914",
-      "1241",
-      "1686"
-    ]
-  },
-  {
-    "category": "Földrajz",
-    "question": "Melyik a Föld legnagyobb óceánja? (változat 15)",
-    "correct": "Csendes-óceán",
-    "wrong": [
-      "Atlanti-óceán",
-      "Indiai-óceán",
-      "Jeges-tenger",
-      "Déli-óceán",
-      "Karib-tenger",
-      "Földközi-tenger",
-      "Arab-tenger",
-      "Balti-tenger"
-    ]
-  },
-  {
-    "category": "Kultúra",
-    "question": "Ki írta az 'Egri csillagok' című regényt? (változat 15)",
-    "correct": "Gárdonyi Géza",
-    "wrong": [
-      "Jókai Mór",
-      "Mikszáth Kálmán",
-      "Móricz Zsigmond",
-      "Kosztolányi Dezső",
-      "Ady Endre",
-      "Arany János",
-      "Petőfi Sándor",
-      "Babits Mihály"
-    ]
-  },
-  {
-    "category": "Tudomány",
-    "question": "Melyik bolygón van a Nagy Vörös Folt nevű vihar? (változat 16)",
-    "correct": "Jupiter",
-    "wrong": [
-      "Szaturnusz",
-      "Neptunusz",
-      "Uránusz",
-      "Mars",
-      "Vénusz",
-      "Merkúr",
-      "Föld",
-      "Plútó",
-      "Io"
-    ]
-  },
-  {
-    "category": "Tudomány",
-    "question": "Mi a Föld légkörének legnagyobb arányban előforduló összetevője? (változat 16)",
-    "correct": "Nitrogén",
-    "wrong": [
-      "Oxigén",
-      "Szén-dioxid",
-      "Argon",
-      "Hidrogén",
-      "Metán",
-      "Ózon",
-      "Hélium",
-      "Neon"
-    ]
-  },
-  {
-    "category": "Történelem",
-    "question": "Melyik évben zajlott a mohácsi csata? (változat 16)",
-    "correct": "1526",
-    "wrong": [
-      "1456",
-      "1490",
-      "1541",
-      "1606",
-      "1703",
-      "1848",
-      "1914",
-      "1241",
-      "1686"
-    ]
-  },
-  {
-    "category": "Földrajz",
-    "question": "Melyik a Föld legnagyobb óceánja? (változat 16)",
-    "correct": "Csendes-óceán",
-    "wrong": [
-      "Atlanti-óceán",
-      "Indiai-óceán",
-      "Jeges-tenger",
-      "Déli-óceán",
-      "Karib-tenger",
-      "Földközi-tenger",
-      "Arab-tenger",
-      "Balti-tenger"
-    ]
-  },
-  {
-    "category": "Kultúra",
-    "question": "Ki írta az 'Egri csillagok' című regényt? (változat 16)",
-    "correct": "Gárdonyi Géza",
-    "wrong": [
-      "Jókai Mór",
-      "Mikszáth Kálmán",
-      "Móricz Zsigmond",
-      "Kosztolányi Dezső",
-      "Ady Endre",
-      "Arany János",
-      "Petőfi Sándor",
-      "Babits Mihály"
-    ]
-  },
-  {
-    "category": "Tudomány",
-    "question": "Melyik bolygón van a Nagy Vörös Folt nevű vihar? (változat 17)",
-    "correct": "Jupiter",
-    "wrong": [
-      "Szaturnusz",
-      "Neptunusz",
-      "Uránusz",
-      "Mars",
-      "Vénusz",
-      "Merkúr",
-      "Föld",
-      "Plútó",
-      "Io"
-    ]
-  },
-  {
-    "category": "Tudomány",
-    "question": "Mi a Föld légkörének legnagyobb arányban előforduló összetevője? (változat 17)",
-    "correct": "Nitrogén",
-    "wrong": [
-      "Oxigén",
-      "Szén-dioxid",
-      "Argon",
-      "Hidrogén",
-      "Metán",
-      "Ózon",
-      "Hélium",
-      "Neon"
-    ]
-  },
-  {
-    "category": "Történelem",
-    "question": "Melyik évben zajlott a mohácsi csata? (változat 17)",
-    "correct": "1526",
-    "wrong": [
-      "1456",
-      "1490",
-      "1541",
-      "1606",
-      "1703",
-      "1848",
-      "1914",
-      "1241",
-      "1686"
-    ]
-  },
-  {
-    "category": "Földrajz",
-    "question": "Melyik a Föld legnagyobb óceánja? (változat 17)",
-    "correct": "Csendes-óceán",
-    "wrong": [
-      "Atlanti-óceán",
-      "Indiai-óceán",
-      "Jeges-tenger",
-      "Déli-óceán",
-      "Karib-tenger",
-      "Földközi-tenger",
-      "Arab-tenger",
-      "Balti-tenger"
-    ]
-  },
-  {
-    "category": "Kultúra",
-    "question": "Ki írta az 'Egri csillagok' című regényt? (változat 17)",
-    "correct": "Gárdonyi Géza",
-    "wrong": [
-      "Jókai Mór",
-      "Mikszáth Kálmán",
-      "Móricz Zsigmond",
-      "Kosztolányi Dezső",
-      "Ady Endre",
-      "Arany János",
-      "Petőfi Sándor",
-      "Babits Mihály"
-    ]
-  },
-  {
-    "category": "Tudomány",
-    "question": "Melyik bolygón van a Nagy Vörös Folt nevű vihar? (változat 18)",
-    "correct": "Jupiter",
-    "wrong": [
-      "Szaturnusz",
-      "Neptunusz",
-      "Uránusz",
-      "Mars",
-      "Vénusz",
-      "Merkúr",
-      "Föld",
-      "Plútó",
-      "Io"
-    ]
-  },
-  {
-    "category": "Tudomány",
-    "question": "Mi a Föld légkörének legnagyobb arányban előforduló összetevője? (változat 18)",
-    "correct": "Nitrogén",
-    "wrong": [
-      "Oxigén",
-      "Szén-dioxid",
-      "Argon",
-      "Hidrogén",
-      "Metán",
-      "Ózon",
-      "Hélium",
-      "Neon"
-    ]
-  },
-  {
-    "category": "Történelem",
-    "question": "Melyik évben zajlott a mohácsi csata? (változat 18)",
-    "correct": "1526",
-    "wrong": [
-      "1456",
-      "1490",
-      "1541",
-      "1606",
-      "1703",
-      "1848",
-      "1914",
-      "1241",
-      "1686"
-    ]
-  },
-  {
-    "category": "Földrajz",
-    "question": "Melyik a Föld legnagyobb óceánja? (változat 18)",
-    "correct": "Csendes-óceán",
-    "wrong": [
-      "Atlanti-óceán",
-      "Indiai-óceán",
-      "Jeges-tenger",
-      "Déli-óceán",
-      "Karib-tenger",
-      "Földközi-tenger",
-      "Arab-tenger",
-      "Balti-tenger"
-    ]
-  },
-  {
-    "category": "Kultúra",
-    "question": "Ki írta az 'Egri csillagok' című regényt? (változat 18)",
-    "correct": "Gárdonyi Géza",
-    "wrong": [
-      "Jókai Mór",
-      "Mikszáth Kálmán",
-      "Móricz Zsigmond",
-      "Kosztolányi Dezső",
-      "Ady Endre",
-      "Arany János",
-      "Petőfi Sándor",
-      "Babits Mihály"
-    ]
-  },
-  {
-    "category": "Tudomány",
-    "question": "Melyik bolygón van a Nagy Vörös Folt nevű vihar? (változat 19)",
-    "correct": "Jupiter",
-    "wrong": [
-      "Szaturnusz",
-      "Neptunusz",
-      "Uránusz",
-      "Mars",
-      "Vénusz",
-      "Merkúr",
-      "Föld",
-      "Plútó",
-      "Io"
-    ]
-  },
-  {
-    "category": "Tudomány",
-    "question": "Mi a Föld légkörének legnagyobb arányban előforduló összetevője? (változat 19)",
-    "correct": "Nitrogén",
-    "wrong": [
-      "Oxigén",
-      "Szén-dioxid",
-      "Argon",
-      "Hidrogén",
-      "Metán",
-      "Ózon",
-      "Hélium",
-      "Neon"
-    ]
-  },
-  {
-    "category": "Történelem",
-    "question": "Melyik évben zajlott a mohácsi csata? (változat 19)",
-    "correct": "1526",
-    "wrong": [
-      "1456",
-      "1490",
-      "1541",
-      "1606",
-      "1703",
-      "1848",
-      "1914",
-      "1241",
-      "1686"
-    ]
-  },
-  {
-    "category": "Földrajz",
-    "question": "Melyik a Föld legnagyobb óceánja? (változat 19)",
-    "correct": "Csendes-óceán",
-    "wrong": [
-      "Atlanti-óceán",
-      "Indiai-óceán",
-      "Jeges-tenger",
-      "Déli-óceán",
-      "Karib-tenger",
-      "Földközi-tenger",
-      "Arab-tenger",
-      "Balti-tenger"
-    ]
-  },
-  {
-    "category": "Kultúra",
-    "question": "Ki írta az 'Egri csillagok' című regényt? (változat 19)",
-    "correct": "Gárdonyi Géza",
-    "wrong": [
-      "Jókai Mór",
-      "Mikszáth Kálmán",
-      "Móricz Zsigmond",
-      "Kosztolányi Dezső",
-      "Ady Endre",
-      "Arany János",
-      "Petőfi Sándor",
-      "Babits Mihály"
+      "Kalcium-karbonát"
     ]
   }
 ]
