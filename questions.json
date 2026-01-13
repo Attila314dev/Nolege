@@ -1,4 +1,122 @@
 [
+  [
+  {
+    "category": "Tudomány",
+    "question": "Melyik bolygó a Naprendszer legnagyobb tömegű bolygója?",
+    "correct": "Jupiter",
+    "wrong": ["Szaturnusz", "Neptunusz", "Uránusz", "Mars", "Föld", "Vénusz", "Merkúr", "Plútó", "Ceres"]
+  },
+  {
+    "category": "Tudomány",
+    "question": "Mi a víz kémiai képlete?",
+    "correct": "H2O",
+    "wrong": ["HO2", "H3O", "O2H", "H2O2", "OH", "O3", "HHO", "HO", "H2"]
+  },
+  {
+    "category": "Tudomány",
+    "question": "Melyik részecske töltése negatív?",
+    "correct": "Elektron",
+    "wrong": ["Proton", "Neutron", "Pozitron", "Kvark", "Foton", "Gluon", "Mezon", "Bozon"]
+  },
+  {
+    "category": "Történelem",
+    "question": "Melyik évben zajlott a mohácsi csata?",
+    "correct": "1526",
+    "wrong": ["1456", "1490", "1541", "1606", "1703", "1848", "1914", "1241"]
+  },
+  {
+    "category": "Történelem",
+    "question": "Ki volt Magyarország első királya?",
+    "correct": "Szent István",
+    "wrong": ["Szent László", "Könyves Kálmán", "Géza fejedelem", "IV. Béla", "Mátyás király", "Árpád", "András herceg", "I. Károly"]
+  },
+  {
+    "category": "Földrajz",
+    "question": "Melyik a Föld legnagyobb óceánja?",
+    "correct": "Csendes-óceán",
+    "wrong": ["Atlanti-óceán", "Indiai-óceán", "Jeges-tenger", "Déli-óceán", "Karib-tenger", "Földközi-tenger", "Arab-tenger", "Balti-tenger"]
+  },
+  {
+    "category": "Földrajz",
+    "question": "Melyik ország fővárosa Canberra?",
+    "correct": "Ausztrália",
+    "wrong": ["Új-Zéland", "Kanada", "Egyesült Királyság", "USA", "Dél-Afrika", "Írország", "Norvégia", "Svédország"]
+  },
+  {
+    "category": "Kultúra",
+    "question": "Ki írta a 'Romeó és Júlia' című művet?",
+    "correct": "William Shakespeare",
+    "wrong": ["Charles Dickens", "Victor Hugo", "Goethe", "Molière", "Dante", "Cervantes", "Tolstoj", "Balzac"]
+  },
+  {
+    "category": "Kultúra",
+    "question": "Melyik hangszernek van billentyűzete?",
+    "correct": "Zongora",
+    "wrong": ["Hegedű", "Cselló", "Fuvola", "Oboa", "Hárfa", "Trombita", "Dob", "Klarinét"]
+  },
+  {
+    "category": "Sport",
+    "question": "Hány játékos van egyszerre a pályán egy focicsapatban?",
+    "correct": "11",
+    "wrong": ["9", "10", "12", "7", "6", "8", "14", "5"]
+  },
+
+  {
+    "category": "Sport",
+    "question": "Melyik sportágban használják a Grand Slam kifejezést?",
+    "correct": "Tenisz",
+    "wrong": ["Foci", "Kosárlabda", "Jégkorong", "Atlétika", "Úszás", "Box", "Rögbi", "Kézilabda"]
+  },
+  {
+    "category": "Technológia",
+    "question": "Mit jelent a CPU rövidítés?",
+    "correct": "Central Processing Unit",
+    "wrong": ["Computer Power Unit", "Central Program Utility", "Core Processing User", "Control Program Unit", "Central Processor User", "Compute Power Unit", "Control Processing Unit", "Core Performance Unit"]
+  },
+  {
+    "category": "Technológia",
+    "question": "Melyik cég fejlesztette az Android operációs rendszert?",
+    "correct": "Google",
+    "wrong": ["Apple", "Microsoft", "IBM", "Samsung", "Nokia", "Sony", "Intel", "Huawei"]
+  },
+  {
+    "category": "Biológia",
+    "question": "Melyik szerv termeli az inzulint?",
+    "correct": "Hasnyálmirigy",
+    "wrong": ["Máj", "Vese", "Gyomor", "Lép", "Tüdő", "Szív", "Agy", "Bél"]
+  },
+  {
+    "category": "Biológia",
+    "question": "Mi az emberi vér fő oxigénszállító molekulája?",
+    "correct": "Hemoglobin",
+    "wrong": ["Plazma", "Albumin", "Inzulin", "Adrenalin", "Glükóz", "DNS", "Fehérvérsejt", "Trombocita"]
+  },
+  {
+    "category": "Vegyes",
+    "question": "Melyik szín nem szerepel a magyar zászlón?",
+    "correct": "Kék",
+    "wrong": ["Piros", "Fehér", "Zöld", "Arany", "Fekete", "Sárga", "Narancs", "Lila"]
+  },
+  {
+    "category": "Vegyes",
+    "question": "Hány napos egy szökőév?",
+    "correct": "366",
+    "wrong": ["365", "364", "360", "370", "367", "362", "368", "355"]
+  },
+  {
+    "category": "Vegyes",
+    "question": "Melyik állat emlős?",
+    "correct": "Delfin",
+    "wrong": ["Cápa", "Polip", "Kígyó", "Béka", "Krokodil", "Pingvin", "Teknős", "Lazac"]
+  },
+  {
+    "category": "Vegyes",
+    "question": "Melyik hónapnak van 28 napja minden évben?",
+    "correct": "Mindegyiknek",
+    "wrong": ["Február", "Január", "Március", "Április", "Június", "Szeptember", "November", "December"]
+  }
+]
+
   {
     "category": "Tudomány",
     "question": "Melyik bolygó a Naprendszer legnagyobb átmérőjű égitestje a Nap után?",
