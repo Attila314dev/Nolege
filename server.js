@@ -43,38 +43,59 @@ function loadQuestionsFromJson() {
 }
 
 /**
- * Expected (preferred) shape per question:
- * { category, question, options: [A,B,C,D], answerIndex: 0..3 }
- *
- * If your JSON differs, adapt here.
+ * Converts your JSON format to the internal format needed by the game
+ * Input:  { category, question, correct, wrong: [...] }
+ * Output: { category, question, options: [A,B,C,D], answerIndex: 0-3 }
  */
 function normalizeQuestion(q, idx) {
-  if (!q || typeof q !== "object") return null;
+  if (!q || typeof q !== "object") {
+    console.warn(`Question #${idx}: invalid question object`);
+    return null;
+  }
 
+  // Extract and validate basic fields
   const category = String(q.category ?? "").trim();
   const question = String(q.question ?? "").trim();
+  const correct = q.correct ? String(q.correct).trim() : null;
+  const wrong = Array.isArray(q.wrong) ? q.wrong : [];
 
-  const options = Array.isArray(q.options) ? q.options.map(x => String(x)) : null;
-  const answerIndex = Number.isInteger(q.answerIndex) ? q.answerIndex : null;
-
+  // Validation
   if (!category || !question) {
-    console.warn(`Question #${idx}: missing category/question`);
+    console.warn(`Question #${idx}: missing category or question text`);
     return null;
   }
-  if (!options || options.length !== 4) {
-    console.warn(`Question #${idx}: options must be an array of 4 strings`);
+  if (!correct) {
+    console.warn(`Question #${idx}: missing correct answer`);
     return null;
   }
-  if (answerIndex === null || answerIndex < 0 || answerIndex > 3) {
-    console.warn(`Question #${idx}: answerIndex must be 0..3`);
+  if (wrong.length < 3) {
+    console.warn(`Question #${idx}: need at least 3 wrong answers, got ${wrong.length}`);
+    return null;
+  }
+
+  // Create options array: 1 correct + 3 random wrong answers
+  const selectedWrong = wrong
+    .sort(() => Math.random() - 0.5)  // Shuffle
+    .slice(0, 3)                       // Take first 3
+    .map(x => String(x).trim());
+
+  // Combine and shuffle all 4 options
+  const allOptions = [correct, ...selectedWrong];
+  shuffle(allOptions);
+
+  // Find which position the correct answer ended up in
+  const answerIndex = allOptions.indexOf(correct);
+
+  if (answerIndex === -1) {
+    console.warn(`Question #${idx}: correct answer not found in shuffled options`);
     return null;
   }
 
   return {
     category,
     question,
-    options,
-    answerIndex
+    options: allOptions,      // Array of 4 strings
+    answerIndex               // 0, 1, 2, or 3
   };
 }
 
