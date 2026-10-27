@@ -40,6 +40,23 @@ A tesztek külön szervert indítanak szabad porton, és valódi HTTP- és WebSo
 
 ## Render beállítások
 
+A repóban lévő `render.yaml` egyetlen, ingyenes Node.js webszolgáltatást készít elő Frankfurtban, a tesztelt Node.js 24.22.1 verzióval.
+
+[Nolege telepítése Renderre](https://dashboard.render.com/blueprint/new?repo=https://github.com/Attila314dev/Nolege)
+
+1. Jelentkezz be Renderre, és engedélyezd a GitHub-repó elérését, ha kéri.
+2. Válaszd ki a saját Render workspace-edet, és ellenőrizd, hogy a szolgáltatás csomagja **Free**.
+3. Indítsd el a Blueprint telepítését az **Apply** gombbal, majd várd meg a **Live** állapotot.
+4. Nyisd meg a Render által megadott `https://…onrender.com` címet. Ezt a főoldali linket küldd el a játékosoknak; a szobalistából névvel és jelszóval csatlakozhatnak.
+
+Az automatikus újratelepítés ki van kapcsolva, így egy későbbi GitHub-módosítás nem indítja újra váratlanul a játékot. Frissítéshez a Renderben kézi telepítést kell indítani.
+
+Az ingyenes Render szolgáltatás 15 perc bejövő forgalom nélküli idő után leállhat; az első következő megnyitáskor az ébredése körülbelül egy perc. Parti előtt nyisd meg az oldalt, és hozd létre a szobát. Újraindításkor a korábbi szobák és pontok elvesznek.
+
+Render dokumentáció: [Blueprint beállítások](https://render.com/docs/blueprint-spec), [ingyenes szolgáltatások](https://render.com/docs/free).
+
+### Kézi beállítás meglévő szolgáltatáshoz
+
 A repó Node.js Web Service-ként futtatható, az alábbi beállításokkal:
 
 | Beállítás | Érték |
@@ -47,6 +64,8 @@ A repó Node.js Web Service-ként futtatható, az alábbi beállításokkal:
 | Build command | `npm ci` |
 | Start command | `npm start` |
 | Health check path | `/healthz` |
+| Node.js verzió (`NODE_VERSION`) | `24.22.1` |
+| Példányszám | `1` |
 
 A szerver a szolgáltató által megadott `PORT` portot használja. Külön adatbázis nem szükséges.
 
