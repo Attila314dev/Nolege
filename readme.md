@@ -1,16 +1,78 @@
-# Kvízszobák – gyorsasági magyar kvíz (Render deploy)
+# Nolege – magyar gyorsasági kvíz
 
-## Fő funkciók
-- Szobák (admin hozza létre, jelszóval védett)
-- Csatlakozás link + jelszó + egyedi nick
-- 10 mp kérdéskör, mindenki egyszerre válaszol
-- A leggyorsabb **helyes** válasz ad pontot
-- 20 kérdés (5 tudomány, 5 matek, 5 irodalom, 5 történelem)
-- Realtime WebSocket
+Többjátékos böngészős kvíz, Node.js szerverrel és valós idejű WebSocket-kapcsolattal.
 
-## Fejlesztés helyben
+## Játékmenet
+
+- Az admin jelszavas szobát hoz létre, és elindítja a játékot.
+- A játékosok a főoldali szobalistából, egyedi 3–12 karakteres névvel csatlakoznak.
+- Egy játék 15 véletlen kérdésből áll, a jelenlegi 100 kérdéses készletből.
+- Kérdésenként 10 másodperc áll rendelkezésre. Ha minden csatlakozott játékos válaszolt, a kör korábban lezárul.
+- A leggyorsabb **helyes** válasz 1 pontot ér. A következő kérdés 3 másodperc múlva indul.
+- A jelszó nélküli néző mód TV-n is használható. Menet közbeni belépéskor az aktuális kérdést és a hátralévő időt is megkapja a néző.
+
+## Helyi indítás
+
+Node.js 22 vagy újabb és npm szükséges.
+
 ```bash
-npm install
+npm ci
+npm start
+```
+
+Ezután nyisd meg: <http://localhost:10000>.
+
+Fejlesztéshez, a szerver automatikus újraindításával:
+
+```bash
 npm run dev
-# majd nyisd meg: http://localhost:10000
-****
+```
+
+A portot a `PORT` környezeti változóval lehet felülírni. Az állapotjelző végpont: `GET /healthz`.
+
+## Ellenőrzés
+
+```bash
+npm test
+```
+
+A tesztek külön szervert indítanak szabad porton, és valódi HTTP- és WebSocket-kapcsolatokkal ellenőrzik a belépést, a pontozást és a menet közbeni nézői csatlakozást.
+
+## Render beállítások
+
+A repóban lévő `render.yaml` egyetlen, ingyenes Node.js webszolgáltatást készít elő Frankfurtban, a tesztelt Node.js 24.22.1 verzióval.
+
+[Nolege telepítése Renderre](https://dashboard.render.com/blueprint/new?repo=https://github.com/Attila314dev/Nolege)
+
+1. Jelentkezz be Renderre, és engedélyezd a GitHub-repó elérését, ha kéri.
+2. Válaszd ki a saját Render workspace-edet, és ellenőrizd, hogy a szolgáltatás csomagja **Free**.
+3. Indítsd el a Blueprint telepítését az **Apply** gombbal, majd várd meg a **Live** állapotot.
+4. Nyisd meg a Render által megadott `https://…onrender.com` címet. Ezt a főoldali linket küldd el a játékosoknak; a szobalistából névvel és jelszóval csatlakozhatnak.
+
+Az automatikus újratelepítés ki van kapcsolva, így egy későbbi GitHub-módosítás nem indítja újra váratlanul a játékot. Frissítéshez a Renderben kézi telepítést kell indítani.
+
+Az ingyenes Render szolgáltatás 15 perc bejövő forgalom nélküli idő után leállhat; az első következő megnyitáskor az ébredése körülbelül egy perc. Parti előtt nyisd meg az oldalt, és hozd létre a szobát. Újraindításkor a korábbi szobák és pontok elvesznek.
+
+Render dokumentáció: [Blueprint beállítások](https://render.com/docs/blueprint-spec), [ingyenes szolgáltatások](https://render.com/docs/free).
+
+### Kézi beállítás meglévő szolgáltatáshoz
+
+A repó Node.js Web Service-ként futtatható, az alábbi beállításokkal:
+
+| Beállítás | Érték |
+| --- | --- |
+| Build command | `npm ci` |
+| Start command | `npm start` |
+| Health check path | `/healthz` |
+| Node.js verzió (`NODE_VERSION`) | `24.22.1` |
+| Példányszám | `1` |
+
+A szerver a szolgáltató által megadott `PORT` portot használja. Külön adatbázis nem szükséges.
+
+## Adatok és működés
+
+A kérdések a `questions.json` fájlban vannak. Egy elem a `category`, `question`, `correct` mezőket és legalább három hibás választ tartalmazó `wrong` tömböt tartalmazza. A szerver minden kérdéshez három hibás választ választ, és összekeveri a négy lehetőséget.
+
+A szobák és pontszámok memóriában élnek: szerverújraindításkor elvesznek. A jelenlegi verziót egyetlen szerverpéldánnyal kell futtatni, hogy minden játékos ugyanazokat a szobákat lássa.
+
+A `tools/import_questions.js` és `tools/schema.sql` egy korábbi PostgreSQL-változat maradványa; a jelenlegi szerver nem használja őket. Az importáló nem része az indításnak.

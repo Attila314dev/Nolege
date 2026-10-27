@@ -37,6 +37,7 @@ let ws;
 let answeredThisRound = false;
 let chosenBtn = null;
 let countdownInterval = null;
+let resultTimeout = null;
 
 function connectWS() {
   const proto = location.protocol === 'https:' ? 'wss' : 'ws';
@@ -90,6 +91,7 @@ function toggleAdminButtons(roomLike) {
 }
 
 function showQuestion(m) {
+  clearTimeout(resultTimeout);
   answeredThisRound = false;
   chosenBtn = null;
 
@@ -116,18 +118,23 @@ function showQuestion(m) {
     optsEl.appendChild(btn);
   });
 
-  startCountdown(m.timeLimitSec);
+  startCountdown(m.timeLimitSec, m.timeRemainingMs);
 }
 
-function startCountdown(sec) {
+function startCountdown(sec, remainingMs = sec * 1000) {
   clearInterval(countdownInterval);
-  let left = sec;
-  timerEl.textContent = left;
-  countdownInterval = setInterval(() => {
-    left -= 1;
-    timerEl.textContent = Math.max(0, left);
-    if (left <= 0) clearInterval(countdownInterval);
-  }, 1000);
+  const end = performance.now() + Math.max(0, remainingMs);
+  const update = () => {
+    const left = Math.max(0, Math.ceil((end - performance.now()) / 1000));
+    timerEl.textContent = left;
+    if (left <= 0) {
+      clearInterval(countdownInterval);
+      answeredThisRound = true;
+      document.querySelectorAll('.opt').forEach(el => el.disabled = true);
+    }
+  };
+  countdownInterval = setInterval(update, 100);
+  update();
 }
 
 function submitAnswer(option, btn) {
@@ -144,8 +151,12 @@ function submitAnswer(option, btn) {
 }
 
 function showRoundResult(m) {
+  clearInterval(countdownInterval);
+  clearTimeout(resultTimeout);
+  answeredThisRound = true;
   const correct = m.correct; // 'A'/'B'/'C'/'D'
   const all = Array.from(document.querySelectorAll('.opt'));
+  all.forEach(btn => btn.disabled = true);
   const correctBtn = all.find(b => b.dataset.letter === correct);
 
   // helyes gomb 1s/4 villanás zölddel
@@ -155,15 +166,17 @@ function showRoundResult(m) {
   if (chosenBtn) {
     if (chosenBtn.dataset.letter === correct) {
       chosenBtn.classList.add('blink-good');
-      setTimeout(() => { chosenBtn.classList.remove('chosen-orange','blink-good'); chosenBtn.classList.add('result-good'); }, 1000);
     } else {
       chosenBtn.classList.add('blink-bad');
-      setTimeout(() => { chosenBtn.classList.remove('chosen-orange','blink-bad'); chosenBtn.classList.add('result-bad'); }, 1000);
     }
   }
 
   // 1s villogás után 2s infópanel
-  setTimeout(() => {
+  resultTimeout = setTimeout(() => {
+    if (chosenBtn) {
+      chosenBtn.classList.remove('chosen-orange', 'blink-good', 'blink-bad');
+      chosenBtn.classList.add(chosenBtn.dataset.letter === correct ? 'result-good' : 'result-bad');
+    }
     qView.classList.add('hide');
     resultView.classList.remove('hide');
 
@@ -199,6 +212,8 @@ function showRoundResult(m) {
 }
 
 function showGameOver(m) {
+  clearInterval(countdownInterval);
+  clearTimeout(resultTimeout);
   qView.classList.add('hide');
   resultView.classList.add('hide');
   gameOverView.classList.remove('hide');
