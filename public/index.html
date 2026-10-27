@@ -1,145 +1,24 @@
 <!doctype html>
 <html lang="hu">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Kvízszobák • Lobby</title>
-  <link rel="stylesheet" href="style.css" />
-</head>
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#0c1519"><title>Nolege · Kvíz a társaságnak</title><link rel="stylesheet" href="/style.css"><script type="module" src="/home.js"></script></head>
 <body>
-  <main class="wrap">
-    <h1>🧠 Kvízszobák</h1>
-
-    <!-- 1) Szobalista felül (Főnök + Join gomb) -->
-    <section class="card">
-      <h2>Elérhető szobák</h2>
-      <div class="flex space">
-        <button id="refreshRooms">Frissítés</button>
-        <span class="small mono">Automatikus frissítés 5 mp-enként</span>
+  <header class="site-header"><a class="brand" href="/"><span class="brand-mark">n</span>nolege<span class="brand-dot">.</span></a><span class="pill"><span class="live-dot"></span> Együtt, élőben</span></header>
+  <main class="page home-page">
+    <section class="hero" id="hero"><span class="eyebrow">A KÖVETKEZŐ JÓ VÁLASZ A TIÉD.</span><h1>Egy társaság.<br><span>Egy jó kvíz.</span></h1><p>Nyiss egy szobát, küldd körbe a linket, és indulhat a játék. Telefonról válaszoltok, a nagy képernyőn mindenki követheti.</p><div class="hero-facts"><span>01 <b>Meghívólink és QR</b></span><span>02 <b>Saját témák</b></span><span>03 <b>Pont minden jó válaszért</b></span></div></section>
+    <section id="inviteBanner" class="invite-banner" hidden aria-live="polite"></section>
+    <div class="home-grid">
+      <section class="panel create-panel" id="createPanel"><div class="section-title"><span class="step">+</span><div><h2>Legyél te a házigazda</h2><p>A többiek egy linkkel csatlakoznak.</p></div></div>
+        <form id="createForm"><label>Beceneved<input id="hostNick" name="nick" minlength="2" maxlength="20" required placeholder="Ahogy a többiek ismernek" autocomplete="nickname"></label><div id="createSettings"></div><details class="advanced"><summary>Jelszó a kézi belépéshez</summary><label>Szobajelszó <span class="optional">opcionális</span><input name="password" type="password" maxlength="100" placeholder="Üresen is hagyhatod" autocomplete="new-password"></label><p class="muted small">A meghívólink önmagában belépést ad. Kézi szobakódos belépésnél kell a jelszó.</p></details><button class="button primary wide" id="createButton" type="submit">Szoba létrehozása <span>↗</span></button><p class="form-message" id="createMessage" role="status"></p></form>
+      </section>
+      <div class="home-side">
+        <section class="panel join-panel" id="joinPanel"><div class="section-title"><span class="step muted-step">→</span><div><h2 id="joinTitle">Van már szobád?</h2><p id="joinSubtitle">Add meg a kódot, és csatlakozz.</p></div></div>
+          <form id="joinForm"><label id="roomCodeLabel">Szobakód<input id="roomCode" name="roomId" minlength="6" maxlength="6" required placeholder="ABC123" class="code-input" autocapitalize="none" autocomplete="off"></label><label>Beceneved<input id="guestNick" name="nick" minlength="2" maxlength="20" required placeholder="Például: Atti" autocomplete="nickname"></label><label id="joinPasswordLabel" hidden>Szobajelszó<input id="joinPassword" name="password" type="password" maxlength="100" autocomplete="current-password"></label><button class="button secondary wide" id="joinButton" type="submit">Belépek a játékba</button><p id="joinMessage" class="form-message" role="status"></p></form><a id="spectatorLink" class="text-link" hidden>Nézőként csatlakozom, játék nélkül →</a>
+        </section>
+        <section class="panel ai-note"><span class="mini-icon">✦</span><div><h3>A kérdések már készen állnak</h3><p id="aiNote">Betöltjük a kvíz lehetőségeit…</p><span class="tag" id="bankCount">Kérdésbank</span></div></section>
       </div>
-      <ul id="roomList" class="players topgap"></ul>
-      <p class="small mono topgap">A Join gomb megnyomása után megadod a nicked és a szoba jelszavát. Ha a játék már fut, automatikusan spectator módba lépsz.</p>
-    </section>
-
-    <!-- 2) Szoba létrehozás alatta -->
-    <section class="card">
-      <h2>Új szoba (Admin)</h2>
-      <label>Admin nick:
-        <input id="adminNick" placeholder="pl. Főnök" maxlength="12" />
-      </label>
-      <label>Szoba jelszó:
-        <input id="adminPass" type="password" placeholder="••••••" />
-      </label>
-      <button id="createBtn">Szoba létrehozása</button>
-      <p id="createOut" class="mono small"></p>
-    </section>
-
-    <!-- 3) Legalul Spectator mód (jelszó NEM kell) -->
-    <section class="card">
-      <h2>Spectator mód (TV-re, csak nézés)</h2>
-      <label>Szobakód: <input id="specRoom" maxlength="6" placeholder="pl. ab12cd" /></label>
-      <button id="specBtn">Belépés spectator-ként</button>
-      <p class="small mono">Spectator módhoz nem kell jelszó.</p>
-    </section>
+    </div>
+    <section class="rooms-section" id="roomsSection"><div class="section-heading"><div><span class="eyebrow">CSATLAKOZZ A TÖBBIEKHEZ</span><h2>Nyitott szobák</h2></div><button class="button quiet" id="refreshRooms" type="button">↻ Frissítés</button></div><div id="roomList" class="room-list" aria-live="polite"><div class="empty-state">Betöltés…</div></div></section>
+    <section class="how-it-works"><div><span>1</span><h3>Beléptek</h3><p>Meghívólink vagy szobakód. Nincs regisztráció.</p></div><div><span>2</span><h3>Válaszoltok</h3><p>Négy lehetőség, közös visszaszámlálás.</p></div><div><span>3</span><h3>Pontot gyűjtötök</h3><p>Minden jó válasz pontot ér, a gyorsaság bónuszt ad.</p></div></section>
   </main>
-
-  <script>
-    // ========== Szobalista ==========
-    const roomList = document.getElementById('roomList');
-    const refreshBtn = document.getElementById('refreshRooms');
-
-    function esc(s){ return String(s ?? "").replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
-
-    async function loadRooms(){
-      try{
-        const res = await fetch('/api/rooms', { cache: 'no-store' });
-        if (!res.ok) throw new Error('rooms fetch failed');
-        const data = await res.json();
-
-        roomList.innerHTML = (data||[]).map(r => `
-          <li>
-            <b>${esc(r.id)}</b>
-            <span class="small">Főnök: ${esc(r.admin || '-')}</span>
-            <span>${r.players} játékos${r.running ? ' • folyamatban' : ''}</span>
-            <button class="btn join" data-room="${esc(r.id)}" data-running="${r.running ? '1':'0'}">
-              ${r.running ? 'Spectate' : 'Join'}
-            </button>
-          </li>
-        `).join('') || '<li>(nincs aktív szoba)</li>';
-
-        // Join/Spectate logika szobánként
-        roomList.querySelectorAll('button.join').forEach(btn => {
-          btn.onclick = async () => {
-            const roomId = btn.getAttribute('data-room');
-            const running = btn.getAttribute('data-running') === '1';
-
-            if (running) {
-              // játék fut → spectator (jelszó NEM kell)
-              location.href = `${location.origin}/room.html?room=${encodeURIComponent(roomId)}&spectator=1`;
-              return;
-            }
-
-            // nem fut → Join játékosként
-            const nick = prompt('Nick (3-12 karakter):')?.trim();
-            if (!nick || nick.length < 3 || nick.length > 12) { alert('Érvénytelen nick.'); return; }
-            const password = prompt('Szoba jelszó:')?.trim();
-            if (!password) { alert('Jelszó kell.'); return; }
-
-            try {
-              const jr = await fetch('/api/join', {
-                method: 'POST',
-                headers: {'Content-Type':'application/json'},
-                body: JSON.stringify({ roomId, password, nick })
-              });
-              const jd = await jr.json();
-              if (!jr.ok) { alert(jd.error || 'Hiba a join-nál'); return; }
-
-              // siker: mehet a szobanézet
-              const link = `${location.origin}/room.html?room=${encodeURIComponent(roomId)}&pw=${encodeURIComponent(password)}&nick=${encodeURIComponent(nick)}`;
-              location.href = link;
-            } catch(e) {
-              alert('Csatlakozás sikertelen.');
-            }
-          };
-        });
-      }catch(e){
-        roomList.innerHTML = '<li>(nem elérhető)</li>';
-      }
-    }
-    refreshBtn.onclick = loadRooms;
-    loadRooms(); setInterval(loadRooms, 5000);
-
-    // ========== Szoba létrehozás ==========
-    const createBtn = document.getElementById('createBtn');
-    const createOut = document.getElementById('createOut');
-    createBtn.onclick = async () => {
-      const adminNick = document.getElementById('adminNick').value.trim();
-      const password = document.getElementById('adminPass').value.trim();
-      if (!adminNick || !password) { createOut.textContent = "Add meg a nevet és jelszót"; return; }
-
-      try{
-        const res = await fetch('/api/createRoom', {
-          method: 'POST', headers: {'Content-Type':'application/json'},
-          body: JSON.stringify({ password, adminNick })
-        });
-        const data = await res.json();
-        if (!res.ok) { createOut.textContent = data.error || 'Hiba'; return; }
-        const roomId = data.roomId;
-        const link = `${location.origin}/room.html?room=${encodeURIComponent(roomId)}&admin=1&pw=${encodeURIComponent(password)}&nick=${encodeURIComponent(adminNick)}`;
-        createOut.textContent = `Kész! Szobakód: ${roomId}`;
-        setTimeout(()=> location.href = link, 700);
-      }catch(e){
-        createOut.textContent = 'Hiba történt a létrehozás közben.';
-      }
-    };
-
-    // ========== Spectator ==========
-    document.getElementById('specBtn').onclick = () => {
-      const room = document.getElementById('specRoom').value.trim().toLowerCase();
-      if(!room) { alert('Add meg a szobakódot'); return; }
-      // jelszó NEM kell
-      location.href = `${location.origin}/room.html?room=${encodeURIComponent(room)}&spectator=1`;
-    };
-  </script>
-</body>
-</html>
+  <footer class="site-footer"><a class="brand small-brand" href="/">nolege.</a><span>Jó kérdések. Közös pillanatok.</span><span>v2.0</span></footer><div id="toast" class="toast" role="status" hidden></div>
+</body></html>

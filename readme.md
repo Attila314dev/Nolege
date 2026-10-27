@@ -1,78 +1,106 @@
-# Nolege – magyar gyorsasági kvíz
+# Nolege 2.0
 
-Többjátékos böngészős kvíz, Node.js szerverrel és valós idejű WebSocket-kapcsolattal.
+Magyar, többjátékos partikvíz telefonra és nagy képernyőre. Egy Node.js-szerver, Express, WebSocket; külön adatbázis nélkül is teljesen játszható.
 
-## Játékmenet
+**Alapból általános kvíz, 15 kérdéssel.** A szobagazda minden új fordulóhoz beállíthat témakört, 1–30 kérdést, nehézséget és 10/15/20/30 másodperces válaszidőt.
 
-- Az admin jelszavas szobát hoz létre, és elindítja a játékot.
-- A játékosok a főoldali szobalistából, egyedi 3–12 karakteres névvel csatlakoznak.
-- Egy játék 15 véletlen kérdésből áll, a jelenlegi 100 kérdéses készletből.
-- Kérdésenként 10 másodperc áll rendelkezésre. Ha minden csatlakozott játékos válaszolt, a kör korábban lezárul.
-- A leggyorsabb **helyes** válasz 1 pontot ér. A következő kérdés 3 másodperc múlva indul.
-- A jelszó nélküli néző mód TV-n is használható. Menet közbeni belépéskor az aktuális kérdést és a hátralévő időt is megkapja a néző.
+## Játék és csatlakozás
 
-## Helyi indítás
+- Szobanyitás után megjelenik a másolható meghívólink és a QR-kód. A vendégnek egy becenév kell.
+- Kézi szobakódos belépéshez választható jelszó. A meghívólink önmagában belépést ad, ezért csak azokkal oszd meg, akiket meg szeretnél hívni.
+- A szobagazda akkor indíthat, ha a kérdéssor elfogadott, és minden online játékos készen áll.
+- Minden helyes válasz 100 alappontot és legfeljebb 100 gyorsasági bónuszt ér. Hibás vagy kihagyott válasz: 0 pont.
+- A kör lezárul, ha minden csatlakozott játékos válaszolt, vagy lejárt az idő. Az eredmény 5 másodpercig látható.
+- Az eredmény a teljes helyes választ, rövid magyarázatot, válaszidőket és a kapott pontokat mutatja.
+- Frissítés és megszakadt WebSocket után ugyanazzal a munkamenettel lehet visszatérni, megőrzött pontszámmal és válasszal.
+- A nézők menet közben is beléphetnek, és az aktuális kérdést vagy eredményt azonnal megkapják.
+- A szobagazda az elkészült forduló után új kérdéssort készíthet. A lezárt kérdések visszanézhetők.
 
-Node.js 22 vagy újabb és npm szükséges.
+## AI: egyetlen beállítás hiányzik
+
+Az élő AI-hoz Renderben add hozzá ezt a környezeti változót:
+
+```text
+GROQ_API_KEY = a saját Groq API-kulcsod
+```
+
+Kulcs létrehozása: <https://console.groq.com/keys>. Ingyenes használathoz a Groq Free Plan fiókját és kvótáit használd. A beépített modell `openai/gpt-oss-120b`; a kód nem választ fizetős tartalék modellt. A szolgáltató fiókodhoz tartozó tényleges korlátai érvényesek.
+
+Renderben: a Nolege szolgáltatás **Environment → Add Environment Variable → GROQ_API_KEY**, majd **Save, rebuild, and deploy**. A kulcsot a Render titkos beállításában tartsd; az alkalmazás nem küldi böngészőbe és nem írja naplóba. A korábbi szobák az újratelepítéskor megszűnnek.
+
+Ezután:
+
+1. A szobában állítsd be az új forduló témáját, kérdésszámát és nehézségét.
+2. Maradjon bekapcsolva az **AI-val, ha elérhető**, és válaszd az **Új kérdéssor készítése** gombot.
+3. Nézd át vagy szerkeszd az előnézetet, és fogadd el a kérdéssort. Az előnézet a megoldásokat is megmutatja.
+4. A már lezárt kérdéseknél a **Kvízmester** szabad szöveges visszakérdezést is fogad.
+
+Az AI a játék előtt készít teljes kérdéssort. A pontozás a rögzített megoldás alapján, a szerveren történik. A chatbot csak már lezárt kérdés megoldását kapja meg, és nem módosíthat pontokat.
+
+### B terv API-kulcs vagy kvóta nélkül
+
+Az alkalmazás jelenleg **140 mentett, magyarázattal és nehézséggel ellátott kérdést** tartalmaz. Általános kvíz, több témakör és legalább 15 kérdéses Harry Potter-kör API nélkül is játszható. Az általános válogatás keveri a témákat és kerüli az ismétlődő főváros/vegyjel/mértékegység sablonokat.
+
+Kulcs nélkül a Kvízmester beépített segédként a mentett magyarázatot és a pontozási szabályokat mutatja. Az eredet mindig látható: **AI-kvízmester** vagy **Beépített segéd**. Hibás, hiányos, időt túllépő vagy kvótába ütköző AI-válasz esetén a szerver a megfelelő témájú bankból készít tartalékot, ha abban elegendő kérdés van. Ha nincs megfelelő bank, megőrzi a korábbi kérdéssort, és jelzi, hogy másik téma vagy kevesebb kérdés szükséges.
+
+Opcionális második szolgáltató: `OPENROUTER_API_KEY`. Ehhez kizárólag az `openrouter/free` modellútvonalat használja. Elég csak a Groq-kulcsot beállítani.
+
+### Kérdéscsomagok mentése
+
+A szobagazda **Mentés** gombja JSON-fájlt tölt le a kérdésekkel és magyarázatokkal. A **Betöltés** gombbal ez később visszaolvasható; a szerver a feltöltött csomagot is ellenőrzi. Így egy jó AI-csomag később újabb API-hívás nélkül játszható.
+
+## Helyi fejlesztés
+
+Node.js 22–24 szükséges; a Render-beállítás és az ellenőrzés Node.js **24.22.1** alatt készült.
 
 ```bash
 npm ci
 npm start
 ```
 
-Ezután nyisd meg: <http://localhost:10000>.
-
-Fejlesztéshez, a szerver automatikus újraindításával:
+Nyisd meg: <http://localhost:10000>.
 
 ```bash
 npm run dev
-```
-
-A portot a `PORT` környezeti változóval lehet felülírni. Az állapotjelző végpont: `GET /healthz`.
-
-## Ellenőrzés
-
-```bash
 npm test
 ```
 
-A tesztek külön szervert indítanak szabad porton, és valódi HTTP- és WebSocket-kapcsolatokkal ellenőrzik a belépést, a pontozást és a menet közbeni nézői csatlakozást.
+Az opcionális helyi `.env` fájlhoz másold le az `.env.example` fájlt. A szerver automatikusan beolvassa. A `.env` nincs verziókövetésben.
 
-## Render beállítások
-
-A repóban lévő `render.yaml` egyetlen, ingyenes Node.js webszolgáltatást készít elő Frankfurtban, a tesztelt Node.js 24.22.1 verzióval.
+## Render
 
 [Nolege telepítése Renderre](https://dashboard.render.com/blueprint/new?repo=https://github.com/Attila314dev/Nolege)
 
-1. Jelentkezz be Renderre, és engedélyezd a GitHub-repó elérését, ha kéri.
-2. Válaszd ki a saját Render workspace-edet, és ellenőrizd, hogy a szolgáltatás csomagja **Free**.
-3. Indítsd el a Blueprint telepítését az **Apply** gombbal, majd várd meg a **Live** állapotot.
-4. Nyisd meg a Render által megadott `https://…onrender.com` címet. Ezt a főoldali linket küldd el a játékosoknak; a szobalistából névvel és jelszóval csatlakozhatnak.
-
-Az automatikus újratelepítés ki van kapcsolva, így egy későbbi GitHub-módosítás nem indítja újra váratlanul a játékot. Frissítéshez a Renderben kézi telepítést kell indítani.
-
-Az ingyenes Render szolgáltatás 15 perc bejövő forgalom nélküli idő után leállhat; az első következő megnyitáskor az ébredése körülbelül egy perc. Parti előtt nyisd meg az oldalt, és hozd létre a szobát. Újraindításkor a korábbi szobák és pontok elvesznek.
-
-Render dokumentáció: [Blueprint beállítások](https://render.com/docs/blueprint-spec), [ingyenes szolgáltatások](https://render.com/docs/free).
-
-### Kézi beállítás meglévő szolgáltatáshoz
-
-A repó Node.js Web Service-ként futtatható, az alábbi beállításokkal:
+A `render.yaml` egyetlen Free Node.js webszolgáltatást ír le Frankfurtban:
 
 | Beállítás | Érték |
 | --- | --- |
-| Build command | `npm ci` |
-| Start command | `npm start` |
-| Health check path | `/healthz` |
-| Node.js verzió (`NODE_VERSION`) | `24.22.1` |
-| Példányszám | `1` |
+| Build | `npm ci` |
+| Start | `npm start` |
+| Health check | `/healthz` |
+| Node.js | `24.22.1` |
+| Automatikus telepítés | kikapcsolva |
+| Példányszám | 1 |
 
-A szerver a szolgáltató által megadott `PORT` portot használja. Külön adatbázis nem szükséges.
+A szerver a `PORT` környezeti változót használja és `0.0.0.0` címre figyel. A WebSocket ugyanazon a nyilvános címen működik, HTTPS alatt WSS-sel.
 
-## Adatok és működés
+Az ingyenes Render szolgáltatás 15 perc bejövő forgalom nélküli idő után leállhat; az ébredés körülbelül egy perc. A szobák és pontok memóriában vannak, szerverújraindításkor elvesznek. Parti előtt nyisd meg az oldalt. Az inaktív szobák két óra után automatikusan bezárulnak. Több szerverpéldányhoz közös állapottárolás kellene; a jelenlegi változat egy példányra készült.
 
-A kérdések a `questions.json` fájlban vannak. Egy elem a `category`, `question`, `correct` mezőket és legalább három hibás választ tartalmazó `wrong` tömböt tartalmazza. A szerver minden kérdéshez három hibás választ választ, és összekeveri a négy lehetőséget.
+## Ellenőrzés és felépítés
 
-A szobák és pontszámok memóriában élnek: szerverújraindításkor elvesznek. A jelenlegi verziót egyetlen szerverpéldánnyal kell futtatni, hogy minden játékos ugyanazokat a szobákat lássa.
+Az integrációs tesztek valódi HTTP- és WebSocket-kapcsolatokkal vizsgálják a meghívót, jelszót, jogosultságokat, kész jelzést, pontozást, visszacsatlakozást, néző módot, teljes játékot, kérdésimportot és a magyarázatok hozzáférését.
 
-A `tools/import_questions.js` és `tools/schema.sql` egy korábbi PostgreSQL-változat maradványa; a jelenlegi szerver nem használja őket. Az importáló nem része az indításnak.
+Az AI-tesztek szimulált szolgáltatói válaszokkal vizsgálják a teljes generálási és chat-útvonalat, a szigorú JSON-sémát, hibás válaszokat, kvótát, időtúllépést és a tartalék működést. A tesztek nem használnak valódi API-kulcsot. Az éles AI ellenőrzéséhez saját kulcs szükséges.
+
+| Fájl | Feladat |
+| --- | --- |
+| `lib/server.js` | HTTP, munkamenetek, szobák, WebSocket és játékmenet |
+| `lib/questions.js` | bank, válogatás és kérdésellenőrzés |
+| `lib/ai.js` | Groq, opcionális OpenRouter és beépített segéd |
+| `questions.json`, `extra-questions.json` | mentett kérdések és magyarázatok |
+| `public/` | magyar mobilos felület |
+| `test/` | automatikus ellenőrzések |
+
+A `tools/import_questions.js` és `tools/schema.sql` korábbi PostgreSQL-es eszközök. A jelenlegi alkalmazás nem használja őket.
+
+Szolgáltatói referencia: [Groq structured outputs](https://console.groq.com/docs/structured-outputs), [Groq limitek](https://console.groq.com/docs/rate-limits), [OpenRouter free router](https://openrouter.ai/openrouter/free), [Render Free](https://render.com/docs/free).

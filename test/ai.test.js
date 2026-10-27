@@ -1,0 +1,126 @@
+import assert from 'node:assert/strict';
+import test from 'node:test';
+import { createAI, AIError } from '../lib/ai.js';
+import { startApp } from '../test-support/helpers.js';
+
+const sample = index => ({ category: 'AI-teszt', question: `Mennyi ${index} + 2?`, correct: String(index + 2),
+  wrong: [String(index + 3), String(index + 4), String(index + 5)], explanation: `${index} és 2 összege ${index + 2}.`, difficulty: 'easy' });
+const completion = content => new Response(JSON.stringify({ choices: [{ finish_reason: 'stop', message: { content } }] }), { status: 200, headers: { 'content-type': 'application/json' } });
+
+test('a missing API key never makes a provider call or pretends to be live AI', async () => {
+  const ai = createAI({ env: {}, fetchImpl: () => { throw new Error('unexpected provider request'); } });
+  assert.equal(ai.status().configured, false);
+  await assert.rejects(ai.generate({ topic: '', count: 2, difficulty: 'mixed' }), error => error instanceof AIError && error.code === 'not_configured');
+});
+
+test('Groq generation uses strict structured output and validates the exact requested pack', async () => {
+  let request;
+  const ai = createAI({ env: { GROQ_API_KEY: 'test-only-not-a-real-key' }, fetchImpl: async (url, options) => {
+    request = { url, options, body: JSON.parse(options.body) };
+    return completion(JSON.stringify({ questions: [sample(1), sample(2)] }));
+  } });
+  const result = await ai.generate({ topic: 'Számolás', count: 2, difficulty: 'easy' });
+  assert.equal(result.questions.length, 2);
+  assert.equal(result.provider, 'Groq');
+  assert.equal(request.url, 'https://api.groq.com/openai/v1/chat/completions');
+  assert.equal(request.body.model, 'openai/gpt-oss-120b');
+  assert.equal(request.body.response_format.json_schema.strict, true);
+  assert.equal(request.body.response_format.json_schema.schema.properties.questions.minItems, 2);
+  assert.equal(request.body.response_format.json_schema.schema.properties.questions.maxItems, 2);
+  assert.ok(request.body.max_completion_tokens < 8000);
+  assert.equal(JSON.stringify(ai.status()).includes('test-only-not-a-real-key'), false);
+});
+
+test('invalid, duplicate, truncated or incomplete AI packs are rejected', async t => {
+  for (const [name, value] of [
+    ['invalid JSON', 'not JSON'],
+    ['wrong count', JSON.stringify({ questions: [sample(1)] })],
+    ['duplicate question', JSON.stringify({ questions: [sample(1), sample(1)] })],
+    ['duplicate answer', JSON.stringify({ questions: [{ ...sample(1), wrong: ['3', '4', '5'] }, sample(2)] })],
+    ['missing explanation', JSON.stringify({ questions: [{ ...sample(1), explanation: '' }, sample(2)] })]
+  ]) {
+    await t.test(name, async () => {
+      const ai = createAI({ env: { GROQ_API_KEY: 'test-only-key' }, fetchImpl: async () => completion(value) });
+      await assert.rejects(ai.generate({ topic: '', count: 2, difficulty: 'mixed' }), error => error.code === 'invalid_response');
+    });
+  }
+  const ai = createAI({ env: { GROQ_API_KEY: 'test-only-key' }, fetchImpl: async () => new Response(JSON.stringify({ choices: [{ finish_reason: 'length', message: { content: '{"questions":[' } }] })) });
+  await assert.rejects(ai.generate({ topic: '', count: 2, difficulty: 'mixed' }), error => error.code === 'invalid_response');
+});
+
+test('a quota error can fall back to the separately configured free OpenRouter route', async () => {
+  const urls = [];
+  const ai = createAI({ env: { GROQ_API_KEY: 'test-groq-key', OPENROUTER_API_KEY: 'test-router-key' }, fetchImpl: async (url, options) => {
+    urls.push(url);
+    if (url.includes('groq.com')) return new Response('{}', { status: 429, headers: { 'retry-after': '30' } });
+    const body = JSON.parse(options.body);
+    assert.equal(body.model, 'openrouter/free');
+    assert.ok(body.max_tokens > 0);
+    return completion(JSON.stringify({ questions: [sample(1)] }));
+  } });
+  const result = await ai.generate({ topic: '', count: 1, difficulty: 'mixed' });
+  assert.equal(result.provider, 'OpenRouter');
+  assert.equal(urls.length, 2);
+});
+
+test('provider authentication, quota and timeout failures have safe actionable errors', async t => {
+  for (const [status, code] of [[401, 'auth'], [403, 'auth'], [429, 'quota'], [500, 'provider_error']]) {
+    await t.test(String(status), async () => {
+      const ai = createAI({ env: { GROQ_API_KEY: 'test-only-secret' }, fetchImpl: async () => new Response('{"error":"sensitive provider details"}', { status }) });
+      await assert.rejects(ai.generate({ count: 1, topic: '', difficulty: 'mixed' }), error => error.code === code && !error.message.includes('sensitive') && !error.message.includes('test-only-secret'));
+    });
+  }
+  const ai = createAI({ env: { GROQ_API_KEY: 'test-only-key' }, timeoutMs: 20, fetchImpl: (_url, { signal }) => new Promise((_resolve, reject) => {
+    const keepAlive = setTimeout(() => reject(new Error('unexpected test timeout')), 1000);
+    signal.addEventListener('abort', () => { clearTimeout(keepAlive); reject(signal.reason); });
+  }) });
+  await assert.rejects(ai.generate({ count: 1, topic: '', difficulty: 'mixed' }), error => error.code === 'unavailable');
+});
+
+test('real app endpoints accept mock AI generation, require approval, and support follow-up chat', async t => {
+  const ai = createAI({ env: { GROQ_API_KEY: 'test-only-key' }, fetchImpl: async (_url, options) => {
+    const body = JSON.parse(options.body);
+    if (body.response_format) return completion(JSON.stringify({ questions: [sample(1), sample(2)] }));
+    return completion('A tesztelt AI-kapcsolat rövid magyarázata a már lezárt kérdéshez.');
+  } });
+  const app = await startApp(t, { ai });
+  const host = await app.create({ count: 2 });
+  const client = await app.connect(host.roomId, host.playerToken);
+  const prepared = await app.request(`/api/rooms/${host.roomId}/prepare`, { method: 'POST', token: host.playerToken,
+    body: { settings: { topic: 'Egyéni teszttéma', count: 2, difficulty: 'easy' } } });
+  assert.equal(prepared.status, 200);
+  assert.equal(prepared.data.pack.source, 'ai');
+  assert.equal(prepared.data.pack.accepted, false);
+  const cursor = client.messages.length;
+  client.send({ type: 'start' });
+  await client.wait(message => message.type === 'error', cursor);
+  assert.equal((await app.request(`/api/rooms/${host.roomId}/accept`, { method: 'POST', token: host.playerToken })).status, 200);
+  client.send({ type: 'start' });
+  const state = await client.state(room => room.phase === 'question');
+  const source = [sample(1), sample(2)].find(q => q.question === state.question.text);
+  client.send({ type: 'answer', roundId: state.question.id, option: state.question.options.indexOf(source.correct) });
+  await client.state(room => room.phase === 'result');
+  const chat = await app.request(`/api/rooms/${host.roomId}/chat`, { method: 'POST', token: host.playerToken, body: { index: 1, message: 'Elmagyarázod részletesebben?' } });
+  assert.equal(chat.status, 200);
+  assert.equal(chat.data.source, 'ai');
+  assert.match(chat.data.answer, /már lezárt/);
+});
+
+test('AI failure preserves a playable bank fallback and labels helper answers honestly', async t => {
+  const ai = createAI({ env: { GROQ_API_KEY: 'test-only-key' }, fetchImpl: async () => new Response('{}', { status: 429 }) });
+  const app = await startApp(t, { ai });
+  const host = await app.create({ count: 1 });
+  const prepared = await app.request(`/api/rooms/${host.roomId}/prepare`, { method: 'POST', token: host.playerToken, body: { settings: { count: 1 } } });
+  assert.equal(prepared.status, 200);
+  assert.equal(prepared.data.pack.source, 'bank');
+  assert.equal(prepared.data.pack.accepted, true);
+  assert.match(prepared.data.pack.warning, /kvóta/);
+  const pack = (await app.request(`/api/rooms/${host.roomId}/pack`, { token: host.playerToken })).data;
+  const client = await app.connect(host.roomId, host.playerToken); client.send({ type: 'start' });
+  const { question } = await client.state(room => room.phase === 'question');
+  client.send({ type: 'answer', roundId: question.id, option: question.options.indexOf(pack.questions[0].correct) });
+  await client.state(room => room.phase === 'result');
+  const chat = await app.request(`/api/rooms/${host.roomId}/chat`, { method: 'POST', token: host.playerToken, body: { index: 1, message: 'Miért?' } });
+  assert.equal(chat.data.source, 'bank');
+  assert.ok(chat.data.warning);
+});

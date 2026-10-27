@@ -13,6 +13,11 @@
       "Szöul",
       "Brasília",
       "Hamburg"
+    ],
+    "explanation": "Ausztrália fővárosa Canberra.",
+    "difficulty": "easy",
+    "tags": [
+      "általános"
     ]
   },
   {
@@ -29,6 +34,11 @@
       "Bécs",
       "Dublin",
       "Újdelhi"
+    ],
+    "explanation": "Kanada fővárosa Ottawa.",
+    "difficulty": "medium",
+    "tags": [
+      "általános"
     ]
   },
   {
@@ -45,6 +55,11 @@
       "London",
       "Dublin",
       "Riga"
+    ],
+    "explanation": "Brazília fővárosa Brasília.",
+    "difficulty": "medium",
+    "tags": [
+      "általános"
     ]
   },
   {
@@ -61,6 +76,11 @@
       "Stockholm",
       "Helsinki",
       "Pretoria"
+    ],
+    "explanation": "Argentína fővárosa Buenos Aires.",
+    "difficulty": "medium",
+    "tags": [
+      "általános"
     ]
   },
   {
@@ -77,6 +97,11 @@
       "Koppenhága",
       "Tallinn",
       "Madrid"
+    ],
+    "explanation": "Mexikó fővárosa Mexikóváros.",
+    "difficulty": "medium",
+    "tags": [
+      "általános"
     ]
   },
   {
@@ -93,6 +118,11 @@
       "Canberra",
       "Kairó",
       "Varsó"
+    ],
+    "explanation": "USA fővárosa Washington, D.C..",
+    "difficulty": "easy",
+    "tags": [
+      "általános"
     ]
   },
   {
@@ -109,6 +139,11 @@
       "Reykjavík",
       "Bukarest",
       "Brasília"
+    ],
+    "explanation": "Japán fővárosa Tokió.",
+    "difficulty": "easy",
+    "tags": [
+      "általános"
     ]
   },
   {
@@ -125,6 +160,11 @@
       "Bukarest",
       "Bern",
       "Bécs"
+    ],
+    "explanation": "Kína fővárosa Peking.",
+    "difficulty": "medium",
+    "tags": [
+      "általános"
     ]
   },
   {
@@ -141,6 +181,11 @@
       "Washington, D.C.",
       "Marseille",
       "Brüsszel"
+    ],
+    "explanation": "Dél-Korea fővárosa Szöul.",
+    "difficulty": "medium",
+    "tags": [
+      "általános"
     ]
   },
   {
@@ -157,6 +202,11 @@
       "Bécs",
       "Róma",
       "Vilnius"
+    ],
+    "explanation": "India fővárosa Újdelhi.",
+    "difficulty": "medium",
+    "tags": [
+      "általános"
     ]
   },
   {
@@ -173,6 +223,11 @@
       "Pretoria",
       "Buenos Aires",
       "Zágráb"
+    ],
+    "explanation": "Egyesült Királyság fővárosa London.",
+    "difficulty": "medium",
+    "tags": [
+      "általános"
     ]
   },
   {
@@ -189,6 +244,11 @@
       "Helsinki",
       "Brüsszel",
       "Szöul"
+    ],
+    "explanation": "Spanyolország fővárosa Madrid.",
+    "difficulty": "medium",
+    "tags": [
+      "általános"
     ]
   },
   {
@@ -205,6 +265,11 @@
       "Bukarest",
       "Ljubljana",
       "Varsó"
+    ],
+    "explanation": "Olaszország fővárosa Róma.",
+    "difficulty": "easy",
+    "tags": [
+      "általános"
     ]
   },
   {
@@ -221,6 +286,11 @@
       "Belgrád",
       "Helsinki",
       "Rijád"
+    ],
+    "explanation": "Németország fővárosa Berlin.",
+    "difficulty": "easy",
+    "tags": [
+      "általános"
     ]
   },
   {
@@ -237,6 +307,11 @@
       "Jeruzsálem",
       "Riga",
       "Hamburg"
+    ],
+    "explanation": "Hollandia fővárosa Amszterdam.",
+    "difficulty": "medium",
+    "tags": [
+      "általános"
     ]
   },
   {
@@ -253,6 +328,11 @@
       "Genf",
       "Bukarest",
       "Prága"
+    ],
+    "explanation": "Svédország fővárosa Stockholm.",
+    "difficulty": "medium",
+    "tags": [
+      "általános"
     ]
   },
   {
@@ -269,6 +349,11 @@
       "Peking",
       "Koppenhága",
       "Belgrád"
+    ],
+    "explanation": "Norvégia fővárosa Oslo.",
+    "difficulty": "medium",
+    "tags": [
+      "általános"
     ]
   },
   {
@@ -285,6 +370,11 @@
       "Helsinki",
       "Bern",
       "Rijád"
+    ],
+    "explanation": "Lengyelország fővárosa Varsó.",
+    "difficulty": "easy",
+    "tags": [
+      "általános"
     ]
   },
   {
@@ -301,6 +391,11 @@
       "Oslo",
       "Belgrád",
       "Varsó"
+    ],
+    "explanation": "Csehország fővárosa Prága.",
+    "difficulty": "medium",
+    "tags": [
+      "általános"
     ]
   },
   {
@@ -317,6 +412,11 @@
       "Koppenhága",
       "Amszterdam",
       "Ottawa"
+    ],
+    "explanation": "Ausztria fővárosa Bécs.",
+    "difficulty": "easy",
+    "tags": [
+      "általános"
     ]
   },
   {
@@ -333,6 +433,11 @@
       "Hidrogén",
       "Jód",
       "Kalcium"
+    ],
+    "explanation": "A Fe vegyjel a vas nevű kémiai elemet jelöli.",
+    "difficulty": "easy",
+    "tags": [
+      "általános"
     ]
   },
   {
@@ -349,6 +454,11 @@
       "Ezüst",
       "Szilícium",
       "Hélium"
+    ],
+    "explanation": "A Au vegyjel a arany nevű kémiai elemet jelöli.",
+    "difficulty": "easy",
+    "tags": [
+      "általános"
     ]
   },
   {
@@ -365,6 +475,11 @@
       "Ón",
       "Kén",
       "Szén"
+    ],
+    "explanation": "A Ag vegyjel a ezüst nevű kémiai elemet jelöli.",
+    "difficulty": "easy",
+    "tags": [
+      "általános"
     ]
   },
   {
@@ -381,6 +496,11 @@
       "Vas",
       "Arany",
       "Neon"
+    ],
+    "explanation": "A Na vegyjel a nátrium nevű kémiai elemet jelöli.",
+    "difficulty": "hard",
+    "tags": [
+      "általános"
     ]
   },
   {
@@ -397,6 +517,11 @@
       "Réz",
       "Jód",
       "Klór"
+    ],
+    "explanation": "A K vegyjel a kálium nevű kémiai elemet jelöli.",
+    "difficulty": "hard",
+    "tags": [
+      "általános"
     ]
   },
   {
@@ -413,6 +538,11 @@
       "Nikkel",
       "Ólom",
       "Fluor"
+    ],
+    "explanation": "A Ca vegyjel a kalcium nevű kémiai elemet jelöli.",
+    "difficulty": "medium",
+    "tags": [
+      "általános"
     ]
   },
   {
@@ -429,6 +559,11 @@
       "Hélium",
       "Nitrogén",
       "Cink"
+    ],
+    "explanation": "A Mg vegyjel a magnézium nevű kémiai elemet jelöli.",
+    "difficulty": "medium",
+    "tags": [
+      "általános"
     ]
   },
   {
@@ -445,6 +580,11 @@
       "Hélium",
       "Fluor",
       "Klór"
+    ],
+    "explanation": "A Cu vegyjel a réz nevű kémiai elemet jelöli.",
+    "difficulty": "medium",
+    "tags": [
+      "általános"
     ]
   },
   {
@@ -461,6 +601,11 @@
       "Fluor",
       "Kálium",
       "Szilícium"
+    ],
+    "explanation": "A Zn vegyjel a cink nevű kémiai elemet jelöli.",
+    "difficulty": "medium",
+    "tags": [
+      "általános"
     ]
   },
   {
@@ -477,6 +622,11 @@
       "Cink",
       "Oxigén",
       "Szilícium"
+    ],
+    "explanation": "A Pb vegyjel a ólom nevű kémiai elemet jelöli.",
+    "difficulty": "hard",
+    "tags": [
+      "általános"
     ]
   },
   {
@@ -493,6 +643,11 @@
       "Jód",
       "Cink",
       "Króm"
+    ],
+    "explanation": "A Sn vegyjel a ón nevű kémiai elemet jelöli.",
+    "difficulty": "hard",
+    "tags": [
+      "általános"
     ]
   },
   {
@@ -509,6 +664,11 @@
       "Alumínium",
       "Lítium",
       "Nátrium"
+    ],
+    "explanation": "A Cl vegyjel a klór nevű kémiai elemet jelöli.",
+    "difficulty": "medium",
+    "tags": [
+      "általános"
     ]
   },
   {
@@ -525,6 +685,11 @@
       "Hidrogén",
       "Szilícium",
       "Oxigén"
+    ],
+    "explanation": "A I vegyjel a jód nevű kémiai elemet jelöli.",
+    "difficulty": "medium",
+    "tags": [
+      "általános"
     ]
   },
   {
@@ -541,6 +706,11 @@
       "Lítium",
       "Nikkel",
       "Ón"
+    ],
+    "explanation": "A He vegyjel a hélium nevű kémiai elemet jelöli.",
+    "difficulty": "easy",
+    "tags": [
+      "általános"
     ]
   },
   {
@@ -557,6 +727,11 @@
       "Kálium",
       "Klór",
       "Hidrogén"
+    ],
+    "explanation": "A Ne vegyjel a neon nevű kémiai elemet jelöli.",
+    "difficulty": "hard",
+    "tags": [
+      "általános"
     ]
   },
   {
@@ -573,6 +748,11 @@
       "Joule",
       "Farad",
       "Coulomb"
+    ],
+    "explanation": "Az áramerősség SI-egysége az amper, jele A.",
+    "difficulty": "medium",
+    "tags": [
+      "általános"
     ]
   },
   {
@@ -589,6 +769,11 @@
       "Tesla",
       "Candela",
       "Kelvin"
+    ],
+    "explanation": "A villamos feszültség mértékegysége a volt, jele V.",
+    "difficulty": "medium",
+    "tags": [
+      "általános"
     ]
   },
   {
@@ -605,6 +790,11 @@
       "Joule",
       "Lumen",
       "Gray"
+    ],
+    "explanation": "Az elektromos ellenállást ohmban mérjük, jele Ω.",
+    "difficulty": "medium",
+    "tags": [
+      "általános"
     ]
   },
   {
@@ -621,6 +811,11 @@
       "Hertz",
       "Weber",
       "Siemens"
+    ],
+    "explanation": "A watt a teljesítmény egysége: egy joule másodpercenként.",
+    "difficulty": "medium",
+    "tags": [
+      "általános"
     ]
   },
   {
@@ -637,6 +832,11 @@
       "Newton",
       "Ohm",
       "Amper"
+    ],
+    "explanation": "A joule az energia és a munka SI-egysége.",
+    "difficulty": "medium",
+    "tags": [
+      "általános"
     ]
   },
   {
@@ -653,6 +853,11 @@
       "Becquerel",
       "Weber",
       "Kelvin"
+    ],
+    "explanation": "A hertz azt fejezi ki, hány ismétlődés történik egy másodperc alatt.",
+    "difficulty": "medium",
+    "tags": [
+      "általános"
     ]
   },
   {
@@ -669,6 +874,11 @@
       "Kelvin",
       "Candela",
       "Coulomb"
+    ],
+    "explanation": "A pascal a nyomás SI-egysége: egy newton négyzetméterenként.",
+    "difficulty": "hard",
+    "tags": [
+      "általános"
     ]
   },
   {
@@ -685,6 +895,11 @@
       "Joule",
       "Siemens",
       "Volt"
+    ],
+    "explanation": "Az SI alapegysége a kelvin. A Celsius-skála ugyanakkora lépéseket használ, más nullaponttal.",
+    "difficulty": "medium",
+    "tags": [
+      "általános"
     ]
   },
   {
@@ -701,6 +916,11 @@
       "Coulomb",
       "Lux",
       "Siemens"
+    ],
+    "explanation": "A fényerősség SI-alapegysége a kandela (candela), jele cd.",
+    "difficulty": "hard",
+    "tags": [
+      "általános"
     ]
   },
   {
@@ -717,6 +937,11 @@
       "Candela",
       "Hertz",
       "Tesla"
+    ],
+    "explanation": "A coulomb a villamos töltés SI-egysége.",
+    "difficulty": "hard",
+    "tags": [
+      "általános"
     ]
   },
   {
@@ -733,6 +958,11 @@
       "Vese",
       "Vékonybél",
       "Agy"
+    ],
+    "explanation": "Az inzulint a hasnyálmirigy béta-sejtjei termelik.",
+    "difficulty": "easy",
+    "tags": [
+      "általános"
     ]
   },
   {
@@ -749,6 +979,11 @@
       "Oxigénszállítás",
       "Vízszállítás",
       "Energiatermelés"
+    ],
+    "explanation": "A DNS-ben tárolt genetikai információ irányítja a sejtek működését és öröklődik az utódsejtekbe.",
+    "difficulty": "medium",
+    "tags": [
+      "általános"
     ]
   },
   {
@@ -765,6 +1000,11 @@
       "Kloroplasztisz",
       "Lizoszóma",
       "Golgi-készülék"
+    ],
+    "explanation": "A riboszómák az mRNS információja alapján kapcsolják össze a fehérjék aminosavait.",
+    "difficulty": "hard",
+    "tags": [
+      "általános"
     ]
   },
   {
@@ -781,6 +1021,11 @@
       "E-vitamin",
       "D-vitamin",
       "B1-vitamin"
+    ],
+    "explanation": "A skorbutot tartós C-vitamin-hiány okozza.",
+    "difficulty": "easy",
+    "tags": [
+      "általános"
     ]
   },
   {
@@ -797,6 +1042,11 @@
       "Máj",
       "Szív",
       "Agy"
+    ],
+    "explanation": "A bőr az egész test külső felszínét borítja, ezért az ember legnagyobb szerve.",
+    "difficulty": "easy",
+    "tags": [
+      "általános"
     ]
   },
   {
@@ -813,11 +1063,16 @@
       "Sejtfal",
       "Citoplazma",
       "Lizoszóma"
+    ],
+    "explanation": "A kloroplasztisz, vagyis a zöld színtest a növényi fotoszintézis helyszíne.",
+    "difficulty": "hard",
+    "tags": [
+      "általános"
     ]
   },
   {
     "category": "Biológia",
-    "question": "Melyik gáz szükséges a sejtlégzéshez?",
+    "question": "Melyik gázt használja az aerob sejtlégzés?",
     "correct": "Oxigén",
     "wrong": [
       "Argon",
@@ -829,6 +1084,11 @@
       "Ózon",
       "Hélium",
       "Hidrogén"
+    ],
+    "explanation": "Az aerob sejtlégzés oxigént használ az energiatermelő folyamat végén.",
+    "difficulty": "medium",
+    "tags": [
+      "általános"
     ]
   },
   {
@@ -845,11 +1105,16 @@
       "Izommozgatás",
       "Hormontermelés",
       "Sejtosztódás"
+    ],
+    "explanation": "A hemoglobin a vörösvérsejtek oxigént megkötő fehérjéje.",
+    "difficulty": "medium",
+    "tags": [
+      "általános"
     ]
   },
   {
     "category": "Biológia",
-    "question": "Melyik biomolekula a fő energia-raktározó rövid távon?",
+    "question": "Melyik tápanyagcsoportba tartozik a cukor és a keményítő?",
     "correct": "Szénhidrát",
     "wrong": [
       "Vitamin",
@@ -861,6 +1126,11 @@
       "Fehérje",
       "Víz",
       "DNS"
+    ],
+    "explanation": "A cukrok és a keményítő egyaránt szénhidrátok.",
+    "difficulty": "medium",
+    "tags": [
+      "általános"
     ]
   },
   {
@@ -877,6 +1147,11 @@
       "Vérlemezke",
       "Monocita",
       "Neutrofil"
+    ],
+    "explanation": "A vörösvérsejtek hemoglobinjuk segítségével szállítják az oxigént.",
+    "difficulty": "medium",
+    "tags": [
+      "általános"
     ]
   },
   {
@@ -893,6 +1168,11 @@
       "1241",
       "1686",
       "1703"
+    ],
+    "explanation": "A mohácsi csata 1526-ban zajlott; a magyar sereg az Oszmán Birodalom hadseregével ütközött meg.",
+    "difficulty": "easy",
+    "tags": [
+      "általános"
     ]
   },
   {
@@ -909,6 +1189,11 @@
       "1812",
       "1606",
       "1789"
+    ],
+    "explanation": "A magyar forradalom 1848. március 15-én kezdődött.",
+    "difficulty": "easy",
+    "tags": [
+      "általános"
     ]
   },
   {
@@ -925,22 +1210,27 @@
       "1848",
       "1100",
       "1000"
+    ],
+    "explanation": "II. András 1222-ben adta ki az Aranybullát.",
+    "difficulty": "hard",
+    "tags": [
+      "általános"
     ]
   },
   {
     "category": "Történelem",
-    "question": "Melyik évben történt a honfoglalás hagyományos dátuma?",
-    "correct": "895",
+    "question": "Melyik században történt a magyar honfoglalás?",
+    "correct": "9. század",
     "wrong": [
-      "997",
-      "1241",
-      "1054",
-      "1526",
-      "800",
-      "955",
-      "1000",
-      "700",
-      "1456"
+      "5. század",
+      "11. század",
+      "14. század",
+      "17. század"
+    ],
+    "explanation": "A magyar honfoglalás a 9. század végéhez kötődik.",
+    "difficulty": "hard",
+    "tags": [
+      "általános"
     ]
   },
   {
@@ -957,6 +1247,11 @@
       "1956",
       "2001",
       "1945"
+    ],
+    "explanation": "A berlini fal megnyitására 1989. november 9-én került sor.",
+    "difficulty": "medium",
+    "tags": [
+      "általános"
     ]
   },
   {
@@ -973,6 +1268,11 @@
       "IV. Béla",
       "Szent László",
       "András herceg"
+    ],
+    "explanation": "I. István volt Magyarország első koronázott királya.",
+    "difficulty": "easy",
+    "tags": [
+      "általános"
     ]
   },
   {
@@ -989,22 +1289,27 @@
       "2004",
       "1938",
       "1990"
+    ],
+    "explanation": "A trianoni békeszerződést 1920. június 4-én írták alá.",
+    "difficulty": "medium",
+    "tags": [
+      "általános"
     ]
   },
   {
     "category": "Történelem",
-    "question": "Ki volt Napóleon?",
-    "correct": "Bonaparte Napóleon",
+    "question": "Melyik ország császára volt Bonaparte Napóleon?",
+    "correct": "Franciaország",
     "wrong": [
-      "Robespierre",
-      "Pasteur",
-      "Richelieu",
-      "Danton",
-      "Voltaire",
-      "Descartes",
-      "De Gaulle",
-      "XVI. Lajos",
-      "XIV. Lajos"
+      "Spanyolország",
+      "Oroszország",
+      "Svédország",
+      "Portugália"
+    ],
+    "explanation": "Bonaparte Napóleon Franciaország császára volt.",
+    "difficulty": "medium",
+    "tags": [
+      "általános"
     ]
   },
   {
@@ -1021,22 +1326,27 @@
       "1989",
       "1975",
       "1941"
+    ],
+    "explanation": "A második világháború európai hadszínterén 1945 májusában fejeződtek be a harcok.",
+    "difficulty": "medium",
+    "tags": [
+      "általános"
     ]
   },
   {
     "category": "Történelem",
-    "question": "Melyik évben jött létre az EU (1993)?",
+    "question": "Melyik évben jött létre az Európai Unió a maastrichti szerződés hatálybalépésével?",
     "correct": "1993",
     "wrong": [
-      "2020",
-      "2012",
       "1957",
-      "1999",
       "1973",
-      "2007",
-      "2004",
-      "1992",
-      "1986"
+      "1989",
+      "2004"
+    ],
+    "explanation": "A maastrichti szerződés 1993-as hatálybalépésével jött létre az Európai Unió.",
+    "difficulty": "hard",
+    "tags": [
+      "általános"
     ]
   },
   {
@@ -1053,6 +1363,11 @@
       "Móricz Zsigmond",
       "Mikszáth Kálmán",
       "Jókai Mór"
+    ],
+    "explanation": "Az Egri csillagok Gárdonyi Géza történelmi regénye, központjában Eger ostromával.",
+    "difficulty": "easy",
+    "tags": [
+      "általános"
     ]
   },
   {
@@ -1069,6 +1384,11 @@
       "Picasso",
       "Michelangelo",
       "Monet"
+    ],
+    "explanation": "A Mona Lisa Leonardo da Vinci legismertebb festményei közé tartozik.",
+    "difficulty": "easy",
+    "tags": [
+      "általános"
     ]
   },
   {
@@ -1085,11 +1405,16 @@
       "Vivaldi",
       "Liszt",
       "Mozart"
+    ],
+    "explanation": "A Für Elise Ludwig van Beethoven zongoradarabja.",
+    "difficulty": "hard",
+    "tags": [
+      "általános"
     ]
   },
   {
     "category": "Kultúra",
-    "question": "Melyik Shakespeare-tragédia?",
+    "question": "Melyik alábbi mű William Shakespeare tragédiája?",
     "correct": "Hamlet",
     "wrong": [
       "Bűn és bűnhődés",
@@ -1101,6 +1426,11 @@
       "Odüsszeia",
       "Candide",
       "A varázshegy"
+    ],
+    "explanation": "A Hamlet William Shakespeare tragédiája; főhőse a dán királyfi.",
+    "difficulty": "medium",
+    "tags": [
+      "általános"
     ]
   },
   {
@@ -1117,6 +1447,11 @@
       "Móricz Zsigmond",
       "Karinthy Frigyes",
       "József Attila"
+    ],
+    "explanation": "Az ember tragédiája Madách Imre drámai költeménye.",
+    "difficulty": "easy",
+    "tags": [
+      "általános"
     ]
   },
   {
@@ -1133,6 +1468,11 @@
       "Hermitage",
       "Musée d'Orsay",
       "Prado"
+    ],
+    "explanation": "A Mona Lisa a párizsi Louvre gyűjteményében található.",
+    "difficulty": "easy",
+    "tags": [
+      "általános"
     ]
   },
   {
@@ -1149,6 +1489,12 @@
       "George R. R. Martin",
       "C. S. Lewis",
       "Terry Pratchett"
+    ],
+    "explanation": "A Harry Potter-regénysorozat szerzője J. K. Rowling.",
+    "difficulty": "easy",
+    "tags": [
+      "általános",
+      "Harry Potter"
     ]
   },
   {
@@ -1165,6 +1511,11 @@
       "Kandinszkij",
       "Rembrandt",
       "Claude Monet"
+    ],
+    "explanation": "A Guernica Pablo Picasso monumentális háborúellenes festménye.",
+    "difficulty": "hard",
+    "tags": [
+      "általános"
     ]
   },
   {
@@ -1181,6 +1532,11 @@
       "Philip K. Dick",
       "Umberto Eco",
       "Jules Verne"
+    ],
+    "explanation": "Az 1984 George Orwell disztópikus regénye.",
+    "difficulty": "easy",
+    "tags": [
+      "általános"
     ]
   },
   {
@@ -1197,6 +1553,11 @@
       "James Cameron",
       "Christopher Nolan",
       "Steven Spielberg"
+    ],
+    "explanation": "A Star Wars eredeti alkotója George Lucas.",
+    "difficulty": "easy",
+    "tags": [
+      "általános"
     ]
   },
   {
@@ -1213,11 +1574,16 @@
       "12",
       "8",
       "6"
+    ],
+    "explanation": "A nagypályás labdarúgásban egy teljes csapat 11 játékossal, köztük egy kapussal játszik.",
+    "difficulty": "easy",
+    "tags": [
+      "általános"
     ]
   },
   {
     "category": "Sport",
-    "question": "Melyik sportágban van 'Grand Slam'?",
+    "question": "Melyik sportág négy legnagyobb egyéni tornáját nevezik Grand Slam-tornáknak?",
     "correct": "Tenisz",
     "wrong": [
       "Foci",
@@ -1229,11 +1595,16 @@
       "Box",
       "Jégkorong",
       "Kézilabda"
+    ],
+    "explanation": "A tenisz négy Grand Slam-tornája az Australian Open, a Roland Garros, Wimbledon és a US Open.",
+    "difficulty": "medium",
+    "tags": [
+      "általános"
     ]
   },
   {
     "category": "Sport",
-    "question": "Hány perc a kézilabda mérkőzés játékideje?",
+    "question": "Hány perc egy felnőtt teremkézilabda-mérkőzés rendes játékideje?",
     "correct": "60",
     "wrong": [
       "45",
@@ -1245,22 +1616,27 @@
       "40",
       "75",
       "90"
+    ],
+    "explanation": "A felnőtt teremkézilabda rendes játékideje két 30 perces félidő.",
+    "difficulty": "medium",
+    "tags": [
+      "általános"
     ]
   },
   {
     "category": "Sport",
-    "question": "Melyik sportágban van les-szabály?",
-    "correct": "Labdarúgás",
+    "question": "Mit neveznek tizenegyesnek a labdarúgásban?",
+    "correct": "Büntetőrúgás",
     "wrong": [
-      "Sakk",
-      "Tenisz",
-      "Birkózás",
-      "Kosárlabda",
-      "Úszás",
-      "Asztalitenisz",
-      "Golf",
-      "Röplabda",
-      "Kézilabda"
+      "Szöglet",
+      "Bedobás",
+      "Középkezdés",
+      "Szabaddobás"
+    ],
+    "explanation": "A tizenegyes a labdarúgás büntetőrúgása.",
+    "difficulty": "medium",
+    "tags": [
+      "általános"
     ]
   },
   {
@@ -1277,11 +1653,16 @@
       "Úszás",
       "Baseball",
       "Golf"
+    ],
+    "explanation": "A free throw a kosárlabdában használt büntetődobás.",
+    "difficulty": "easy",
+    "tags": [
+      "általános"
     ]
   },
   {
     "category": "Sport",
-    "question": "Melyik sportágban játszanak szettekre háló felett?",
+    "question": "Melyik csapatsport jellegzetes eleme a feladás, a sáncolás és a leütés?",
     "correct": "Röplabda",
     "wrong": [
       "Vízilabda",
@@ -1293,6 +1674,11 @@
       "Autóverseny",
       "Kosárlabda",
       "Kézilabda"
+    ],
+    "explanation": "A feladás, a sáncolás és a leütés a röplabda jellegzetes játékelemei.",
+    "difficulty": "easy",
+    "tags": [
+      "általános"
     ]
   },
   {
@@ -1309,11 +1695,16 @@
       "Németország",
       "Olaszország",
       "Spanyolország"
+    ],
+    "explanation": "Az első újkori olimpiát 1896-ban a görögországi Athénban rendezték.",
+    "difficulty": "medium",
+    "tags": [
+      "általános"
     ]
   },
   {
     "category": "Sport",
-    "question": "Melyik sportágban van 'gém'?",
+    "question": "Melyik sportág pontozásában követi egymást a 15, 30 és 40?",
     "correct": "Tenisz",
     "wrong": [
       "Baseball",
@@ -1325,11 +1716,16 @@
       "Kézilabda",
       "Röplabda",
       "Birkózás"
+    ],
+    "explanation": "A teniszben egy gém pontozásában szerepel a 15, 30 és 40.",
+    "difficulty": "medium",
+    "tags": [
+      "általános"
     ]
   },
   {
     "category": "Sport",
-    "question": "Melyik sportágban van maraton?",
+    "question": "Melyik sportág hosszútávfutó versenyszáma a maratoni futás?",
     "correct": "Atlétika",
     "wrong": [
       "Tenisz",
@@ -1341,6 +1737,11 @@
       "Jégkorong",
       "Úszás",
       "Sakk"
+    ],
+    "explanation": "A maratoni futás az atlétika hosszútávfutó versenyszáma.",
+    "difficulty": "medium",
+    "tags": [
+      "általános"
     ]
   },
   {
@@ -1357,6 +1758,11 @@
       "Rögbi",
       "Kézilabda",
       "Tenisz"
+    ],
+    "explanation": "Az asztaliteniszben a játékosok kis ütővel, asztal fölé feszített hálón át juttatják a labdát.",
+    "difficulty": "easy",
+    "tags": [
+      "általános"
     ]
   },
   {
@@ -1373,6 +1779,11 @@
       "Core Processing User",
       "Control Program Unit",
       "Control Processing Unit"
+    ],
+    "explanation": "A CPU a Central Processing Unit rövidítése: ez a számítógép központi feldolgozóegysége.",
+    "difficulty": "easy",
+    "tags": [
+      "általános"
     ]
   },
   {
@@ -1389,6 +1800,11 @@
       "Apple",
       "IBM",
       "Google"
+    ],
+    "explanation": "A Windows operációs rendszert a Microsoft fejleszti.",
+    "difficulty": "easy",
+    "tags": [
+      "általános"
     ]
   },
   {
@@ -1405,6 +1821,11 @@
       "3D modellezés",
       "Tömörítés",
       "Adatbázis kezelése"
+    ],
+    "explanation": "A HTML a weboldal elemeit és szerkezetét írja le; a megjelenést általában CSS egészíti ki.",
+    "difficulty": "easy",
+    "tags": [
+      "általános"
     ]
   },
   {
@@ -1421,6 +1842,11 @@
       "HTTP",
       "IMAP",
       "FTP"
+    ],
+    "explanation": "A HTTPS titkosított kapcsolatot használó HTTP.",
+    "difficulty": "easy",
+    "tags": [
+      "általános"
     ]
   },
   {
@@ -1437,6 +1863,11 @@
       "Áramellátás",
       "Fájlok tömörítése",
       "Nyomtatás"
+    ],
+    "explanation": "A RAM-ban a futó programok és az általuk használt adatok vannak; tartalma áramtalanításkor általában elveszik.",
+    "difficulty": "easy",
+    "tags": [
+      "általános"
     ]
   },
   {
@@ -1453,6 +1884,11 @@
       "53",
       "143",
       "3389"
+    ],
+    "explanation": "A HTTPS alapértelmezett TCP-portja a 443.",
+    "difficulty": "easy",
+    "tags": [
+      "általános"
     ]
   },
   {
@@ -1469,6 +1905,11 @@
       "Universal Resource Locator",
       "Unique Reference Link",
       "Unified Resource Language"
+    ],
+    "explanation": "Az URL a Uniform Resource Locator rövidítése; internetes erőforrás címét jelöli.",
+    "difficulty": "hard",
+    "tags": [
+      "általános"
     ]
   },
   {
@@ -1485,6 +1926,11 @@
       "Swift",
       "Go",
       "Rust"
+    ],
+    "explanation": "A JavaScript a böngészőben közvetlenül futtatható, elterjedt programozási nyelv.",
+    "difficulty": "easy",
+    "tags": [
+      "általános"
     ]
   },
   {
@@ -1501,6 +1947,11 @@
       "Játékfejlesztés",
       "Operációs rendszer telepítés",
       "Szövegszerkesztés"
+    ],
+    "explanation": "Az SQL relációs adatbázisok adatainak lekérdezésére és kezelésére szolgáló nyelv.",
+    "difficulty": "medium",
+    "tags": [
+      "általános"
     ]
   },
   {
@@ -1517,6 +1968,11 @@
       "10.10.10",
       "localhost",
       "8.8.8.8.8"
+    ],
+    "explanation": "Az IPv4-cím szokásos írásmódja négy, ponttal elválasztott 0–255 közötti szám.",
+    "difficulty": "medium",
+    "tags": [
+      "általános"
     ]
   },
   {
@@ -1533,6 +1989,11 @@
       "Neptunusz",
       "Plútó",
       "Europa"
+    ],
+    "explanation": "A Naprendszer legbelső bolygója a Merkúr.",
+    "difficulty": "easy",
+    "tags": [
+      "általános"
     ]
   },
   {
@@ -1549,6 +2010,11 @@
       "Merkúr",
       "Vénusz",
       "Ganymedes"
+    ],
+    "explanation": "A Mars felszínének vas-oxidjai adják jellegzetes vöröses színét.",
+    "difficulty": "easy",
+    "tags": [
+      "általános"
     ]
   },
   {
@@ -1565,6 +2031,11 @@
       "Föld",
       "Titan",
       "Io"
+    ],
+    "explanation": "A Szaturnusz különösen látványos, jégből és kőzettörmelékből álló gyűrűrendszeréről ismert.",
+    "difficulty": "easy",
+    "tags": [
+      "általános"
     ]
   },
   {
@@ -1581,6 +2052,11 @@
       "Ózon",
       "Hélium",
       "Argon"
+    ],
+    "explanation": "Az oxigéntermelő fotoszintézisben a víz bontásából oxigén szabadul fel.",
+    "difficulty": "medium",
+    "tags": [
+      "általános"
     ]
   },
   {
@@ -1597,6 +2073,11 @@
       "Hidrogén-peroxid",
       "Szén-dioxid",
       "Kalcium-karbonát"
+    ],
+    "explanation": "A közönséges konyhasó fő alkotója a nátrium-klorid, képlete NaCl.",
+    "difficulty": "easy",
+    "tags": [
+      "általános"
     ]
   }
 ]
