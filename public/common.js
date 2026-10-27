@@ -16,8 +16,8 @@ export async function api(path, { method = 'GET', body, token } = {}) {
     throw error;
   } finally { clearTimeout(timeout); }
 }
-function readStorage(key) {
-  for (const storage of ['localStorage', 'sessionStorage']) { try { const value = window[storage].getItem(key); if (value) return value; } catch {} }
+function readStorage(key, tabFirst = false) {
+  for (const storage of tabFirst ? ['sessionStorage', 'localStorage'] : ['localStorage', 'sessionStorage']) { try { const value = window[storage].getItem(key); if (value) return value; } catch {} }
   return null;
 }
 function writeStorage(key, value) {
@@ -26,10 +26,13 @@ function writeStorage(key, value) {
 }
 export const savedNick = () => readStorage('nolege:nick') || '';
 export function saveSession(id, session, nick) {
-  writeStorage(`nolege:session:${id}`, JSON.stringify({ token: session.playerToken, playerId: session.playerId, nick }));
+  const key = `nolege:session:${id}`;
+  const value = JSON.stringify({ token: session.playerToken, playerId: session.playerId, nick });
+  try { window.sessionStorage.setItem(key, value); } catch {}
+  writeStorage(key, value);
   writeStorage('nolege:nick', nick);
 }
-export function getSession(id) { try { return JSON.parse(readStorage(`nolege:session:${id}`)); } catch { return null; } }
+export function getSession(id) { try { return JSON.parse(readStorage(`nolege:session:${id}`, true)); } catch { return null; } }
 export function forgetSession(id) { for (const storage of ['localStorage', 'sessionStorage']) { try { window[storage].removeItem(`nolege:session:${id}`); } catch {} } }
 export function settingsFrom(form) {
   const data = new FormData(form);
