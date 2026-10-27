@@ -60,7 +60,7 @@ test('host permissions come from the session token and all online players must b
   await hostClient.wait(message => message.type === 'error', before);
   assert.equal((await app.request(`/api/rooms/${host.roomId}/session`, { token: host.playerToken })).data.phase, 'lobby');
   guestClient.send({ type: 'ready', ready: true });
-  await hostClient.state(state => state.readyToStart && state.players.length === 2);
+  await hostClient.state(state => state.readyToStart && state.players.length === 2 && state.players.every(p => p.connected && p.ready));
   hostClient.send({ type: 'start' });
   const questionState = await hostClient.state(state => state.phase === 'question');
   assert.equal(questionState.question.options.length, 4);
@@ -77,7 +77,7 @@ test('every correct answer scores; duplicate and invalid answers do not alter th
   const guest = (await app.request('/api/join', { method: 'POST', body: { roomId: host.roomId, nick: 'Guest' } })).data;
   const guestClient = await app.connect(host.roomId, guest.playerToken);
   guestClient.send({ type: 'ready', ready: true });
-  await hostClient.state(state => state.readyToStart && state.players.length === 2);
+  await hostClient.state(state => state.readyToStart && state.players.length === 2 && state.players.every(p => p.connected && p.ready));
   hostClient.send({ type: 'start' });
   const { question } = await hostClient.state(state => state.phase === 'question');
   const option = correctOption(question, pack);
