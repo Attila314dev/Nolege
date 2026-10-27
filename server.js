@@ -161,6 +161,7 @@ function newRoom(password, adminNick) {
       questions: [],
       roundClosed: false,
       roundTimer: null,
+      roundResult: null,
       expected: 0
     }
   };
@@ -199,6 +200,28 @@ function roomSnapshot(room) {
       questionIndex: room.game.questionIndex
     }
   };
+}
+
+function questionPayload(room) {
+  const { game } = room;
+  const q = game.currentQ;
+  return {
+    index: game.questionIndex + 1,
+    total: game.questions.length,
+    category: q.category,
+    question: q.question,
+    options: q.options,
+    timeLimitSec: 10,
+    timeRemainingMs: game.roundClosed ? 0 : Math.max(0, game.questionStart + 10_000 - Date.now())
+  };
+}
+
+function sendCurrentRound(ws, room) {
+  if (!room.game.running || !room.game.currentQ) return;
+  ws.send(JSON.stringify({ type: "question", ...questionPayload(room) }));
+  if (room.game.roundResult) {
+    ws.send(JSON.stringify({ type: "roundResult", ...room.game.roundResult }));
+  }
 }
 
 // --------------------
@@ -270,6 +293,7 @@ wss.on("connection", (ws) => {
       room.spectators.add(ws);
       ws.on("close", () => room.spectators.delete(ws));
       ws.send(JSON.stringify({ type: "joined", room: roomSnapshot(room), you: { spectator: true } }));
+      sendCurrentRound(ws, room);
       return;
     }
 
@@ -352,6 +376,7 @@ function goNextQuestion(room) {
   room.game.questionIndex++;
   room.game.answers = [];
   room.game.roundClosed = false;
+  room.game.roundResult = null;
   if (room.game.roundTimer) {
     clearTimeout(room.game.roundTimer);
     room.game.roundTimer = null;
@@ -373,14 +398,7 @@ function goNextQuestion(room) {
 
   room.game.expected = Array.from(room.players.values()).filter((p) => p.ws && p.ws.readyState === 1).length;
 
-  broadcast(room, "question", {
-    index: room.game.questionIndex + 1,
-    total: room.game.questions.length,
-    category: q.category,
-    question: q.question,
-    options: q.options,
-    timeLimitSec: 10
-  });
+  broadcast(room, "question", questionPayload(room));
 
   room.game.roundTimer = setTimeout(() => finishRound(room), 10_000);
 }
@@ -424,14 +442,15 @@ function finishRound(room) {
     return { nick: nk, timeMs, isCorrect, option: ans?.option ?? null, points };
   });
 
-  broadcast(room, "roundResult", {
+  room.game.roundResult = {
     correct: correctLetter,
     winner: winner ? winner.nick : null,
     details,
     scoreboard: Array.from(room.players.values())
       .map((p) => ({ nick: p.nick, score: p.score }))
       .sort((a, b) => b.score - a.score)
-  });
+  };
+  broadcast(room, "roundResult", room.game.roundResult);
 
   // 1s villogás + 2s infó
   setTimeout(() => goNextQuestion(room), 3000);
@@ -442,5 +461,5 @@ app.get("/healthz", (_req, res) => res.send("ok"));
 const PORT = process.env.PORT || 10000;
 
 server.listen(PORT, "0.0.0.0", () => {
-  console.log("Server listening on", PORT);
+  console.log("Server listening on", server.address().port);
 });
