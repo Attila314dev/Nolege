@@ -13,6 +13,28 @@ test('a missing API key never makes a provider call or pretends to be live AI', 
   await assert.rejects(ai.generate({ topic: '', count: 2, difficulty: 'mixed' }), error => error instanceof AIError && error.code === 'not_configured');
 });
 
+test('health follows validated completions, exposes real model and timestamps, and clears after recovery', async () => {
+  let clock = 1000, mode = 'invalid';
+  const ai = createAI({ env: { OPENROUTER_API_KEY: 'test-only-private-key' }, now: () => clock,
+    fetchImpl: async () => {
+      assert.equal(ai.status().state, 'pending');
+      return new Response(JSON.stringify({ model: 'actual-selected-model', choices: [{ finish_reason: 'stop', message: {
+        content: mode === 'invalid' ? '{bad JSON' : JSON.stringify({ questions: [sample(1)] }) } }] }), { status: 200 });
+    } });
+  assert.equal(ai.status().state, 'unverified');
+  await assert.rejects(ai.generate({ count: 1, topic: '', difficulty: 'easy' }));
+  assert.equal(ai.status().state, 'error', 'HTTP 200 alone is not usable generation');
+  assert.equal(ai.status().lastError.code, 'invalid_response');
+  assert.equal(ai.status().lastSuccessAt, null);
+  mode = 'valid'; clock += 100;
+  await ai.generate({ count: 1, topic: '', difficulty: 'easy' });
+  assert.equal(ai.status().state, 'working');
+  assert.equal(ai.status().lastModel, 'actual-selected-model');
+  assert.equal(ai.status().lastCompletedAt, clock);
+  assert.equal(ai.status().lastError, null);
+  assert.equal(JSON.stringify(ai.status()).includes('test-only-private-key'), false);
+});
+
 test('Groq generation uses strict structured output and validates the exact requested pack', async () => {
   let request;
   const ai = createAI({ env: { GROQ_API_KEY: 'test-only-not-a-real-key' }, fetchImpl: async (url, options) => {
@@ -96,30 +118,35 @@ test('real app endpoints accept mock AI generation, require approval, and suppor
   await client.wait(message => message.type === 'error', cursor);
   assert.equal((await app.request(`/api/rooms/${host.roomId}/accept`, { method: 'POST', token: host.playerToken })).status, 200);
   client.send({ type: 'start' });
-  const state = await client.state(room => room.phase === 'question');
-  const source = [sample(1), sample(2)].find(q => q.question === state.question.text);
-  client.send({ type: 'answer', roundId: state.question.id, option: state.question.options.indexOf(source.correct) });
-  await client.state(room => room.phase === 'result');
+  for (let index = 1; index <= 2; index++) {
+    const state = await client.state(room => room.phase === 'question' && room.question.index === index);
+    const source = [sample(1), sample(2)].find(q => q.question === state.question.text);
+    client.send({ type: 'answer', roundId: state.question.id, option: state.question.options.indexOf(source.correct) });
+  }
+  await client.state(room => room.phase === 'finished');
   const chat = await app.request(`/api/rooms/${host.roomId}/chat`, { method: 'POST', token: host.playerToken, body: { index: 1, message: 'Elmagyarázod részletesebben?' } });
   assert.equal(chat.status, 200);
   assert.equal(chat.data.source, 'ai');
   assert.match(chat.data.answer, /már lezárt/);
 });
 
-test('AI failure preserves a playable bank fallback and labels helper answers honestly', async t => {
+test('a failed background provider leaves the general stock playable and helper answers labelled honestly', async t => {
   const ai = createAI({ env: { GROQ_API_KEY: 'test-only-key' }, fetchImpl: async () => new Response('{}', { status: 429 }) });
   const app = await startApp(t, { ai });
   const host = await app.create({ count: 1 });
   const prepared = await app.request(`/api/rooms/${host.roomId}/prepare`, { method: 'POST', token: host.playerToken, body: { settings: { count: 1 } } });
   assert.equal(prepared.status, 200);
-  assert.equal(prepared.data.pack.source, 'bank');
+  assert.equal(prepared.data.pack.source, 'pool');
   assert.equal(prepared.data.pack.accepted, true);
-  assert.match(prepared.data.pack.warning, /kvóta/);
+  await app.pool.refill();
+  assert.equal(ai.status().state, 'error');
+  assert.equal(ai.status().lastError.code, 'quota');
+  assert.ok(app.pool.status().lastError);
   const pack = (await app.request(`/api/rooms/${host.roomId}/pack`, { token: host.playerToken })).data;
   const client = await app.connect(host.roomId, host.playerToken); client.send({ type: 'start' });
   const { question } = await client.state(room => room.phase === 'question');
   client.send({ type: 'answer', roundId: question.id, option: question.options.indexOf(pack.questions[0].correct) });
-  await client.state(room => room.phase === 'result');
+  await client.state(room => room.phase === 'finished');
   const chat = await app.request(`/api/rooms/${host.roomId}/chat`, { method: 'POST', token: host.playerToken, body: { index: 1, message: 'Miért?' } });
   assert.equal(chat.data.source, 'bank');
   assert.ok(chat.data.warning);

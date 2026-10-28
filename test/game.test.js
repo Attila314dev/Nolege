@@ -6,7 +6,7 @@ import { startApp, correctOption } from '../test-support/helpers.js';
 
 test('the app serves the new UI and reports a playable offline question bank', async t => {
   const app = await startApp(t);
-  for (const path of ['/', '/join/abcdef', '/room.html', '/home.js', '/client.js', '/common.js', '/style.css']) {
+  for (const path of ['/', '/join/abcdef', '/room.html', '/home.js', '/client.js', '/common.js', '/focus.js', '/style.css']) {
     const response = await app.request(path);
     assert.equal(response.status, 200, path);
     assert.ok(response.data.length > 100, path);
@@ -183,23 +183,62 @@ test('settings, exact question counts and accepted JSON packs work without an AI
   assert.equal(stillThere.settings.topic, 'Harry Potter');
 });
 
-test('the question helper cannot reveal upcoming answers and clearly identifies offline responses', async t => {
-  const app = await startApp(t);
+test('the quizmaster stays blocked for the whole match and works again after the final result', async t => {
+  const app = await startApp(t, { timings: { questionMs: 2000, resultMs: 200 } });
   const host = await app.create({ count: 1 });
   const pack = (await app.request(`/api/rooms/${host.roomId}/pack`, { token: host.playerToken })).data;
   const client = await app.connect(host.roomId, host.playerToken);
   client.send({ type: 'start' });
   const { question } = await client.state(state => state.phase === 'question');
   const early = await app.request(`/api/rooms/${host.roomId}/chat`, { method: 'POST', token: host.playerToken, body: { index: 1, message: 'Mi a helyes válasz?' } });
-  assert.equal(early.status, 403);
+  assert.equal(early.status, 409);
+  assert.equal(early.data.code, 'game_running');
   client.send({ type: 'answer', roundId: question.id, option: correctOption(question, pack) });
   await client.state(state => state.phase === 'result');
+  const interval = await app.request(`/api/rooms/${host.roomId}/chat`, { method: 'POST', token: host.playerToken, body: { index: 1, message: 'Miért?' } });
+  assert.equal(interval.status, 409);
+  assert.equal(interval.data.code, 'game_running');
+  await client.state(state => state.phase === 'finished');
   const reply = await app.request(`/api/rooms/${host.roomId}/chat`, { method: 'POST', token: host.playerToken, body: { index: 1, message: 'Miért?' } });
   assert.equal(reply.status, 200);
   assert.equal(reply.data.source, 'bank');
   assert.ok(reply.data.answer.includes(pack.questions[0].correct));
   const rules = await app.request(`/api/rooms/${host.roomId}/chat`, { method: 'POST', token: host.playerToken, body: { index: 1, message: 'Hány pontot ér a gyorsaság?' } });
   assert.match(rules.data.answer, /100 alappont/);
+});
+
+test('an earlier question cannot be discussed during a later question, including after reconnect', async t => {
+  let aiCalls = 0;
+  const app = await startApp(t, { timings: { questionMs: 2000, resultMs: 100 }, ai: {
+    status: () => ({ configured: true, providers: ['Test'] }),
+    async chat() { aiCalls++; return { answer: 'A meccs vége után elérhető.', source: 'ai' }; }
+  } });
+  const host = await app.create({ count: 2 });
+  const client = await app.connect(host.roomId, host.playerToken);
+  const guest = (await app.request('/api/join', { method: 'POST', body: { roomId: host.roomId, nick: 'Guest' } })).data;
+  const guestClient = await app.connect(host.roomId, guest.playerToken);
+  guestClient.send({ type: 'ready', ready: true });
+  await client.state(state => state.readyToStart && state.players.every(p => p.connected && p.ready));
+  client.send({ type: 'start' });
+  const first = await client.state(state => state.phase === 'question');
+  client.send({ type: 'answer', roundId: first.question.id, option: 0 });
+  guestClient.send({ type: 'answer', roundId: first.question.id, option: 0 });
+  await client.state(state => state.phase === 'question' && state.question.index === 2);
+  const replacement = await app.connect(host.roomId, host.playerToken);
+  const second = await replacement.state(state => state.phase === 'question' && state.question.index === 2);
+  for (const token of [host.playerToken, guest.playerToken]) {
+    const blocked = await app.request(`/api/rooms/${host.roomId}/chat`, { method: 'POST', token, body: { index: 1, message: 'Az előző kérdésről kérdeznék.' } });
+    assert.equal(blocked.status, 409);
+    assert.equal(blocked.data.code, 'game_running');
+  }
+  assert.equal(aiCalls, 0, 'blocked requests never reach the AI provider');
+  replacement.send({ type: 'answer', roundId: second.question.id, option: 0 });
+  guestClient.send({ type: 'answer', roundId: second.question.id, option: 0 });
+  await replacement.state(state => state.phase === 'finished');
+  const allowed = await app.request(`/api/rooms/${host.roomId}/chat`, { method: 'POST', token: guest.playerToken, body: { index: 1, message: 'Most miért?' } });
+  assert.equal(allowed.status, 200);
+  assert.equal(allowed.data.source, 'ai');
+  assert.equal(aiCalls, 1);
 });
 
 test('a complete multi-question game can be followed by a newly prepared round', async t => {

@@ -1,4 +1,6 @@
-import { $, api, copy, esc, forgetSession, getSession, settingsFrom, settingsHTML, sourceName, toast } from './common.js';
+import { $, api, copy, esc, forgetSession, getSession, settingsFrom, settingsHTML, sourceName, suggestTopicCount, toast } from './common.js';
+import { createFocusMode, matchInProgress } from './focus.js';
+import { renderAIStatus } from './ai-status.js';
 
 const query = new URLSearchParams(location.search);
 const roomId = (query.get('room') || location.pathname.match(/^\/room\/([a-z0-9]+)$/i)?.[1] || '').toLowerCase();
@@ -19,13 +21,14 @@ let selectedQuestionIndex = 0;
 let reviewLength = -1;
 let lastGameId = '';
 const chats = new Map();
+const focusMode = createFocusMode({ notify: toast });
 
 function showError(message, join = false) {
   $('#roomError').hidden = false;
   $('#roomError').innerHTML = `${esc(message)} ${join ? `<a href="/join/${esc(roomId)}">Újracsatlakozom →</a>` : '<a href="/">Vissza a főoldalra →</a>'}`;
 }
 function connection(text, connected = false) {
-  $('#connectionStatus').textContent = text; $('#connectionStatus').classList.toggle('connected', connected);
+  for (const id of ['#connectionStatus', '#focusConnection']) { $(id).textContent = text; $(id).classList.toggle('connected', connected); }
 }
 function send(message) {
   if (ws?.readyState === WebSocket.OPEN) ws.send(JSON.stringify(message));
@@ -41,14 +44,14 @@ function connect() {
     let message; try { message = JSON.parse(event.data); } catch { return; }
     if (message.type === 'state') { retry = 0; connection('Élő kapcsolat', true); $('#roomError').hidden = true; render(message.room); }
     if (message.type === 'error') toast(message.error, true);
-    if (message.type === 'roomClosed') showError('A szobagazda bezárta a szobát, vagy a szoba lejárt.');
+    if (message.type === 'roomClosed') { focusMode.setActive(false); showError('A szobagazda bezárta a szobát, vagy a szoba lejárt.'); }
   };
   socket.onclose = event => {
     if (socket !== ws) return;
     clearInterval(timer);
-    if (event.code === 4404) { connection('A szoba bezárult'); showError('Ez a szoba már bezárult.'); return; }
-    if (event.code === 4001) { connection('Másik lapon aktív'); showError('Ezt a játékost egy másik böngészőlapon nyitottad meg. Frissítsd ezt az oldalt, ha itt szeretnél játszani.'); return; }
-    if (event.code === 4401) { connection('Új belépés szükséges'); forgetSession(roomId); showError('A belépésed már nem érvényes.', true); return; }
+    if (event.code === 4404) { focusMode.setActive(false); connection('A szoba bezárult'); showError('Ez a szoba már bezárult.'); return; }
+    if (event.code === 4001) { focusMode.setActive(false); connection('Másik lapon aktív'); showError('Ezt a játékost egy másik böngészőlapon nyitottad meg. Frissítsd ezt az oldalt, ha itt szeretnél játszani.'); return; }
+    if (event.code === 4401) { focusMode.setActive(false); connection('Új belépés szükséges'); forgetSession(roomId); showError('A belépésed már nem érvényes.', true); return; }
     connection('Kapcsolat helyreállítása…');
     reconnectTimer = setTimeout(connect, Math.min(10_000, 700 * 2 ** retry++) + Math.random() * 300);
   };
@@ -59,7 +62,13 @@ document.addEventListener('visibilitychange', () => {
 });
 
 function render(next) {
+  const newQuestion = next.phase === 'question' && (room?.phase !== 'question' || room?.question?.id !== next.question?.id);
   room = next;
+  const playing = matchInProgress(room.phase);
+  focusMode.setActive(playing);
+  $('#focusTitle').textContent = room.settings.topic || 'Általános kvíz';
+  const myRank = room.players.findIndex(player => player.id === room.you.id);
+  $('#focusScore').textContent = room.you.spectator ? `${room.players.filter(p => p.connected).length} játékos · néző vagy` : `${room.players[myRank]?.score ?? 0} pont · ${myRank + 1}. hely`;
   if (lastGameId !== room.gameId) {
     lastGameId = room.gameId; chats.clear(); selectedQuestionIndex = 0; reviewLength = -1; stageKey = '';
     if ($('#chatDialog').open) $('#chatDialog').close();
@@ -76,20 +85,23 @@ function render(next) {
   if (key !== stageKey) { stageKey = key; renderStage(); }
   startTimer();
   renderHost();
+  renderAIStatus($('#roomAIStatus'), room.ai, room.pool);
   renderReview();
+  if (newQuestion) { $('#gameStage').focus({ preventScroll: true }); window.scrollTo({ top: 0, behavior: 'instant' }); }
 }
 
 function renderStage() {
   const stage = $('#gameStage');
   stage.classList.toggle('spectator-stage', room.you.spectator);
   if (room.preparing) {
-    stage.innerHTML = '<div class="lobby-stage"><span class="spinner large-spinner"></span><span class="eyebrow">KÉSZÜL A KÉRDÉSSOR</span><h2>A kvízmester dolgozik.</h2><p>Összeállítjuk és ellenőrizzük a kérdéseket. Ez néhány másodpercig is eltarthat.</p></div>';
+    const preparing = room.preparingSettings || room.settings;
+    stage.innerHTML = `<div class="lobby-stage"><span class="spinner large-spinner"></span><span class="eyebrow">KÉSZÜL A KÉRDÉSSOR</span><h2>${preparing.count} kérdés készül.</h2><p>${esc(preparing.topic || 'Általános kvíz')}<br>Az egyedi AI-generálás akár másfél percig is eltarthat. Megvárjuk, amíg minden kérdés elkészül.</p></div>`;
     return;
   }
   if (room.phase === 'lobby') {
     const ready = room.players.filter(p => p.connected && p.ready).length;
     const count = room.players.filter(p => p.connected).length;
-    stage.innerHTML = `<div class="lobby-stage"><div class="lobby-illustration"><span>?</span><i>✦</i><b>!</b></div><span class="eyebrow">${room.you.spectator ? 'NÉZŐTÉR' : 'MINDJÁRT KEZDÜNK'}</span><h2>${room.you.spectator ? 'Várjuk az első kérdést.' : room.you.host ? 'Mindenki itt van?' : 'Készen állsz egy jó kvízre?'}</h2><p>${room.you.spectator ? 'A kérdések és az eredmények itt is élőben jelennek meg.' : room.you.host ? 'Küldd körbe a meghívót. Amint mindenki készen áll, indulhat a játék.' : 'Jelezz a többieknek, ha kezdődhet. A szobagazda indítja a játékot.'}</p><div class="pack-tags"><span class="tag">${sourceName(room.pack?.source)}</span><span class="tag">${room.pack?.count || 0} kérdés</span><span class="tag tag-accent">${ready}/${count} készen áll</span></div>${room.pack?.warning ? `<div class="notice">${esc(room.pack.warning)}</div>` : ''}${!room.pack ? '<div class="notice">Ehhez a témához még elő kell készíteni a kérdéssort.</div>' : !room.pack.accepted ? `<div class="notice">Az AI kérdéssora elkészült. ${room.you.host ? 'Nézd át, majd fogadd el.' : 'Várunk a szobagazda jóváhagyására.'}</div>` : ''}${room.you.host ? `<div class="lobby-actions">${room.pack && !room.pack.accepted ? '<button class="button secondary" data-action="accept">Kérdéssor elfogadása ✓</button>' : ''}<button id="startGame" class="button primary large-button" data-action="start" ${room.readyToStart ? '' : 'disabled'}>Indulhat a kvíz →</button><span class="small muted">${room.readyToStart ? 'Mindenki készen áll.' : 'Várunk a kérdéssorra és a játékosok kész jelzésére.'}</span></div>` : !room.you.spectator ? `<button class="button ${room.you.ready ? 'secondary' : 'primary'} large-button" data-action="ready">${room.you.ready ? '✓ Készen állok · visszavonom' : 'Készen állok ✓'}</button>` : ''}</div>`;
+    stage.innerHTML = `<div class="lobby-stage"><div class="lobby-illustration"><span>?</span><i>✦</i><b>!</b></div><span class="eyebrow">${room.you.spectator ? 'NÉZŐTÉR' : 'MINDJÁRT KEZDÜNK'}</span><h2>${room.you.spectator ? 'Várjuk az első kérdést.' : room.you.host ? 'Mindenki itt van?' : 'Készen állsz egy jó kvízre?'}</h2><p>${room.you.spectator ? 'A kérdések és az eredmények itt is élőben jelennek meg.' : room.you.host ? 'Küldd körbe a meghívót. Amint mindenki készen áll, indulhat a játék.' : 'Jelezz a többieknek, ha kezdődhet. A szobagazda indítja a játékot.'}</p><div class="pack-tags"><span class="tag">${sourceName(room.pack?.source)}${room.pack?.source === 'pool' && room.pack.aiCount ? ` · ${room.pack.aiCount} AI-ból mentett` : ''}</span><span class="tag">${room.pack?.count || 0} kérdés</span><span class="tag tag-accent">${ready}/${count} készen áll</span></div>${room.pack?.warning ? `<div class="notice">${esc(room.pack.warning)}</div>` : ''}${!room.pack ? '<div class="notice">Ehhez a témához még elő kell készíteni a kérdéssort.</div>' : !room.pack.accepted ? `<div class="notice">Az AI kérdéssora elkészült. ${room.you.host ? 'Nézd át, majd fogadd el.' : 'Várunk a szobagazda jóváhagyására.'}</div>` : ''}${room.you.host ? `<div class="lobby-actions">${room.pack && !room.pack.accepted ? '<button class="button secondary" data-action="accept">Kérdéssor elfogadása ✓</button>' : ''}<button id="startGame" class="button primary large-button" data-action="start" ${room.readyToStart ? '' : 'disabled'}>Indulhat a kvíz →</button><span class="small muted">${room.readyToStart ? 'Mindenki készen áll.' : 'Várunk a kérdéssorra és a játékosok kész jelzésére.'}</span></div>` : !room.you.spectator ? `<button class="button ${room.you.ready ? 'secondary' : 'primary'} large-button" data-action="ready">${room.you.ready ? '✓ Készen állok · visszavonom' : 'Készen állok ✓'}</button>` : ''}</div>`;
     return;
   }
   if (room.phase === 'question') {
@@ -100,7 +112,7 @@ function renderStage() {
   if (room.phase === 'result') {
     const result = room.result;
     const mine = result.details.find(d => d.id === room.you.id);
-    stage.innerHTML = `<div class="question-top"><span class="eyebrow">${result.index}. KÉRDÉS · EREDMÉNY</span><span class="tag">${esc(result.category)}</span><span id="countdown" class="next-countdown"></span></div><div class="result-symbol ${mine && !mine.correct ? 'result-miss' : ''}">${room.you.spectator ? '✓' : mine?.correct ? '✓' : '↗'}</div><h2 class="result-title">${room.you.spectator ? 'Ez volt a helyes válasz.' : mine?.correct ? 'Szép válasz!' : mine?.option == null ? 'Ezt most kihagytad.' : 'Ezt most nem találtad el.'}</h2><div class="correct-answer"><span>${'ABCD'[result.correctIndex]}</span><strong>${esc(result.correct)}</strong>${mine?.correct ? `<b>+${mine.points}<small>pont</small></b>` : ''}</div><p class="explanation">${esc(result.explanation)}</p><div class="result-footer"><span>${result.fastest ? `Leggyorsabb: <b>${esc(result.fastest)}</b>` : 'Most nem érkezett helyes válasz.'}</span>${!room.you.spectator ? `<button class="button quiet" data-chat="${result.index}">Miért? Kérdezek a kvízmestertől ↗</button>` : ''}</div><div class="round-details">${result.details.map(d => `<div class="${d.id === room.you.id ? 'is-you' : ''}"><span>${d.correct ? '✓' : d.option == null ? '–' : '×'} ${esc(d.nick)}</span><span>${d.timeMs == null ? 'nem válaszolt' : `${(d.timeMs / 1000).toFixed(2)} mp`}</span><strong>+${d.points}</strong></div>`).join('')}</div>`;
+    stage.innerHTML = `<div class="question-top"><span class="eyebrow">${result.index}. KÉRDÉS · EREDMÉNY</span><span class="tag">${esc(result.category)}</span><span id="countdown" class="next-countdown"></span></div><div class="result-symbol ${mine && !mine.correct ? 'result-miss' : ''}">${room.you.spectator ? '✓' : mine?.correct ? '✓' : '↗'}</div><h2 class="result-title">${room.you.spectator ? 'Ez volt a helyes válasz.' : mine?.correct ? 'Szép válasz!' : mine?.option == null ? 'Ezt most kihagytad.' : 'Ezt most nem találtad el.'}</h2><div class="correct-answer"><span>${'ABCD'[result.correctIndex]}</span><strong>${esc(result.correct)}</strong>${mine?.correct ? `<b>+${mine.points}<small>pont</small></b>` : ''}</div><p class="explanation">${esc(result.explanation)}</p><div class="result-footer"><span>${result.fastest ? `Leggyorsabb: <b>${esc(result.fastest)}</b>` : 'Most nem érkezett helyes válasz.'}</span><span class="small muted">A Kvízmestert a meccs végén kérdezheted.</span></div><div class="round-details">${result.details.map(d => `<div class="${d.id === room.you.id ? 'is-you' : ''}"><span>${d.correct ? '✓' : d.option == null ? '–' : '×'} ${esc(d.nick)}</span><span>${d.timeMs == null ? 'nem válaszolt' : `${(d.timeMs / 1000).toFixed(2)} mp`}</span><strong>+${d.points}</strong></div>`).join('')}</div>`;
     return;
   }
   const winner = room.players[0];
@@ -124,13 +136,16 @@ function renderHost() {
   $('#hostPanel').hidden = !room.you.host;
   $('#invitePanel').hidden = !room.you.host;
   if (!room.you.host) return;
-  const playing = ['question', 'result'].includes(room.phase);
+  const playing = matchInProgress(room.phase);
   const key = JSON.stringify(room.settings);
   if (settingsKey !== key) { settingsKey = key; $('#roomSettings').innerHTML = settingsHTML(room.settings, meta.topics); }
   $('#settingsForm').querySelectorAll('input,select,button').forEach(el => { el.disabled = playing || room.preparing; });
   $('#useAI').disabled = playing || room.preparing || !room.ai.configured;
   if (!room.ai.configured) $('#useAI').checked = false;
-  $('#aiStatus').textContent = room.ai.configured ? 'AI-kulcs beállítva. Generálás után a kérdéssor előnézetben szerkeszthető és menthető.' : 'Kérdésbankkal játszotok. A szabad témageneráláshoz és beszélgetéshez még az AI-kulcs hiányzik.';
+  $('#aiStatus').textContent = 'Az általános kvíz a készletből indul. Egyedi témakörhöz az AI külön csomagot készít; kikapcsolva csak a mentett témákból választunk.';
+  $('#prepareError').hidden = !room.prepareError;
+  $('#prepareError').textContent = room.prepareError || '';
+  $('#refillButton').disabled = playing || room.preparing || !room.ai.configured || room.pool.refilling || room.pool.available >= room.pool.target || room.pool.nextRetryAt > Date.now();
   $('#prepareButton').textContent = room.preparing ? 'Készül a kérdéssor…' : room.phase === 'finished' ? 'Új forduló készítése' : 'Új kérdéssor készítése';
   $('#previewButton').disabled = playing || room.preparing || !room.pack;
   $('#exportButton').disabled = playing || room.preparing || !room.pack;
@@ -171,10 +186,18 @@ $('#settingsForm').addEventListener('submit', async event => {
     render(prepared); toast(prepared.pack.source === 'ai' ? 'Az AI-kérdéssor elkészült. Nézd át és fogadd el.' : 'Új kérdéssor kész. Jöhet a kész jelzés!');
   } catch (error) { toast(error.message, true); if (room) renderHost(); }
 });
+suggestTopicCount($('#settingsForm'));
+$('#refillButton').addEventListener('click', async () => {
+  $('#refillButton').disabled = true;
+  try { render(await api(`/api/rooms/${roomId}/refill`, { method: 'POST', token: session.token })); }
+  catch (error) { toast(error.message, true); renderHost(); }
+});
 
 $('#previewButton').addEventListener('click', async () => {
   try {
-    const pack = await api(`/api/rooms/${roomId}/pack`, { token: session.token }); previewQuestions = pack.questions;
+    const pack = await api(`/api/rooms/${roomId}/pack`, { token: session.token });
+    if (matchInProgress(room.phase)) return;
+    previewQuestions = pack.questions;
     $('#previewQuestions').innerHTML = pack.questions.map((q, i) => `<details class="preview-card" data-preview-card="${i}" ${i === 0 ? 'open' : ''}><summary><span>${i + 1}.</span> ${esc(q.question)}</summary><label>Témakör<input name="category" value="${esc(q.category)}" maxlength="80" required></label><label>Kérdés<textarea name="question" maxlength="360" required rows="2">${esc(q.question)}</textarea></label><label>Helyes válasz<input name="correct" value="${esc(q.correct)}" maxlength="140" required></label>${q.wrong.slice(0, 3).map((answer, j) => `<label>${j + 1}. hibás válasz<input name="wrong${j}" value="${esc(answer)}" maxlength="140" required></label>`).join('')}<label>Magyarázat<textarea name="explanation" maxlength="700" required rows="3">${esc(q.explanation)}</textarea></label></details>`).join('');
     $('#previewMessage').textContent = ''; $('#previewDialog').showModal();
   } catch (error) { toast(error.message, true); }
@@ -215,7 +238,8 @@ $('#closeRoom').addEventListener('click', async () => {
 });
 
 function renderReview() {
-  $('#reviewSection').hidden = room.history.length === 0;
+  $('#reviewSection').hidden = room.phase !== 'finished' || room.history.length === 0;
+  if (matchInProgress(room.phase)) return;
   if (reviewLength === room.history.length) return;
   reviewLength = room.history.length;
   $('#reviewList').innerHTML = room.history.map(q => `<article class="review-card"><span class="review-number">${q.index}</span><div><span class="tag">${esc(q.category)}</span><h3>${esc(q.question)}</h3><p class="review-correct">✓ ${esc(q.correct)}</p><p class="muted">${esc(q.explanation)}</p>${!room.you.spectator ? `<button class="text-button" data-chat="${q.index}">Kérdezek erről a kvízmestertől ↗</button>` : ''}</div></article>`).join('');
@@ -224,6 +248,7 @@ function renderReview() {
 }
 $('#reviewList').addEventListener('click', event => { const button = event.target.closest('[data-chat]'); if (button) openChat(Number(button.dataset.chat)); });
 function openChat(index) {
+  if (room.phase !== 'finished') { toast('A Kvízmester a meccs végén lesz elérhető.'); return; }
   selectedQuestionIndex = index; $('#chatQuestion').value = index;
   renderChat(); if (!$('#chatDialog').open) $('#chatDialog').showModal(); $('#chatInput').focus();
 }
@@ -237,7 +262,8 @@ function renderChat() {
 $('#chatQuestion').addEventListener('change', event => { selectedQuestionIndex = Number(event.target.value); renderChat(); });
 $('#closeChat').addEventListener('click', () => $('#chatDialog').close());
 $('#chatForm').addEventListener('submit', async event => {
-  event.preventDefault(); const message = $('#chatInput').value.trim(); if (!message) return;
+  event.preventDefault(); if (room.phase !== 'finished') return;
+  const message = $('#chatInput').value.trim(); if (!message) return;
   const index = selectedQuestionIndex; const messages = chats.get(index) || [];
   const gameId = room.gameId;
   const history = messages.slice(-4).map(({ role, content }) => ({ role, content }));
@@ -245,11 +271,11 @@ $('#chatForm').addEventListener('submit', async event => {
   $('#chatSend').disabled = true; $('#chatInput').disabled = true; $('#chatSend').textContent = 'Gondolkodik…';
   try {
     const result = await api(`/api/rooms/${roomId}/chat`, { method: 'POST', token: session.token, body: { index, message, history } });
-    if (room.gameId !== gameId) return;
+    if (room.gameId !== gameId || matchInProgress(room.phase)) return;
     messages.push({ role: 'assistant', content: result.answer, source: result.source });
     if (result.warning) toast(result.warning);
-  } catch (error) { messages.push({ role: 'assistant', content: error.message, source: 'bank' }); }
-  finally { $('#chatSend').disabled = false; $('#chatInput').disabled = false; $('#chatSend').textContent = 'Kérdezek ↗'; renderChat(); }
+  } catch (error) { if (room.gameId === gameId && !matchInProgress(room.phase)) messages.push({ role: 'assistant', content: error.message, source: 'bank' }); }
+  finally { $('#chatSend').disabled = false; $('#chatInput').disabled = false; $('#chatSend').textContent = 'Kérdezek ↗'; if (room.phase === 'finished') renderChat(); }
 });
 
 async function initialize() {
@@ -259,6 +285,7 @@ async function initialize() {
     meta = await api('/api/meta');
     if (!spectator) render(await api(`/api/rooms/${roomId}/session`, { token: session.token }));
     connect();
+    if (room?.you.host && !room.pack && !room.preparing && !room.prepareError && room.ai.configured) $('#settingsForm').requestSubmit();
   } catch (error) { connection('Nem sikerült kapcsolódni'); if (error.status === 401) forgetSession(roomId); showError(error.message, error.status === 401); }
 }
 initialize();

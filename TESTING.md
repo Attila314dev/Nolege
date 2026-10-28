@@ -1,45 +1,56 @@
-# Nolege 2.0 – ellenőrzési jegyzőkönyv
+# Nolege 2.1 — tesztjegyzőkönyv
 
-Ellenőrzés: 2026. október 27. Az éles alkalmazás címe: https://nolege-party-attila314dev.onrender.com/.
+Ellenőrzés: 2026. október 28., Node.js 24.22.1.
 
-Az éles, ellenőrzött alkalmazáskód: `5c7fc519f22062d0e9b99fd7aa3649cf6c666953`.
-A jegyzőkönyvet tartalmazó következő commit csak tesztet és dokumentációt módosít.
+## Automata tesztek
 
-## Automatizált ellenőrzések
+- `npm test`: **52 sikeres teszt, 0 hiba** a beágyazott esetekkel együtt.
+- `npm audit --omit=dev`: **0 ismert sérülékenység**.
+- `render.yaml`: érvényes a Render aktuális JSON-sémája szerint.
+- `git diff --check`: sikeres.
 
-- `npm test`: **32 sikeres teszt, 0 hiba**, a beágyazott tesztesetekkel együtt.
-- `npm audit --omit=dev --audit-level=high`: **0 sérülékenység**.
-- A JavaScript-fájlok szintaktikai ellenőrzése és a `git diff --check` sikeres.
-- Valódi helyi HTTP- és WebSocket-kapcsolatokkal ellenőrizve: meghívó és jelszó, házigazdajogok, kész jelzés, minden helyes válasz pontozása, ismételt válaszok kizárása, frissítés és visszacsatlakozás, nézői szinkron, új forduló, szobabezárás, kérdésszám, témaszűrés és csomagimport.
-- Külön teszt ellenőrzi, hogy két böngészőlap játékosazonossága frissítés után is külön marad.
-- Az AI kérés- és válaszfolyama tesztszolgáltatóval ellenőrizve: strukturált kérdéscsomag, előzetes jóváhagyás, beszélgetés, hibás adatok, hiányzó kulcs, hitelesítési hiba, kvóta és időtúllépés. A tesztadatok nem kerülnek az éles működésbe.
+A tesztek ellenőrzik a meghívós belépést, jogosultságokat, kész jelzést, pontozást, újracsatlakozást, néző módot és az importált kérdéscsomagokat is.
 
-## Éles, kétjátékos próba
+Az új ellenőrzések lefedik:
 
-2026-10-27 17:41–17:42 UTC között három kérdéses játék futott le két külön játékos HTTP- és WebSocket-kapcsolatával.
+- A Kvízmester tiltását a teljes meccs alatt, az eredményszünetekben és korábbi kérdésre hivatkozva is. A tiltott kérés nem jut el az AI-szolgáltatóhoz.
+- Az automatikus fókusznézetet, a kijelző ébren tartásának felszabadítását és a hiányzó vagy tiltott mobilos API-k melletti működést.
+- Az AI-állapotot valódi szolgáltatói válasz szimulálásával: a kulcs és a HTTP 200 válasz még nem jelent sikert; a teljes kérdéssornak is érvényesnek kell lennie. Az utolsó hívás időpontja és a tényleges modell neve elérhető, a kulcs nem kerül a válaszba.
+- A kezdeti 100 kérdéses készletet API-hívás nélkül; az ismétlésmentes kiosztást és az egyetlen közös háttérfeltöltést legfeljebb 20 kérdéses adaggal.
+- A kvóta utáni várakozást, napi háttérfeltöltési korlátot, duplikált kérdések kizárását és a játszható tartalék bankot.
+- A készlet, kiosztási előzmény és napi számláló visszaállítását egy új alkalmazáspéldányban. Sikertelen olvasás után a rendszer nem írja felül az ismeretlen távoli állapotot.
+- Az egyedi, 20 kérdéses tematikus csomagot, amely nem kerül az általános készletbe. Hibája megőrzi az előző csomagot, és nem vált észrevétlenül általános kvízre.
+- A hiányzó nehézségi szinthez szükség esetén külön AI-csomag készítését.
 
-| Ellenőrzés | Eredmény |
+## Böngészős próba
+
+A `tools/browser_smoke.mjs` valódi Chromium böngészővel **hat képernyőméreten** végigjátszott három kérdést:
+
+| Méret | Eredmény |
 | --- | --- |
-| Alkalmazás és bank | 2.0.0, 140 érvényes kérdés |
-| QR-kód | Független QR-olvasóval visszafejtve; pontosan a meghívólinkre mutat |
-| Kérdéscsomag | Letöltés és visszatöltés az éles API-n sikeres |
-| Három kérdés | Mindkét játékos mindhárom helyes válaszára kapott pontot |
-| Végső eredmény | 594 és 588 pont; a különbséget a gyorsasági bónusz adta |
-| Kérdéssegéd | Kulcs nélkül a bankból válaszolt, ezt egyértelműen jelölte |
-| Tesztszoba | A próba után eltávolítva |
+| 375 × 667 | sikeres |
+| 390 × 844 | sikeres |
+| 412 × 915 | sikeres |
+| 768 × 1024 | sikeres |
+| 844 × 390 | sikeres |
+| 1365 × 900 | sikeres |
 
-## Böngészőben ellenőrzött felület
+Minden méreten ellenőrizve: nincs vízszintes túlcsordulás; legalább 44 px magas válaszgombok; rejtett oldalsáv és chat meccs alatt; megmaradó fókusz az eredményszünetben; működő magyarázat és chat a meccs után. A legkisebb nézetben az oldalfrissítés utáni visszatérés is sikeres. Böngészős JavaScript-hiba nem történt.
 
-Sikeres: kezdőlap, szobalétrehozás, QR megjelenítés, meghívó másolása, csatlakozás becenévvel, kész jelzés, házigazda frissítése külön vendéglap mellett, kérdéscsomag előnézete és szerkesztése, mentés, letöltés.
+Mobilképernyő: `docs/nolege-v2.1-mobile-focus.png`.
 
-A fájlválasztón keresztüli visszatöltési próba a böngésző automatizálásában elakadt, ezért erre nincs sikeres böngészős ellenőrzés. A szerver importútvonala az automatizált teszteken és az éles API-próbán is sikeres volt.
+Újrafuttatás:
 
-![Az elkészült kezdőlap az éles szolgáltatáson](docs/nolege-v2-home.jpg)
+```bash
+npm ci
+npx playwright install chromium
+npm run test:browser
+```
 
-## Az AI éles bekapcsolása
+Meglévő Chromiumhoz a `CHROMIUM_EXECUTABLE` változó adható meg. Ebben a környezetben a Playwright CDN letöltése hibás archívumokat adott; a sikeres próba az npm-ről származó Chromium 153 binárissal futott. A mobilméret-emuláció és a kompatibilitási tesztek nem helyettesítik a fizikai Android/Safari/iOS készülékpróbát.
 
-Az ellenőrzéskor nem volt beállítva valódi szolgáltatói API-kulcs (`aiConfigured: false`). A valódi Groq-szolgáltatóval végzett generálás és beszélgetés még nincs ellenőrizve.
+## Éles környezet
 
-A Render szolgáltatás **Environment** beállításában add meg a `GROQ_API_KEY` változót, majd válaszd a **Save, rebuild, and deploy** műveletet. A teljes beállítást és az opcionális második szolgáltatót a [readme.md](readme.md) írja le.
+A kiadás utáni élő ellenőrzés eredménye itt kerül rögzítésre. A fenti AI-tesztek szimulált szolgáltatót használnak; nem fogyasztanak éles API-kvótát.
 
-Kulcs nélkül a 140 kérdéses bank, a kézi szerkesztés, a csomagok mentése és visszatöltése, valamint a bankból dolgozó kérdéssegéd használható. A felület megkülönbözteti a bankból és az AI-tól érkező tartalmat.
+A külön Free Key Value megőrzi a készletet a webalkalmazás újraindításakor. Magának az ingyenes adattárnak az újraindításakor a tartalma elveszhet; a következő alkalmazásindítás ilyenkor a beépített bankból indul újra.

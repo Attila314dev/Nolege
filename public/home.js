@@ -1,18 +1,27 @@
-import { $, api, esc, getSession, saveSession, savedNick, settingsFrom, settingsHTML, toast } from './common.js';
+import { $, api, esc, getSession, saveSession, savedNick, settingsFrom, settingsHTML, suggestTopicCount, toast } from './common.js';
+import { renderAIStatus } from './ai-status.js';
 
 let meta = { topics: [], ai: { configured: false } };
 const invitedRoom = location.pathname.match(/^\/join\/([a-z0-9]+)$/i)?.[1]?.toLowerCase();
 const invite = new URLSearchParams(location.search).get('invite') || '';
 $('#hostNick').value = savedNick(); $('#guestNick').value = savedNick();
 $('#createSettings').innerHTML = settingsHTML();
+suggestTopicCount($('#createForm'));
+
+async function refreshStatus() {
+  if (document.hidden) return;
+  try { meta = await api('/api/meta'); renderAIStatus($('#homeAIStatus'), meta.ai, meta.pool); }
+  catch { $('#homeAIStatus').textContent = 'Az állapotot most nem tudjuk frissíteni.'; }
+}
 
 async function initialize() {
   try {
     meta = await api('/api/meta');
     $('#createSettings').innerHTML = settingsHTML({}, meta.topics);
     $('#bankCount').textContent = `${meta.bankCount} mentett kérdés`;
+    renderAIStatus($('#homeAIStatus'), meta.ai, meta.pool);
     $('#aiNote').textContent = meta.ai.configured
-      ? 'Az AI egyéni témákból is összeállít kérdéssort. A mentett csomagokból azonnal játszhattok.'
+      ? 'Az általános kvíz az előkészített készletből indul. Egyedi témához külön AI-kérdéssor készül.'
       : 'Általános, tematikus és Harry Potter-kvíz is játszható a mentett bankból. Az AI-kulcs később kapcsolja be az egyéni kérdésgenerálást.';
   } catch (error) { toast(error.message, true); }
   if (invitedRoom) {
@@ -87,4 +96,5 @@ $('#roomList').addEventListener('click', async event => {
 });
 $('#refreshRooms').addEventListener('click', loadRooms);
 setInterval(loadRooms, 8000);
+setInterval(refreshStatus, 15_000);
 initialize();

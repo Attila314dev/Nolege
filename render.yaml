@@ -12,3 +12,15 @@ services:
     envVars:
       - key: NODE_VERSION
         value: "24.22.1"
+      - key: REDIS_URL
+        fromService:
+          name: nolege-question-pool
+          type: keyvalue
+          property: connectionString
+  - type: keyvalue
+    name: nolege-question-pool
+    plan: free
+    region: frankfurt
+    maxmemoryPolicy: noeviction
+    persistenceMode: "off"
+    ipAllowList: []
