@@ -1,0 +1,50 @@
+Ki festette a Csillagos éj című képet?|Vincent van Gogh|A Csillagos éj Vincent van Gogh 1889-es festménye.|artist
+Ki festette A sikoly legismertebb változatait?|Edvard Munch|A sikoly Edvard Munch művészetének ismert motívuma.|artist
+Ki festette Az emlékezet állandósága című képet az olvadó órákkal?|Salvador Dalí|Az olvadó órák Salvador Dalí szürrealista festményén jelennek meg.|artist
+Ki festette a Leány gyöngy fülbevalóval című képet?|Johannes Vermeer|A festmény Johannes Vermeer műve.|artist
+Ki festette a Vénusz születése című reneszánsz képet?|Sandro Botticelli|A Vénusz születése Botticelli festménye.|artist
+Ki alkotta a Sixtus-kápolna mennyezetfreskóit?|Michelangelo|A mennyezet képeit Michelangelo festette a 16. század elején.|artist
+Ki készítette a Gondolkodó című szobrot?|Auguste Rodin|A Gondolkodó Auguste Rodin szobra.|artist
+Ki festette az Éjjeli őrjáratot?|Rembrandt|Az Éjjeli őrjárat Rembrandt festménye.|artist
+Ki alkotta A nagy hullám Kanagavánál című fametszetet?|Kacusika Hokuszai|A híres japán fametszet Hokuszai alkotása.|artist
+Melyik festő híres a tündérrózsákat ábrázoló képsorozatáról?|Claude Monet|Monet sok képen örökítette meg giverny-i kertjének tündérrózsáit.|artist
+Melyik városban található az Uffizi képtár?|Firenze|Az Uffizi Firenze egyik legismertebb múzeuma.|city
+Melyik városban található a Prado múzeum?|Madrid|A Museo del Prado Madridban található.|city
+Melyik városban található a Rijksmuseum?|Amszterdam|A Rijksmuseum Amszterdam jelentős múzeuma.|city
+Melyik városban áll a Sagrada Família?|Barcelona|A Sagrada Família Barcelona ismert bazilikája.|city
+Ki tervezte a Sagrada Família legismertebb építészeti koncepcióját?|Antoni Gaudí|Gaudí munkásságának központi alkotása a Sagrada Família.|artist
+Melyik városban áll az Eiffel-torony?|Párizs|Az Eiffel-torony Párizs jelképe.|city
+Melyik országban található a pisai ferde torony?|Olaszország|Pisa és híres harangtornya Olaszországban található.|country
+Melyik városban áll a Colosseum?|Róma|A Colosseum az ókori Róma amfiteátruma.|city
+Melyik országban található a Tádzs Mahal?|India|A Tádzs Mahal az indiai Ágrában áll.|country
+Melyik városban található a Parthenón?|Athén|A Parthenón az athéni Akropolisz egyik temploma.|city
+Melyik irányzathoz kapcsolódik legerősebben Claude Monet neve?|Impresszionizmus|Monet az impresszionizmus meghatározó festője.|art-style
+Melyik művészeti irányzathoz kapcsolódik Salvador Dalí?|Szürrealizmus|Dalí a szürrealizmus legismertebb alkotói közé tartozik.|art-style
+Melyik irányzat kialakításában játszott fontos szerepet Picasso és Braque?|Kubizmus|Picasso és Braque a kubizmus úttörői voltak.|art-style
+Melyik stílusra jellemző a csúcsív és a támpillér?|Gótika|A gótikus építészet fontos elemei a csúcsívek és a támpillérek.|art-style
+Melyik középkori építészeti stílus jellegzetessége a vaskos fal és a félkörív?|Romanika|A román stílusú építészetre vastag falak és félköríves nyílások jellemzők.|art-style
+Mi a freskó hagyományos festési alapja?|Nedves vakolat|A valódi freskó festékét még nedves vakolatra viszik fel.|art-material|Száraz vászon~Üveglap~Fémlemez
+Miből áll össze a mozaik képe?|Apró színes darabokból|A mozaikot kő-, üveg- vagy más apró darabokból rakják ki.|art-definition|Egyetlen kifaragott tömbből~Fényképezőgép filmjéből~Csak ceruzavonalakból
+Melyik technika használ hagyományosan vízzel hígított, áttetsző festéket papíron?|Akvarell|Az akvarell vízzel hígítható festékkel készül, rendszerint papíron.|art-technique|Bronzöntés~Fametszet~Kőfaragás
+Melyik műfaj ábrázol jellemzően elrendezett tárgyakat, gyümölcsöket vagy virágokat?|Csendélet|A csendélet élettelen tárgyak vagy növények elrendezett látványa.|art-genre|Történelmi csatakép~Önarckép~Tájkép
+Melyik műfajban ábrázolja a művész saját magát?|Önarckép|Az önarckép alkotója saját személyét jeleníti meg.|art-genre|Csendélet~Tájkép~Állatkép
+Melyik magyar festő alkotása a Rőzsehordó nő?|Munkácsy Mihály|A Rőzsehordó nő Munkácsy Mihály festménye.|artist
+Ki festette a Magányos cédrust?|Csontváry Kosztka Tivadar|A Magányos cédrus Csontváry ismert alkotása.|artist
+Melyik magyar festő alkotása a Majális?|Szinyei Merse Pál|A Majális Szinyei Merse Pál 1873-as festménye.|artist
+Ki tervezte a budapesti Iparművészeti Múzeum épületét Pártos Gyulával együtt?|Lechner Ödön|Az épület tervezői Lechner Ödön és Pártos Gyula voltak.|artist
+Ki tervezte a budapesti Országházat?|Steindl Imre|A magyar Országház Steindl Imre tervei alapján épült.|artist
+Melyik irányzathoz kötődik a Bauhaus iskola?|Modernizmus|A Bauhaus a modern építészet és formatervezés fontos iskolája volt.|art-style
+Melyik országban alapították a Bauhaus iskolát 1919-ben?|Németország|A Bauhaus Walter Gropius vezetésével Weimarban indult.|country
+Melyik művész készítette a Campbell-leveskonzerveket ábrázoló pop-art képeket?|Andy Warhol|A Campbell-leveskonzervek Andy Warhol ismert képsorozata.|artist
+Melyik mexikói festőnő híres személyes önarcképeiről?|Frida Kahlo|Frida Kahlo életművében kiemelt helyük van az önarcképeknek.|artist
+Ki festette A csók című aranyszínű bécsi szecessziós képet?|Gustav Klimt|A csók Gustav Klimt festménye.|artist
+Melyik városban áll az Antoni Gaudí tervezte Casa Batlló?|Barcelona|A Casa Batlló Barcelona egyik ismert Gaudí-épülete.|city
+Melyik építész tervezte a Vízesésházat, más néven Fallingwatert?|Frank Lloyd Wright|A pennsylvaniai Vízesésház Frank Lloyd Wright terve.|artist
+Melyik görög szoborábrázolás jellegzetes témája egy diszkoszt elhajítani készülő atléta?|Diszkobolosz|A Diszkobolosz diszkoszvetőt ábrázol.|sculpture|Milói Vénusz~Laokoón-csoport~Szamothrakéi Niké
+Milyen anyagból faragta Michelangelo a firenzei Dávid-szobrot?|Márvány|Michelangelo Dávidja márványszobor.|art-material|Bronz~Fa~Agyag
+Melyik múzeumban őrzik a Milói Vénuszt?|Louvre|A Milói Vénusz a párizsi Louvre gyűjteményében található.|museum|Prado~Uffizi~Rijksmuseum
+Melyik városban található a bilbaói Guggenheim Múzeum?|Bilbao|A Frank Gehry tervezte Guggenheim Múzeum Bilbaóban áll.|city
+Melyik festő nevéhez kötődik a pointillista Vasárnap délután Grande Jatte szigetén?|Georges Seurat|Seurat apró színpontokból építette fel e festmény látványát.|artist
+Melyik országból származott Edvard Munch?|Norvégia|Edvard Munch norvég festő volt.|country
+Melyik holland festő vágta le saját füle egy részét?|Vincent van Gogh|Az eset Van Gogh arles-i életének ismert eseménye.|artist
+Melyik művész festménye az Athéni iskola?|Raffaello|Az Athéni iskola Raffaello vatikáni freskója.|artist

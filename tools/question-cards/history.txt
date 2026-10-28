@@ -1,0 +1,50 @@
+Melyik évben érte el Kolumbusz Kristóf első útján Amerikát?|1492|Kolumbusz első amerikai útja 1492-ben történt.|year
+Melyik évben kezdődött a francia forradalom?|1789|A Bastille ostroma és a forradalom kezdete 1789-hez kötődik.|year
+Melyik évben tört ki az első világháború?|1914|Az első világháború 1914 nyarán kezdődött.|year
+Melyik évben ért véget az első világháború?|1918|Az első világháború fegyverszünetei 1918-ban zárták le a harcokat.|year
+Melyik évben kezdődött a második világháború Európában?|1939|Lengyelország német megtámadása 1939 szeptemberében indította a háborút.|year
+Melyik római hadvezért gyilkolták meg Kr. e. 44 márciusának idusán?|Julius Caesar|Julius Caesart Kr. e. 44. március 15-én ölték meg.|history-person
+Kit tekintenek az első római császárnak?|Augustus|Augustus uralma alapozta meg a római császárságot.|history-person
+Milyen írásrendszer ismert az ókori egyiptomi emlékekről?|Hieroglif írás|Az egyiptomi hieroglifák képszerű írásjelekből állnak.|writing|Ékírás~Cirill írás~Latin ábécé
+Melyik nyelv volt az ókori Róma egyik alapvető hivatalos nyelve?|Latin|A latin a római állam és jog meghatározó nyelve volt.|language|Óegyiptomi~Óskandináv~Szanszkrit
+Melyik városállammal vívta Róma a pun háborúkat?|Karthágó|A pun háborúk Róma és Karthágó között zajlottak.|ancient-city|Athén~Spárta~Alexandria
+Melyik szorosnál harcolt Leónidasz a perzsák ellen Kr. e. 480-ban?|Thermopülai|Leónidasz spártai király Thermopülainál vezette a görög védőket.|battle-place|Waterloo~Hastings~Actium
+Melyik mai ország területéről erednek az ókori olimpiai játékok?|Görögország|Az ókori játékokat a görögországi Olümpiában tartották.|country
+Melyik ország történelmi védműve a Nagy Fal?|Kína|A kínai Nagy Fal különböző korokban épült védműveket foglal magába.|country
+Kinek a nevéhez kötik az európai mozgatható fémbetűs könyvnyomtatás elterjedését?|Johannes Gutenberg|Gutenberg nyomdászati munkája a 15. század közepén vált meghatározóvá.|history-person
+Melyik évhez kötik Luther Márton 95 tételének megjelenését?|1517|Luther tételei 1517-ben kerültek a reformáció középpontjába.|year
+Melyik évben adták ki Angliában a Magna Cartát?|1215|A Magna Carta 1215-ben született meg.|year
+Melyik évben szenvedett Napóleon vereséget Waterloonál?|1815|A waterlooi csatát 1815 júniusában vívták.|year
+Melyik mai országban található Waterloo?|Belgium|Waterloo Belgium területén, Brüsszel közelében található.|country
+Milyen épület volt a francia forradalom jelképes helyszíne, a Bastille?|Börtönerőd|A Bastille párizsi erőd és állami börtön volt.|building-kind|Egyetem~Kikötő~Katedrális
+Melyik mai ország városaiban bontakozott ki először a reneszánsz?|Olaszország|A reneszánsz korai központjai az itáliai városállamok voltak.|country
+Melyik térségben kezdődött az ipari forradalom a 18. században?|Nagy-Britannia|Az ipari forradalom elsőként Nagy-Britanniában bontakozott ki.|country
+Ki korszerűsítette jelentősen a gőzgépet a 18. században?|James Watt|Watt külön kondenzátora javította a gőzgép hatásfokát.|history-person
+Melyik évben fogadták el az amerikai Függetlenségi nyilatkozatot?|1776|A nyilatkozatot 1776. július 4-én fogadták el.|year
+Ki volt az Amerikai Egyesült Államok első elnöke?|George Washington|George Washington volt az első amerikai elnök.|history-person
+Melyik időszakban zajlott az amerikai polgárháború?|1861–1865|Az északi és déli államok polgárháborúja 1861-től 1865-ig tartott.|year-range|1848–1852~1870–1874~1901–1905
+Melyik amerikai elnökhöz kapcsolódik az 1863-as Emancipációs kiáltvány?|Abraham Lincoln|Lincoln elnök kiáltványa 1863-ban lépett hatályba.|history-person
+Melyik évben zajlott az oroszországi februári és októberi forradalom?|1917|Mindkét orosz forradalom 1917 eseménye volt.|year
+Melyik évben alakult meg a Szovjetunió?|1922|A Szovjetuniót 1922 decemberében hozták létre.|year
+Melyik évben alapították az Egyesült Nemzetek Szervezetét?|1945|Az ENSZ alapokmánya 1945-ben lépett hatályba.|year
+Melyik évben alapították a NATO-t?|1949|Az Észak-atlanti Szerződést 1949 áprilisában írták alá.|year
+Melyik két nagyhatalom szembenállása határozta meg a hidegháborút?|Amerikai Egyesült Államok és Szovjetunió|A hidegháború két fő hatalmi központja az USA és a Szovjetunió volt.|country-pair|Franciaország és Spanyolország~Japán és Brazília~Kanada és Ausztrália
+Melyik város ellátását biztosította az 1948–1949-es légihíd?|Berlin|A légihíd a blokád alá vont Nyugat-Berlin ellátását szolgálta.|city
+Melyik évben indították el a Szputnyik–1 műholdat?|1957|A Szputnyik–1 1957-ben lett az első mesterséges földhold.|year
+Ki volt az első ember a világűrben?|Jurij Gagarin|Gagarin 1961-ben a Vosztok–1 fedélzetén jutott az űrbe.|history-person
+Melyik évben történt az első emberes holdra szállás?|1969|Az Apollo–11 1969 júliusában szállt le a Holdra.|year
+Melyik Apollo-küldetés vitte először a Hold felszínére az embert?|Apollo–11|Az Apollo–11 legénységéből Armstrong és Aldrin lépett a Holdra.|space-mission|Apollo–8~Apollo–13~Apollo–17
+Ki lépett elsőként a Hold felszínére?|Neil Armstrong|Neil Armstrong volt az első holdfelszínre lépő ember.|history-person
+Melyik évben történt a csernobili atomerőmű-baleset?|1986|A csernobili katasztrófa 1986 áprilisában következett be.|year
+Melyik város volt a Bizánci Birodalom fővárosa?|Konstantinápoly|Konstantinápoly volt a kelet-római, majd bizánci állam központja.|city|Róma~Athén~Alexandria
+Mi Konstantinápoly mai neve?|Isztambul|A történelmi Konstantinápoly a mai Isztambul.|city|Ankara~Athén~Izmir
+Melyik évhez kötik hagyományosan a Nyugatrómai Birodalom bukását?|476|Romulus Augustulus trónfosztása 476-ban történt.|year
+Melyik évben foglalták el az oszmánok Konstantinápolyt?|1453|II. Mehmed serege 1453-ban foglalta el a várost.|year
+Melyik évben zajlott a hastingsi csata?|1066|A hastingsi csatát 1066 októberében vívták.|year
+Melyik két ország között zajlott alapvetően a százéves háború?|Anglia és Franciaország|A háborúsorozat központi ellenfelei Anglia és Franciaország voltak.|country-pair|Spanyolország és Portugália~Franciaország és Olaszország~Anglia és Svédország
+Melyik évben írták alá az első világháborút lezáró versailles-i békét Németországgal?|1919|A versailles-i békeszerződést 1919 júniusában írták alá.|year
+Melyik évben koronázták Napóleont a franciák császárává?|1804|Napóleon császárrá koronázására 1804-ben került sor.|year
+Melyik egyiptomi uralkodónő volt Julius Caesar és Marcus Antonius kortársa?|VII. Kleopátra|VII. Kleopátra Egyiptom utolsó Ptolemaiosz-házi uralkodója volt.|history-person
+Melyik itáliai városhoz kötődik leginkább a Medici család felemelkedése?|Firenze|A Medici család Firenze gazdasági és politikai életében vált meghatározóvá.|city
+Melyik dinasztia tagja volt VIII. Henrik angol király?|Tudor-ház|VIII. Henrik a Tudor-dinasztia uralkodója volt.|dynasty|Stuart-ház~Bourbon-ház~Habsburg-ház
+Melyik ókori állam királya volt Hammurapi?|Óbabiloni Birodalom|Hammurapi Babilon uralkodójaként vált ismertté.|empire|Római Birodalom~Bizánci Birodalom~Azték Birodalom

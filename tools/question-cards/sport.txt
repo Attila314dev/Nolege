@@ -1,0 +1,50 @@
+Hány játékos lehet egyszerre a pályán egy kosárlabdacsapatból a szokásos nagypályás játékban?|5|A hagyományos kosárlabdában csapatonként öt játékos van a pályán.|number
+Hány játékos alkot egy röplabdacsapatot a pályán a teremröplabdában?|6|Teremröplabdában csapatonként hat játékos tartózkodik a pályán.|number
+Hány játékos van egyszerre egy kézilabdacsapatból a pályán, a kapust is számolva?|7|A kézilabdában hat mezőnyjátékos és egy kapus a szokásos felállás.|number
+Melyik sportágban használják az ütővel játszott tollaslabdát?|Tollaslabda|A sportág jellegzetes eszköze a tollaslabda.|sport
+Melyik sportágban szerepel a küzdelemben ippon?|Cselgáncs|Az ippon a cselgáncsban teljes értékű győzelmet jelenthet.|sport
+Melyik sportágban használják a tőr, párbajtőr és kard fegyvernemeket?|Vívás|A sportvívás három fegyverneme a tőr, a párbajtőr és a kard.|sport
+Melyik sportágban játszanak koronggal a jégen?|Jégkorong|A jégkorong jellegzetes játékeszköze a korong.|sport
+Melyik sportágban része a felszerelésnek a kesztyű, a bázis és az ütő?|Baseball|A baseball pályáján bázisok találhatók, a játékhoz ütőt és kesztyűt is használnak.|sport
+Melyik sportágban jelöli a birdie a parnál eggyel jobb eredményt?|Golf|A birdie egy ütéssel a par alatti eredmény.|sport
+Melyik sportágban használják a strike kifejezést mind a tíz bábu ledöntésére?|Bowling|A bowlingban strike a tíz bábu első gurításból történő ledöntése.|sport
+Hány bábu áll fel a szokásos tenpin bowlingban egy sorozat elején?|10|A tenpin bowling tíz bábuval játszható.|number
+Melyik sportágban szerepel a lólengés és a nyújtó?|Torna|Mindkettő férfi szertornaszám.|sport
+Melyik sportág versenyszáma a 100 méteres pillangó?|Úszás|A pillangó az úszás egyik versenyúszásneme.|sport
+Melyik sportágban ismert a Tour de France?|Kerékpársport|A Tour de France országúti kerékpárverseny.|sport
+Melyik sportágban használják a scrum, magyarul tolongás kifejezést?|Rögbi|A tolongás a rögbi egyik jellegzetes játékeleme.|sport
+Melyik sportágban használják a touchdown kifejezést?|Amerikai futball|A touchdown az amerikai futball egyik pontszerzési formája.|sport
+Melyik sportágban számít a sakk-matt a parti közvetlen befejezésének?|Sakk|A mattolt játékos királya nem tudja elkerülni az ütést.|sport
+Melyik sakkfigura lép átlósan tetszőleges számú szabad mezőt?|futó|A futó átlós irányban mozog.|chesspiece
+Melyik sakkfigura léphet át más figurák fölött?|huszár|A huszár jellegzetes L alakú lépésével átugorhat más figurákat.|chesspiece
+Melyik sakkfigura lép egyszerre egy mezőt bármely irányba normál lépésnél?|király|A király normál lépése egy szomszédos mezőre vezet.|chesspiece
+Melyik ország városában rendezik a wimbledoni teniszbajnokságot?|Egyesült Királyság|Wimbledon Londonban található.|country
+Melyik városban rendezik a Roland Garros teniszbajnokságot?|Párizs|A Roland Garros Párizsban zajlik.|city
+Melyik városban rendezik hagyományosan az Australian Opent?|Melbourne|Az Australian Open helyszíne Melbourne.|city
+Milyen borításon játsszák a Roland Garros mérkőzéseit?|Salak|A Roland Garros jellegzetes borítása a vörös salak.|tennis-surface|Fű~Kemény pálya~Fa parketta
+Milyen borításon játsszák Wimbledon mérkőzéseit?|Fű|Wimbledon a füves pályáiról ismert.|tennis-surface|Salak~Kemény pálya~Fa parketta
+Melyik színű trikót viseli a Tour de France összetett versenyének éllovasa?|sárga|Az összetett éllovas sárga trikót visel.|colour
+Hány karika szerepel az olimpiai jelképen?|5|Az olimpiai jelkép öt összefonódó karikából áll.|number
+Melyik évben rendezték a londoni nyári olimpiát a 21. században?|2012|London 2012-ben rendezett nyári olimpiai játékokat.|year
+Melyik évben rendezték a riói nyári olimpiát?|2016|Rio de Janeiro a 2016-os nyári olimpia házigazdája volt.|year
+Melyik város rendezte a 2000-es nyári olimpiát?|Sydney|A 2000-es nyári olimpiát Sydneyben tartották.|city
+Melyik város rendezte a 2008-as nyári olimpiát?|Peking|A 2008-as játékok házigazdája Peking volt.|city
+Melyik ország nyerte a 2014-es férfi labdarúgó-világbajnokságot?|Németország|Németország a döntőben Argentínát győzte le.|country
+Melyik ország nyerte a 2018-as férfi labdarúgó-világbajnokságot?|Franciaország|Franciaország Horvátország ellen nyerte a döntőt.|country
+Melyik ország nyerte a 2022-es férfi labdarúgó-világbajnokságot?|Argentína|Argentína a Franciaország elleni döntő után lett világbajnok.|country
+Melyik országban rendezték a 2010-es férfi labdarúgó-világbajnokságot?|Dél-afrikai Köztársaság|A 2010-es torna házigazdája Dél-Afrika volt.|country
+Melyik város futballklubja az FC Barcelona?|Barcelona|Az FC Barcelona Barcelona városához kötődik.|city
+Melyik város futballklubja a Manchester United?|Manchester|A Manchester United angol labdarúgóklub.|city
+Melyik országból származik Roger Federer?|Svájc|Roger Federer svájci teniszező.|country
+Melyik országból származik Rafael Nadal?|Spanyolország|Rafael Nadal spanyol teniszező.|country
+Melyik országot képviselte Usain Bolt az olimpiákon?|Jamaica|Usain Bolt jamaicai rövidtávfutó.|country
+Melyik sportágban lett ismert Michael Phelps?|Úszás|Michael Phelps olimpiai érmeit úszásban szerezte.|sport
+Melyik sportág legendája Michael Jordan?|Kosárlabda|Michael Jordan a kosárlabda történetének ismert alakja.|sport
+Melyik sportágban lett világhírű Muhammad Ali?|Ökölvívás|Muhammad Ali nehézsúlyú ökölvívó volt.|sport
+Melyik sportágban versenyzett Ayrton Senna?|Autósport|Ayrton Senna Formula–1-es autóversenyző volt.|sport
+Melyik sportág magyar olimpiai bajnoka Egerszegi Krisztina?|Úszás|Egerszegi Krisztina úszásban nyert olimpiai aranyérmeket.|sport
+Melyik sportág magyar olimpiai bajnoka Szilágyi Áron?|Vívás|Szilágyi Áron kardvívó olimpiai bajnok.|sport
+Hány méter egy szabványos szabadtéri atlétikai futópálya belső köre?|400|A szokásos szabadtéri atlétikai pálya egy köre 400 méter.|number
+Mekkora a maratoni futás hivatalos távja kilométerben?|42,195|A maratoni futás szabványos távja 42 195 méter.|distance|40,000~41,500~43,200
+Hány versenyszámból áll a tízpróba?|10|A tízpróba tíz atlétikai versenyszám összesítése.|number
+Hány versenyszámból áll a hétpróba?|7|A hétpróbában hét versenyszám eredményét összesítik.|number

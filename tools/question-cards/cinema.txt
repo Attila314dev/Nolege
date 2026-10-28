@@ -1,0 +1,50 @@
+Melyik animációs film főszereplője Simba?|Az oroszlánkirály|Simba Az oroszlánkirály főszereplője.|film-title
+Melyik filmben szerepel Shrek és Szamár?|Shrek|A zöld ogre és társa a Shrek szereplői.|film-title
+Melyik animációs filmben keresik Némót?|Némó nyomában|A Némó nyomában története a kis bohóchal keresése.|film-title
+Melyik filmben énekel Elsa a Let It Go dallamára?|Jégvarázs|Elsa a Jégvarázs egyik főszereplője.|film-title
+Melyik animációs filmben lesz Remy patkányból szakácssegéd Párizsban?|L'ecsó|Remy a L'ecsó című Pixar-film főhőse.|film-title
+Melyik film főszereplője a szeméttömörítő robot és EVE?|WALL·E|A WALL·E két központi robotfigurája WALL·E és EVE.|film-title
+Melyik filmben találkozik Carl és Russell egy léggömbökkel repülő házban?|Fel!|Carl és Russell a Fel! című animációs film szereplői.|film-title
+Melyik animációs filmben küzd Po, a panda?|Kung Fu Panda|Po a Kung Fu Panda főhőse.|film-title
+Melyik sorozat családja él a kitalált Springfieldben, és tagja Homer?|A Simpson család|Homer Simpson családjával Springfieldben él.|series-title
+Melyik sorozat szereplői Ross, Rachel, Monica, Chandler, Joey és Phoebe?|Jóbarátok|Ők a Jóbarátok hat központi szereplője.|series-title
+Melyik sorozat központi családja a Stark család Westerosban?|Trónok harca|A Starkok a Trónok harca fontos szereplői.|series-title
+Melyik sorozatban szerepel Walter White és Jesse Pinkman?|Totál szívás|Walter és Jesse a Breaking Bad, magyarul Totál szívás szereplői.|series-title
+Melyik sorozat történetének fontos helyszíne Hawkins városa?|Stranger Things|A Stranger Things központi helyszíne a kitalált Hawkins.|series-title
+Melyik sorozat főszereplője Wednesday Addams?|Wednesday|Wednesday Addams a róla elnevezett sorozat főhőse.|series-title
+Melyik film rendezője James Cameron, főszereplői Jack és Rose?|Titanic|Jack és Rose az 1997-es Titanic főszereplői.|film-title
+Melyik filmben élnek a na'vik Pandora holdján?|Avatar|James Cameron Avatarjának helyszíne Pandora.|film-title
+Melyik film rendezője Christopher Nolan, és fő témája az álomba lépés?|Eredet|Az Eredet története mások álmaiba való belépés köré épül.|film-title
+Melyik filmben keresi Cooper az emberiség új otthonát a világűrben?|Csillagok között|Cooper a Csillagok között főszereplője.|film-title
+Melyik filmben alakítja Tom Hanks a címszereplő, történelmi eseményekbe sodródó futót?|Forrest Gump|Tom Hanks játssza Forrest Gump szerepét.|film-title
+Melyik filmben szerepel Andy Dufresne és Ellis Boyd Redding?|A remény rabjai|Andy és Red A remény rabjai két központi alakja.|film-title
+Ki rendezte az 1994-es Ponyvaregényt?|Quentin Tarantino|A Ponyvaregény Quentin Tarantino filmje.|director
+Ki rendezte A cápa című 1975-ös filmet?|Steven Spielberg|A cápa Steven Spielberg rendezése.|director
+Ki rendezte A keresztapa című 1972-es filmet?|Francis Ford Coppola|A keresztapát Francis Ford Coppola rendezte.|director
+Ki rendezte a 2001: Űrodüsszeia című filmet?|Stanley Kubrick|A 2001: Űrodüsszeia Stanley Kubrick filmje.|director
+Ki rendezte az 1982-es Szárnyas fejvadászt?|Ridley Scott|Az eredeti Szárnyas fejvadász rendezője Ridley Scott.|director
+Ki rendezte az 1960-as Psychót?|Alfred Hitchcock|A Psycho Alfred Hitchcock filmje.|director
+Ki rendezte a Grand Budapest Hotel című filmet?|Wes Anderson|A Grand Budapest Hotel Wes Anderson rendezése.|director
+Ki rendezte a Chihiro Szellemországban című animációs filmet?|Mijazaki Hajao|A Chihiro Szellemországban Mijazaki Hajao filmje.|director
+Melyik ország filmgyártásához kötődik a Studio Ghibli?|Japán|A Studio Ghibli japán animációs stúdió.|country
+Melyik országban készült az Élősködők című 2019-es film?|Dél-Korea|Az Élősködők dél-koreai film.|country
+Melyik színész alakítja Indiana Jonest az 1981-es Az elveszett frigyláda fosztogatóiban?|Harrison Ford|Harrison Ford játssza Indiana Jonest.|actor
+Melyik színész alakítja Jack Sparrow-t A Karib-tenger kalózai filmekben?|Johnny Depp|Jack Sparrow szerepét Johnny Depp alakítja.|actor
+Melyik színész alakítja Vasembert a 2008-as filmben?|Robert Downey Jr.|A 2008-as Vasember címszereplője Robert Downey Jr.|actor
+Melyik színész játssza a főszerepet az 1999-es Mátrixban?|Keanu Reeves|Neo szerepét Keanu Reeves alakítja.|actor
+Melyik színész alakítja Batmant A sötét lovagban?|Christian Bale|Christopher Nolan filmjében Christian Bale játssza Batmant.|actor
+Melyik színész alakítja Jokert A sötét lovagban?|Heath Ledger|A film Jokerét Heath Ledger alakítja.|actor
+Melyik színésznő alakítja Hermione Grangert a Harry Potter-filmekben?|Emma Watson|Hermione szerepét Emma Watson játssza.|actor
+Melyik színész alakítja Harry Pottert a nyolc eredeti mozifilmben?|Daniel Radcliffe|Harry Potter mozis megformálója Daniel Radcliffe.|actor
+Melyik színésznő alakítja Katniss Everdeent Az éhezők viadalában?|Jennifer Lawrence|Katniss Everdeen szerepét Jennifer Lawrence alakítja.|actor
+Melyik színész játssza James Bondot a 2006-os Casino Royale-ban?|Daniel Craig|A 2006-os Casino Royale Bondja Daniel Craig.|actor
+Milyen állat Judy Hopps, a Zootropolis rendőre?|Nyúl|Judy Hopps nyúlként csatlakozik a rendőrséghez.|animal
+Melyik film szereplője Villám McQueen?|Verdák|Villám McQueen a Verdák versenyautója.|film-title
+Melyik animációs filmben szerepel Miguel és a holtak napja?|Coco|A Coco története a mexikói halottak napjához kapcsolódik.|film-title
+Melyik sorozat kitalált munkahelye a Dunder Mifflin papírcég?|A hivatal|A Dunder Mifflin A hivatal amerikai változatának központi cége.|series-title
+Melyik sorozatban él Sheldon Cooper és Leonard Hofstadter?|Agymenők|Sheldon és Leonard az Agymenők főszereplői.|series-title
+Mi az eredeti Star Trek csillaghajójának neve Kirk kapitány alatt?|USS Enterprise|Kirk kapitány a USS Enterprise parancsnoka.|spaceship|Millennium Falcon~Discovery One~Nostromo
+Melyik filmsorozat űrhajója a Millennium Falcon?|Star Wars|A Millennium Falcon a Star Wars ismert űrhajója.|franchise|Star Trek~Alien~Dűne
+Melyik városban adják át hagyományosan a berlini filmfesztivál Arany Medve díját?|Berlin|Az Arany Medve a Berlinale fődíja.|city
+Melyik filmfesztivál fődíja az Arany Pálma?|Cannes-i filmfesztivál|Az Arany Pálmát Cannes-ban adják át.|festival|Velencei filmfesztivál~Berlinale~Locarnói filmfesztivál
+Melyik filmfesztivál fődíja az Arany Oroszlán?|Velencei filmfesztivál|Az Arany Oroszlán a velencei filmfesztivál díja.|festival|Cannes-i filmfesztivál~Berlinale~Sundance filmfesztivál

@@ -1,0 +1,50 @@
+Ki a görög mitológiában az olümposzi istenek királya?|Zeusz|Zeusz az olümposzi istenek uralkodója.|greek-god
+Ki a görög mitológiában a tengerek istene?|Poszeidón|Poszeidón a tengerekhez és földrengésekhez kapcsolódó isten.|greek-god
+Ki a görög mitológiában az alvilág ura?|Hádész|Hádész az alvilág uralkodója.|greek-god
+Ki a görög mitológiában a bölcsesség istennője?|Athéné|Athéné a bölcsesség és a mesterségek istennője.|greek-god
+Ki a görög mitológiában a szerelem és szépség istennője?|Aphrodité|Aphrodité a szerelem és szépség istennője.|greek-god
+Ki a görög mitológiában az istenek hírnöke?|Hermész|Hermész az istenek hírnöke és az utazók pártfogója.|greek-god
+Ki a görög mitológiában a kovácsmesterség istene?|Héphaisztosz|Héphaisztosz az isteni kovács.|greek-god
+Ki a görög mitológiában a vadászat istennője?|Artemisz|Artemisz a vadászat és a vadon istennője.|greek-god
+Ki a görög mitológiában a borhoz és a színjátszáshoz kapcsolódó isten?|Dionüszosz|Dionüszosz a bor és a színházi ünnepek istene.|greek-god
+Ki a görög mitológiában a háború istene, akinek római megfelelője Mars?|Arész|Arész római megfelelője Mars.|greek-god
+Melyik görög hős végzett tizenkét híres munkát?|Héraklész|Héraklész történetéhez tizenkét munka kapcsolódik.|myth-hero
+Melyik görög hős győzte le a Minótauroszt?|Thészeusz|Thészeusz Ariadné segítségével jutott ki a labirintusból.|myth-hero
+Melyik hős vezette az argonautákat az aranygyapjúért?|Iaszón|Az argonauták vezetője Iaszón volt.|myth-hero
+Melyik görög hős híres a sebezhető sarkáról?|Akhilleusz|Akhilleusz sarka a későbbi hagyományban egyetlen sebezhető pontja.|myth-hero
+Melyik görög hős tér haza Ithakába az Odüsszeiában?|Odüsszeusz|Az Odüsszeia Odüsszeusz hazatérését meséli el.|myth-hero
+Melyik mitikus lény feje kígyókkal borított, és tekintete kővé változtat?|Medusza|Medusza a gorgók egyike.|mythical-being
+Melyik görög mitikus lény félig ember, félig bika?|Minótaurosz|A Minótaurosz embertestű, bikafejű lény.|mythical-being
+Melyik mitikus lény őrzi a görög alvilág bejáratát háromfejű kutyaként?|Kerberosz|Kerberosz az alvilág háromfejű őrkutyája.|mythical-being
+Melyik görög mitikus teremtmény szárnyas ló?|Pégaszosz|Pégaszosz a görög mitológia szárnyas lova.|mythical-being
+Ki repült túl közel a Naphoz viasszal rögzített szárnyakon?|Ikarosz|Ikarosz szárnyának viasza megolvadt a történet szerint.|myth-hero
+Ki az északi mitológiában a villámokhoz kapcsolódó kalapácsos isten?|Thor|Thor fegyvere a Mjölnir kalapács.|norse-god
+Ki az északi mitológiában az egyszemű főisten?|Odin|Odin bölcsességért cserébe feláldozta egyik szemét a mítosz szerint.|norse-god
+Ki az északi mitológiában a cselszövő alakváltó istenalak?|Loki|Loki történeteiben fontos szerepe van a ravaszságnak és az alakváltásnak.|norse-god
+Mi Thor kalapácsának neve?|Mjölnir|Thor kalapácsát Mjölnirnek nevezik.|myth-object|Excalibur~Gungnir~Aranygyapjú
+Mi Odin lándzsájának neve?|Gungnir|Odin lándzsája Gungnir.|myth-object|Mjölnir~Excalibur~Ariadné fonala
+Mi az északi mitológiában a világfa neve?|Yggdrasil|Yggdrasil a világokat összekötő világfa.|myth-place|Valhalla~Olimposz~Tartarosz
+Mi a harcban elesett kiválasztott hősök csarnoka az északi mitológiában?|Valhalla|A Valhallában Odin kiválasztott harcosai gyűlnek össze.|myth-place|Ithaka~Olimposz~Knósszosz
+Mi az északi mitológia isteneket is érintő végső küzdelmének neve?|Ragnarök|A Ragnarök az istenek pusztulásával és megújulással járó eseménysor.|myth-event|Szatur­nália~Dionüszia~Panathénaia
+Melyik egyiptomi isten ismert sakálfejű ábrázolásáról?|Anubisz|Anubisz a halotti szertartásokhoz kapcsolódó isten.|egypt-god
+Melyik egyiptomi isten ismert sólyomfejű ábrázolásáról és az uralkodói hatalomról?|Hórusz|Hórusz az éghez és a királysághoz kapcsolódik.|egypt-god
+Melyik egyiptomi istenség a Nap egyik legismertebb megszemélyesítője?|Ré|Ré az egyiptomi napisten.|egypt-god
+Melyik egyiptomi isten az alvilág uralkodója és a megújulás alakja?|Ozirisz|Ozirisz a túlvilághoz és újjászületéshez kötődik.|egypt-god
+Melyik egyiptomi istennő Ozirisz felesége és Hórusz anyja?|Ízisz|Ízisz Ozirisz hitvese és Hórusz anyja.|egypt-god
+Mi Zeusz római megfelelőjének neve?|Jupiter|A római Jupiter megfeleltethető a görög Zeusznak.|roman-god
+Mi Poszeidón római megfelelőjének neve?|Neptunus|Neptunus a római tengeristen.|roman-god
+Mi Aphrodité római megfelelőjének neve?|Venus|A római Venus a szerelem és szépség istennője.|roman-god
+Mi Arész római megfelelőjének neve?|Mars|Mars a római hadisten.|roman-god
+Mi Hermész római megfelelőjének neve?|Mercurius|A római Mercurius megfeleltethető Hermésznek.|roman-god
+Melyik város alapításmondájának ikerpárja Romulus és Remus?|Róma|A római hagyomány Romulushoz és Remushoz köti a város eredetét.|city
+Melyik állat táplálta a monda szerint Romulust és Remust?|Nőstényfarkas|A római alapításmondában egy nőstényfarkas szoptatja az ikreket.|animal|Oroszlán~Teve~Szarvas
+Melyik ország kulturális hagyománya a szamurájok világa?|Japán|A szamurájok a történelmi Japán harcos rétegéhez tartoztak.|country
+Melyik ország hagyományos színpadi műfaja a kabuki?|Japán|A kabuki japán színházi műfaj.|country
+Melyik országból ered a flamenco legismertebb hagyománya?|Spanyolország|A flamenco Andalúziához és Spanyolország kultúrájához kötődik.|country
+Melyik kultúra ünnepe a holtak napjának színes, oltárokkal kísért hagyománya, a Día de Muertos?|Mexikói|A Día de Muertos Mexikó ismert ünnepi hagyománya.|culture|Norvég~Japán~Ógörög
+Melyik ország nevéhez kötődik a capoeira kialakulása?|Brazília|A capoeira afro-brazil eredetű mozgás- és harcművészeti hagyomány.|country
+Melyik ókori nép alkotta az ékírás legkorábbi ismert változatát Mezopotámiában?|Sumérok|Az ékírás kezdetei a sumér városokhoz kapcsolódnak.|ancient-people|Vikingek~Aztékok~Etruszkok
+Melyik ókori civilizáció történetéhez kötődik a Gilgames-eposz?|Mezopotámiai|A Gilgames-eposz mezopotámiai hagyományokból származik.|culture|Óegyiptomi~Japán~Skandináv
+Melyik legendakör királyának kardja Excalibur?|Artúr|Az Excalibur Artúr király legendájának kardja.|legend-person|Robin Hood~Siegfried~Beowulf
+Melyik mitikus madár születik újjá a hamvaiból?|Főnix|A főnix a megújulás és újjászületés mitikus madara.|mythical-being
+Melyik görög nő segítette fonallal Thészeuszt a labirintusban?|Ariadné|Ariadné fonala segítette Thészeuszt a visszaút megtalálásában.|myth-person|Pénelopé~Kasszandra~Antigoné

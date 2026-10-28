@@ -1,0 +1,50 @@
+Melyik égitest körül kering a Föld?|Nap|A Föld a Nap körül kering.|space-object
+Mi a Föld természetes holdjának neve?|Hold|A Föld egyetlen természetes holdja a Hold.|space-object
+Melyik bolygó a legnagyobb a Naprendszerben?|Jupiter|A Jupiter a legnagyobb átmérőjű és tömegű bolygó a Naprendszerben.|planet
+Melyik bolygó forog a Nap körül a Föld és a Merkúr pályája között?|Vénusz|A Vénusz a Naptól számított második bolygó.|planet
+Melyik bolygó a Naptól számítva a legtávolabbi a nyolc bolygó közül?|Neptunusz|A Neptunusz a Naprendszer nyolcadik bolygója.|planet
+Melyik bolygó tengelyferdesége közel derékszög, ezért szinte oldalán forog?|Uránusz|Az Uránusz forgástengelye nagyon erősen megdőlt.|planet
+Melyik törpebolygót sorolták 2006-ig a kilencedik bolygóként?|Plútó|A Plútót 2006-ban a törpebolygók közé sorolták.|space-object
+Melyik galaxisban található a Naprendszer?|Tejútrendszer|A Nap a Tejútrendszer egyik csillaga.|galaxy|Androméda-galaxis~Triangulum-galaxis~Nagy Magellán-felhő
+Melyik jelenség során takarja el a Hold a Nap korongját a földi megfigyelő számára?|Napfogyatkozás|Napfogyatkozáskor a Hold a Nap és a Föld közé kerül.|space-event|Holdfogyatkozás~Sarki fény~Meteorraj
+Melyik jelenség során kerül a Hold a Föld árnyékába?|Holdfogyatkozás|Holdfogyatkozáskor a Föld árnyéka a Holdra vetül.|space-event|Napfogyatkozás~Sarki fény~Napforduló
+Mennyi idő alatt tesz meg a Föld nagyjából egy keringést a Nap körül?|1 év|A Föld egy teljes Nap körüli keringésének ideje nagyjából egy év.|time-period|1 nap~1 hét~1 hónap
+Mi okozza a nappalok és éjszakák váltakozását?|A Föld tengely körüli forgása|A forgás miatt a felszín váltakozva fordul a Nap felé és attól el.|physics-cause|A Hold fényerejének változása~A Nap napi kihunyása~A Föld éves pályájának megszűnése
+Mi az évszakok kialakulásának fő oka a Földön?|A forgástengely ferdesége és a keringés|A tengelyferdeség miatt év közben változik a napsugarak beesése és a nappal hossza.|physics-cause|A Nap havi méretváltozása~A Hold napi távolodása~A csillagok darabszámának változása
+Melyik kölcsönhatás tartja pályán a bolygókat a Nap körül?|Gravitáció|A Nap gravitációja alakítja a bolygók pályáját.|force-type|Súrlódás~Felületi feszültség~Rugalmas erő
+Melyik erő akadályozza rendszerint két érintkező felület egymáson való elcsúszását?|Súrlódási erő|A súrlódás az egymáshoz képesti csúszást akadályozza.|force-type|Mágneses vonzóerő~Felhajtóerő~Sugárnyomás
+Melyik fizikai mennyiség a tömeg és sebesség szorzata a klasszikus mechanikában?|Lendület|A lendület képlete p = m · v.|quantity
+Melyik fizikai mennyiség a megtett út és az eltelt idő hányadosa egyenletes mozgásnál?|Sebesség|Egyenletes mozgásnál a sebesség s/t.|quantity
+Melyik fizikai mennyiség jelenti az időegység alatt végzett munkát?|Teljesítmény|A teljesítmény a munkavégzés sebességét méri.|quantity
+Melyik fizikai mennyiség az egységnyi felületre merőleges erő nagysága?|Nyomás|A nyomás p = F/A.|quantity
+Melyik fizikai mennyiség az egységnyi térfogatra jutó tömeg?|Sűrűség|A sűrűség a tömeg és térfogat hányadosa.|quantity
+Melyik részecske elektromos töltése negatív?|elektron|Az elektron negatív elemi töltést hordoz.|particle
+Melyik részecske elektromos töltése pozitív az atommagban?|proton|Az atommag protonjai pozitív töltésűek.|particle
+Melyik atommagbeli részecske elektromosan semleges?|neutron|A neutronnak nincs eredő elektromos töltése.|particle
+Melyik részecske a fény kvantuma?|foton|A fény elektromágneses energiája fotonokkal írható le.|particle
+Melyik közegben nem terjed a hang?|Vákuum|A hang mechanikai hullám, anyagi közegre van szüksége.|medium|Levegő~Víz~Acél
+Melyik hullámtípushoz tartozik a látható fény?|Elektromágneses hullám|A látható fény az elektromágneses sugárzás része.|wave-type|Kizárólag hanghullám~Felszíni vízhullám~Szeizmikus hullám
+Melyik jelenség bontja a fehér fényt különböző színekre egy prizmában?|Színszóródás|A különböző hullámhosszúságú fény eltérő mértékben törik meg.|optics|Mágneses indukció~Radioaktív bomlás~Hővezetés
+Melyik tükör ad álló, azonos méretű látszólagos képet?|Síktükör|Az ideális síktükör képe álló és azonos méretű.|mirror|Homorú tükör minden helyzetben~Domború tükör~Gömbtükör minden helyzetben
+Melyik lencse gyűjti össze a vele párhuzamosan érkező fénysugarakat levegőben?|Gyűjtőlencse|A gyűjtőlencse a párhuzamos fénysugarakat fókuszba vezeti.|lens|Szórólencse~Sík üveglap~Üres lyuk
+Melyik színű a látható fény legnagyobb hullámhosszúságú vége?|piros|A látható tartomány vörös vége nagyobb hullámhosszú az ibolyánál.|colour
+Mi történik rendszerint egy fémrúddal melegítéskor?|Kitágul|A legtöbb fém melegítéskor hőtágulást mutat.|thermal-change|Mindig összehúzódik~Tömege megkétszereződik~Elektromosan eltűnik
+Hány Celsius-fokon fagy meg a tiszta víz normál légköri nyomáson?|0|A tiszta víz szokásos fagyáspontja 0 °C.|number
+Hány Celsius-fokon forr a tiszta víz normál légköri nyomáson?|100|Normál légköri nyomáson a tiszta víz forráspontja 100 °C.|number
+Mi a folyadék gázhalmazállapotba kerülésének egyik felszíni formája?|Párolgás|A párolgás a folyadék felszínén zajló gőzképződés.|phase-change
+Hogyan nevezzük a gáz folyadékká alakulását?|Lecsapódás|Lecsapódáskor a gázhalmazállapotú anyag folyadékká válik.|phase-change
+Hogyan nevezzük a szilárd anyag közvetlen gázzá alakulását?|Szublimáció|A szublimáció folyadékállapot közbeiktatása nélküli átmenet.|phase-change
+Hogyan nevezzük a folyadék szilárddá alakulását?|Fagyás|A megszilárdulást folyadékok esetén fagyásnak is nevezzük.|phase-change
+Melyik energiafajta kapcsolódik a test mozgásához?|Mozgási energia|A mozgó testnek kinetikus energiája van.|energy-type|Kizárólag nyugalmi helyzeti energia~Kizárólag kémiai kötési energia~Kizárólag rugalmas energia
+Melyik egyszerű gép alapelve működik egy hagyományos kétkarú mérlegben?|Emelő|A kétkarú mérleg emelőként működik.|simple-machine|Lejtő~Csavar~Ék
+Melyik tudós nevéhez kapcsolódik a három klasszikus mozgástörvény?|Isaac Newton|Newton fogalmazta meg a klasszikus mechanika három alapvető mozgástörvényét.|scientist
+Melyik tudós nevéhez kapcsolódik az általános relativitáselmélet?|Albert Einstein|Az általános relativitáselméletet Einstein dolgozta ki.|scientist
+Melyik tudós fogalmazta meg a bolygómozgás három törvényét?|Johannes Kepler|Kepler törvényei a bolygók pályáit írják le.|scientist
+Melyik csillagászhoz kötődik a kora újkori heliocentrikus világkép meghatározó könyve?|Nikolausz Kopernikusz|Kopernikusz 1543-ban megjelent műve napközéppontú rendszert ismertetett.|scientist
+Melyik űrtávcsövet indították 1990-ben, és neve Edwin Hubble-re utal?|Hubble-űrtávcső|A Hubble-űrtávcső 1990-ben jutott Föld körüli pályára.|space-telescope|James Webb-űrtávcső~Kepler-űrtávcső~Spitzer-űrtávcső
+Melyik űrtávcsövet indították 2021 decemberében, és főként infravörösben figyel?|James Webb-űrtávcső|A James Webb-űrtávcső 2021. december 25-én indult.|space-telescope|Hubble-űrtávcső~Hipparcos~Gaia
+Milyen alakúak a bolygópályák Kepler első törvénye szerint?|Ellipszisek|A bolygópályák ellipszisek, egyik gyújtópontjukban a Nappal.|shape|Négyzetek~Parabolák minden esetben~Háromszögek
+Mit jelent a fényév?|A fény által egy év alatt vákuumban megtett távolságot|A fényév távolságegység, nem időegység.|astronomy-definition|Egy csillag életkorát~Egy évben lévő nappalok számát~A fény színének gyakoriságát
+Melyik Naphoz közeli csillag része az Alfa Centauri rendszernek?|Proxima Centauri|A Proxima Centauri a Naphoz legközelebbi ismert csillag.|star|Sirius~Vega~Betelgeuse
+Melyik csillagkép jellegzetes része a három fényes övcsillag?|Orion|Az Orion övét három könnyen felismerhető csillag alkotja.|constellation|Cassiopeia~Hattyú~Lant
+Melyik csillag található az északi égi pólus közelében?|Sarkcsillag|A Sarkcsillag segít az északi irány meghatározásában.|star|Sirius~Vega~Antares

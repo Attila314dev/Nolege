@@ -86,7 +86,7 @@ test('a quota error can fall back to the separately configured free OpenRouter r
 });
 
 test('provider authentication, quota and timeout failures have safe actionable errors', async t => {
-  for (const [status, code] of [[401, 'auth'], [403, 'auth'], [429, 'quota'], [500, 'provider_error']]) {
+  for (const [status, code] of [[401, 'auth'], [403, 'auth'], [429, 'rate_limit'], [500, 'provider_error']]) {
     await t.test(String(status), async () => {
       const ai = createAI({ env: { GROQ_API_KEY: 'test-only-secret' }, fetchImpl: async () => new Response('{"error":"sensitive provider details"}', { status }) });
       await assert.rejects(ai.generate({ count: 1, topic: '', difficulty: 'mixed' }), error => error.code === code && !error.message.includes('sensitive') && !error.message.includes('test-only-secret'));
@@ -140,7 +140,7 @@ test('a failed background provider leaves the general stock playable and helper 
   assert.equal(prepared.data.pack.accepted, true);
   await app.pool.refill();
   assert.equal(ai.status().state, 'error');
-  assert.equal(ai.status().lastError.code, 'quota');
+  assert.equal(ai.status().lastError.code, 'rate_limit');
   assert.ok(app.pool.status().lastError);
   const pack = (await app.request(`/api/rooms/${host.roomId}/pack`, { token: host.playerToken })).data;
   const client = await app.connect(host.roomId, host.playerToken); client.send({ type: 'start' });

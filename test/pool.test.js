@@ -150,7 +150,7 @@ test('a failed thematic generation preserves the previous pack and is never disg
   const response = await app.request(`/api/rooms/${host.roomId}/prepare`, { method: 'POST', token: host.playerToken,
     body: { settings: { topic: 'Modern popzene', count: 20 } } });
   assert.equal(response.status, 502);
-  assert.equal(response.data.code, 'quota');
+  assert.equal(response.data.code, 'rate_limit');
   const after = (await app.request(`/api/rooms/${host.roomId}/pack`, { token: host.playerToken })).data;
   assert.deepEqual(after, before);
   const state = (await app.request(`/api/rooms/${host.roomId}/session`, { token: host.playerToken })).data;

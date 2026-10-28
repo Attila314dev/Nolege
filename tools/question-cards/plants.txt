@@ -1,0 +1,50 @@
+Melyik növény termése a makk a tölgyerdőkben?|Tölgy|A tölgyek jellegzetes termése a makk.|plant
+Melyik fa termése a gesztenyepüré alapjául használt szelídgesztenye?|Szelídgesztenyefa|Az ehető szelídgesztenye a szelídgesztenyefa termése.|plant
+Melyik növény virágzata fordul gyakran a fény felé fiatal állapotban, és olajos magjáért termesztik?|Napraforgó|A napraforgó fontos olajnövény, fiatal hajtásai követhetik a Nap járását.|plant
+Melyik gabonából készül hagyományosan a kukoricaliszt?|Kukorica|A kukoricaliszt a kukorica szemterméséből készül.|plant
+Melyik gabona a rizottó fő alapanyaga?|Rizs|A rizottó alapját rizs adja.|plant
+Melyik növény gumójából készül a hasábburgonya?|Burgonya|A burgonya föld alatti szárgumóját fogyasztjuk.|plant
+Melyik növény megvastagodott gyökeréből készül a kristálycukor jelentős része Európában?|Cukorrépa|A cukorrépa fontos európai cukorforrás.|plant
+Melyik növény őrölt magjából készül a presszókávé?|Kávécserje|A kávé a kávécserje magjából készül.|plant
+Melyik növény levele a hagyományos fekete és zöld tea alapanyaga?|Teacserje|Mindkét tea a Camellia sinensis leveleiből készül.|plant
+Melyik növény termésének magjai adják a kakaó alapját?|Kakaófa|A kakaó a kakaófa magjából származik.|plant
+Melyik növény csoportjába tartozik a kaktusz?|Zárvatermők|A kaktuszok virágos, zárvatermő növények.|plant-group|Mohák~Harasztok~Nyitvatermők
+Melyik növénycsoport tagjai szaporodnak spórákkal, és gyakran nagy, szeldelt leveleik vannak?|Páfrányok|A páfrányok spórákkal szaporodó edényes növények.|plant-group|Fenyők~Pázsitfüvek~Rózsafélék
+Melyik növénycsoporthoz tartozik a lucfenyő?|Nyitvatermők|A lucfenyő nyitvatermő, toboztermő növény.|plant-group|Mohák~Harasztok~Zárvatermők
+Melyik zöld színanyag játszik alapvető szerepet a fotoszintézisben?|Klorofill|A klorofill fényenergiát nyel el a fotoszintézishez.|plant-pigment|Melanin~Hemoglobin~Keratin
+Melyik növényi szerv veszi fel rendszerint a talaj vizét és ásványi anyagait?|Gyökér|A gyökér feladata a rögzítés és a víz, illetve ásványi anyagok felvétele.|plant-organ|Virág~Termés~Szirom
+Melyik növényi szervből alakul ki rendszerint a termés a megtermékenyítés után?|Magház|A termés rendszerint a virág magházából fejlődik.|plant-organ|Gyökércsúcs~Levéllemez~Portok
+Melyik növényi részben található a virágpor?|Portok|A porzó portokjában képződik a virágpor.|plant-organ|Magház~Gyökérszőr~Csészelevél
+Mi a megporzás?|A virágpor eljutása a női szaporítószervhez|Zárvatermőknél a megporzás során a virágpor a bibére kerül.|plant-definition|A gyökér leválása a szárról~A termés kiszáradása~A levelek őszi lehullása
+Melyik gáz felvételére van szükség a fotoszintézis szénhidrátképzéséhez?|szén-dioxid|A fotoszintézis szénforrása a szén-dioxid.|gas
+Melyik fának jellegzetesen fehér a kérge?|Nyírfa|Sok nyírfafaj kérge feltűnően fehér.|plant
+Melyik fa legyező alakú leveleiről ismert?|Páfrányfenyő|A páfrányfenyő, vagy ginkgo levelei legyező alakúak.|plant
+Melyik fa termése a szárnyas ikerlependék, amely helikopterszerűen foroghat?|Juhar|A juharok termése jellegzetes ikerlependék.|plant
+Melyik növény szára adja a parafa alapanyagát a kérge révén?|Paratölgy|A parafa a paratölgy külső kérgéből származik.|plant
+Melyik növény terméséből készül az olívaolaj?|Olajfa|Az olívaolajat az olajfa terméséből sajtolják.|plant
+Melyik növényhez kötődik a komlóvirágzat felhasználása a sörfőzésben?|Komló|A sörfőzésben a komló nőivarú virágzatát használják.|plant
+Melyik fűszernövény bibéje adja a sáfrányt?|Jóféle sáfrány|A sáfrány fűszer a Crocus sativus szárított bibéje.|plant
+Melyik növény szárított virágbimbója a szegfűszeg?|Szegfűszegfa|A fűszerként használt szegfűszeg szárított virágbimbó.|plant
+Melyik növény szárából nyerik a fahéj fűszer alapját?|Fahéjfa|A fahéj a fahéjfák belső kérgéből készül.|plant
+Melyik növény szárított termése a fekete bors?|Borscserje|A fekete bors a Piper nigrum termése.|plant
+Melyik növény húsos leveleiből nyerik az aloe gélt?|Aloe vera|Az Aloe vera levelének belseje gélszerű anyagot tartalmaz.|plant
+Melyik növény gyöktörzse a gyömbérfűszer?|Gyömbér|A gyömbér föld alatti gyöktörzsét használjuk fűszerként.|plant
+Melyik növény gyöktörzse adja a jellegzetes sárga kurkumaport?|Kurkuma|A kurkuma sárga fűszeranyaga a gyöktörzsben található.|plant
+Melyik növény rokonai a búza, a rizs és a kukorica rendszertani családjuk alapján?|Pázsitfűfélék|Mindhárom gabona a pázsitfűfélék családjába tartozik.|plant-group|Rózsafélék~Orchideafélék~Fészkesvirágzatúak
+Melyik növény magjából készül a tahini?|Szezám|A tahini szezámmagból őrölt paszta.|plant
+Melyik növény a pesto genovese jellegzetes friss zöldfűszere?|Bazsalikom|A hagyományos genovai pesto jellegzetes alapanyaga a bazsalikom.|plant
+Melyik tűlevelű fa hullatja le ősszel az összes tűlevelét?|Vörösfenyő|A vörösfenyő lombhullató tűlevelű fa.|plant|Lucfenyő~Erdeifenyő~Jegenyefenyő
+Mi a növények párologtatásának szakkifejezése?|Transzspiráció|A transzspiráció a növények vízleadása párologtatással.|plant-process|Fermentáció~Kristályosodás~Kondenzáció
+Melyik szállítószövet viszi főként a vizet a gyökértől a növény felső részei felé?|Farész|A farész, vagy xilém a víz és oldott ásványi anyagok fő szállítója.|plant-tissue|Háncsrész~Bőrszövet~Osztódószövet
+Melyik szállítószövet továbbítja főként a fotoszintézis szerves termékeit?|Háncsrész|A háncsrész, vagy floém a szerves anyagok szállításában vesz részt.|plant-tissue|Farész~Bőrszövet~Sziklevél
+Melyik évszakban hullatják leveleiket rendszerint a mérsékelt övi lombhullató fák?|ősz|A mérsékelt öv lombhullató fáinak levelei jellemzően ősszel hullanak le.|season
+Melyik kapcsolatban él együtt kölcsönösen előnyösen a zuzmó gombája és fotoszintetizáló társa?|Szimbiózis|A zuzmó gomba és alga vagy cianobaktérium tartós együttélése.|ecology-term|Ragadozás~Versengés~Kizárólagos élősködés
+Mi az ökológiában a lebontók egyik fő feladata?|Az elhalt szerves anyag lebontása|A lebontók a tápanyagok körforgásához járulnak hozzá.|ecology-definition|A napfény visszatükrözése~A sziklák megolvasztása~A bolygó forgatása
+Melyik szervezet nem növény, hanem a gombák közé tartozik?|Csiperke|A csiperke gomba, nem fotoszintetizáló növény.|organism|Tölgy~Napraforgó~Páfrányfenyő
+Melyik életközösségre jellemző a nagyon kevés csapadék és a gyér növényzet?|Sivatag|A sivatagokat a rendkívül alacsony csapadék jellemzi.|biome|Trópusi esőerdő~Láperdő~Ártéri erdő
+Melyik életközösségre jellemző a tartós hideg és a moha-, zuzmó-, törpecserje-növényzet?|Tundra|A tundrán a hideg és a rövid tenyészidő korlátozza a növényzetet.|biome|Szavanna~Trópusi esőerdő~Mediterrán keménylombú erdő
+Melyik erdőtípusra jellemző az egész éven át meleg, csapadékos klíma és a sok növényszint?|Trópusi esőerdő|A trópusi esőerdő meleg, nedves éghajlaton alakul ki.|biome|Tajga~Tundra~Sivatag
+Melyik eurázsiai erdőövben uralkodnak a tűlevelű fák?|Tajga|A tajga a hideg mérsékelt öv tűlevelű erdőöve.|biome|Szavanna~Tundra~Sivatag
+Melyik ökológiai fogalom jelenti az élővilág változatosságát?|Biodiverzitás|A biodiverzitás a biológiai sokféleséget jelenti.|ecology-term|Párolgás~Hőmérséklet~Légnyomás
+Melyik kölcsönhatásban fogyasztja el az egyik állat a másik állatot?|Ragadozás|A ragadozó zsákmányállatot fogyaszt.|ecology-term|Mutualizmus~Fotoszintézis~Kommenzalizmus
+Mi a tápláléklánc első termelőinek fő energiaforrása a legtöbb szárazföldi rendszerben?|Napfény|A fotoszintetizáló termelők a Nap fényenergiáját használják.|energy-source|Földrengés~Holdfény önálló energiatermelése~Szélcsend

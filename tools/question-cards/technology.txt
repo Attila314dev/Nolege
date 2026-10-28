@@ -1,0 +1,50 @@
+Mit jelent a WWW rövidítés?|World Wide Web|A WWW a World Wide Web rövidítése.|tech-expansion|Wide Wireless Window~World Work Writer~Web Windows Wire
+Melyik protokoll szolgál titkosított webes kapcsolatokhoz?|HTTPS|A HTTPS a HTTP TLS-sel védett változata.|protocol|FTP titkosítás nélkül~Telnet~HTTP titkosítás nélkül
+Melyik protokollra épül az IP-címekkel végzett internetes csomagtovábbítás?|IP|Az Internet Protocol címzi és továbbítja az internetes csomagokat.|protocol
+Melyik rendszer fordítja le a tartományneveket IP-címekre?|DNS|A Domain Name System névfeloldást végez.|tech-system|GPS~USB~HDMI
+Melyik szolgáltatás tárolja a forráskód verzióit elosztott rendszerben?|Git|A Git elosztott verziókezelő rendszer.|software
+Melyik fájlkiterjesztés szokásos egy Python-forrásfájlnál?|.py|A Python-forrásfájlok elterjedt kiterjesztése .py.|extension
+Melyik fájlkiterjesztés szokásos egy JavaScript-forrásfájlnál?|.js|A JavaScript-forrásfájlok gyakori kiterjesztése .js.|extension
+Melyik fájlkiterjesztés jelöl gyakran JSON-adatfájlt?|.json|A JSON-fájlok elterjedt kiterjesztése .json.|extension
+Melyik fájlkiterjesztés jelöl hordozható dokumentumformátumot?|.pdf|A PDF a Portable Document Format.|extension
+Melyik fájlkiterjesztés jelöl gyakran tömörített állománycsomagot?|.zip|A ZIP tömörített archívumformátum.|extension
+Melyik jelölőnyelv írja le a weboldalak szerkezetét?|HTML|A HTML a weboldal elemeit és szerkezetét írja le.|web-language|CSS~SQL~Bash
+Melyik nyelv adja meg rendszerint a weboldal színeit és elrendezését?|CSS|A CSS stíluslapok formázzák a weboldal megjelenését.|web-language|HTML~SQL~Python
+Melyik adatformátum használ gyakran kulcs-érték párokat és kapcsos zárójeleket?|JSON|A JSON objektumai kulcs-érték párokból állnak.|data-format|JPEG~MP3~WAV
+Melyik formátum használ vektorgrafikát webes képekhez?|SVG|Az SVG XML-alapú vektorgrafikus formátum.|image-format|JPEG~BMP~GIF
+Melyik képfájltípus támogat veszteségmentes tömörítést és átlátszóságot?|PNG|A PNG veszteségmentes, alfa-csatornát is támogató formátum.|image-format|JPEG~MP3~WAV
+Melyik hangfájltípus ismert veszteséges tömörítéséről?|MP3|Az MP3 veszteséges hangtömörítési formátum.|audio-format|WAV tömörítetlen PCM-mel~FLAC~AIFF tömörítetlen PCM-mel
+Mit nevezünk böngészőnek?|Weboldalakat megjelenítő programot|A böngésző webes tartalmakat tölt le és jelenít meg.|tech-definition|Csak egy monitorkábelt~A processzor hűtőjét~Kizárólag hálózati aljzatot
+Melyik program webböngésző az alábbiak közül?|Firefox|A Mozilla Firefox webböngésző.|software|LibreOffice Writer~Blender~Audacity
+Melyik program ismert nyílt forrású 3D-modellezőként?|Blender|A Blender 3D-modellezésre és animációra is használható.|software
+Melyik program elsősorban hangok szerkesztésére szolgál?|Audacity|Az Audacity hangszerkesztő alkalmazás.|software
+Mi a kétértékű számrendszer két számjegye?|0 és 1|A bináris számrendszer a 0 és 1 számjegyeket használja.|tech-pair|1 és 2~0 és 9~2 és 8
+Hány bitből áll egy bájt a mai szabványos használatban?|8|A bájt szokásos mai mérete nyolc bit.|number
+Melyik számrendszer alapja 16?|Hexadecimális|A hexadecimális rendszer tizenhatos számrendszer.|number-system|Bináris~Oktális~Decimális
+Hány különböző értéket vehet fel egy 8 bites előjel nélküli szám?|256|Nyolc bit 2 a nyolcadikon, vagyis 256 értéket kódol.|number
+Melyik hardveregység végez elsősorban grafikai párhuzamos számításokat?|GPU|A GPU grafikus feldolgozóegység.|hardware|Tápegység~Billentyűzet~Hangkábel
+Melyik adattároló használ mozgó alkatrész helyett félvezető memóriát?|SSD|Az SSD félvezető alapú adattároló.|hardware|Hagyományos HDD~DVD-meghajtó~Magnókazetta
+Melyik adattárolóban található forgó mágneses lemez?|HDD|A hagyományos merevlemez forgó mágneslemezeket használ.|hardware|SSD~RAM-modul~USB-kábel
+Melyik csatlakozó szolgál digitális kép és hang továbbítására?|HDMI|A HDMI digitális kép- és hangjelet továbbít.|connector|3,5 mm-es analóg fejhallgatócsatlakozó~PS/2~VGA hang nélkül
+Melyik műholdas rendszer szolgál helymeghatározásra?|GPS|A GPS műholdas helymeghatározó rendszer.|tech-system|DNS~HTML~SMTP
+Melyik vezeték nélküli technológia használatos gyakran fülhallgatók rövid hatótávú kapcsolatára?|Bluetooth|A Bluetooth rövid hatótávolságú vezeték nélküli kapcsolatokhoz elterjedt.|wireless|Ethernet-kábel~HDMI-kábel~SATA-kábel
+Mit jelent a kétlépcsős azonosításban a második tényező?|A jelszótól független további igazolást|A második tényező más jellegű bizonyítékot ad a személyazonosságra.|security-definition|Ugyanazt a jelszót még egyszer~A képernyő fényerejét~A felhasználónév hosszát
+Mi az adathalászat célja?|Bizalmas adatok megszerzése megtévesztéssel|Az adathalász üzenetek és oldalak megtévesztéssel kérnek adatokat.|security-definition|A merevlemez tisztítása~A monitor kalibrálása~A billentyűzet gyorsítása
+Mi a biztonsági mentés célja?|Adatok helyreállíthatósága elvesztés esetén|A mentésből hibák vagy adatvesztés után visszaállíthatók az adatok.|security-definition|A jelszavak nyilvánossá tétele~Az összes korábbi adat azonnali törlése~A kijelző színének módosítása
+Mi a titkosítás alapvető célja?|Az adatok olvashatóságának korlátozása jogosultság alapján|A titkosított adat megfelelő kulcs nélkül nem értelmezhető rendesen.|security-definition|Az adatméret feltétlen növelése~A fájlnevek kötelező rövidítése~A képernyő elforgatása
+Melyik adatbázistípus tárol jellemzően sorokból és oszlopokból álló táblákat?|Relációs adatbázis|A relációs adatbázisok táblákra és kapcsolatokra épülnek.|database-type|Kizárólag képfájl~Hangkodek~Videokártya-driver
+Melyik SQL-utasítás kérdez le adatokat táblából?|SELECT|A SELECT adatlekérdezésre szolgál.|sql-command|DELETE~DROP~INSERT
+Melyik SQL-utasítás szúr be új sort egy táblába?|INSERT|Az INSERT új rekordot ad a táblához.|sql-command|SELECT~DROP~COMMIT
+Melyik SQL-utasítás módosít meglévő sorokat?|UPDATE|Az UPDATE meglévő rekordokat módosít.|sql-command|SELECT~CREATE~ROLLBACK
+Melyik SQL-utasítás töröl sorokat egy táblából?|DELETE|A DELETE megadott sorokat töröl.|sql-command|INSERT~SELECT~GRANT
+Melyik HTTP-státuszkód jelenti általában a nem található erőforrást?|404|A 404 jelentése Not Found.|http-code
+Melyik HTTP-státuszkód jelzi a túl sok kérést?|429|A 429 jelentése Too Many Requests.|http-code
+Melyik HTTP-státuszkód jelzi a sikeres, szokásos választ?|200|A 200 jelentése OK.|http-code
+Melyik HTTP-státuszkód jelenti a belső szerverhibát?|500|Az 500 jelentése Internal Server Error.|http-code
+Melyik HTTP-metódus szolgál hagyományosan erőforrás lekérésére?|GET|A GET kérés erőforrás reprezentációját kéri le.|http-method|POST~PATCH~DELETE
+Melyik HTTP-metódus szolgál egy erőforrás részleges módosítására?|PATCH|A PATCH részleges módosítást ír le.|http-method|GET~HEAD~OPTIONS
+Melyik programozási szerkezet ismétel meg egy műveletsort?|Ciklus|A ciklus ismétlést valósít meg.|code-concept|Megjegyzés~Fájlkiterjesztés~Színprofil
+Mi a függvény paramétere a programozásban?|A függvénynek átadható bemeneti érték helye|A paraméter a függvény bemenetének megnevezett helye.|code-definition|Csak a fájl mérete~A képernyő felbontása~A processzor sorozatszáma
+Mit nevezünk rekurziónak?|Amikor egy eljárás közvetlenül vagy közvetve önmagát hívja|A rekurzív hívás kisebb részproblémák megoldására használható.|code-definition|Minden változó törlését~A program lefordításának tiltását~Az internetkapcsolat sebességét
+Melyik rendezési tulajdonságot jelenti az emelkedő számsorrend?|A kisebb értékek megelőzik a nagyobbakat|Emelkedő sorrendben az értékek nem csökkennek.|code-definition|A nagyobbak mindig előbb állnak~Csak páros számok szerepelhetnek~Minden elemnek azonosnak kell lennie
+Melyik logikai művelet igaz csak akkor, ha mindkét bemenete igaz?|ÉS|Az ÉS művelet két igaz operandus esetén ad igaz eredményt.|logical-op|VAGY~Kizáró VAGY~NEM

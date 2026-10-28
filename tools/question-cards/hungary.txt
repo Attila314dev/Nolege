@@ -1,0 +1,50 @@
+Melyik Magyarország legnagyobb tava?|Balaton|Magyarország legnagyobb tava a Balaton.|lake
+Melyik országban található a Velencei-tó?|Magyarország|A Velencei-tó Magyarországon, Fejér vármegyében található.|country
+Melyik hegységben emelkedik a Kékes?|Mátra|A Kékes a Mátra része.|mountain
+Mi Magyarország legmagasabb hegycsúcsa?|Kékes|Magyarország legmagasabb csúcsa a Kékes.|hungarian-peak|Galyatető~Írott-kő~Zengő
+Melyik tóba nyúlik be a Tihanyi-félsziget?|Balaton|A Tihanyi-félsziget a Balatonba nyúlik be.|lake
+Milyen táj jellegzetes példája a Hortobágy?|Puszta|A Hortobágy jellegzetes füves pusztai táj.|landscape|Magashegység~Trópusi esőerdő~Sarki tundra
+Melyik városban áll a magyar Országház?|Budapest|Az Országház Budapesten, a Duna partján található.|city
+Melyik folyó halad át Szegeden?|Tisza|Szeged a Tisza partján fekszik.|river
+Melyik városhoz kapcsolódik a Nagytemplom és a cívisváros elnevezés?|Debrecen|Debrecent gyakran nevezik cívisvárosnak; ismert épülete a Nagytemplom.|city
+Melyik magyar városhoz kötődik a Zsolnay kerámia története?|Pécs|A Zsolnay gyár és a Zsolnay Kulturális Negyed Pécsen található.|city
+Melyik város várát védte Dobó István 1552-ben?|Eger|Dobó István az egri vár védelmét vezette.|city
+Melyik városban található a Halászbástya?|Budapest|A Halászbástya Budapest budai oldalán található.|city
+Melyik településen áll az Esterházy-kastély, a magyar Versailles?|Fertőd|A fertődi Esterházy-kastélyt gyakran magyar Versailles-ként említik.|hungarian-place
+Melyik városban áll a híres Grassalkovich-kastély?|Gödöllő|A gödöllői királyi kastély a Grassalkovich családhoz kötődik.|hungarian-place
+Melyik városban található a Festetics-kastély?|Keszthely|A keszthelyi Festetics-kastély a Balaton nyugati térségének ismert műemléke.|hungarian-place
+Melyik barlang az Aggteleki-karszt legismertebb nagy barlangrendszere?|Baradla|A Baradla a Baradla–Domica-barlangrendszer magyarországi része.|cave|Szemlő-hegyi-barlang~Pál-völgyi-barlang~Tapolcai-tavasbarlang
+Melyik magyar tó ismert természetes meleg vizű gyógytóként?|Hévízi-tó|A Hévízi-tó természetes termálvízzel táplált gyógytó.|lake
+Melyik város fölött áll a Dunakanyarra néző Fellegvár?|Visegrád|A visegrádi Fellegvár a Dunakanyar fölé magasodik.|hungarian-place
+Melyik budapesti híd teljes nevében szerepel Széchenyi István neve?|Lánchíd|A híd hivatalos neve Széchenyi lánchíd.|budapest-bridge|Erzsébet híd~Szabadság híd~Petőfi híd
+Melyik budapesti hegyen áll a Szabadság-szobor?|Gellért-hegy|A Szabadság-szobor a Gellért-hegy tetején áll.|hungarian-hill|János-hegy~Hármashatár-hegy~Széchenyi-hegy
+Melyik sziget húzódik a Margit híd és az Árpád híd között?|Margit-sziget|A Margit-sziget a Duna budapesti szigete.|island
+Budapest melyik kerületében található a Budavári Palota?|I. kerület|A Budavári Palota Budapest I. kerületében áll.|district|V. kerület~XI. kerület~XIV. kerület
+Melyik város farsangi hagyománya a busójárás?|Mohács|A busójárás Mohács jellegzetes farsangi hagyománya.|hungarian-place
+Melyik település nevéhez kötődik a halasi csipke?|Kiskunhalas|A halasi csipke Kiskunhalas híres kézműves terméke.|hungarian-place
+Melyik város a matyó népművészet egyik központja?|Mezőkövesd|Mezőkövesd a matyó hímzés és népművészet ismert központja.|hungarian-place
+Melyik alföldi városról nevezték el a kalocsai hímzést?|Kalocsa|A kalocsai hímzés Kalocsa és környéke népművészetéhez kötődik.|hungarian-place
+Melyik történelmi borvidékhez kötődik az aszú?|Tokaj|A tokaji aszú a Tokaji borvidék jellegzetes bora.|wine-region|Villány~Somló~Etyek–Buda
+Mi Nándorfehérvár mai neve?|Belgrád|A történelmi Nándorfehérvár a mai Belgrád.|city
+Melyik városban működik a Déri Múzeum?|Debrecen|A Déri Múzeum Debrecen jelentős múzeuma.|city
+Melyik település bencés főapátsága világörökségi helyszín?|Pannonhalma|A pannonhalmi bencés főapátság világörökségi helyszín.|hungarian-place
+Mi Feszty Árpád ópusztaszeri körképének címe?|A magyarok bejövetele|A körkép a honfoglalás témáját jeleníti meg.|painting-title|Egri nők~Rőzsehordó nő~Éjjeli őrjárat
+Ki találta fel a Rubik-kockát?|Rubik Ernő|A bűvös kockát Rubik Ernő alkotta meg.|hungarian-person
+Melyik magyar tudós kapott 1937-ben élettani és orvosi Nobel-díjat?|Szent-Györgyi Albert|Szent-Györgyi Albert 1937-ben kapta meg a Nobel-díjat.|hungarian-person
+Melyik magyar feltalálóhoz kötik a modern golyóstoll kifejlesztését?|Bíró László József|Bíró László József munkája tette ismertté a modern golyóstollat.|hungarian-person
+Melyik magyar tudós nevét viseli a tárolt programú számítógép közismert architektúrája?|Neumann János|A Neumann-elv a számítógépek működésének alapvető modellje.|hungarian-person
+Melyik magyar orvost nevezték az anyák megmentőjének?|Semmelweis Ignác|Semmelweis a gyermekágyi láz megelőzésében végzett úttörő munkát.|hungarian-person
+Kinek a nevét viseli a relatív szolmizációra is építő magyar zenepedagógiai koncepció?|Kodály Zoltán|A Kodály-koncepció az énekes zenei neveléshez kötődik.|hungarian-person
+Ki komponálta A kékszakállú herceg vára című operát?|Bartók Béla|A kékszakállú herceg vára Bartók Béla operája.|hungarian-person
+Ki írta a Himnusz szövegét?|Kölcsey Ferenc|A Himnusz költője Kölcsey Ferenc.|hungarian-person
+Ki írta a Szózat szövegét?|Vörösmarty Mihály|A Szózat Vörösmarty Mihály verse.|hungarian-person
+Ki írta a Nemzeti dalt?|Petőfi Sándor|A Nemzeti dal Petőfi Sándor 1848-as verse.|hungarian-person
+Mi a magyar zászló színsorrendje felülről lefelé?|Piros, fehér, zöld|A magyar trikolór felső sávja piros, középsője fehér, alsója zöld.|flag-colours|Zöld, fehér, piros~Piros, zöld, fehér~Fehér, piros, zöld
+Milyen állat vezeti Hunort és Magort a csodaszarvas mondájában?|Szarvas|A mondában egy csodálatos szarvas vezeti a testvérpárt.|animal
+Melyik mitikus madár kapcsolódik a magyar eredetmondákhoz?|Turul|A turul a magyar mondahagyomány ismert madáralakja.|mythical-being
+Melyik nagyváros közelében található Lillafüred?|Miskolc|Lillafüred Miskolc egyik ismert üdülőterülete.|city
+Melyik település mellett található a Hungaroring?|Mogyoród|A Hungaroring Mogyoród közelében épült.|hungarian-place
+Melyik ismert gyógyfürdő működik a budapesti Városligetben?|Széchenyi Gyógyfürdő|A Széchenyi Gyógyfürdő a Városligetben található.|bath|Gellért Gyógyfürdő~Rudas Gyógyfürdő~Lukács Gyógyfürdő
+Melyik folyó felduzzasztásával alakították ki a Tisza-tavat?|Tisza|A Tisza-tó a Tiszán kialakított tározó.|river
+Melyik pénznemet vezették be Magyarországon 1946-ban?|Forint|A forintot 1946. augusztus 1-jén vezették be.|currency|Pengő~Korona~Euró
+Melyik magyar város neve kapcsolódik a szegedi szabadtéri játékokhoz?|Szeged|A szegedi szabadtéri játékok fő helyszíne a város Dóm tere.|city

@@ -1,0 +1,50 @@
+Melyik hangszernek van rendszerint 88 billentyűje?|Zongora|A modern koncertzongora szokásos billentyűszáma 88.|instrument
+Melyik vonós hangszer szól általában mélyebben a hegedűnél, de magasabban a csellónál?|Brácsa|A brácsa a hegedű és a cselló közötti hangfekvésű vonós hangszer.|instrument
+Melyik hangszer legmélyebb tagja a hagyományos vonósnégyesnek?|Cselló|A vonósnégyes két hegedűből, brácsából és csellóból áll.|instrument
+Melyik fafúvós hangszerben szól egyetlen nádnyelv a fúvókán?|Klarinét|A klarinét egynádnyelves fúvókával működik.|instrument|Fuvola~Oboa~Fagott
+Melyik rézfúvós hangszer csúszkájával változtatja a cső hosszát?|Harsona|A harsona jellegzetes eleme a kihúzható tolóka.|instrument
+Melyik húros hangszer jellegzetes alakja a háromszögszerű keret?|Hárfa|A hárfa húrjai a jellegzetes kereten feszülnek.|instrument
+Melyik hangszer szokásos hangolása E–A–D–G–H–E?|Gitár|A hathúros gitár szokásos hangolása a mély húrtól E–A–D–G–H–E.|instrument
+Melyik négytagú brit együttes tagja volt John Lennon és Paul McCartney?|The Beatles|Lennon és McCartney a Beatles két tagja volt.|band
+Melyik együttes énekese volt Freddie Mercury?|Queen|Freddie Mercury a Queen énekeseként vált világhírűvé.|band
+Melyik svéd együttes nyerte az 1974-es Eurovíziót a Waterloo című dallal?|ABBA|Az ABBA a Waterloo előadásával nyert 1974-ben.|band
+Melyik amerikai énekest nevezték a rock and roll királyának?|Elvis Presley|Elvis Presley közismert beceneve a rock and roll királya.|singer
+Melyik énekeshez kötődik az 1982-es Thriller album?|Michael Jackson|A Thriller Michael Jackson albuma.|singer
+Melyik énekesnő eredeti neve Stefani Germanotta?|Lady Gaga|Stefani Germanotta Lady Gaga polgári neve.|singer
+Melyik brit énekesnő albuma a 21?|Adele|A 21 Adele 2011-es albuma.|singer
+Melyik énekesnő adta ki az 1989 című albumot?|Taylor Swift|Az 1989 Taylor Swift 2014-es albuma.|singer
+Melyik énekesnő főszereplésével készült a 2018-as Csillag születik?|Lady Gaga|A 2018-as film női főszerepét Lady Gaga alakította.|singer
+Melyik előadó dala a Shape of You?|Ed Sheeran|A Shape of You Ed Sheeran 2017-es dala.|singer
+Melyik kanadai énekes polgári neve Abel Tesfaye?|The Weeknd|Abel Tesfaye a The Weeknd művésznevet használja.|singer
+Melyik brit énekesnő dala a Levitating?|Dua Lipa|A Levitating Dua Lipa Future Nostalgia albumán szerepel.|singer
+Melyik előadó albuma a Lemonade?|Beyoncé|A Lemonade Beyoncé 2016-os albuma.|singer
+Melyik zeneszerző írta a Négy évszak hegedűversenyeit?|Antonio Vivaldi|A Négy évszak Vivaldi négy hegedűversenye.|composer
+Melyik zeneszerző műve a Varázsfuvola?|Wolfgang Amadeus Mozart|A Varázsfuvola Mozart operája.|composer
+Ki komponálta a Diótörő balettet?|Pjotr Iljics Csajkovszkij|A Diótörő zenéjét Csajkovszkij szerezte.|composer
+Ki komponálta a Carmen című operát?|Georges Bizet|A Carmen Georges Bizet operája.|composer
+Ki komponálta az Aidát?|Giuseppe Verdi|Az Aida Giuseppe Verdi operája.|composer
+Ki komponálta a Bolerót?|Maurice Ravel|A Bolero Maurice Ravel zenekari műve.|composer
+Melyik zeneszerző műve a Kék Duna keringő?|Ifjabb Johann Strauss|A Kék Duna keringőt ifjabb Johann Strauss komponálta.|composer
+Melyik zeneszerző alkotása a Finlandia?|Jean Sibelius|A Finlandia Jean Sibelius szimfonikus költeménye.|composer
+Ki komponálta a Peer Gynt szvitek zenéjét?|Edvard Grieg|A Peer Gynt zenéjét Edvard Grieg szerezte.|composer
+Melyik zeneszerző műve A moldva című szimfonikus költemény?|Bedřich Smetana|A moldva Smetana Hazám ciklusának része.|composer
+Mit jelent a zenei jelzésként használt piano?|Halkan|A piano halk előadást kér.|music-term|Hangosan~Gyorsítva~Szünet nélkül
+Mit jelent a zenei jelzésként használt forte?|Hangosan|A forte hangos előadást jelöl.|music-term|Halkan~Lassítva~Pizzicatóval
+Mit jelent a crescendo jelzés?|Fokozatosan erősödve|A crescendo a hangerő fokozatos növelését kéri.|music-term|Fokozatosan halkulva~Mindig azonos hangerővel~Azonnali teljes csenddel
+Hány vonalból áll a hagyományos kottavonalrendszer?|5|A szokásos kottavonalrendszer öt vonalból áll.|number
+Hány félhangból áll egy tiszta oktáv az egyenletes temperálásban?|12|Az oktávot tizenkét egyenlő félhangra osztjuk.|number
+Mi a szokásos magyar hangnévsorban a G hangot követő törzshang?|A|A törzshangok sora C–D–E–F–G–A–H.|musicnote
+Melyik énekhang a legmagasabb a szoprán, alt, tenor, basszus sorban?|Szoprán|E négy szokásos szólam közül a szoprán a legmagasabb.|voice|Alt~Tenor~Basszus
+Melyik énekhang a legmélyebb a szoprán, alt, tenor, basszus sorban?|Basszus|E négy szólam közül a basszus a legmélyebb.|voice|Szoprán~Alt~Tenor
+Melyik zenei műfaj történetében fontos helyszín New Orleans?|Jazz|New Orleans a jazz kialakulásának egyik központja.|music-genre|Gregorián ének~Bécsi klasszikus szimfónia~Barokk kantáta
+Melyik ország nevéhez kötődik a reggae kialakulása?|Jamaica|A reggae Jamaicán alakult ki.|country
+Melyik magyar zeneszerző komponálta a Magyar rapszódiákat?|Liszt Ferenc|A Magyar rapszódiák Liszt Ferenc művei.|composer
+Ki komponálta a Háry János daljátékot?|Kodály Zoltán|A Háry János Kodály Zoltán daljátéka.|composer
+Ki zenésítette meg a magyar Himnuszt?|Erkel Ferenc|A Himnusz zenéjét Erkel Ferenc komponálta.|composer
+Melyik rockegyüttes albuma a The Dark Side of the Moon?|Pink Floyd|A The Dark Side of the Moon a Pink Floyd 1973-as albuma.|band
+Melyik együttes énekese volt Kurt Cobain?|Nirvana|Kurt Cobain a Nirvana frontembere volt.|band
+Melyik ausztrál eredetű rockegyüttes albuma a Back in Black?|AC/DC|A Back in Black az AC/DC 1980-as albuma.|band
+Melyik együttes lemeze az OK Computer?|Radiohead|Az OK Computer a Radiohead 1997-es albuma.|band
+Melyik elektronikus zenei duó tagjai voltak Guy-Manuel de Homem-Christo és Thomas Bangalter?|Daft Punk|A Daft Punkot e két francia zenész alkotta.|band
+Melyik filmhez szerezte Hans Zimmer az álomszintekhez kapcsolódó zenét 2010-ben?|Eredet|Hans Zimmer komponálta az Eredet zenéjét.|film-title|Gladiátor~A sötét lovag~Csillagok között
+Melyik zeneszerző műve az Egy kiállítás képei zongoraciklus?|Mogyeszt Muszorgszkij|Az Egy kiállítás képei Muszorgszkij zongoraciklusa.|composer

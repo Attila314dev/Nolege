@@ -1,0 +1,50 @@
+Melyik állat a legnagyobb ma élő emlős?|Kék bálna|A kék bálna a ma élő állatok közül a legnagyobb testű.|animal
+Melyik ma élő szárazföldi állatnak a legnagyobb a testmagassága?|Zsiráf|A zsiráf a legmagasabb ma élő szárazföldi állat.|animal
+Melyik nagymacska híres a hímje nyakát körülvevő sörényről?|Oroszlán|A kifejlett hím oroszlán jellegzetessége a sörény.|animal
+Melyik nagymacska bundája jellegzetesen fekete csíkos, narancsos alapon?|Tigris|A tigris bundáján sötét csíkok találhatók.|animal
+Melyik állat legfőbb tápláléka a bambusz az alábbiak közül?|Óriáspanda|Az óriáspanda étrendjének túlnyomó része bambusz.|animal|Jegesmedve~Oroszlán~Szürke farkas
+Melyik ausztrál erszényes híres az eukaliptuszlevelek fogyasztásáról?|Koala|A koala táplálékát főként eukaliptuszlevelek adják.|animal
+Melyik állat jellegzetes tárolószerve a zsírban gazdag púp?|Teve|A teve púpjában zsír raktározódik.|animal
+Melyik állatnak van ormánya és nagy, lapátszerű füle?|Elefánt|Az elefánt jellegzetessége az ormány.|animal
+Melyik emlőscsoport tagjai képesek aktív, szárnycsapásos repülésre?|Denevérek|A denevérek az egyedüli aktív repülésre képes emlősök.|animal-group|Mókusok~Sünök~Cickányok
+Melyik madárcsoport tagjai úsznak jól, de nem tudnak repülni, és a déli féltekén őshonosak?|Pingvinek|A pingvinek röpképtelen, vízi élethez alkalmazkodott madarak.|animal-group|Sirályok~Albatroszok~Viharmadarak
+Melyik madár a legnagyobb ma élő madárfaj?|Strucc|A strucc a legnagyobb testű ma élő madár.|animal
+Melyik madárfaj hímje ismert hatalmas, szemfoltos dísztollairól?|Indiai páva|Az indiai páva hímjének felső farkfedői látványos díszt alkotnak.|animal
+Melyik madár képes jellegzetesen egy helyben lebegve virágok nektárját fogyasztani?|Kolibri|A kolibrik szárnymozgása lehetővé teszi a lebegést.|animal
+Melyik rovar állít elő mézet a legismertebb háziasított fajként?|Házi méh|A házi méh nektárból készít mézet.|animal
+Melyik állatcsoport kifejlett tagjainak van hat lába?|Rovarok|A kifejlett rovaroknak három pár lábuk van.|animal-group|Pókok~Rákok~Százlábúak
+Hány lába van egy ép kifejlett póknak?|8|A pókoknak négy pár járólábuk van.|number
+Hány karja van egy polipnak?|8|A polipnak nyolc karja van.|number
+Milyen szervvel lélegzik a legtöbb kifejlett hal?|Kopoltyú|A halak többsége kopoltyúval veszi fel a víz oxigénjét.|animal-organ|Tüdőhólyagocska~Légcsőrendszer~Köpenyüregben lévő tüdő
+Melyik állatcsoporthoz tartozik a krokodil?|Hüllők|A krokodilok hüllők.|animal-group|Emlősök~Kétéltűek~Halak
+Melyik állatcsoporthoz tartozik a béka?|Kétéltűek|A békák a kétéltűek közé tartoznak.|animal-group|Hüllők~Emlősök~Madarak
+Mi a béka vízben fejlődő lárvájának neve?|Ebihal|A békák lárváját ebihalnak nevezzük.|larva|Hernyó~Pajor~Nyű
+Mi a lepkék jellegzetes lárvaalakja?|Hernyó|A lepkék lárvái a hernyók.|larva|Ebihal~Pajor~Nyű
+Melyik állat alakít ki gátakat faágakból a vízben?|Hód|A hódok gátépítéssel alakítják élőhelyüket.|animal
+Melyik tengerben élő emlős ismert gyakori játékos viselkedéséről és visszhangos tájékozódásáról?|Palackorrú delfin|A palackorrú delfin hangok visszaverődésével is tájékozódik.|animal|Császárpingvin~Nagy fehér cápa~Közönséges polip
+Melyik állat tartozik a tojásrakó emlősök közé?|Kacsacsőrű emlős|A kacsacsőrű emlős tojásrakó emlős.|animal|Vörös kenguru~Koala~Vombat
+Melyik halnak van jellegzetes lófejszerű feje, és a hím hordozza a petéket?|Csikóhal|A csikóhalaknál a hím költőtáskájában fejlődnek az utódok.|animal
+Melyik állat híres arról, hogy színváltoztatásra képes és a szemeit külön is mozgathatja?|Kaméleon|A kaméleonok jellegzetessége a színváltoztatás és a külön mozgó szem.|animal
+Melyik állat bőre tüskés, és veszély esetén gyakran összegömbölyödik?|Sün|A sün tüskés hátával védekezik.|animal
+Melyik állatfajból háziasították a kutyát?|Szürke farkas|A házikutya a szürke farkas háziasított leszármazási vonalához tartozik.|animal
+Melyik kontinensen őshonos a zsiráf?|Afrika|A zsiráfok afrikai állatok.|continent
+Melyik kontinensen él vadon a jaguár az Amazonas vidékén?|Dél-Amerika|Az Amazonas-medence jaguárjai Dél-Amerikában élnek.|continent
+Melyik állat rendelkezik páncéllal, amelyhez a bordái és csigolyái is kapcsolódnak?|Teknős|A teknős páncélja a csontvázával összenőtt képződmény.|animal
+Melyik fecskefaj jellegzetessége a hosszú, villás farok és a vöröses torok?|Füsti fecske|A füsti fecske jellegzetesen hosszú farkvillájú, vöröses torkú madár.|animal
+Melyik madár rakja tojását gyakran más madarak fészkébe?|Kakukk|A közönséges kakukk költésparazita.|animal
+Melyik állat ismert a téli álomhoz kapcsolódó, akár hónapokig tartó nyugalmi állapotról?|Mormota|A mormoták hosszú téli álmot alszanak.|animal|Vörös róka~Őz~Vadnyúl
+Melyik állat szőrének levegővel telt szerkezete segít a hideg elleni védelemben az Északi-sarkvidéken?|Jegesmedve|A jegesmedve sűrű bundája és zsírrétege alkalmazkodás a sarki környezethez.|animal
+Melyik állatot nevezik tudományosan Homo sapiensnek?|Ember|A Homo sapiens a mai ember fajneve.|animal
+Melyik állatcsoport tagjai táplálják tejjel az utódaikat?|Emlősök|Az emlősök jellegzetessége az emlőmirigyek termelte tej.|animal-group|Madarak~Hüllők~Rovarok
+Melyik állatcsoport kültakaróját borítják valódi tollak?|Madarak|A tollak a madarak jellegzetes kültakarói képletei.|animal-group|Emlősök~Hüllők~Kétéltűek
+Melyik állat a világ legnagyobb ma élő halfaja?|Cetcápa|A cetcápa a legnagyobb ma élő hal.|animal
+Melyik állat élőhelye a sarkvidéki jégtáblák környéke, és hosszú felső agyarai vannak?|Rozmár|A rozmár hosszú agyarú, sarkvidéki tengeri emlős.|animal
+Melyik tengeri állatnak van ötkarú jellegzetes testformája az ismert fajok nagy részénél?|Tengeri csillag|Sok tengeri csillag ötkarú, bár vannak többkarú fajok is.|animal
+Melyik állatcsoporthoz tartoznak a tengeri csillagok és a tengeri sünök?|Tüskésbőrűek|Mindkettő a tüskésbőrűek törzsébe tartozik.|animal-group|Puhatestűek~Ízeltlábúak~Gyűrűsférgek
+Melyik állatcsoporthoz tartoznak a csigák és kagylók?|Puhatestűek|A csigák és kagylók a puhatestűek törzsének tagjai.|animal-group|Tüskésbőrűek~Ízeltlábúak~Gerincesek
+Melyik rovarcsoportban vannak dolgozók, királynők és gyakran bolyban élő közösségek?|Hangyák|A hangyák társas rovarok, kolóniákban élnek.|animal-group|Szitakötők~Bolhák~Sáskák
+Melyik madár használja vésőszerű csőrét fatörzsek kopogtatására?|Harkály|A harkályok csőre a fák kérgének és fájának megmunkálásához alkalmazkodott.|animal
+Melyik állatnak jellegzetes a fekete-fehér csíkos kültakarója a lóalkatúak között?|Zebra|A zebrákat jellegzetes csíkos szőrzetük különbözteti meg.|animal
+Melyik állatcsoportba tartozik a tarajos gőte?|Kétéltűek|A gőték farkos kétéltűek.|animal-group|Hüllők~Halak~Emlősök
+Melyik afrikai emberszabású majomnak a legnagyobb az átlagos testtömege?|Gorilla|A gorillák a legnagyobb termetű ma élő főemlősök.|animal|Csimpánz~Bonobó~Gibbon
+Melyik ázsiai emberszabású majom jellegzetesen vörösesbarna szőrű?|Orangután|Az orangutánok vörösesbarna szőrű emberszabású majmok.|animal

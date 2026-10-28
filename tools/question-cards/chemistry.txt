@@ -1,0 +1,50 @@
+Melyik elem rendszáma 1?|Hidrogén|A hidrogén atommagjában egy proton van.|element
+Melyik elem rendszáma 2?|Hélium|A hélium rendszáma kettő.|element
+Melyik elem rendszáma 6?|Szén|A szén atommagja hat protont tartalmaz.|element
+Melyik elem rendszáma 8?|Oxigén|Az oxigén rendszáma nyolc.|element
+Melyik elem vegyjele az O?|Oxigén|Az O az oxigén vegyjele.|element
+Melyik elem vegyjele az N?|Nitrogén|Az N a nitrogén vegyjele.|element
+Melyik elem vegyjele a C?|Szén|A C a szén vegyjele.|element
+Melyik elem vegyjele a H?|Hidrogén|A H a hidrogén vegyjele.|element
+Melyik elem vegyjele az S?|Kén|Az S a kén vegyjele.|element
+Melyik elem vegyjele a P?|Foszfor|A P a foszfor vegyjele.|element
+Melyik elem vegyjele a Si?|Szilícium|A Si a szilícium vegyjele.|element
+Melyik elem vegyjele az Al?|Alumínium|Az Al az alumínium vegyjele.|element
+Melyik vegyület képlete a H₂O?|Víz|A vízmolekula két hidrogénatomot és egy oxigénatomot tartalmaz.|compound
+Melyik vegyület képlete a CO₂?|Szén-dioxid|A szén-dioxid egy szén- és két oxigénatomból áll.|compound
+Melyik vegyület képlete az NH₃?|Ammónia|Az ammónia képlete NH₃.|compound
+Melyik vegyület képlete a CH₄?|Metán|A metán egy szénatomot és négy hidrogénatomot tartalmaz.|compound
+Melyik vegyület képlete a C₂H₅OH?|Etanol|Az etanol a szeszes italokban található alkohol.|compound
+Melyik sav adja az ecet jellegzetes savasságát?|Ecetsav|Az ecet híg vizes ecetsavoldat.|acid
+Melyik sav található jellegzetesen a citrusfélékben?|Citromsav|A citromsav a citrusfélék egyik jellegzetes szerves sava.|acid
+Melyik sav fontos összetevője a gyomornedvnek?|Sósav|A gyomor savas közegét a sósav biztosítja.|acid
+Milyen kémhatású a 7-nél kisebb pH-jú híg vizes oldat 25 °C-on?|Savas|A semleges pH 25 °C-on közel 7; ennél kisebb érték savas.|ph-type|Lúgos~Semleges~A pH nem jelzi a kémhatást
+Milyen kémhatású a 7-nél nagyobb pH-jú híg vizes oldat 25 °C-on?|Lúgos|A 7-nél nagyobb pH 25 °C-on lúgos kémhatást jelent.|ph-type|Savas~Semleges~Mindig olajos
+Mennyi a tiszta víz pH-ja közelítőleg 25 °C-on?|7|A tiszta víz 25 °C-on közel semleges, pH-ja 7.|number
+Mi a sav és bázis reakciójának szokásos neve?|Semlegesítés|Sav és bázis reakcióját semlegesítésnek nevezzük.|chem-process|Szublimáció~Mágnesezés~Lepárlás
+Melyik jelzőanyag színe változik a közeg kémhatása szerint?|Indikátor|Az indikátorok a pH függvényében változtatják színüket.|chem-tool|Katalizátor minden esetben~Hőszigetelő~Oldhatatlan homok
+Melyik gázból van a legtöbb a földi száraz levegőben térfogatarány szerint?|nitrogén|A száraz levegő térfogatának körülbelül 78 százaléka nitrogén.|gas
+Melyik gáz alkotja a sztratoszféra UV-sugárzást elnyelő jellegzetes rétegét?|ózon|Az ózonréteg a Nap UV-sugárzásának jelentős részét elnyeli.|gas
+Melyik halmazállapotnak van önálló térfogata, de nincs önálló alakja?|Folyadék|A folyadék felveszi az edény alakját, térfogata közel állandó.|state|Gáz~Plazma~Szilárd test
+Melyik halmazállapot tölti ki az edény rendelkezésre álló teljes terét?|Gáz|A gáz kitágulva kitölti a számára hozzáférhető edényt.|state|Szilárd test~Folyadék~Kristály
+Melyik eljárással választható el a vízben nem oldódó homok a víztől?|Szűrés|A szűrő visszatartja a homokszemcséket, a víz áthalad.|separation
+Melyik eljárás használja ki két folyadék eltérő forráspontját?|Lepárlás|A lepárlás az eltérő illékonyságon és forrásponton alapul.|separation
+Melyik eljárással nyerhető vissza só a sós vízből a víz eltávolításával?|Bepárlás|Bepárláskor az oldószer elpárolog, az oldott anyag visszamarad.|separation
+Melyik eljárás használható a vasreszelék és homok keverékének szétválasztására?|Mágneses elválasztás|A mágnes a vasreszeléket vonzza, a homokot rendszerint nem.|separation
+Melyik anyag a gyémánt és a grafit közös kémiai eleme?|Szén|A gyémánt és grafit a szén eltérő módosulatai.|element
+Melyik fém fő alkotója a közönséges acélnak?|Vas|Az acél alapja a vas, meghatározott mennyiségű szénnel.|element
+Melyik két fém hagyományos ötvözete a bronz?|Réz és ón|A hagyományos ónbronz réz és ón ötvözete.|metal-pair|Réz és cink~Vas és alumínium~Arany és ezüst
+Melyik két fém ötvözete a sárgaréz?|Réz és cink|A sárgaréz fő összetevői a réz és a cink.|metal-pair|Réz és ón~Vas és nikkel~Alumínium és ólom
+Melyik fém folyékony szobahőmérsékleten?|Higany|A higany szokásos szobahőmérsékleten folyékony.|element
+Melyik nemfémes elem folyékony szobahőmérsékleten?|Bróm|A bróm a szobahőmérsékleten folyékony nemfémes elem.|element
+Milyen részecskeszám határozza meg egy atom rendszámát?|Protonok száma|A rendszám az atommagban található protonok száma.|atomic-property|Neutronok és elektronok összege~Kötések száma~Molekulák száma
+Hogyan nevezzük az azonos rendszámú, de eltérő neutronszámú atomokat?|Izotópok|Az izotópok azonos elem eltérő tömegszámú atomjai.|atomic-term|Izobárok minden esetben~Különböző elemek szükségképpen~Csak ionok
+Hogyan nevezzük az elektront leadó vagy felvevő, töltött atomot?|Ion|Elektronleadással vagy -felvétellel töltött ion keletkezhet.|atomic-term|Izotóp minden esetben~Foton~Kristályrács
+Milyen kötésben osztoznak az atomok közös elektronpáron?|Kovalens kötés|A kovalens kötés közös elektronpár révén jön létre.|bond|Ionos kötés~Fémes kötés~Gravitációs kapcsolat
+Mi gyorsíthat kémiai reakciót anélkül, hogy a teljes folyamatban elfogyna?|Katalizátor|A katalizátor a reakció sebességét növeli, és a folyamat végén visszaalakul.|chem-tool|Kizárólag az edény színe~Csak a termék tömege~Mindig a fény hiánya
+Milyen reakciót nevezünk exotermnek?|Hőfelszabadulással járót|Exoterm folyamatban energia, jellemzően hő távozik a környezetbe.|reaction-type|Kizárólag hőelnyeléssel járót~Anyag nélküli folyamatot~Mindig fény nélküli reakciót
+Milyen folyamatban ad le elektront egy részecske a redoxireakciók értelmezésében?|Oxidáció|Az elektronleadás oxidáció.|redox|Redukció~Oldódás minden esetben~Kondenzáció
+Milyen folyamatban vesz fel elektront egy részecske a redoxireakciók értelmezésében?|Redukció|Az elektronfelvétel redukció.|redox|Oxidáció~Szublimáció~Kristályosodás
+Melyik elemből áll a hétköznapi alumíniumfólia fő anyaga?|Alumínium|Az alumíniumfólia fő anyaga alumínium.|element
+Melyik vegyület másik neve a szódabikarbóna?|Nátrium-hidrogén-karbonát|A szódabikarbóna képlete NaHCO₃.|compound
+Melyik vegyület a mészkő leggyakoribb fő összetevője?|Kalcium-karbonát|A mészkő fő ásványa rendszerint a kalcit, vagyis kalcium-karbonát.|compound

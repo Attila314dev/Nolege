@@ -1,0 +1,50 @@
+Melyik kontinens déli részén található Patagónia?|Dél-Amerika|Patagónia Argentína és Chile déli területein fekszik.|continent
+Melyik kontinensen terül el a Szahara?|Afrika|A Szahara Észak-Afrika hatalmas sivataga.|continent
+Melyik országban emelkedik a Kilimandzsáró?|Tanzánia|A Kilimandzsáró Tanzánia területén található.|country
+Melyik országban található a Grand Canyon?|Amerikai Egyesült Államok|A Grand Canyon Arizona államban fekszik.|country
+Melyik skandináv ország nyugati partvidéke híres fjordjairól?|Norvégia|Norvégia tagolt nyugati partjain számos fjord húzódik.|country
+Melyik ország jelképes hegye a Fudzsi?|Japán|A Fudzsi Japán legmagasabb hegye és ismert jelképe.|country
+Melyik országban található Machu Picchu?|Peru|Az egykori inka település Peru hegyei között áll.|country
+Melyik országban áll Angkorvat templomegyüttese?|Kambodzsa|Angkorvat a kambodzsai Angkor emlékegyüttes része.|country
+Melyik országban található Petra sziklába vájt városa?|Jordánia|Petra Jordánia egyik legismertebb történelmi helyszíne.|country
+Melyik országban áll a Tádzs Mahal?|India|A Tádzs Mahal az indiai Agra városában található.|country
+Melyik országban találhatók a gízai piramisok?|Egyiptom|Gíza piramisai Kairó közelében, Egyiptomban állnak.|country
+Melyik országhoz tartoznak a Galápagos-szigetek?|Ecuador|A Galápagos-szigetek Ecuador csendes-óceáni szigetcsoportja.|country
+Melyik országban található a Yellowstone Nemzeti Park?|Amerikai Egyesült Államok|A Yellowstone főként Wyoming állam területén fekszik.|country
+Melyik országhoz tartozik Bali szigete?|Indonézia|Bali az indonéz szigetvilág része.|country
+Melyik óceán közepén húzódó hátságon fekszik Izland?|Atlanti-óceán|Izland a Közép-atlanti-hátság felszínre emelkedő részén fekszik.|ocean
+Melyik óceán délnyugati térségében található Új-Zéland?|Csendes-óceán|Új-Zéland a Csendes-óceán délnyugati részén helyezkedik el.|ocean
+Mi Finnország fővárosa?|Helsinki|Finnország fővárosa Helsinki, a Finn-öböl partján.|city
+Melyik ország fővárosa Lisszabon?|Portugália|Lisszabon Portugália fővárosa, a Tejo torkolatánál.|country
+Melyik ország adriai partján fekszik Dubrovnik?|Horvátország|Dubrovnik Horvátország déli, adriai partvidékén található.|country
+Melyik országhoz tartozik Capri szigete?|Olaszország|Capri a Nápolyi-öböl közelében fekvő olasz sziget.|country
+Melyik hegység húzódik Dél-Amerika nyugati peremén?|Andok|Az Andok Dél-Amerika nyugati oldalán fut végig.|mountain
+Melyik hegység része a Matterhorn?|Alpok|A Matterhorn a svájci–olasz határon, az Alpokban emelkedik.|mountain
+Melyik hegység övezi a Kárpát-medencét északról és keletről?|Kárpátok|A Kárpátok íve északon és keleten határolja a medencét.|mountain
+Melyik a Föld legnagyobb, kontinensnek nem minősülő szigete?|Grönland|A kontinenseket külön számítva Grönland a legnagyobb sziget.|island
+Melyik óceánban található Madagaszkár?|Indiai-óceán|Madagaszkár Afrika keleti partjainál, az Indiai-óceánban fekszik.|ocean
+Melyik tengerben található Szicília?|Földközi-tenger|Szicília a Földközi-tenger legnagyobb szigete.|sea
+Melyik országhoz tartoznak a Baleár-szigetek?|Spanyolország|Mallorca, Menorca és Ibiza a spanyol Baleár-szigetekhez tartozik.|country
+Melyik folyó halad át Kairón?|Nílus|Kairó a Nílus két partján terül el.|river
+Melyik folyó halad át Londonon?|Temze|London történelme szorosan összefonódik a Temzével.|river
+Melyik folyó halad át Párizson?|Szajna|Párizs központját a Szajna szeli ketté.|river
+Melyik folyó választja el Budát és Pestet?|Duna|Budapest két történelmi városrésze között a Duna folyik.|river
+Melyik tengerbe ömlik a Nílus?|Földközi-tenger|A Nílus deltája a Földközi-tenger déli partján található.|sea
+Melyik vízbe torkollik a Volga?|Kaszpi-tenger|A Volga az óceánokkal össze nem függő Kaszpi-tengerbe ömlik.|sea
+Melyik kontinensen található a Titicaca-tó?|Dél-Amerika|A Titicaca-tó Peru és Bolívia határán fekszik.|continent
+Melyik országban található a Bajkál-tó?|Oroszország|A Bajkál-tó Oroszország szibériai részén helyezkedik el.|country
+Melyik ország partjainál húzódik a Nagy-korallzátony?|Ausztrália|A Nagy-korallzátony Ausztrália északkeleti partvidékén található.|country
+Hogy hívják Új-Zéland két legnagyobb szigetét?|Északi-sziget és Déli-sziget|Új-Zéland két legnagyobb szárazföldje az Északi- és a Déli-sziget.|island-pair|Grönland és Izland~Kréta és Ciprus~Borneó és Jáva
+Melyik két tengert köti össze a Szuezi-csatorna?|Földközi-tengert és Vörös-tengert|A Szuezi-csatorna a Földközi- és a Vörös-tenger között vezet.|water-pair|Fekete-tengert és Balti-tengert~Északi-tengert és Adriai-tengert~Vörös-tengert és Fekete-tengert
+Melyik két óceánt köti össze a Panama-csatorna?|Atlanti-óceánt és Csendes-óceánt|A Panama-csatorna átjárót nyit az Atlanti- és a Csendes-óceán között.|water-pair|Indiai-óceánt és Jeges-tengert~Atlanti-óceánt és Indiai-óceánt~Csendes-óceánt és Jeges-tengert
+Melyik két kontinens között fekszik a Gibraltári-szoros?|Európa és Afrika|A szoros Spanyolország déli része és Észak-Afrika között található.|continent-pair|Ázsia és Ausztrália~Észak-Amerika és Dél-Amerika~Európa és Észak-Amerika
+Melyik város Greenwich nevű részéhez kötődik a kezdő délkör?|London|A greenwichi obszervatórium London területén található.|city
+Hogy hívjuk a 0° földrajzi szélességű vonalat?|Egyenlítő|Az Egyenlítő az északi és a déli félgömb határa.|geo-line|Ráktérítő~Baktérítő~Északi-sarkkör
+Melyik nevezetes szélességi kör határolja északon a trópusi övezetet?|Ráktérítő|A trópusi övezet északi határa a Ráktérítő.|geo-line|Baktérítő~Egyenlítő~Déli-sarkkör
+Mit kötnek össze a domborzati térkép szintvonalai?|Azonos magasságú pontokat|Egy szintvonal minden pontja ugyanazon a tengerszint feletti magasságon van.|map-term|Azonos hőmérsékletű pontokat~Azonos légnyomású pontokat~Azonos csapadékú pontokat
+Melyik a Föld legnagyobb területű kontinense?|Ázsia|A kontinensek közül Ázsia területe a legnagyobb.|continent
+Hány fok a greenwichi kezdő délkör földrajzi hosszúsága?|0°|A hosszúsági fokok kiindulópontja a 0°-os délkör.|angle
+Melyik óceán pereméhez kötődik a Csendes-óceáni Tűzgyűrű?|Csendes-óceán|A Tűzgyűrű a Csendes-óceán peremének vulkáni és földrengési övezete.|ocean
+Melyik kontinensen található az Atlasz-hegység?|Afrika|Az Atlasz-hegység Északnyugat-Afrikában húzódik.|continent
+Melyik tengerbe ömlik a Duna?|Fekete-tenger|A Duna deltája a Fekete-tenger nyugati partjánál található.|sea
+Melyik országban található a Vezúv vulkán?|Olaszország|A Vezúv Nápoly közelében, Olaszországban emelkedik.|country

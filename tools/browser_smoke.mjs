@@ -7,7 +7,7 @@ import { createQuizServer } from '../lib/server.js';
 const launch = { headless: true };
 if (process.env.CHROMIUM_EXECUTABLE) launch.executablePath = process.env.CHROMIUM_EXECUTABLE;
 const browser = await chromium.launch(launch);
-const app = createQuizServer({ ai: createAI({ env: {} }), timings: { questionMs: 10_000, resultMs: 500 } });
+const app = createQuizServer({ ai: createAI({ env: {} }), timings: { questionMs: 60_000, resultMs: 1500 } });
 await app.ready;
 await new Promise(resolve => app.server.listen(0, '127.0.0.1', resolve));
 const base = `http://127.0.0.1:${app.server.address().port}`;

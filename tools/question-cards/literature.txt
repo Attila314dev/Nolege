@@ -1,0 +1,50 @@
+Ki írta A kis herceg című könyvet?|Antoine de Saint-Exupéry|A kis herceg Antoine de Saint-Exupéry műve.|writer
+Ki írta a Micimackó-történeteket?|A. A. Milne|Micimackó történeteinek szerzője A. A. Milne.|writer
+Ki írta az Alice Csodaországban című regényt?|Lewis Carroll|Alice történetét Lewis Carroll alkotta meg.|writer
+Ki írta A hobbit című regényt?|J. R. R. Tolkien|A hobbit Tolkien Középföldén játszódó regénye.|writer
+Ki írta a Narnia krónikái könyvsorozatot?|C. S. Lewis|Narnia történeteinek szerzője C. S. Lewis.|writer
+Ki írta a Robinson Crusoe című regényt?|Daniel Defoe|A Robinson Crusoe Daniel Defoe regénye.|writer
+Ki írta a Gulliver utazásai című művet?|Jonathan Swift|Gulliver utazásait Jonathan Swift írta.|writer
+Ki írta a Don Quijote című regényt?|Miguel de Cervantes|Don Quijote történetének szerzője Miguel de Cervantes.|writer
+Melyik ókori költőhöz kötik az Odüsszeiát?|Homérosz|Az Odüsszeiát hagyományosan Homérosz művének tekintik.|writer
+Melyik eposz meséli el a trójai háború egy szakaszát?|Iliász|Az Iliász a trójai háború eseményeinek egy részét dolgozza fel.|book-title
+Ki írta a János vitézt?|Petőfi Sándor|A János vitéz Petőfi Sándor elbeszélő költeménye.|writer
+Ki írta a Toldit?|Arany János|A Toldi Arany János elbeszélő költeménye.|writer
+Ki írta A Pál utcai fiúk című regényt?|Molnár Ferenc|A Pál utcai fiúk Molnár Ferenc ifjúsági regénye.|writer
+Ki írta a Vuk című regényt?|Fekete István|Vuk, a rókakölyök történetét Fekete István írta.|writer
+Ki írta a Tüskevár című regényt?|Fekete István|A Tüskevár Fekete István ifjúsági regénye.|writer
+Mi A kis herceg otthonául szolgáló kisbolygó jelölése?|B–612|A történetben a kis herceg a B–612-es kisbolygóról érkezik.|asteroid-code|B–216~A–113~X–301
+Ki írta a Dorian Gray arcképe című regényt?|Oscar Wilde|A Dorian Gray arcképe Oscar Wilde regénye.|writer
+Ki írta a Büszkeség és balítélet című regényt?|Jane Austen|A Büszkeség és balítélet Jane Austen műve.|writer
+Ki írta a Jane Eyre című regényt?|Charlotte Brontë|A Jane Eyre szerzője Charlotte Brontë.|writer
+Ki írta az Üvöltő szeleket?|Emily Brontë|Az Üvöltő szelek Emily Brontë regénye.|writer
+Ki írta a Bűn és bűnhődés című regényt?|Fjodor Dosztojevszkij|A Bűn és bűnhődés Dosztojevszkij műve.|writer
+Ki írta a Háború és békét?|Lev Tolsztoj|A Háború és béke Lev Tolsztoj nagyregénye.|writer
+Ki írta A három testőr című regényt?|Alexandre Dumas|A három testőr Alexandre Dumas történelmi kalandregénye.|writer
+Ki írta A nyomorultak című regényt?|Victor Hugo|A nyomorultak Victor Hugo regénye.|writer
+Ki írta a Monte Cristo grófja című regényt?|Alexandre Dumas|Monte Cristo grófjának történetét Alexandre Dumas írta.|writer
+Ki írta a Moby Dick című regényt?|Herman Melville|A Moby Dick Herman Melville bálnavadászatról szóló regénye.|writer
+Ki írta a Fahrenheit 451 című regényt?|Ray Bradbury|A Fahrenheit 451 Ray Bradbury disztópiája.|writer
+Ki írta a Szép új világ című regényt?|Aldous Huxley|A Szép új világ Aldous Huxley disztópiája.|writer
+Ki írta az Alapítvány regénysorozat első köteteit?|Isaac Asimov|Az Alapítvány világát Isaac Asimov alkotta meg.|writer
+Ki írta A Dűne című eredeti regényt?|Frank Herbert|A Dűne Frank Herbert tudományos-fantasztikus regénye.|writer
+Ki írta Az átváltozás című elbeszélést?|Franz Kafka|Az átváltozás Franz Kafka elbeszélése.|writer
+Ki írta A per című regényt?|Franz Kafka|A per Franz Kafka regénye.|writer
+Ki írta a Kisasszonyok című regényt?|Louisa May Alcott|A Kisasszonyok Louisa May Alcott műve.|writer
+Ki alkotta meg Harisnyás Pippi alakját?|Astrid Lindgren|Harisnyás Pippi történeteit Astrid Lindgren írta.|writer
+Ki írta A repülő osztály című regényt?|Erich Kästner|A repülő osztály Erich Kästner ifjúsági regénye.|writer
+Ki írta a Nyugaton a helyzet változatlan című regényt?|Erich Maria Remarque|A háborúellenes regény szerzője Erich Maria Remarque.|writer
+Ki írta az Isteni színjátékot?|Dante Alighieri|Az Isteni színjáték Dante Alighieri műve.|writer
+Ki írta a Dekameront?|Giovanni Boccaccio|A Dekameron Giovanni Boccaccio novellagyűjteménye.|writer
+Ki írta a Faust című híres drámai költeményt?|Johann Wolfgang von Goethe|A Faust Goethe legismertebb művei közé tartozik.|writer
+Ki írta a Bánk bán című drámát?|Katona József|A Bánk bán Katona József drámája.|writer
+Melyik országból ered a haiku műfaja?|Japán|A haiku japán eredetű rövid versforma.|country
+Melyik műfaj jellegzetes kezdő formulája az Egyszer volt, hol nem volt?|Népmese|Ez a formula a népmesék hagyományos kezdete.|literary-genre|Hírlapi tudósítás~Tudományos értekezés~Önéletrajz
+Hogy nevezik a történet fő cselekményét követő, lezáró részt?|Epilógus|Az epilógus a történetet követő lezárás.|literary-term|Prológus~Mottó~Lábjegyzet
+Melyik klasszikus versforma rögzített sorszáma tizennégy?|Szonett|A szonett hagyományosan tizennégy sorból áll.|literary-genre|Haiku~Eposz~Népdal
+Hogy nevezik a versben vagy dalban rendszeresen visszatérő sort vagy szakaszt?|Refrén|A refrén ismétlődő szövegrész.|literary-term|Mottó~Prológus~Lábjegyzet
+Melyik elbeszélői forma jellemzője az én névmással mesélő narrátor?|Egyes szám első személyű|Az én-elbeszélő egyes szám első személyben szólal meg.|narration|Egyes szám harmadik személyű~Többes szám második személyű~Személytelen felsorolás
+Hogy hívják a szereplők gondolataiba is belelátó narrátort?|Mindentudó elbeszélő|A mindentudó elbeszélő több szereplő belső világát is ismeri.|narration|Korlátozott tudású tanú~Néma szereplő~Csupán dokumentumokat közlő narrátor
+Mit nevezünk versszaknak?|Összetartozó verssorok csoportját|A versszak a vers több sorból álló szerkezeti egysége.|literary-definition|Egyetlen szó hangsúlyát~A könyv címoldalát~A regény utolsó mondatát
+Melyik magyar költő szülővárosa Nagyszalonta?|Arany János|Arany János Nagyszalontán született.|writer
+Melyik angliai településen született William Shakespeare?|Stratford-upon-Avon|Shakespeare szülőhelye Stratford-upon-Avon.|city|London~Oxford~Cambridge

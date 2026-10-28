@@ -145,7 +145,7 @@ function renderHost() {
   $('#aiStatus').textContent = 'Az általános kvíz a készletből indul. Egyedi témakörhöz az AI külön csomagot készít; kikapcsolva csak a mentett témákból választunk.';
   $('#prepareError').hidden = !room.prepareError;
   $('#prepareError').textContent = room.prepareError || '';
-  $('#refillButton').disabled = playing || room.preparing || !room.ai.configured || room.pool.refilling || room.pool.available >= room.pool.target || room.pool.nextRetryAt > Date.now();
+  $('#refillButton').disabled = playing || room.preparing || room.pool.refilling || room.pool.available >= room.pool.target || room.pool.nextRetryAt > Date.now();
   $('#prepareButton').textContent = room.preparing ? 'Készül a kérdéssor…' : room.phase === 'finished' ? 'Új forduló készítése' : 'Új kérdéssor készítése';
   $('#previewButton').disabled = playing || room.preparing || !room.pack;
   $('#exportButton').disabled = playing || room.preparing || !room.pack;

@@ -1,0 +1,50 @@
+Melyik szerv pumpálja a vért a keringésben?|Szív|A szív ritmikus összehúzódásai hajtják a vérkeringést.|body-organ
+Melyik szerv fő feladata a gázcsere a belélegzett levegővel?|Tüdő|A tüdő léghólyagocskáiban zajlik a gázcsere.|body-organ
+Melyik páros szerv termeli a vizeletet a vér szűrésével?|Vese|A vesék szűrési és szabályozási folyamatokkal állítják elő a vizeletet.|body-organ
+Melyik szervben termelődik az epe?|Máj|Az epe a májban termelődik.|body-organ
+Melyik szerv tárolja és sűríti az epét?|Epehólyag|Az epehólyag tárolja és besűríti a máj termelte epét.|body-organ
+Melyik emésztőszerv savas közegében működik a pepszin?|Gyomor|A gyomor pepszinje savas közegben bont fehérjéket.|body-organ
+Melyik bélszakaszban szívódik fel a tápanyagok nagy része?|Vékonybél|A tápanyagok emésztése és felszívása főként a vékonybélben történik.|body-organ
+Melyik szerv irányítja a központi idegrendszer részeként a tudatos mozgásokat?|Agy|Az agy mozgásvezérlő területei a tudatos mozgásban vesznek részt.|body-organ
+Melyik testrész védi csontos burkolatával az agyat?|Koponya|A koponya agykoponyai része védi az agyat.|body-part
+Melyik csontcsoport védi a mellkasban a szívet és a tüdőt?|Bordák|A bordák a mellkas védő csontos falának részei.|body-part
+Hány szívüregből áll az egészséges emberi szív?|4|A szív két pitvarból és két kamrából áll.|number
+Hány pár bordája van rendszerint az embernek?|12|A szokásos emberi bordaszám tizenkét pár.|number
+Hány csont alkotja egy ember felkarjának vázát?|1|A felkart egy felkarcsont alkotja.|number
+Melyik az emberi test leghosszabb csontja?|Combcsont|A combcsont a leghosszabb emberi csont.|body-part
+Melyik csont található a felkarban?|Felkarcsont|A felkart a humerus, magyarul felkarcsont alkotja.|body-part
+Melyik csont található az alkar hüvelykujj felőli oldalán?|Orsócsont|Az orsócsont az alkar hüvelykujj felőli csontja.|body-part
+Melyik csont található a lábszár belső oldalán?|Sípcsont|A sípcsont a lábszár nagyobb, belső csontja.|body-part
+Melyik izom választja el a mellüreget a hasüregtől?|Rekeszizom|A rekeszizom elválasztja a két testüreget, és részt vesz a légzésben.|body-part
+Melyik szerv érzékeli a fényt?|Szem|A szem ideghártyájának fényérzékelő sejtjei észlelik a fényt.|body-organ
+Melyik érzékszervben található a halláshoz szükséges csiga?|Fül|A csiga a belső fül része.|body-organ
+Melyik szemrész szabályozza a pupilla méretét?|Szivárványhártya|A szivárványhártya izmai változtatják a pupilla átmérőjét.|eye-part|Üvegtest~Ideghártya~Látóideg
+Melyik szemrétegben találhatók a csapok és pálcikák?|Ideghártya|A retina, vagy ideghártya tartalmazza a fényérzékelő sejteket.|eye-part|Ínhártya~Szaruhártya~Szemhéj
+Melyik szemsejttípus fontos a színlátásban?|Csapok|A csapok különböző hullámhossztartományokra érzékenyek.|cell-type|Vörösvérsejtek~Csontsejtek~Izomrostok
+Melyik sejttípus része az immunrendszernek a vérben?|Fehérvérsejt|A fehérvérsejtek az immunvédekezésben vesznek részt.|cell-type|Vörösvérsejt~Zsírsejt~Porcsejt
+Melyik véralkotó segíti elsődlegesen a véralvadási dugó kialakulását?|Vérlemezke|A vérlemezkék a vérzéscsillapítás kezdeti szakaszában működnek közre.|blood-component|Vörösvérsejt~Albumin~Szőlőcukor
+Melyik vércsoport hordoz mind A, mind B antigént a vörösvérsejteken az AB0 rendszerben?|AB|Az AB csoport vörösvérsejtjein mindkét antigén megtalálható.|blood
+Melyik vércsoport vörösvérsejtjein nincs sem A, sem B antigén az AB0 rendszerben?|0|A 0-s vércsoportban egyik ilyen antigén sincs a vörösvérsejteken.|blood
+Milyen ér szállít vért a szívtől kifelé?|Artéria|Az artériákat a szívtől elfelé tartó áramlás határozza meg.|vessel|Véna~Nyirokér~Epevezeték
+Milyen ér szállít vért a szív felé?|Véna|A vénák a vért a szív irányába vezetik.|vessel|Artéria~Nyirokér~Húgyvezeték
+Melyik érszakaszban történik közvetlen anyagcsere a vér és a szövetek között?|Hajszálér|A hajszálerek vékony fala teszi lehetővé az anyagok cseréjét.|vessel|Főverőér~Üres véna~Tüdőverőér
+Melyik szövet köti az izmot a csonthoz?|Ín|Az inak az izmok erejét a csontokra közvetítik.|body-tissue|Porc~Zsírszövet~Zománc
+Melyik szövet köti rendszerint össze az ízületet alkotó csontokat?|Szalag|Az ízületi szalagok csontokat kötnek össze és stabilizálnak.|body-tissue|Ín~Zománc~Hámréteg
+Melyik anyag az emberi fog külső, legkeményebb rétege?|Fogzománc|A fog koronáját kívülről fogzománc borítja.|body-tissue|Dentin~Fogbél~Íny
+Melyik fehérje fontos összetevője a hajnak és a körömnek?|Keratin|A haj és a köröm fő szerkezeti fehérjéje a keratin.|body-protein|Hemoglobin~Inzulin~Albumin
+Melyik szerv tárolja a vesékben termelt vizeletet az ürítés előtt?|Húgyhólyag|A vizelet a húgyhólyagban gyűlik össze.|body-organ
+Hány állandó foga lehet rendszerint egy felnőttnek a négy bölcsességfoggal együtt?|32|A teljes felnőtt fogazat harminckét fogból áll.|number
+Hány tejfogból áll rendszerint a teljes gyermekkori tejfogazat?|20|A teljes tejfogazat húsz fogból áll.|number
+Melyik nyálban található enzim kezdi meg a keményítő bontását?|Amiláz|A nyálamiláz a keményítő emésztését kezdi meg.|enzyme|Pepszin~Laktáz~Tripszin
+Melyik bélenzim bontja a tejcukrot?|Laktáz|A laktáz a laktózt bontó enzim.|enzyme|Amiláz~Pepszin~Lipáz
+Melyik hormon emeli a vércukorszintet a máj glükózleadásának serkentésével?|Glukagon|A glukagon a vércukorszint szabályozásában az inzulinnal ellentétes irányban hat.|hormone|Inzulin~Melatonin~Oxitocin
+Melyik hormon termelése kapcsolódik erősen a sötétséghez és az alvás-ébrenlét ritmusához?|Melatonin|A melatonin a napi ritmus jelzésében vesz részt.|hormone|Inzulin~Glukagon~Adrenalin
+Melyik mirigy termel tiroxint?|Pajzsmirigy|A tiroxin a pajzsmirigy egyik hormonja.|body-organ
+Melyik agyterület fontos a mozgások összehangolásában és az egyensúlyban?|Kisagy|A kisagy a mozgáskoordinációban játszik fontos szerepet.|brain-part|Nyúltvelő~Kérgestest~Tobozmirigy
+Mi az idegsejt szokásos neve?|Neuron|Az idegsejt másik neve neuron.|cell-name|Nefron~Trombocita~Oszteocita
+Mi a vese működési alapegysége?|Nefron|A nefron végzi a vizeletképzés alapfolyamatait.|body-unit|Neuron~Alveolus~Izomrost
+Melyik szervben találhatók a hangszalagok?|Gége|A hangszalagok a gégében helyezkednek el.|body-organ
+Melyik érzékünk receptorai találhatók az orrüreg felső részének szaglóhámjában?|Szaglás|A szaglóhám érzékeli az illatmolekulákat.|sense|Hallás~Látás~Egyensúlyérzékelés
+Melyik szervcső vezeti a táplálékot a garatból a gyomorba?|Nyelőcső|A nyelőcső izommozgással továbbítja a falatot a gyomorhoz.|body-organ
+Melyik bőrben lévő mirigy segíti párolgással a test hűtését?|Verejtékmirigy|A verejték elpárolgása hőt von el a bőrtől.|gland|Faggyúmirigy~Könnymirigy~Nyálmirigy
+Hány kromoszómapár van rendszerint az ember testi sejtjeiben?|23|Az ember szokásos testi sejtjeiben huszonhárom kromoszómapár van.|number

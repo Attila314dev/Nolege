@@ -1,0 +1,50 @@
+Mennyi 7 + 8?|15|Hét és nyolc összege tizenöt.|number
+Mennyi 9 × 6?|54|Kilencszer hat ötvennégy.|number
+Mennyi 81 ÷ 9?|9|Nyolcvanegy osztva kilenccel kilenc.|number
+Mennyi 100 − 37?|63|Százból harminchét hatvanhárom.|number
+Mennyi 12 × 12?|144|Tizenkettő négyzete száznegyvennégy.|number
+Mennyi 2 az ötödik hatványon?|32|2 × 2 × 2 × 2 × 2 = 32.|number
+Mennyi 3 a harmadik hatványon?|27|3 × 3 × 3 = 27.|number
+Mennyi 49 pozitív négyzetgyöke?|7|A hét négyzete negyvenkilenc.|number
+Mennyi 144 pozitív négyzetgyöke?|12|A tizenkettő négyzete száznegyvennégy.|number
+Mennyi 200 tíz százaléka?|20|200 × 0,10 = 20.|number
+Mennyi 80 huszonöt százaléka?|20|A huszonöt százalék egynegyed; 80/4 = 20.|number
+Mennyi 150 húsz százaléka?|30|150 × 0,20 = 30.|number
+Mennyi egy 500 forintos ár 10 százalékos emelés után?|550|Az emelés ötven forint, így az új ár 550 forint.|number
+Mennyi egy 800 forintos ár 25 százalékos csökkentés után?|600|A kedvezmény kétszáz forint; 800 − 200 = 600.|number
+Mennyi 1/2 + 1/4?|3/4|Közös nevezővel 2/4 + 1/4 = 3/4.|fraction
+Mennyi 3/4 − 1/4?|1/2|A különbség 2/4, vagyis 1/2.|fraction
+Mennyi 1/3 + 1/3?|2/3|Azonos nevező esetén a számlálókat összeadjuk.|fraction
+Mennyi 1/2 × 1/2?|1/4|A számlálókat és nevezőket külön összeszorozva 1/4-et kapunk.|fraction
+Hány centiméter egy méter?|100|Egy méter száz centiméter.|number
+Hány milliméter egy centiméter?|10|Egy centiméter tíz milliméter.|number
+Hány oldala van egy hatszögnek?|6|A hatszög hat oldalú sokszög.|number
+Hány csúcsa van egy kockának?|8|A kockának nyolc csúcsa van.|number
+Hány éle van egy kockának?|12|A kocka tizenkét éllel rendelkezik.|number
+Hány lapja van egy kockának?|6|A kockát hat négyzetlap határolja.|number
+Mennyi a háromszög belső szögeinek összege az euklideszi síkon?|180°|A síkbeli háromszög belső szögeinek összege 180 fok.|angle
+Mennyi egy négyzet egyetlen belső szöge?|90°|A négyzet minden szöge derékszög.|angle
+Mennyi a teljes körhöz tartozó szög?|360°|A teljes szög 360 fok.|angle
+Mennyi egy egyenlő oldalú háromszög egyik belső szöge?|60°|A három egyenlő szög összege 180 fok, ezért mindegyik 60 fok.|angle
+Mekkora a négyzet kerülete, ha az oldala 5 cm?|20 cm|A kerület 4 × 5 = 20 cm.|length-result|10 cm~15 cm~25 cm
+Mekkora a 4 cm oldalú négyzet területe?|16 cm²|A terület az oldal négyzete: 4 × 4 = 16 cm².|area-result|8 cm²~12 cm²~20 cm²
+Mekkora a 3 cm és 7 cm oldalú téglalap területe?|21 cm²|A téglalap területe a két oldal szorzata.|area-result|10 cm²~20 cm²~24 cm²
+Mekkora a 3 cm és 7 cm oldalú téglalap kerülete?|20 cm|A kerület 2 × (3 + 7) = 20 cm.|length-result|10 cm~21 cm~24 cm
+Mekkora a 2 cm élű kocka térfogata?|8 cm³|A kocka térfogata az él harmadik hatványa: 2³ = 8.|volume-result|4 cm³~6 cm³~12 cm³
+Mekkora a kör átmérője, ha a sugara 6 cm?|12 cm|Az átmérő kétszerese a sugárnak.|length-result|3 cm~6 cm~18 cm
+Mennyi a 2, 4 és 6 számok számtani átlaga?|4|Az összeg tizenkettő, osztva hárommal négy.|number
+Mennyi a 3, 7 és 8 számok összege?|18|3 + 7 + 8 = 18.|number
+Mi az x értéke az x + 7 = 19 egyenletben?|12|Mindkét oldalból hetet kivonva x = 12.|number
+Mi az x értéke a 3x = 21 egyenletben?|7|Mindkét oldalt hárommal osztva x = 7.|number
+Mi az x értéke a 2x + 4 = 18 egyenletben?|7|Először négyet kivonunk, majd kettővel osztunk.|number
+Melyik szám prímszám az alábbiak közül?|17|A 17 pozitív osztói csak az 1 és a 17.|prime|15~21~27
+Melyik a legkisebb prímszám?|2|A 2 legkisebb egynél nagyobb szám, amelynek csak két pozitív osztója van.|number
+Mennyi 18 és 24 legnagyobb közös osztója?|6|Mindkét szám osztható hattal, ennél nagyobb közös osztójuk nincs.|number
+Mennyi 4 és 6 legkisebb közös többszöröse?|12|A tizenkettő a legkisebb pozitív szám, amely mindkettővel osztható.|number
+Mennyi −3 + 8?|5|Nyolcból három levonásával ötöt kapunk.|number
+Mennyi −4 × −5?|20|Két negatív szám szorzata pozitív.|number
+Mennyi 5! értéke?|120|5! = 5 × 4 × 3 × 2 × 1 = 120.|number
+Mekkora az esélye egy szabályos hatoldalú dobókockával hatost dobni?|1/6|A hat egyformán valószínű kimenet közül egy a hatos.|fraction
+Mekkora az esélye egy szabályos pénzérmével fejet dobni?|1/2|A két egyformán valószínű oldal közül az egyik a fej.|fraction
+Mi következik a 2, 4, 8, 16 sorozatban, ha minden tag az előző kétszerese?|32|A következő tag 16 × 2 = 32.|number
+Mi következik a 1, 1, 2, 3, 5, 8 sorozatban, ha minden további tag az előző kettő összege?|13|Az utolsó két tag összege 5 + 8 = 13.|number

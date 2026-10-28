@@ -2,10 +2,10 @@ import { esc } from './common.js';
 
 export function aiStatusView(ai = {}) {
   if (!ai.configured) return { tone: 'neutral', title: 'AI nincs beállítva', detail: 'A mentett kérdésekből továbbra is játszhattok.' };
-  if (ai.state === 'pending') return { tone: 'pending', title: ai.lastOperation === 'chat' ? 'A Kvízmester válaszol…' : 'AI-kérdések készülnek…', detail: 'Valódi API-hívás van folyamatban.' };
+  if (ai.state === 'pending') return { tone: 'pending', title: ai.lastOperation === 'chat' ? 'A Kvízmester válaszol…' : ai.lastOperation === 'connection-test' ? 'API-kapcsolatteszt…' : 'AI-kérdések készülnek…', detail: 'Valódi API-hívás van folyamatban.' };
   if (ai.state === 'working' && ai.lastSuccessAt) return { tone: 'success', title: 'AI: legutóbbi hívás sikeres', detail: ai.lastProvider || 'Az AI használható választ adott.' };
   if (ai.state === 'error') return { tone: 'error', title: 'AI: legutóbbi hívás sikertelen', detail: ai.lastError?.message || 'Az AI most nem érhető el.' };
-  return { tone: 'neutral', title: 'AI-kulcs beállítva · még nem teszteltük', detail: 'Az első generálás után látod a hívás eredményét.' };
+  return { tone: 'neutral', title: 'AI-kulcs beállítva · még nem teszteltük', detail: 'Az első modellhívás után látod a hívás eredményét.' };
 }
 
 export function renderAIStatus(element, ai = {}, pool = {}) {

@@ -1,6 +1,6 @@
 {
   "name": "nolege",
-  "version": "2.1.0",
+  "version": "3.0.0",
   "type": "module",
   "engines": {
     "node": ">=22 <25"
@@ -9,7 +9,9 @@
     "start": "node server.js",
     "dev": "node --watch server.js",
     "test": "node --test",
-    "test:browser": "node tools/browser_smoke.mjs"
+    "test:browser": "node tools/browser_smoke.mjs",
+    "test:admin-browser": "node tools/admin_browser_smoke.mjs",
+    "build:catalog": "node tools/build_catalog.mjs"
   },
   "dependencies": {
     "express": "^4.19.2",
