@@ -50,4 +50,12 @@ Képek: `docs/nolege-admin-mobile.png`, `docs/nolege-admin-desktop.png`, `docs/n
 
 ## Éles kiadás
 
-A kiadás utáni eredmények itt egészülnek ki. A tartós szerkesztéshez az alkalmazás saját, Nolege repóra korlátozott `GITHUB_BANK_TOKEN` jogosultsága szükséges; ennek hiányában az admin biztonságosan olvasható módban működik. A ChatGPT GitHub-kapcsolata ezt a futó alkalmazásnak nem adja át.
+Az első 3.0 kiadás Render-deployja `dep-dbh1gg8m7kps73f14d3g`, forrása `09a0fd3c`; állapota live. Az éles HTTP-próba ellenőrizte a 3.0.0 verziót, a 940 kérdést, a 800 ChatGPT-forrást, a tulajdonosi Secure/HttpOnly belépést és a külön asszisztensi hozzáférést. Belépés nélkül az admin adatai 401-et adnak, CSRF nélkül a módosítás 403-at. Az export 800 új kérdést, a teljes mentés 940 elemet és érvényes ellenőrzőösszeget adott.
+
+Az API passzív frissítésekor a szolgáltató **4/50 felhasznált, 46 megmaradt** ingyenes napi kérést jelzett. Az alkalmazás modellhívásszámlálója nem nőtt. Új éles inferencia nem indult; az API-kapcsolatteszt sikerét így nem állítjuk igazoltnak.
+
+Az éles HTTP/WebSocket-próba két játékossal három kérdést játszott végig, 551–398 eredménnyel. A néző az aktuális kérdést kapta, a meccs alatti chat 409 game_running választ adott. A készlet Redisből működött, tárolási hiba nélkül; a próbaszoba törölve.
+
+A hitelesítés nélküli GitHub REST-olvasás az első deployban tartalék olvasásra esett vissza. A javítás nyilvános repónál közvetlenül a GitHub nyers adatfájlját olvassa, REST-kvóta használata nélkül. Token mellett továbbra is a Contents API SHA-ellenőrzésével ír.
+
+A tartós szerkesztéshez az alkalmazás saját, Nolege repóra korlátozott `GITHUB_BANK_TOKEN` jogosultsága szükséges; ennek hiányában az admin biztonságosan olvasható módban működik. A ChatGPT GitHub-kapcsolata ezt a futó alkalmazásnak nem adja át.

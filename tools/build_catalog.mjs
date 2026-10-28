@@ -11,7 +11,7 @@ const categories = {
   cinema: 'Filmek és sorozatok', sport: 'Sport', animals: 'Állatvilág', plants: 'Növények és természet', body: 'Emberi test',
   physics: 'Fizika és csillagászat', chemistry: 'Kémia', technology: 'Technológia', mathematics: 'Matematika és logika', mythology: 'Mitológia és kultúrák'
 };
-const createdAt = '2026-10-28T16:00:00.000Z';
+const createdAt = '2026-10-28T15:43:35.000Z';
 const cards = [];
 for (const [category, title] of Object.entries(categories)) {
   const filename = path.join(root, 'tools/question-cards', `${category}.txt`);

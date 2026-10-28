@@ -44,7 +44,7 @@ function applySummary(value) {
   ].map(([label, count, detail, cls]) => `<article class="stat-card ${cls}"><span class="stat-label">${label}</span><strong>${number(count)}</strong><small>${detail}</small></article>`).join('');
   const notice = $('#storageNotice');
   notice.hidden = storage.writable && !storage.error;
-  notice.innerHTML = storage.error ? esc(storage.error) : 'A bankot már böngészheted és exportálhatod. A tartós szerkesztéshez a Render Environment részében szükséges a <code>GITHUB_BANK_TOKEN</code>: fine-grained GitHub-token, csak az <b>Attila314dev/Nolege</b> repóhoz, <b>Contents: Read and write</b> jogosultsággal. A kulcsot közvetlenül Renderbe add meg.';
+  notice.innerHTML = (storage.error ? esc(storage.error) + '<br>' : '') + (!storage.configured ? 'A bankot már böngészheted és exportálhatod. A tartós szerkesztéshez a Render Environment részében szükséges a <code>GITHUB_BANK_TOKEN</code>: fine-grained GitHub-token, csak az <b>Attila314dev/Nolege</b> repóhoz, <b>Contents: Read and write</b> jogosultsággal. A kulcsot közvetlenül Renderbe add meg.' : 'A távoli bank helyreállítása után a Bank frissítése gombbal próbáld újra.');
   const selected = $('#categoryFilter').value;
   $('#categoryFilter').innerHTML = '<option value="">Minden témakör</option>' + stats.categories.map(category => `<option>${esc(category)}</option>`).join('');
   $('#categoryFilter').value = selected;

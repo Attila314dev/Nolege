@@ -24,7 +24,8 @@ const ai = createAI({ env: { OPENROUTER_API_KEY: 'test-only-browser-api-key' }, 
   }
   return Response.json({ model: 'mock/model:free', usage: { prompt_tokens: 20, completion_tokens: 10, total_tokens: 30 }, choices: [{ finish_reason: 'stop', message: { content } }] });
 } });
-const catalog = createCatalog({ store: memoryCatalogStore(loadCatalogSeed()) });
+const catalogStore = memoryCatalogStore(loadCatalogSeed());
+const catalog = createCatalog({ store: catalogStore });
 await catalog.ready;
 const app = createQuizServer({ catalog, adminEnv, ai });
 await app.ready;
@@ -107,5 +108,13 @@ try {
     console.log(`PASS admin ${width}x${height}: login, filters, editor, API, backups, audit, logout; no overflow`);
     await context.close();
   }
+  catalogStore.writable = false;
+  const context = await browser.newContext({ viewport: { width: 375, height: 667 }, isMobile: true, hasTouch: true });
+  const page = await context.newPage(); page.on('pageerror', error => errors.push(error.message));
+  await page.goto(`${base}/admin`); await page.locator('#loginForm [name=password]').fill(password); await page.locator('#loginButton').click();
+  await page.locator('#storageNotice:not([hidden])').waitFor(); assert.match(await page.locator('#storageNotice').innerText(), /GITHUB_BANK_TOKEN/);
+  assert.equal(await page.locator('#newQuestion').isDisabled(), true); assert.equal(await page.locator('#exportFiltered').isEnabled(), true);
+  await noOverflow(page, 'read-only setup notice'); await context.close();
+  console.log('PASS admin read-only: setup instructions visible, writes disabled, export enabled');
   assert.deepEqual(errors, [], 'browser runtime errors');
 } finally { await browser.close(); await app.close(); await rm(temp, { recursive: true, force: true }); }

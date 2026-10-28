@@ -19,7 +19,7 @@ Az új 800 kérdés külön szolgáltatói modellhívás nélkül készült. Sze
 
 ## Tartós mentés és belépés beállítása
 
-A `bank/catalog.json` az elsődleges kérdésbank. GitHub kiszolgálja és verziózza az adatfájlt; a webalkalmazást Render futtatja. A repó nyilvánossága a kérdésadatokra is vonatkozik; a belépési adatok és API-kulcsok nem kerülnek bele.
+A `bank/catalog.json` az elsődleges kérdésbank. GitHub kiszolgálja és verziózza az adatfájlt; a webalkalmazást Render futtatja. Nyilvános repónál a token nélküli böngészés közvetlenül a GitHub nyers fájlját olvassa, REST-kvóta nélkül. A repó nyilvánossága a kérdésadatokra is vonatkozik; a belépési adatok és API-kulcsok nem kerülnek bele.
 
 Renderben a tartós íráshoz külön **`GITHUB_BANK_TOKEN`** kell. Ez független a ChatGPT GitHub-kapcsolatától. Hozz létre fine-grained GitHub-tokent, kizárólag az **Attila314dev/Nolege** repóhoz, **Contents: Read and write** jogosultsággal, és add meg közvetlenül a [Render Environment](https://dashboard.render.com/web/srv-dbgbhlec6qcc73eucbbg/env) felületen. A többi jogosultság maradjon kikapcsolva. A `GITHUB_BANK_REPO` alapértéke `Attila314dev/Nolege`.
 

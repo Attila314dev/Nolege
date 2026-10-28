@@ -60,7 +60,9 @@ test('a GitHub catalog without runtime write permission exposes read-only state 
   const seed = loadCatalogSeed(); let writes = 0;
   const store = githubCatalogStore({ fallback: seed, fetchImpl: async (_url, options) => {
     if (options.method === 'PUT') writes++;
-    return Response.json({ encoding: 'base64', content: Buffer.from(JSON.stringify(seed)).toString('base64'), sha: 'seed-sha' });
+    assert.ok(_url.startsWith('https://raw.githubusercontent.com/Attila314dev/Nolege/'));
+    assert.equal(options.headers.authorization, undefined);
+    return Response.json(seed);
   } });
   const catalog = createCatalog({ store }); await catalog.ready; assert.equal(catalog.status().writable, false);
   await assert.rejects(catalog.bulk(['cg-geography-001'], 'approved', catalog.summary().revision, 'Attila'), error => error.code === 'storage_not_configured');
