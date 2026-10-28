@@ -129,3 +129,5 @@ A custom topic such as **Modern popzene** uses a separate temporary pack, never 
 Optional `OPENROUTER_MODEL` selects a specific model instead of the default `openrouter/free` route. API credentials stay on the server.
 
 Browser regression checks: install Chromium with `npx playwright install chromium`, then run `npm run test:browser`. An existing browser binary can be selected with `CHROMIUM_EXECUTABLE`. These checks emulate mobile screen sizes in Chromium; physical Safari/iOS testing remains separate. Background replenishment runs while the web process is awake and resumes when a sleeping Free service starts again.
+
+Az éles 2.1-es kiadás beállítása: `OPENROUTER_MODEL=google/gemma-4-26b-a4b-it:free`. Az ellenőrzéskor az OpenRouter 429 kvótahibát adott; a készletből továbbra is lehet játszani. Az aktuális szolgáltatói hiba és a kérdések forrása a felületen látható.

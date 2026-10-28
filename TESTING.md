@@ -51,6 +51,16 @@ Meglévő Chromiumhoz a `CHROMIUM_EXECUTABLE` változó adható meg. Ebben a kö
 
 ## Éles környezet
 
-A kiadás utáni élő ellenőrzés eredménye itt kerül rögzítésre. A fenti AI-tesztek szimulált szolgáltatót használnak; nem fogyasztanak éles API-kvótát.
+Az éles szolgáltatás: <https://nolege-party-attila314dev.onrender.com/>. Render-deploy: `dep-dbgvmc0n74is73dggcng`, állapot: **live**, forrás: `6b14f7f`.
+
+- A nyilvános oldal és az API 2.1.0 verziót jelez; a készlet `redis` háttértárral működik, tárolási hiba nélkül.
+- Böngészőben a 100 kérdéses készletből kiosztott 20 kérdés után 80 maradt, és automatikusan elindult a valódi AI-utántöltés. A meccs közben a fókusznézet megjelent, a játék végén pedig visszatértek a kérdések és a Kvízmester-gombok.
+- A külön HTTP/WebSocket-próbában két játékos három kérdést játszott végig. Az elsőre egy, a másodikra és harmadikra két helyes válasz érkezett. Végeredmény: **561–398**. A néző az aktuális kérdést kapta; a meccs alatti chat `409 game_running` választ adott. A próbaszobát a teszt eltávolította.
+- Az alkalmazás Render-frissítése után a tároló megőrizte a kiosztási előzményt és a napi AI-hívásszámlálót; a fel nem használt bankkérdésekből feltöltötte a készletet.
+- Az első `openrouter/free` háttérhívás 85 másodperc után időtúllépést jelzett. Az új állapotjelző ezt hibának mutatta; a készletből közben lehetett játszani.
+- Az OpenRouter aktuális nyilvános modellkatalógusa alapján az éles beállítás `OPENROUTER_MODEL=google/gemma-4-26b-a4b-it:free` lett. A katalógus ezt díjmentes, JSON-válaszformátumot támogató modellként sorolta fel.
+- A **Modern popzene, 20 kérdés** éles generálása ezután `429` kvótahibát adott. A szolgáltató várakozási idejének betartása után egyetlen újrapróbálás is ugyanezt jelezte; további próbálkozás nem történt. A felület látható hibát adott, és nem állított elő általános kérdéssort a kért téma helyett.
+
+A 20 kérdéses tematikus generálás és a sikeres háttérfeltöltés teljes kódútja szimulált szolgáltatóval sikeres. **Sikeres éles AI-generálás ebben a kiadásban a szolgáltatói kvótahiba miatt még nincs igazolva.** A fenti automata AI-tesztek nem fogyasztanak éles API-kvótát.
 
 A külön Free Key Value megőrzi a készletet a webalkalmazás újraindításakor. Magának az ingyenes adattárnak az újraindításakor a tartalma elveszhet; a következő alkalmazásindítás ilyenkor a beépített bankból indul újra.
