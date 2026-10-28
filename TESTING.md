@@ -59,3 +59,5 @@ Az éles HTTP/WebSocket-próba két játékossal három kérdést játszott vég
 A hitelesítés nélküli GitHub REST-olvasás az első deployban tartalék olvasásra esett vissza. A javítás nyilvános repónál közvetlenül a GitHub nyers adatfájlját olvassa, REST-kvóta használata nélkül. Token mellett továbbra is a Contents API SHA-ellenőrzésével ír.
 
 A tartós szerkesztéshez az alkalmazás saját, Nolege repóra korlátozott `GITHUB_BANK_TOKEN` jogosultsága szükséges; ennek hiányában az admin biztonságosan olvasható módban működik. A ChatGPT GitHub-kapcsolata ezt a futó alkalmazásnak nem adja át.
+
+A javított kiadás deployja **`dep-dbh1k6e1egvs73ed3meg`**, forrása **`d7b5a549`**, állapota **live**. Az ismételt éles adminpróba sikeres: a bank közvetlenül GitHubról olvasható (`remote: true`, tárolási hiba nélkül), továbbra is 940 kérdéssel. Tulajdonosi és asszisztensi belépés, védett végpontok, szűrt export, ellenőrzőösszeges mentés és inferenciamentes állapotfrissítés rendben. Token nélkül az adminírás 503 storage_not_configured választ ad, nem jelez elmentetlen módosítást sikeresnek. Éles adminírás és annak GitHub-mentése a külön GITHUB_BANK_TOKEN beállítása után ellenőrizhető.
