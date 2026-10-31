@@ -91,6 +91,14 @@ test('a failing fallback never hides a Gemini key error, and a later success cle
   healthy = true; await ai.testConnection(); assert.equal(ai.diagnostics().lastError, null); assert.equal(ai.status().state, 'working');
 });
 
+test('Google array and plain-text error responses retain the redacted explanation', async () => {
+  for (const body of [JSON.stringify([{ error: { code: 400, message: 'Unsupported field for test-only-google-key' } }]), 'Unsupported field for test-only-google-key']) {
+    const ai = createAI({ env: { GEMINI_API_KEY: 'test-only-google-key' }, fetchImpl: async () => new Response(body, { status: 400 }) });
+    await assert.rejects(ai.testConnection(), error => error.code === 'provider_error');
+    assert.match(ai.diagnostics().lastError.message, /Unsupported field/); assert.equal(JSON.stringify(ai.diagnostics()).includes('test-only-google-key'), false);
+  }
+});
+
 test('Groq generation uses strict structured output and validates the exact requested pack', async () => {
   let request;
   const ai = createAI({ env: { GROQ_API_KEY: 'test-only-not-a-real-key' }, fetchImpl: async (url, options) => {
