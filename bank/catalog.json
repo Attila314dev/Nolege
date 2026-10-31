@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "revision": "41a2c972-b3db-4d3b-b70e-dc7a85b0ade3",
+  "revision": "e202e253-9df4-447c-81e0-848c59fec67b",
   "questions": [
     {
       "id": "legacy-0001",
@@ -20813,6 +20813,14 @@
       "actor": "Attila",
       "action": "bulk_approved",
       "count": 5,
+      "detail": ""
+    },
+    {
+      "id": "9b757cd9-e21a-43ca-8adc-96706bda0d67",
+      "at": "2026-10-31T16:33:39.706Z",
+      "actor": "Attila",
+      "action": "settings_updated",
+      "count": 1,
       "detail": ""
     }
   ]
