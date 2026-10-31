@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "revision": "d7a9224a-26ac-436e-be2f-dcf8e7aa30bb",
+  "revision": "e215715c-01dc-41b5-8834-01e23c7cb741",
   "questions": [
     {
       "id": "legacy-0001",
@@ -20625,7 +20625,7 @@
   ],
   "settings": {
     "openRouterModel": "google/gemma-4-26b-a4b-it:free",
-    "backgroundAI": false
+    "backgroundAI": true
   },
   "audit": [
     {
@@ -20650,6 +20650,14 @@
       "actor": "Attila",
       "action": "bulk_approved",
       "count": 799,
+      "detail": ""
+    },
+    {
+      "id": "91d46a0e-b47e-4f73-8b15-84bd31c86f36",
+      "at": "2026-10-31T11:22:19.819Z",
+      "actor": "Attila",
+      "action": "settings_updated",
+      "count": 1,
       "detail": ""
     }
   ]
