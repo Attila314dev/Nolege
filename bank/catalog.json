@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "revision": "seed-3-0-0",
+  "revision": "6ae8a573-8d17-4883-a932-cd0f8fda03c4",
   "questions": [
     {
       "id": "legacy-0001",
@@ -3836,12 +3836,12 @@
       "difficulty": "easy",
       "tags": [],
       "family": "melyik kontinens deli reszen talalhato patagonia",
-      "status": "review",
+      "status": "approved",
       "source": "chatgpt",
       "createdBy": "ChatGPT",
       "createdAt": "2026-10-28T15:43:35.000Z",
-      "updatedBy": "ChatGPT",
-      "updatedAt": "2026-10-28T15:43:35.000Z"
+      "updatedBy": "Attila",
+      "updatedAt": "2026-10-31T11:21:45.862Z"
     },
     {
       "id": "cg-geography-002",
@@ -20635,6 +20635,14 @@
       "action": "questions_imported",
       "count": 800,
       "detail": "Új, ellenőrzendő ChatGPT-kérdések; szolgáltatói API-hívás nélkül."
+    },
+    {
+      "id": "9e0ebc4b-1460-42f9-825e-e5f978bababe",
+      "at": "2026-10-31T11:21:45.862Z",
+      "actor": "Attila",
+      "action": "bulk_approved",
+      "count": 1,
+      "detail": ""
     }
   ]
 }
