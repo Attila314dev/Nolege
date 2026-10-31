@@ -42,8 +42,8 @@ test('Gemini is preferred, uses the Google endpoint and schema, and accounts for
     count++; assert.equal(url, 'https://generativelanguage.googleapis.com/v1beta/openai/chat/completions');
     assert.equal(options.headers.authorization, 'Bearer test-only-google-key');
     const body = JSON.parse(options.body);
-    assert.equal(body.model, 'gemini-3.8-flash'); assert.equal(body.reasoning_effort, 'minimal'); assert.equal(body.reasoning, undefined);
-    assert.equal(body.max_tokens, 2650); assert.equal(body.max_completion_tokens, undefined);
+    assert.equal(body.model, 'gemini-3.8-flash'); assert.equal(body.reasoning_effort, 'low'); assert.equal(body.reasoning, undefined);
+    assert.equal(body.max_tokens, 3674); assert.equal(body.max_completion_tokens, undefined);
     assert.equal(body.response_format.json_schema.strict, true); assert.equal(body.response_format.json_schema.schema.properties.questions.minItems, 5);
     return Response.json({ model: 'gemini-3.8-flash', usage: { prompt_tokens: 100, completion_tokens: 650, total_tokens: 750 }, choices: [{ finish_reason: 'stop', message: { content: JSON.stringify({ questions: Array.from({ length: 5 }, (_, i) => sample(i + 100)) }) } }] });
   } });
