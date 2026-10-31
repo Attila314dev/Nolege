@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "revision": "0818d87f-0dcf-4380-87f3-3e3356804664",
+  "revision": "41a2c972-b3db-4d3b-b70e-dc7a85b0ade3",
   "questions": [
     {
       "id": "legacy-0001",
@@ -20636,12 +20636,12 @@
       "difficulty": "easy",
       "tags": [],
       "family": "melyik volt az emberiseg tortenetenek elso mesterseges holdja amelyet a szovjetunio bocsatott fel 1957 ben",
-      "status": "review",
+      "status": "approved",
       "source": "api",
       "createdBy": "ChatGPT",
       "createdAt": "2026-10-31T12:56:14.749Z",
-      "updatedBy": "ChatGPT",
-      "updatedAt": "2026-10-31T12:56:14.749Z",
+      "updatedBy": "Attila",
+      "updatedAt": "2026-10-31T13:09:04.047Z",
       "provider": "Gemini",
       "model": "gemini-3.1-flash-lite"
     },
@@ -20659,12 +20659,12 @@
       "difficulty": "medium",
       "tags": [],
       "family": "melyik urszonda lepte at elsokent a heliopauzat es jutott el a csillagkozi terbe",
-      "status": "review",
+      "status": "approved",
       "source": "api",
       "createdBy": "ChatGPT",
       "createdAt": "2026-10-31T12:56:14.749Z",
-      "updatedBy": "ChatGPT",
-      "updatedAt": "2026-10-31T12:56:14.749Z",
+      "updatedBy": "Attila",
+      "updatedAt": "2026-10-31T13:09:04.047Z",
       "provider": "Gemini",
       "model": "gemini-3.1-flash-lite"
     },
@@ -20682,12 +20682,12 @@
       "difficulty": "medium",
       "tags": [],
       "family": "melyik urszonda erkezett meg elsokent a plutohoz 2015 ben hogy reszletes felveteleket keszitsen rola",
-      "status": "review",
+      "status": "approved",
       "source": "api",
       "createdBy": "ChatGPT",
       "createdAt": "2026-10-31T12:56:14.750Z",
-      "updatedBy": "ChatGPT",
-      "updatedAt": "2026-10-31T12:56:14.750Z",
+      "updatedBy": "Attila",
+      "updatedAt": "2026-10-31T13:09:04.047Z",
       "provider": "Gemini",
       "model": "gemini-3.1-flash-lite"
     },
@@ -20705,12 +20705,12 @@
       "difficulty": "hard",
       "tags": [],
       "family": "melyik urszonda leszalloegysege hajtotta vegre az elso sima leszallast a mars felszinen 1971 ben",
-      "status": "review",
+      "status": "approved",
       "source": "api",
       "createdBy": "ChatGPT",
       "createdAt": "2026-10-31T12:56:14.751Z",
-      "updatedBy": "ChatGPT",
-      "updatedAt": "2026-10-31T12:56:14.751Z",
+      "updatedBy": "Attila",
+      "updatedAt": "2026-10-31T13:09:04.047Z",
       "provider": "Gemini",
       "model": "gemini-3.1-flash-lite"
     },
@@ -20728,12 +20728,12 @@
       "difficulty": "easy",
       "tags": [],
       "family": "melyik urtavcso allt palyara 1990 ben forradalmasitva ezzel a vilagegyetemrol alkotott kepunket",
-      "status": "review",
+      "status": "approved",
       "source": "api",
       "createdBy": "ChatGPT",
       "createdAt": "2026-10-31T12:56:14.751Z",
-      "updatedBy": "ChatGPT",
-      "updatedAt": "2026-10-31T12:56:14.751Z",
+      "updatedBy": "Attila",
+      "updatedAt": "2026-10-31T13:09:04.047Z",
       "provider": "Gemini",
       "model": "gemini-3.1-flash-lite"
     }
@@ -20804,6 +20804,14 @@
       "at": "2026-10-31T12:56:14.751Z",
       "actor": "ChatGPT",
       "action": "questions_imported",
+      "count": 5,
+      "detail": ""
+    },
+    {
+      "id": "d0c2a18e-21bd-4d2e-9eea-15a817942cbd",
+      "at": "2026-10-31T13:09:04.047Z",
+      "actor": "Attila",
+      "action": "bulk_approved",
       "count": 5,
       "detail": ""
     }
