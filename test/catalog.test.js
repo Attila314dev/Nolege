@@ -78,7 +78,7 @@ test('catalog growth beyond the GitHub inline limit reads the exact blob rather 
       ? Response.json({ encoding: 'base64', content: Buffer.from(JSON.stringify(seed)).toString('base64') })
       : Response.json({ encoding: 'none', content: '', sha: 'exact-file-sha' });
   } });
-  assert.equal((await store.read()).questions.length, 940); assert.equal(requests.length, 2);
+  assert.equal((await store.read()).questions.length, seed.questions.length); assert.equal(requests.length, 2);
   assert.ok(requests[1].endsWith('/git/blobs/exact-file-sha'));
 });
 

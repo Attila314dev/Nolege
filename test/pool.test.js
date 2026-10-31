@@ -151,7 +151,7 @@ test('the UI never turns a configured key into a false successful health indicat
 });
 
 test('a failed thematic generation preserves the previous pack and is never disguised as a general quiz', async t => {
-  const ai = createAI({ env: { OPENROUTER_API_KEY: 'test-only-secret' }, fetchImpl: async () => new Response('{}', { status: 429 }) });
+  const ai = createAI({ env: { GEMINI_API_KEY: 'test-only-secret' }, fetchImpl: async () => new Response('{}', { status: 429 }) });
   const app = await startApp(t, { bank, ai, poolOptions: { autoRefill: false } });
   const host = await app.create({ count: 2 });
   const before = (await app.request(`/api/rooms/${host.roomId}/pack`, { token: host.playerToken })).data;
@@ -169,7 +169,7 @@ test('a failed thematic generation preserves the previous pack and is never disg
 
 test('a twenty-question custom theme is temporary and never pollutes the general stock', async t => {
   const questions = Array.from({ length: 20 }, (_, n) => sample(n + 8000));
-  const ai = createAI({ env: { OPENROUTER_API_KEY: 'test-only-key' }, fetchImpl: async () => new Response(JSON.stringify({ model: 'verified-test-model', choices: [{ finish_reason: 'stop', message: { content: JSON.stringify({ questions }) } }] }), { status: 200 }) });
+  const ai = createAI({ env: { GEMINI_API_KEY: 'test-only-key' }, fetchImpl: async () => new Response(JSON.stringify({ model: 'verified-test-model', choices: [{ finish_reason: 'stop', message: { content: JSON.stringify({ questions }) } }] }), { status: 200 }) });
   const app = await startApp(t, { bank, ai, poolOptions: { autoRefill: false } });
   const host = await app.create({ topic: 'Modern popzene', count: 20 });
   const stockBefore = app.pool.status().available;
@@ -186,7 +186,7 @@ test('a twenty-question custom theme is temporary and never pollutes the general
 
 test('a general quiz with a difficulty absent from stock can still generate an exact AI pack', async t => {
   const questions = Array.from({ length: 20 }, (_, n) => ({ ...sample(n + 9000), difficulty: 'hard' }));
-  const ai = createAI({ env: { OPENROUTER_API_KEY: 'test-only-key' }, fetchImpl: async () => new Response(JSON.stringify({ choices: [{ finish_reason: 'stop', message: { content: JSON.stringify({ questions }) } }] }), { status: 200 }) });
+  const ai = createAI({ env: { GEMINI_API_KEY: 'test-only-key' }, fetchImpl: async () => new Response(JSON.stringify({ choices: [{ finish_reason: 'stop', message: { content: JSON.stringify({ questions }) } }] }), { status: 200 }) });
   const app = await startApp(t, { bank, ai, poolOptions: { autoRefill: false } });
   const host = await app.create({ count: 20, difficulty: 'hard' });
   const response = await app.request(`/api/rooms/${host.roomId}/prepare`, { method: 'POST', token: host.playerToken,

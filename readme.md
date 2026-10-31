@@ -1,4 +1,4 @@
-# Nolege 3.2
+# Nolege 3.3
 
 Magyar többjátékos partikvíz, mobilos fókusznézettel és privát kérdésműhellyel. Node.js, Express és WebSocket; a teljes kérdésbank GitHubon tárolt JSON, a gyors játékbeli készlet külön Render Key Value tárolót használ.
 
@@ -56,17 +56,15 @@ Az asszisztensi hozzáférés az `/api/admin/*` végpontokhoz `Authorization: Be
 
 Az **Állapot frissítése** szolgáltatói modell- és fiókadatokat kérdez le, modellgenerálás nélkül. A **Kapcsolatteszt** valódi, rövid modellkérést használ. A panel mutatja a szolgáltatót, modellt, kulcsbeállítottságot, utolsó valódi sikeres hívást, a kitakart szolgáltatói hibát, valamint a kérés- és tokenhasználatot. A számlálók az alkalmazás aktuális indulása óta értendők; a szolgáltatói napi kvóta ettől független, és csak akkor jelenik meg, ha az API megadja.
 
-A HTTP 429 különböző korlátozásokat jelenthet. A panel megkülönbözteti a szolgáltató által jelzett napi limitet, a modell háttérszolgáltatójának korlátját és az ismeretlen eredetű limitet. Nem következtet automatikusan elfogyott ingyenes keretre.
+A HTTP 429 napi vagy rövidebb időablakra érvényes korlátot is jelenthet. A panel a Google által megadott részleteket mutatja; napi keretet csak kifejezett napi kvótajelzés alapján állít.
 
-AI-hozzáféréshez elsőként a **`GEMINI_API_KEY`** állítható be Renderben. A Gemini az elsődleges szolgáltató, alapmodellje **`gemini-3.8-flash`**, amely a szolgáltató jelenlegi ingyenes csomagjában is elérhető; a tényleges fiókkorlátok és a projekt számlázási beállításai érvényesek. A szerveroldali, opcionális `GEMINI_MODEL` felülírhatja a modellt. A kulcs a Google hivatalos OpenAI-kompatibilis API-jához kerül, a böngésző nem kapja meg.
-
-Opcionális tartalék a `GROQ_API_KEY` (`openai/gpt-oss-120b`), majd az `OPENROUTER_API_KEY`. Az OpenRouter csak ingyenes útvonalat használ; a kiválasztott `:free` modell az adminban menthető. Ha minden szolgáltató hibázik, a panel az elsődleges szolgáltató hibáját őrzi meg, az összes próbálkozás külön megjelenik a kérésnaplóban. A tényleges hívások és tokenek számlálódnak; sikeres helyreállás törli a régi hibajelzést.
+Az AI-kapcsolatot kizárólag a **Google Gemini** biztosítja. Renderben a **`GEMINI_API_KEY`** adja a szerveroldali hozzáférést, az opcionális **`GEMINI_MODEL`** a modell nevét. Alapértelmezés a kipróbált **`gemini-3.1-flash-lite`**. A Google projekt tényleges kvótája és számlázási beállításai érvényesek. A kulcsot a böngésző nem kapja meg. A kérésnapló a tényleges hívásokat és tokeneket rögzíti; egy sikertelen kérés egyetlen modellhívás marad.
 
 A Gemini állapotfrissítése hitelesített modelllistát kér le, inferencia nélkül. A kulcs beállítottsága és a modell elérhetősége külön látszik; működő generálásnak csak egy sikeres modellválaszt tekintünk. A Google tényleges kvótájához az admin az AI Studio felületére hivatkozik, nem talál ki fennmaradó kérésszámot. A Google hibaválaszainak napi kvótaadatait és várakozási idejét a rendszer megőrzi, a kulcsokat kitakarja.
 
 Az adminban témára és 1–30 kérdésre kérhető AI-csomag, alapból 5 kérdéssel. Szerkeszthető előnézet után **ellenőrzendőként** menthető; közös játékba jóváhagyás után kerül. Az előnézet 30 percig él.
 
-A gyors készlet célja **100 kérdés**. Először a jóváhagyott bank még fel nem használt kérdéseiből töltődik. A háttérben új AI-kérdések készítése **alapból ki van kapcsolva**. Bekapcsolva Gemini esetén 5, más szolgáltatónál legfeljebb 20 kérdéses adagok, legfeljebb 12 háttérfeltöltési művelet/UTC-nap készülhet; tartalék szolgáltató próbája további API-hívást jelenthet; ezek is ellenőrzésre várnak. Kvóta- vagy szolgáltatói hiba várakozást eredményez. A meglévő bankból tovább lehet játszani, a kérdések újrafelhasználását a felület jelzi.
+A gyors készlet célja **100 kérdés**. Először a jóváhagyott bank még fel nem használt kérdéseiből töltődik. A háttérben új AI-kérdések készítése **alapból ki van kapcsolva**. Bekapcsolva 5 kérdéses adagok, legfeljebb 12 háttérfeltöltési művelet/UTC-nap készülhet; ezek is ellenőrzésre várnak. Kvóta- vagy szolgáltatói hiba várakozást eredményez. A meglévő bankból tovább lehet játszani, a kérdések újrafelhasználását a felület jelzi.
 
 A játékbeli egyedi téma, például „Modern popzene”, külön ideiglenes kérdéssor. A szobagazda előnézetben fogadja el, és nem tölti automatikusan a közös bankot. Hibás generálás megőrzi a korábbi csomagot, és nem helyettesíti a kért témát általános kvízzel. A szobai JSON-mentés később új API-hívás nélkül visszatölthető.
 
@@ -93,7 +91,6 @@ npm test
 npx playwright install chromium
 npm run test:browser
 npm run test:admin-browser
-ADMIN_AI_PROVIDER=gemini npm run test:admin-browser
 npm run test:experience-browser
 ```
 
@@ -105,4 +102,4 @@ A tesztek szimulált AI-t használnak, **nem fogyasztanak valódi szolgáltatói
 
 Fő fájlok: `lib/catalog.js`, `lib/catalog-store.js`, `lib/admin-auth.js`, `lib/admin.js`, `public/admin.*`, `lib/server.js`, `lib/question-pool.js`, `bank/catalog.json`. A korábbi PostgreSQL-es `tools/import_questions.js` és `tools/schema.sql` nem része a futó alkalmazásnak.
 
-Referenciák: [GitHub Contents API](https://docs.github.com/en/rest/repos/contents), [Render titkok](https://render.com/docs/configure-environment-variables), [Render Free](https://render.com/docs/free), [OpenRouter](https://openrouter.ai/docs/api-reference/limits), [Gemini API](https://ai.google.dev/gemini-api/docs/openai), [Gemini kvóta](https://ai.google.dev/gemini-api/docs/rate-limits).
+Referenciák: [GitHub Contents API](https://docs.github.com/en/rest/repos/contents), [Render titkok](https://render.com/docs/configure-environment-variables), [Render Free](https://render.com/docs/free), [Gemini API](https://ai.google.dev/gemini-api/docs/openai), [Gemini kvóta](https://ai.google.dev/gemini-api/docs/rate-limits).

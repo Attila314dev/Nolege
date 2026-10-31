@@ -12,11 +12,9 @@ import { hashAdminPassword } from '../lib/admin-auth.js';
 const password = 'test-only-browser-password';
 const adminEnv = { ADMIN_SESSION_SECRET: 'test-only-browser-session-secret-0123456789', ADMIN_OWNER_PASSWORD_HASH: await hashAdminPassword(password) };
 let inference = 0;
-const useGemini = process.env.ADMIN_AI_PROVIDER === 'gemini';
-const mockModel = useGemini ? 'gemini-3.8-flash' : 'mock/model:free';
-const ai = createAI({ env: useGemini ? { GEMINI_API_KEY: 'test-only-browser-api-key' } : { OPENROUTER_API_KEY: 'test-only-browser-api-key' }, fetchImpl: async (url, options) => {
-  if (url.endsWith('/models')) return Response.json({ data: useGemini ? [{ id: mockModel }] : [] });
-  if (url.endsWith('/key')) return Response.json({ data: { free_model_daily_requests: { used: 4, limit: 50, remaining: 46 } } });
+const mockModel = 'gemini-3.1-flash-lite';
+const ai = createAI({ env: { GEMINI_API_KEY: 'test-only-browser-api-key' }, fetchImpl: async (url, options) => {
+  if (url.endsWith('/models')) return Response.json({ data: [{ id: mockModel }] });
   inference++;
   const body = JSON.parse(options.body);
   let content = 'rendben';
@@ -60,26 +58,22 @@ try {
     assert.match(await page.locator('#adminStats').innerText(), /940/);
     assert.match(await page.locator('#listCount').innerText(), /800/);
     await noOverflow(page, `bank ${width}`);
-    if (!useGemini && [375, 1365].includes(width)) {
-      await mkdir(new URL('../docs/', import.meta.url), { recursive: true });
-      await page.screenshot({ path: new URL(`../docs/nolege-admin-${width === 375 ? 'mobile' : 'desktop'}.png`, import.meta.url).pathname, fullPage: true });
-    }
     await page.locator('#questionList [data-edit]').first().click(); await page.locator('#questionDialog[open]').waitFor();
     assert.match(await page.locator('#questionProvenance').innerText(), /ChatGPT/);
     await noOverflow(page, `editor ${width}`); await page.locator('[data-close=questionDialog]').click();
     await page.locator('[data-tab=api]').click(); await page.locator('#apiOverview .api-health').waitFor();
     await noOverflow(page, `API ${width}`);
-    if (useGemini) {
-      assert.match(await page.locator('#apiOverview .api-key-row').innerText(), /Gemini:.*beállítva/);
-      assert.match(await page.locator('#apiOverview').innerText(), /Elsődleges szolgáltató/);
-      assert.equal(await page.locator('#apiSettingsForm [name=openRouterModel]').isDisabled(), true);
-      await page.locator('#apiOverview a[href="https://aistudio.google.com/usage"]').waitFor();
-      if ([375, 1365].includes(width)) await page.screenshot({ path: new URL(`../docs/nolege-admin-gemini-${width === 375 ? 'mobile' : 'desktop'}.png`, import.meta.url).pathname, fullPage: true });
+    assert.match(await page.locator('#apiOverview .api-key-row').innerText(), /Gemini:.*beállítva/);
+    assert.equal(await page.locator('#apiOverview .api-key-row > span').count(), 1);
+    assert.equal(await page.locator('#apiSettingsForm input').count(), 1);
+    await page.locator('#apiOverview a[href="https://aistudio.google.com/usage"]').waitFor();
+    if ([375, 1365].includes(width)) {
+      await mkdir(new URL('../docs/', import.meta.url), { recursive: true });
+      await page.screenshot({ path: new URL(`../docs/nolege-admin-gemini-${width === 375 ? 'mobile' : 'desktop'}.png`, import.meta.url).pathname, fullPage: true });
     }
     if (width === 375) {
       await page.locator('#refreshAPI').click();
-      if (useGemini) await page.getByText('Modell szerepel a szolgáltatói listában', { exact: false }).waitFor();
-      else await page.getByText('46 kérés maradt', { exact: true }).waitFor();
+      await page.getByText('Modell szerepel a szolgáltatói listában', { exact: false }).waitFor();
       assert.equal(inference, 0);
       await page.locator('#testAPI').click(); await page.waitForFunction(() => document.querySelector('#testAPI').textContent.includes('· AI-kéréssel'));
       assert.equal(inference, 1);

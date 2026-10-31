@@ -15,7 +15,7 @@ test('a missing API key never makes a provider call or pretends to be live AI', 
 
 test('health follows validated completions, exposes real model and timestamps, and clears after recovery', async () => {
   let clock = 1000, mode = 'invalid';
-  const ai = createAI({ env: { OPENROUTER_API_KEY: 'test-only-private-key' }, now: () => clock,
+  const ai = createAI({ env: { GEMINI_API_KEY: 'test-only-private-key' }, now: () => clock,
     fetchImpl: async () => {
       assert.equal(ai.status().state, 'pending');
       return new Response(JSON.stringify({ model: 'actual-selected-model', choices: [{ finish_reason: 'stop', message: {
@@ -36,16 +36,16 @@ test('health follows validated completions, exposes real model and timestamps, a
   assert.equal(JSON.stringify(ai.status()).includes('test-only-private-key'), false);
 });
 
-test('Gemini is preferred, uses the Google endpoint and schema, and accounts for a five-question pack', async () => {
+test('Gemini uses the Google endpoint and schema, and accounts for a five-question pack', async () => {
   let count = 0;
-  const ai = createAI({ env: { GEMINI_API_KEY: 'test-only-google-key', OPENROUTER_API_KEY: 'test-only-fallback-key' }, fetchImpl: async (url, options) => {
+  const ai = createAI({ env: { GEMINI_API_KEY: 'test-only-google-key' }, fetchImpl: async (url, options) => {
     count++; assert.equal(url, 'https://generativelanguage.googleapis.com/v1beta/openai/chat/completions');
     assert.equal(options.headers.authorization, 'Bearer test-only-google-key');
     const body = JSON.parse(options.body);
-    assert.equal(body.model, 'gemini-3.8-flash'); assert.equal(body.reasoning_effort, 'low'); assert.equal(body.reasoning, undefined);
+    assert.equal(body.model, 'gemini-3.1-flash-lite'); assert.equal(body.reasoning_effort, 'low'); assert.equal(body.reasoning, undefined);
     assert.equal(body.max_tokens, 3674); assert.equal(body.max_completion_tokens, undefined);
     assert.equal(body.response_format.json_schema.strict, true); assert.equal(body.response_format.json_schema.schema.properties.questions.minItems, 5);
-    return Response.json({ model: 'gemini-3.8-flash', usage: { prompt_tokens: 100, completion_tokens: 650, total_tokens: 750 }, choices: [{ finish_reason: 'stop', message: { content: JSON.stringify({ questions: Array.from({ length: 5 }, (_, i) => sample(i + 100)) }) } }] });
+    return Response.json({ model: 'gemini-3.1-flash-lite', usage: { prompt_tokens: 100, completion_tokens: 650, total_tokens: 750 }, choices: [{ finish_reason: 'stop', message: { content: JSON.stringify({ questions: Array.from({ length: 5 }, (_, i) => sample(i + 100)) }) } }] });
   } });
   assert.equal(ai.status().primaryProvider, 'Gemini'); assert.equal(ai.recommendedBatchSize, 5);
   const result = await ai.generate({ topic: 'Számolás', count: 5, difficulty: 'easy' });
@@ -57,15 +57,16 @@ test('Gemini is preferred, uses the Google endpoint and schema, and accounts for
 
 test('Gemini passive inspection verifies the configured model without inference or unrelated provider traffic', async () => {
   let reads = 0;
-  const ai = createAI({ env: { GEMINI_API_KEY: 'test-only-google-key', GEMINI_MODEL: 'gemini-3.1-flash-lite' }, fetchImpl: async (url, options) => {
+  const ai = createAI({ env: { GEMINI_API_KEY: 'test-only-google-key', GEMINI_MODEL: 'gemini-3.8-flash' }, fetchImpl: async (url, options) => {
     reads++; assert.equal(url, 'https://generativelanguage.googleapis.com/v1beta/openai/models'); assert.equal(options.method, undefined);
     assert.equal(options.headers.authorization, 'Bearer test-only-google-key');
-    return Response.json({ data: [{ id: 'gemini-3.8-flash' }, { id: 'models/gemini-3.1-flash-lite' }] });
+    return Response.json({ data: [{ id: 'gemini-3.1-flash-lite' }, { id: 'models/gemini-3.8-flash' }] });
   } });
   const results = await Promise.all([ai.inspect(), ai.inspect()]);
+  assert.equal(ai.diagnostics().providers[0].model, 'gemini-3.8-flash');
   assert.equal(reads, 1); assert.equal(results[0].checks.Gemini.modelAvailable, true);
   assert.equal(ai.status().state, 'unverified'); assert.equal(ai.status().lastSuccessAt, null);
-  assert.equal(ai.diagnostics().usage.requests, 0); assert.equal(ai.diagnostics().quota, null);
+  assert.equal(ai.diagnostics().usage.requests, 0); assert.equal(ai.diagnostics().providers.length, 1);
 });
 
 test('Gemini daily-quota errors retain retry information and redact credentials inside Google details', async () => {
@@ -79,15 +80,14 @@ test('Gemini daily-quota errors retain retry information and redact credentials 
   assert.equal(JSON.stringify(ai.diagnostics()).includes(key), false);
 });
 
-test('a failing fallback never hides a Gemini key error, and a later success clears the old diagnostic', async () => {
+test('a Gemini key error is reported and a later success clears the old diagnostic', async () => {
   let healthy = false;
-  const ai = createAI({ env: { GEMINI_API_KEY: 'test-only-google-key', OPENROUTER_API_KEY: 'test-only-router-key' }, fetchImpl: async url => {
-    if (url.includes('openrouter')) return Response.json({ error: { code: 429, message: 'Rate limit' } }, { status: 429 });
+  const ai = createAI({ env: { GEMINI_API_KEY: 'test-only-google-key' }, fetchImpl: async url => {
     if (!healthy) return Response.json({ error: { code: 400, message: 'API key not valid. Please pass a valid API key.' } }, { status: 400 });
     return completion('rendben');
   } });
   await assert.rejects(ai.testConnection(), error => error.code === 'auth');
-  assert.equal(ai.diagnostics().lastError.provider, 'Gemini'); assert.equal(ai.diagnostics().recent.length, 2);
+  assert.equal(ai.diagnostics().lastError.provider, 'Gemini'); assert.equal(ai.diagnostics().recent.length, 1);
   healthy = true; await ai.testConnection(); assert.equal(ai.diagnostics().lastError, null); assert.equal(ai.status().state, 'working');
 });
 
@@ -99,24 +99,6 @@ test('Google array and plain-text error responses retain the redacted explanatio
   }
 });
 
-test('Groq generation uses strict structured output and validates the exact requested pack', async () => {
-  let request;
-  const ai = createAI({ env: { GROQ_API_KEY: 'test-only-not-a-real-key' }, fetchImpl: async (url, options) => {
-    request = { url, options, body: JSON.parse(options.body) };
-    return completion(JSON.stringify({ questions: [sample(1), sample(2)] }));
-  } });
-  const result = await ai.generate({ topic: 'Számolás', count: 2, difficulty: 'easy' });
-  assert.equal(result.questions.length, 2);
-  assert.equal(result.provider, 'Groq');
-  assert.equal(request.url, 'https://api.groq.com/openai/v1/chat/completions');
-  assert.equal(request.body.model, 'openai/gpt-oss-120b');
-  assert.equal(request.body.response_format.json_schema.strict, true);
-  assert.equal(request.body.response_format.json_schema.schema.properties.questions.minItems, 2);
-  assert.equal(request.body.response_format.json_schema.schema.properties.questions.maxItems, 2);
-  assert.ok(request.body.max_completion_tokens < 8000);
-  assert.equal(JSON.stringify(ai.status()).includes('test-only-not-a-real-key'), false);
-});
-
 test('invalid, duplicate, truncated or incomplete AI packs are rejected', async t => {
   for (const [name, value] of [
     ['invalid JSON', 'not JSON'],
@@ -126,37 +108,32 @@ test('invalid, duplicate, truncated or incomplete AI packs are rejected', async 
     ['missing explanation', JSON.stringify({ questions: [{ ...sample(1), explanation: '' }, sample(2)] })]
   ]) {
     await t.test(name, async () => {
-      const ai = createAI({ env: { GROQ_API_KEY: 'test-only-key' }, fetchImpl: async () => completion(value) });
+      const ai = createAI({ env: { GEMINI_API_KEY: 'test-only-key' }, fetchImpl: async () => completion(value) });
       await assert.rejects(ai.generate({ topic: '', count: 2, difficulty: 'mixed' }), error => error.code === 'invalid_response');
     });
   }
-  const ai = createAI({ env: { GROQ_API_KEY: 'test-only-key' }, fetchImpl: async () => new Response(JSON.stringify({ choices: [{ finish_reason: 'length', message: { content: '{"questions":[' } }] })) });
+  const ai = createAI({ env: { GEMINI_API_KEY: 'test-only-key' }, fetchImpl: async () => new Response(JSON.stringify({ choices: [{ finish_reason: 'length', message: { content: '{"questions":[' } }] })) });
   await assert.rejects(ai.generate({ topic: '', count: 2, difficulty: 'mixed' }), error => error.code === 'invalid_response');
 });
 
-test('a quota error can fall back to the separately configured free OpenRouter route', async () => {
-  const urls = [];
-  const ai = createAI({ env: { GROQ_API_KEY: 'test-groq-key', OPENROUTER_API_KEY: 'test-router-key' }, fetchImpl: async (url, options) => {
-    urls.push(url);
-    if (url.includes('groq.com')) return new Response('{}', { status: 429, headers: { 'retry-after': '30' } });
-    const body = JSON.parse(options.body);
-    assert.equal(body.model, 'openrouter/free');
-    assert.ok(body.max_tokens > 0);
-    return completion(JSON.stringify({ questions: [sample(1)] }));
+test('a failed Gemini request is attempted once', async () => {
+  let calls = 0;
+  const ai = createAI({ env: { GEMINI_API_KEY: 'test-only-key' }, fetchImpl: async url => {
+    calls++; assert.equal(new URL(url).hostname, 'generativelanguage.googleapis.com');
+    return Response.json({ error: { code: 503, message: 'High demand' } }, { status: 503 });
   } });
-  const result = await ai.generate({ topic: '', count: 1, difficulty: 'mixed' });
-  assert.equal(result.provider, 'OpenRouter');
-  assert.equal(urls.length, 2);
+  await assert.rejects(ai.generate({ topic: '', count: 1, difficulty: 'mixed' }), error => error.code === 'provider_error');
+  assert.equal(calls, 1); assert.equal(ai.diagnostics().usage.requests, 1);
 });
 
 test('provider authentication, quota and timeout failures have safe actionable errors', async t => {
   for (const [status, code] of [[401, 'auth'], [403, 'auth'], [429, 'rate_limit'], [500, 'provider_error']]) {
     await t.test(String(status), async () => {
-      const ai = createAI({ env: { GROQ_API_KEY: 'test-only-secret' }, fetchImpl: async () => new Response('{"error":"sensitive provider details"}', { status }) });
+      const ai = createAI({ env: { GEMINI_API_KEY: 'test-only-secret' }, fetchImpl: async () => new Response('{"error":"sensitive provider details"}', { status }) });
       await assert.rejects(ai.generate({ count: 1, topic: '', difficulty: 'mixed' }), error => error.code === code && !error.message.includes('sensitive') && !error.message.includes('test-only-secret'));
     });
   }
-  const ai = createAI({ env: { GROQ_API_KEY: 'test-only-key' }, timeoutMs: 20, fetchImpl: (_url, { signal }) => new Promise((_resolve, reject) => {
+  const ai = createAI({ env: { GEMINI_API_KEY: 'test-only-key' }, timeoutMs: 20, fetchImpl: (_url, { signal }) => new Promise((_resolve, reject) => {
     const keepAlive = setTimeout(() => reject(new Error('unexpected test timeout')), 1000);
     signal.addEventListener('abort', () => { clearTimeout(keepAlive); reject(signal.reason); });
   }) });
@@ -164,7 +141,7 @@ test('provider authentication, quota and timeout failures have safe actionable e
 });
 
 test('real app endpoints accept mock AI generation, require approval, and support follow-up chat', async t => {
-  const ai = createAI({ env: { GROQ_API_KEY: 'test-only-key' }, fetchImpl: async (_url, options) => {
+  const ai = createAI({ env: { GEMINI_API_KEY: 'test-only-key' }, fetchImpl: async (_url, options) => {
     const body = JSON.parse(options.body);
     if (body.response_format) return completion(JSON.stringify({ questions: [sample(1), sample(2)] }));
     return completion('A tesztelt AI-kapcsolat rövid magyarázata a már lezárt kérdéshez.');
@@ -195,7 +172,7 @@ test('real app endpoints accept mock AI generation, require approval, and suppor
 });
 
 test('a failed background provider leaves the general stock playable and helper answers labelled honestly', async t => {
-  const ai = createAI({ env: { GROQ_API_KEY: 'test-only-key' }, fetchImpl: async () => new Response('{}', { status: 429 }) });
+  const ai = createAI({ env: { GEMINI_API_KEY: 'test-only-key' }, fetchImpl: async () => new Response('{}', { status: 429 }) });
   const app = await startApp(t, { ai });
   const host = await app.create({ count: 1 });
   const prepared = await app.request(`/api/rooms/${host.roomId}/prepare`, { method: 'POST', token: host.playerToken, body: { settings: { count: 1 } } });

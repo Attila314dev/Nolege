@@ -11,7 +11,7 @@ const fixtureToken = 'test-only-assistant-access-token-0123456789';
 const env = { ADMIN_SESSION_SECRET: 'test-only-session-secret-at-least-thirty-two-characters',
   ADMIN_OWNER_PASSWORD_HASH: await hashAdminPassword(fixturePassword), ADMIN_ASSISTANT_TOKEN_HASH: tokenHash(fixtureToken) };
 const question = n => ({ id: `fixture-${n}`, category: 'Teszt', question: `Mennyi ${n} és 4 összege?`, correct: String(n + 4), wrong: [String(n + 5), String(n + 6), String(n + 7)], explanation: `${n} és négy összege ${n + 4}.`, difficulty: 'easy', status: n <= 2 ? 'approved' : 'review', source: 'chatgpt', createdBy: 'ChatGPT', createdAt: '2026-10-28T10:00:00Z', updatedBy: 'ChatGPT', updatedAt: '2026-10-28T10:00:00Z' });
-const seed = () => ({ schemaVersion: 1, revision: 'initial-revision', questions: [1, 2, 3, 4].map(question), settings: { openRouterModel: 'openrouter/free', backgroundAI: false }, audit: [] });
+const seed = () => ({ schemaVersion: 1, revision: 'initial-revision', questions: [1, 2, 3, 4].map(question), settings: { backgroundAI: false }, audit: [] });
 async function setup(t, options = {}) {
   const store = options.store || memoryCatalogStore(seed());
   const catalog = createCatalog({ store }); await catalog.ready;
@@ -120,25 +120,24 @@ test('GitHub writes use the current file SHA and refuse to overwrite unreadable 
   assert.equal(writes, 1); assert.equal(reads, 1);
 });
 
-test('status refresh reads quota without inference, while an explicit connection test counts actual tokens', async t => {
+test('status refresh reads models without inference, while an explicit connection test counts actual tokens', async t => {
   let completions = 0;
-  const ai = createAI({ env: { OPENROUTER_API_KEY: 'test-only-router-secret' }, fetchImpl: async url => {
-    if (url.endsWith('/key')) return new Response(JSON.stringify({ data: { free_model_daily_requests: { used: 4, limit: 50, remaining: 46 }, is_free_tier: true } }));
-    if (url.endsWith('/models')) return new Response(JSON.stringify({ data: [] }));
-    completions++; return new Response(JSON.stringify({ model: 'example/free-model:free', usage: { prompt_tokens: 10, completion_tokens: 1, total_tokens: 11 }, choices: [{ finish_reason: 'stop', message: { content: 'rendben' } }] }));
+  const ai = createAI({ env: { GEMINI_API_KEY: 'test-only-router-secret' }, fetchImpl: async url => {
+    if (url.endsWith('/models')) return Response.json({ data: [{ id: 'gemini-3.1-flash-lite' }] });
+    completions++; return new Response(JSON.stringify({ model: 'gemini-3.1-flash-lite', usage: { prompt_tokens: 10, completion_tokens: 1, total_tokens: 11 }, choices: [{ finish_reason: 'stop', message: { content: 'rendben' } }] }));
   } });
   const app = await setup(t, { ai });
   const inspected = await app.requestAdmin('/api-status?refresh=1');
-  assert.equal(inspected.status, 200); assert.equal(completions, 0); assert.equal(inspected.data.diagnostics.quota.freeModelDailyRequests.remaining, 46);
+  assert.equal(inspected.status, 200); assert.equal(completions, 0); assert.equal(inspected.data.diagnostics.checks.Gemini.modelAvailable, true);
   assert.equal(inspected.data.ai.state, 'unverified');
   const tested = await app.requestAdmin('/api-test', { method: 'POST', body: {} });
   assert.equal(tested.status, 200); assert.equal(completions, 1); assert.equal(tested.data.diagnostics.usage.totalTokens, 11);
 });
 
-test('upstream 429 and daily quota errors remain distinct, with private provider messages redacted', async () => {
-  for (const [message, expected] of [['Temporarily rate limited upstream', 'upstream_rate_limit'], ['Daily free model limit reached', 'daily_limit'], ['Too many requests', 'rate_limit']]) {
+test('minute and daily quota errors remain distinct, with private provider messages redacted', async () => {
+  for (const [message, expected] of [['Requests per minute exceeded', 'rate_limit'], ['RequestsPerDay exceeded', 'daily_limit'], ['Too many requests', 'rate_limit']]) {
     const key = 'test-only-redaction-secret';
-    const ai = createAI({ env: { OPENROUTER_API_KEY: key }, fetchImpl: async () => new Response(JSON.stringify({ error: { code: 429, message, metadata: { raw: `Provider details ${key}` } } }), { status: 429, headers: { 'retry-after': '120' } }) });
+    const ai = createAI({ env: { GEMINI_API_KEY: key }, fetchImpl: async () => new Response(JSON.stringify({ error: { code: 429, message, details: [{ '@type': 'type.googleapis.com/google.rpc.QuotaFailure', violations: [{ description: `Provider details ${key}` }] }] } }), { status: 429, headers: { 'retry-after': '120' } }) });
     await assert.rejects(ai.testConnection(), error => error.code === expected && error.retryAfter === 120);
     assert.equal(JSON.stringify(ai.diagnostics()).includes(key), false);
     assert.equal(JSON.stringify(ai.status()).includes('Provider details'), false);
@@ -148,9 +147,9 @@ test('upstream 429 and daily quota errors remain distinct, with private provider
 test('Gemini admin generation preserves Google attribution and imports only for review', async t => {
   let completions = 0;
   const ai = createAI({ env: { GEMINI_API_KEY: 'test-only-gemini-key' }, fetchImpl: async (url, options) => {
-    if (url.endsWith('/models')) return Response.json({ data: [{ id: 'gemini-3.8-flash' }] });
+    if (url.endsWith('/models')) return Response.json({ data: [{ id: 'gemini-3.1-flash-lite' }] });
     completions++; const body = JSON.parse(options.body); const count = JSON.parse(body.messages.at(-1).content).kerdesekSzama;
-    return Response.json({ model: 'gemini-3.8-flash', usage: { prompt_tokens: 100, completion_tokens: 700, total_tokens: 800 }, choices: [{ finish_reason: 'stop', message: { content: JSON.stringify({ questions: Array.from({ length: count }, (_, i) => {
+    return Response.json({ model: 'gemini-3.1-flash-lite', usage: { prompt_tokens: 100, completion_tokens: 700, total_tokens: 800 }, choices: [{ finish_reason: 'stop', message: { content: JSON.stringify({ questions: Array.from({ length: count }, (_, i) => {
       const { category, question: text, correct, wrong, explanation, difficulty } = question(800 + i); return { category, question: text, correct, wrong, explanation, difficulty };
     }) }) } }] });
   } });
@@ -160,6 +159,6 @@ test('Gemini admin generation preserves Google attribution and imports only for 
   assert.equal(generated.status, 200); assert.equal(generated.data.provider, 'Gemini'); assert.equal(generated.data.questions.length, 5);
   const imported = await app.requestAdmin(`/generated/${generated.data.generationId}/import`, { method: 'POST', body: { revision: app.catalog.summary().revision } });
   assert.equal(imported.status, 200); assert.equal(app.catalog.summary().stats.statuses.approved, 2); assert.equal(app.catalog.summary().stats.sources.api, 5);
-  for (const item of app.catalog.list({ source: 'api' }).questions) { assert.equal(item.status, 'review'); assert.equal(item.provider, 'Gemini'); assert.equal(item.model, 'gemini-3.8-flash'); }
+  for (const item of app.catalog.list({ source: 'api' }).questions) { assert.equal(item.status, 'review'); assert.equal(item.provider, 'Gemini'); assert.equal(item.model, 'gemini-3.1-flash-lite'); }
   assert.equal(ai.diagnostics().usage.requests, 1); assert.equal(ai.diagnostics().usage.totalTokens, 800);
 });
