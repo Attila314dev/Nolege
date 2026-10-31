@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "revision": "af087d49-5533-4c99-b5a2-91119c5c8ff3",
+  "revision": "0818d87f-0dcf-4380-87f3-3e3356804664",
   "questions": [
     {
       "id": "legacy-0001",
@@ -20621,6 +20621,121 @@
       "createdAt": "2026-10-28T15:43:35.000Z",
       "updatedBy": "Attila",
       "updatedAt": "2026-10-31T11:21:58.844Z"
+    },
+    {
+      "id": "08ce566b-0900-48b0-9705-d191b1b376d6",
+      "category": "Űrkutatás",
+      "question": "Melyik volt az emberiség történetének első mesterséges holdja, amelyet a Szovjetunió bocsátott fel 1957-ben?",
+      "correct": "Szputnyik–1",
+      "wrong": [
+        "Vosztok–1",
+        "Explorer–1",
+        "Luna–1"
+      ],
+      "explanation": "A Szputnyik–1 volt az első űreszköz, amely sikeresen Föld körüli pályára állt 1957. október 4-én.",
+      "difficulty": "easy",
+      "tags": [],
+      "family": "melyik volt az emberiseg tortenetenek elso mesterseges holdja amelyet a szovjetunio bocsatott fel 1957 ben",
+      "status": "review",
+      "source": "api",
+      "createdBy": "ChatGPT",
+      "createdAt": "2026-10-31T12:56:14.749Z",
+      "updatedBy": "ChatGPT",
+      "updatedAt": "2026-10-31T12:56:14.749Z",
+      "provider": "Gemini",
+      "model": "gemini-3.1-flash-lite"
+    },
+    {
+      "id": "29ab66ab-a170-4dfa-820f-1a0d46623f8e",
+      "category": "Űrkutatás",
+      "question": "Melyik űrszonda lépte át elsőként a heliopauzát, és jutott el a csillagközi térbe?",
+      "correct": "Voyager–1",
+      "wrong": [
+        "Pioneer–10",
+        "New Horizons",
+        "Voyager–2"
+      ],
+      "explanation": "A Voyager–1 2012-ben lépte át a heliopauzát, ezzel az első ember alkotta eszköz lett, amely a csillagközi térbe jutott.",
+      "difficulty": "medium",
+      "tags": [],
+      "family": "melyik urszonda lepte at elsokent a heliopauzat es jutott el a csillagkozi terbe",
+      "status": "review",
+      "source": "api",
+      "createdBy": "ChatGPT",
+      "createdAt": "2026-10-31T12:56:14.749Z",
+      "updatedBy": "ChatGPT",
+      "updatedAt": "2026-10-31T12:56:14.749Z",
+      "provider": "Gemini",
+      "model": "gemini-3.1-flash-lite"
+    },
+    {
+      "id": "5421b808-72f8-4988-8764-4852cc3f6a82",
+      "category": "Űrkutatás",
+      "question": "Melyik űrszonda érkezett meg elsőként a Plútóhoz 2015-ben, hogy részletes felvételeket készítsen róla?",
+      "correct": "New Horizons",
+      "wrong": [
+        "Cassini",
+        "Galileo",
+        "Voyager–2"
+      ],
+      "explanation": "A New Horizons űrszonda 2015. július 14-én repült el a Plútó mellett, történelmi jelentőségű adatokat gyűjtve a törpebolygóról.",
+      "difficulty": "medium",
+      "tags": [],
+      "family": "melyik urszonda erkezett meg elsokent a plutohoz 2015 ben hogy reszletes felveteleket keszitsen rola",
+      "status": "review",
+      "source": "api",
+      "createdBy": "ChatGPT",
+      "createdAt": "2026-10-31T12:56:14.750Z",
+      "updatedBy": "ChatGPT",
+      "updatedAt": "2026-10-31T12:56:14.750Z",
+      "provider": "Gemini",
+      "model": "gemini-3.1-flash-lite"
+    },
+    {
+      "id": "753c46cd-c0d7-44e8-b2c6-dac71ac5ff33",
+      "category": "Űrkutatás",
+      "question": "Melyik űrszonda leszállóegysége hajtotta végre az első sima leszállást a Mars felszínén, 1971-ben?",
+      "correct": "Mars–3",
+      "wrong": [
+        "Viking–1",
+        "Pathfinder",
+        "Curiosity"
+      ],
+      "explanation": "A szovjet Mars–3 leszállóegysége 1971. december 2-án érte el a Mars felszínét, bár a működése csak rövid ideig tartott.",
+      "difficulty": "hard",
+      "tags": [],
+      "family": "melyik urszonda leszalloegysege hajtotta vegre az elso sima leszallast a mars felszinen 1971 ben",
+      "status": "review",
+      "source": "api",
+      "createdBy": "ChatGPT",
+      "createdAt": "2026-10-31T12:56:14.751Z",
+      "updatedBy": "ChatGPT",
+      "updatedAt": "2026-10-31T12:56:14.751Z",
+      "provider": "Gemini",
+      "model": "gemini-3.1-flash-lite"
+    },
+    {
+      "id": "0732339f-41e4-4e5d-a1ae-d237530cf8c9",
+      "category": "Űrkutatás",
+      "question": "Melyik űrtávcső állt pályára 1990-ben, forradalmasítva ezzel a világegyetemről alkotott képünket?",
+      "correct": "Hubble űrtávcső",
+      "wrong": [
+        "James Webb űrtávcső",
+        "Spitzer űrtávcső",
+        "Kepler űrtávcső"
+      ],
+      "explanation": "A Hubble űrtávcsövet 1990 áprilisában a Discovery űrrepülőgép juttatta Föld körüli pályára.",
+      "difficulty": "easy",
+      "tags": [],
+      "family": "melyik urtavcso allt palyara 1990 ben forradalmasitva ezzel a vilagegyetemrol alkotott kepunket",
+      "status": "review",
+      "source": "api",
+      "createdBy": "ChatGPT",
+      "createdAt": "2026-10-31T12:56:14.751Z",
+      "updatedBy": "ChatGPT",
+      "updatedAt": "2026-10-31T12:56:14.751Z",
+      "provider": "Gemini",
+      "model": "gemini-3.1-flash-lite"
     }
   ],
   "settings": {
@@ -20682,6 +20797,14 @@
       "actor": "Attila",
       "action": "settings_updated",
       "count": 1,
+      "detail": ""
+    },
+    {
+      "id": "a5875cf6-10b9-4c2a-a5a9-57a1e4544208",
+      "at": "2026-10-31T12:56:14.751Z",
+      "actor": "ChatGPT",
+      "action": "questions_imported",
+      "count": 5,
       "detail": ""
     }
   ]
