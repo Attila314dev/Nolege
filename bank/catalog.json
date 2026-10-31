@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "revision": "e202e253-9df4-447c-81e0-848c59fec67b",
+  "revision": "e602bda9-3d5a-4a75-92c1-a9343a40fcd1",
   "questions": [
     {
       "id": "legacy-0001",
@@ -20739,7 +20739,6 @@
     }
   ],
   "settings": {
-    "openRouterModel": "google/gemma-4-26b-a4b-it:free",
     "backgroundAI": true
   },
   "audit": [
@@ -20819,6 +20818,14 @@
       "id": "9b757cd9-e21a-43ca-8adc-96706bda0d67",
       "at": "2026-10-31T16:33:39.706Z",
       "actor": "Attila",
+      "action": "settings_updated",
+      "count": 1,
+      "detail": ""
+    },
+    {
+      "id": "41e91474-4284-4d1b-b4dd-daa9af314603",
+      "at": "2026-10-31T16:39:54.145Z",
+      "actor": "ChatGPT",
       "action": "settings_updated",
       "count": 1,
       "detail": ""
