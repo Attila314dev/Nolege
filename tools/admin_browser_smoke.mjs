@@ -12,8 +12,10 @@ import { hashAdminPassword } from '../lib/admin-auth.js';
 const password = 'test-only-browser-password';
 const adminEnv = { ADMIN_SESSION_SECRET: 'test-only-browser-session-secret-0123456789', ADMIN_OWNER_PASSWORD_HASH: await hashAdminPassword(password) };
 let inference = 0;
-const ai = createAI({ env: { OPENROUTER_API_KEY: 'test-only-browser-api-key' }, fetchImpl: async (url, options) => {
-  if (url.endsWith('/models')) return Response.json({ data: [] });
+const useGemini = process.env.ADMIN_AI_PROVIDER === 'gemini';
+const mockModel = useGemini ? 'gemini-3.8-flash' : 'mock/model:free';
+const ai = createAI({ env: useGemini ? { GEMINI_API_KEY: 'test-only-browser-api-key' } : { OPENROUTER_API_KEY: 'test-only-browser-api-key' }, fetchImpl: async (url, options) => {
+  if (url.endsWith('/models')) return Response.json({ data: useGemini ? [{ id: mockModel }] : [] });
   if (url.endsWith('/key')) return Response.json({ data: { free_model_daily_requests: { used: 4, limit: 50, remaining: 46 } } });
   inference++;
   const body = JSON.parse(options.body);
@@ -22,10 +24,11 @@ const ai = createAI({ env: { OPENROUTER_API_KEY: 'test-only-browser-api-key' }, 
     const count = JSON.parse(body.messages.at(-1).content).kerdesekSzama;
     content = JSON.stringify({ questions: Array.from({ length: count }, (_, i) => ({ question: `Böngészőpróba: mennyi ${i + 700} meg 2?`, correct: String(i + 702), wrong: [String(i + 703), String(i + 704), String(i + 705)], category: 'Böngészőpróba', difficulty: 'easy', explanation: 'Kettőt hozzáadunk a kiinduló számhoz.' })) });
   }
-  return Response.json({ model: 'mock/model:free', usage: { prompt_tokens: 20, completion_tokens: 10, total_tokens: 30 }, choices: [{ finish_reason: 'stop', message: { content } }] });
+  return Response.json({ model: mockModel, usage: { prompt_tokens: 20, completion_tokens: 10, total_tokens: 30 }, choices: [{ finish_reason: 'stop', message: { content } }] });
 } });
 const seed = loadCatalogSeed();
 // Exercise the review workflow independently of the owner's live approvals.
+seed.questions = seed.questions.filter(question => /^(legacy-|cg-)/.test(question.id));
 for (const question of seed.questions) if (question.id.startsWith('cg-')) question.status = 'review';
 const catalogStore = memoryCatalogStore(seed);
 const catalog = createCatalog({ store: catalogStore });
@@ -57,7 +60,7 @@ try {
     assert.match(await page.locator('#adminStats').innerText(), /940/);
     assert.match(await page.locator('#listCount').innerText(), /800/);
     await noOverflow(page, `bank ${width}`);
-    if ([375, 1365].includes(width)) {
+    if (!useGemini && [375, 1365].includes(width)) {
       await mkdir(new URL('../docs/', import.meta.url), { recursive: true });
       await page.screenshot({ path: new URL(`../docs/nolege-admin-${width === 375 ? 'mobile' : 'desktop'}.png`, import.meta.url).pathname, fullPage: true });
     }
@@ -66,8 +69,18 @@ try {
     await noOverflow(page, `editor ${width}`); await page.locator('[data-close=questionDialog]').click();
     await page.locator('[data-tab=api]').click(); await page.locator('#apiOverview .api-health').waitFor();
     await noOverflow(page, `API ${width}`);
+    if (useGemini) {
+      assert.match(await page.locator('#apiOverview .api-key-row').innerText(), /Gemini:.*beállítva/);
+      assert.match(await page.locator('#apiOverview').innerText(), /Elsődleges szolgáltató/);
+      assert.equal(await page.locator('#apiSettingsForm [name=openRouterModel]').isDisabled(), true);
+      await page.locator('#apiOverview a[href="https://aistudio.google.com/usage"]').waitFor();
+      if ([375, 1365].includes(width)) await page.screenshot({ path: new URL(`../docs/nolege-admin-gemini-${width === 375 ? 'mobile' : 'desktop'}.png`, import.meta.url).pathname, fullPage: true });
+    }
     if (width === 375) {
-      await page.locator('#refreshAPI').click(); await page.getByText('46 kérés maradt', { exact: true }).waitFor(); assert.equal(inference, 0);
+      await page.locator('#refreshAPI').click();
+      if (useGemini) await page.getByText('Modell szerepel a szolgáltatói listában', { exact: false }).waitFor();
+      else await page.getByText('46 kérés maradt', { exact: true }).waitFor();
+      assert.equal(inference, 0);
       await page.locator('#testAPI').click(); await page.waitForFunction(() => document.querySelector('#testAPI').textContent.includes('· AI-kéréssel'));
       assert.equal(inference, 1);
       await page.locator('#generateForm [name=topic]').fill('Böngészőpróba'); await page.locator('#generateForm [name=count]').fill('2');
@@ -76,7 +89,7 @@ try {
       await page.locator('[data-generated="0"] [name=explanation]').fill('Szerkesztett próbamondat az előnézetben.');
       await noOverflow(page, 'generated preview'); await page.locator('#saveGenerated').click(); await page.locator('#generationDialog').waitFor({ state: 'hidden' });
       assert.equal(catalog.summary().stats.sources.api, 2); assert.equal(catalog.summary().stats.statuses.approved, 140); assert.equal(inference, 2);
-      const generated = catalog.list({ source: 'api' }).questions[0]; assert.equal(generated.model, 'mock/model:free'); assert.match(generated.explanation, /Szerkesztett/);
+      const generated = catalog.list({ source: 'api' }).questions[0]; assert.equal(generated.model, mockModel); assert.match(generated.explanation, /Szerkesztett/);
       // Restore the seed between viewport tests; all writes are isolated in memory.
       await catalog.restore(seed, catalog.summary().revision, 'Browser fixture');
     }

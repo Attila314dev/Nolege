@@ -32,7 +32,63 @@ test('health follows validated completions, exposes real model and timestamps, a
   assert.equal(ai.status().lastModel, 'actual-selected-model');
   assert.equal(ai.status().lastCompletedAt, clock);
   assert.equal(ai.status().lastError, null);
+  assert.equal(ai.diagnostics().lastError, null);
   assert.equal(JSON.stringify(ai.status()).includes('test-only-private-key'), false);
+});
+
+test('Gemini is preferred, uses the Google endpoint and schema, and accounts for a five-question pack', async () => {
+  let count = 0;
+  const ai = createAI({ env: { GEMINI_API_KEY: 'test-only-google-key', OPENROUTER_API_KEY: 'test-only-fallback-key' }, fetchImpl: async (url, options) => {
+    count++; assert.equal(url, 'https://generativelanguage.googleapis.com/v1beta/openai/chat/completions');
+    assert.equal(options.headers.authorization, 'Bearer test-only-google-key');
+    const body = JSON.parse(options.body);
+    assert.equal(body.model, 'gemini-3.8-flash'); assert.equal(body.reasoning_effort, 'minimal'); assert.equal(body.reasoning, undefined);
+    assert.equal(body.max_tokens, 2650); assert.equal(body.max_completion_tokens, undefined);
+    assert.equal(body.response_format.json_schema.strict, true); assert.equal(body.response_format.json_schema.schema.properties.questions.minItems, 5);
+    return Response.json({ model: 'gemini-3.8-flash', usage: { prompt_tokens: 100, completion_tokens: 650, total_tokens: 750 }, choices: [{ finish_reason: 'stop', message: { content: JSON.stringify({ questions: Array.from({ length: 5 }, (_, i) => sample(i + 100)) }) } }] });
+  } });
+  assert.equal(ai.status().primaryProvider, 'Gemini'); assert.equal(ai.recommendedBatchSize, 5);
+  const result = await ai.generate({ topic: 'Számolás', count: 5, difficulty: 'easy' });
+  assert.equal(result.provider, 'Gemini'); assert.equal(result.questions.length, 5); assert.equal(count, 1);
+  assert.equal(ai.status().lastProvider, 'Gemini'); assert.equal(ai.status().state, 'working');
+  assert.equal(ai.diagnostics().usage.requests, 1); assert.equal(ai.diagnostics().usage.totalTokens, 750);
+  assert.equal(JSON.stringify(ai.diagnostics()).includes('test-only-google-key'), false);
+});
+
+test('Gemini passive inspection verifies the configured model without inference or unrelated provider traffic', async () => {
+  let reads = 0;
+  const ai = createAI({ env: { GEMINI_API_KEY: 'test-only-google-key', GEMINI_MODEL: 'gemini-3.1-flash-lite' }, fetchImpl: async (url, options) => {
+    reads++; assert.equal(url, 'https://generativelanguage.googleapis.com/v1beta/openai/models'); assert.equal(options.method, undefined);
+    assert.equal(options.headers.authorization, 'Bearer test-only-google-key');
+    return Response.json({ data: [{ id: 'gemini-3.8-flash' }, { id: 'models/gemini-3.1-flash-lite' }] });
+  } });
+  const results = await Promise.all([ai.inspect(), ai.inspect()]);
+  assert.equal(reads, 1); assert.equal(results[0].checks.Gemini.modelAvailable, true);
+  assert.equal(ai.status().state, 'unverified'); assert.equal(ai.status().lastSuccessAt, null);
+  assert.equal(ai.diagnostics().usage.requests, 0); assert.equal(ai.diagnostics().quota, null);
+});
+
+test('Gemini daily-quota errors retain retry information and redact credentials inside Google details', async () => {
+  const key = 'test-only-gemini-private-key';
+  const ai = createAI({ env: { GEMINI_API_KEY: key }, fetchImpl: async () => Response.json({ error: { code: 429, message: 'Quota exceeded', details: [
+    { '@type': 'type.googleapis.com/google.rpc.QuotaFailure', violations: [{ quotaId: 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', description: `Rejected ${key}` }] },
+    { '@type': 'type.googleapis.com/google.rpc.RetryInfo', retryDelay: '45.5s' }
+  ] } }, { status: 429 }) });
+  await assert.rejects(ai.generate({ topic: '', count: 5, difficulty: 'mixed' }), error => error.code === 'daily_limit' && error.retryAfter === 46);
+  assert.equal(ai.diagnostics().lastError.provider, 'Gemini'); assert.equal(ai.diagnostics().lastError.scope, 'account');
+  assert.equal(JSON.stringify(ai.diagnostics()).includes(key), false);
+});
+
+test('a failing fallback never hides a Gemini key error, and a later success clears the old diagnostic', async () => {
+  let healthy = false;
+  const ai = createAI({ env: { GEMINI_API_KEY: 'test-only-google-key', OPENROUTER_API_KEY: 'test-only-router-key' }, fetchImpl: async url => {
+    if (url.includes('openrouter')) return Response.json({ error: { code: 429, message: 'Rate limit' } }, { status: 429 });
+    if (!healthy) return Response.json({ error: { code: 400, message: 'API key not valid. Please pass a valid API key.' } }, { status: 400 });
+    return completion('rendben');
+  } });
+  await assert.rejects(ai.testConnection(), error => error.code === 'auth');
+  assert.equal(ai.diagnostics().lastError.provider, 'Gemini'); assert.equal(ai.diagnostics().recent.length, 2);
+  healthy = true; await ai.testConnection(); assert.equal(ai.diagnostics().lastError, null); assert.equal(ai.status().state, 'working');
 });
 
 test('Groq generation uses strict structured output and validates the exact requested pack', async () => {

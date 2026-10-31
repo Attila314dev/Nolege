@@ -144,3 +144,22 @@ test('upstream 429 and daily quota errors remain distinct, with private provider
     assert.equal(JSON.stringify(ai.status()).includes('Provider details'), false);
   }
 });
+
+test('Gemini admin generation preserves Google attribution and imports only for review', async t => {
+  let completions = 0;
+  const ai = createAI({ env: { GEMINI_API_KEY: 'test-only-gemini-key' }, fetchImpl: async (url, options) => {
+    if (url.endsWith('/models')) return Response.json({ data: [{ id: 'gemini-3.8-flash' }] });
+    completions++; const body = JSON.parse(options.body); const count = JSON.parse(body.messages.at(-1).content).kerdesekSzama;
+    return Response.json({ model: 'gemini-3.8-flash', usage: { prompt_tokens: 100, completion_tokens: 700, total_tokens: 800 }, choices: [{ finish_reason: 'stop', message: { content: JSON.stringify({ questions: Array.from({ length: count }, (_, i) => {
+      const { category, question: text, correct, wrong, explanation, difficulty } = question(800 + i); return { category, question: text, correct, wrong, explanation, difficulty };
+    }) }) } }] });
+  } });
+  const app = await setup(t, { ai });
+  const inspected = await app.requestAdmin('/api-status?refresh=1'); assert.equal(inspected.status, 200); assert.equal(completions, 0); assert.equal(inspected.data.diagnostics.checks.Gemini.modelAvailable, true);
+  const generated = await app.requestAdmin('/generate', { method: 'POST', body: { settings: { topic: 'Teszt', count: 5 } } });
+  assert.equal(generated.status, 200); assert.equal(generated.data.provider, 'Gemini'); assert.equal(generated.data.questions.length, 5);
+  const imported = await app.requestAdmin(`/generated/${generated.data.generationId}/import`, { method: 'POST', body: { revision: app.catalog.summary().revision } });
+  assert.equal(imported.status, 200); assert.equal(app.catalog.summary().stats.statuses.approved, 2); assert.equal(app.catalog.summary().stats.sources.api, 5);
+  for (const item of app.catalog.list({ source: 'api' }).questions) { assert.equal(item.status, 'review'); assert.equal(item.provider, 'Gemini'); assert.equal(item.model, 'gemini-3.8-flash'); }
+  assert.equal(ai.diagnostics().usage.requests, 1); assert.equal(ai.diagnostics().usage.totalTokens, 800);
+});

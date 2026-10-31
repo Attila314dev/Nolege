@@ -1,10 +1,16 @@
-# Nolege 3.1 — ellenőrzés
+# Nolege 3.2 — ellenőrzés
 
 2026. október 31., Node.js 24.22.1.
 
-- `npm test`: **75 sikeres teszt, 0 hiba**.
+- `npm test`: **81 sikeres teszt, 0 hiba**.
 - `git diff --check`: sikeres.
 - Az AI-tesztek és az admin böngészőpróbája szimulált szolgáltatót használnak; nem fogyasztanak éles API-kvótát.
+
+## Gemini-bekötés
+
+Szimulált szolgáltatóval ellenőrizve: Gemini elsődlegessége és tényleges Google-végpontja; sémás ötkérdéses generálás; valós válaszmezőkből képzett kérés- és tokenszámlálás; passzív modelllekérdezés inferencia nélkül; Google napi kvóta és RetryInfo értelmezése; kulcs kitakarása a hibarészletekben; az elsődleges kulcshiba megőrzése sikertelen tartalék mellett; hibajelzés törlése siker után. Teljes adminfolyamat: Gemini-előnézet, import ellenőrzendőként, forrás és modell megőrzése, jóváhagyott állomány változatlansága. A háttérkészlet tiszteletben tartja az ötkérdéses szolgáltatói ajánlást, egy feltöltési műveletként számolva.
+
+Az admin böngészőpróbája `ADMIN_AI_PROVIDER=gemini` kapcsolóval a Google-változatot is ellenőrzi: három szolgáltatói kártya, elsődleges Gemini-jelzés, AI Studio kvótahivatkozás, kikapcsolt OpenRouter-modellmező hiányzó tartalékkulcsnál, nulla inferencia állapotfrissítéskor, explicit kapcsolatteszt és szerkeszthető kérdéscsomag. Az eredeti OpenRouter-változat továbbra is külön futtatható. Képek: `docs/nolege-admin-gemini-mobile.png`, `docs/nolege-admin-gemini-desktop.png`.
 
 ## Adatok és szerver
 
@@ -45,6 +51,7 @@ npx playwright install chromium
 npm test
 npm run test:browser
 npm run test:admin-browser
+ADMIN_AI_PROVIDER=gemini npm run test:admin-browser
 npm run test:experience-browser
 ```
 

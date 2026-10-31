@@ -72,6 +72,13 @@ test('quota failures back off without blocking play or making repeated calls', a
   assert.equal(calls, 2);
 });
 
+test('a provider can reduce background batches without spending extra refill calls', async t => {
+  const ai = { ...generator(), recommendedBatchSize: 5 };
+  const pool = await poolFor(t, { ai }); pool.take(general(20));
+  await pool.refill();
+  assert.equal(pool.status().available, 85); assert.equal(pool.status().dailyCalls, 1); assert.equal(ai.calls(), 1);
+});
+
 test('a daily refill ceiling survives serial writes and resets only on the next UTC day', async t => {
   let clock = Date.parse('2026-10-28T10:00:00Z');
   const ai = generator();
