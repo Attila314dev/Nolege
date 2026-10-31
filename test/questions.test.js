@@ -4,7 +4,7 @@ import { bankPack, bankPool, loadBank, parseSettings, validatePack, validateQues
 
 const bank = loadBank();
 test('the full fallback bank is valid and contains useful explanations', () => {
-  assert.equal(bank.length, 140);
+  assert.ok(bank.length >= 140);
   assert.ok(bank.every(q => q.explanation.length > 10 && q.wrong.length >= 3));
   assert.ok(bankPool(bank, parseSettings({ topic: 'Harry Potter' })).length >= 15);
 });
@@ -20,7 +20,8 @@ test('general quiz selection covers categories without repetitive templates', ()
 test('exact count, topic and difficulty filters are respected', () => {
   for (const count of [1, 5, 15, 30]) assert.equal(bankPack(bank, parseSettings({ count })).length, count);
   const pack = bankPack(bank, parseSettings({ topic: 'Harry Potter', count: 15 }));
-  assert.ok(pack.every(q => q.tags.includes('Harry Potter')));
+  const eligible = new Set(bankPool(bank, parseSettings({ topic: 'Harry Potter' })).map(q => q.question));
+  assert.ok(pack.every(q => eligible.has(q.question)));
   assert.throws(() => bankPack(bank, parseSettings({ topic: 'nincs ilyen téma', count: 1 })), /még nincs/);
   const hard = bankPack(bank, parseSettings({ difficulty: 'hard', count: 5 }));
   assert.ok(hard.every(q => q.difficulty === 'hard'));

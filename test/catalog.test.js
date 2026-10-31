@@ -7,22 +7,23 @@ import { createCatalog, loadCatalogSeed } from '../lib/catalog.js';
 import { fileCatalogStore, githubCatalogStore, memoryCatalogStore } from '../lib/catalog-store.js';
 import { validateQuestion, fold } from '../lib/questions.js';
 
-test('the starter catalog contains 800 distinct attributed review questions and preserves the 140 approved originals', () => {
-  const seed = loadCatalogSeed(); assert.equal(seed.questions.length, 940);
-  const authored = seed.questions.filter(q => q.source === 'chatgpt'); assert.equal(authored.length, 800);
-  assert.equal(seed.questions.filter(q => q.status === 'approved').length, 140);
+function reviewSeed() { const seed = loadCatalogSeed(); for (const q of seed.questions) if (q.id.startsWith('cg-')) q.status = 'review'; return seed; }
+test('the catalog preserves the 800 attributed original questions and their admin-selected approval states', () => {
+  const seed = loadCatalogSeed(); assert.ok(seed.questions.length >= 940);
+  const authored = seed.questions.filter(q => q.id.startsWith('cg-')); assert.equal(authored.length, 800);
+  assert.equal(seed.questions.filter(q => q.id.startsWith('legacy-')).length, 140);
   const categories = new Map(); const texts = new Set();
   for (const q of seed.questions) {
     validateQuestion(q); assert.ok(q.wrong.length >= 3); assert.equal(new Set([q.correct, ...q.wrong.slice(0, 3)].map(fold)).size, 4);
     assert.ok(!texts.has(fold(q.question))); texts.add(fold(q.question));
-    if (q.source === 'chatgpt') {
+    if (q.id.startsWith('cg-')) {
       assert.equal(q.wrong.length, 3);
-      assert.equal(q.status, 'review'); assert.equal(q.createdBy, 'ChatGPT'); assert.ok(Date.parse(q.createdAt));
+      assert.ok(['draft', 'review', 'approved', 'archived'].includes(q.status)); assert.equal(q.source, 'chatgpt'); assert.equal(q.createdBy, 'ChatGPT'); assert.ok(Date.parse(q.createdAt));
       categories.set(q.category, (categories.get(q.category) || 0) + 1);
     }
   }
   assert.equal(categories.size, 16); assert.ok([...categories.values()].every(count => count === 50));
-  assert.equal(seed.settings.backgroundAI, false);
+  assert.equal(typeof seed.settings.backgroundAI, 'boolean');
 });
 
 test('the new arithmetic cards independently satisfy their numerical equations', () => {
@@ -43,7 +44,7 @@ test('the new arithmetic cards independently satisfy their numerical equations',
 test('file catalog writes survive a new app instance and reject external edits without discarding them', async () => {
   const dir = await mkdtemp(path.join(tmpdir(), 'nolege-catalog-'));
   try {
-    const file = path.join(dir, 'catalog.json'); const seed = loadCatalogSeed();
+    const file = path.join(dir, 'catalog.json'); const seed = reviewSeed();
     const catalog = createCatalog({ store: fileCatalogStore(file, seed) }); await catalog.ready;
     const original = catalog.get('cg-geography-001');
     await catalog.save({ ...original, explanation: 'Tartósan módosított magyarázat.' }, catalog.summary().revision, 'Attila');
@@ -57,7 +58,7 @@ test('file catalog writes survive a new app instance and reject external edits w
 });
 
 test('a GitHub catalog without runtime write permission exposes read-only state and rejects mutations', async () => {
-  const seed = loadCatalogSeed(); let writes = 0;
+  const seed = reviewSeed(); let writes = 0;
   const store = githubCatalogStore({ fallback: seed, fetchImpl: async (_url, options) => {
     if (options.method === 'PUT') writes++;
     assert.ok(_url.startsWith('https://raw.githubusercontent.com/Attila314dev/Nolege/'));

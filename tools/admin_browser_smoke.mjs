@@ -24,7 +24,10 @@ const ai = createAI({ env: { OPENROUTER_API_KEY: 'test-only-browser-api-key' }, 
   }
   return Response.json({ model: 'mock/model:free', usage: { prompt_tokens: 20, completion_tokens: 10, total_tokens: 30 }, choices: [{ finish_reason: 'stop', message: { content } }] });
 } });
-const catalogStore = memoryCatalogStore(loadCatalogSeed());
+const seed = loadCatalogSeed();
+// Exercise the review workflow independently of the owner's live approvals.
+for (const question of seed.questions) if (question.id.startsWith('cg-')) question.status = 'review';
+const catalogStore = memoryCatalogStore(seed);
 const catalog = createCatalog({ store: catalogStore });
 await catalog.ready;
 const app = createQuizServer({ catalog, adminEnv, ai });
@@ -75,7 +78,7 @@ try {
       assert.equal(catalog.summary().stats.sources.api, 2); assert.equal(catalog.summary().stats.statuses.approved, 140); assert.equal(inference, 2);
       const generated = catalog.list({ source: 'api' }).questions[0]; assert.equal(generated.model, 'mock/model:free'); assert.match(generated.explanation, /Szerkesztett/);
       // Restore the seed between viewport tests; all writes are isolated in memory.
-      await catalog.restore(loadCatalogSeed(), catalog.summary().revision, 'Browser fixture');
+      await catalog.restore(seed, catalog.summary().revision, 'Browser fixture');
     }
     await page.locator('[data-tab=backups]').click(); await noOverflow(page, `backup ${width}`);
     if (width === 1365) {

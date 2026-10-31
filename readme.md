@@ -1,13 +1,21 @@
-# Nolege 3.0
+# Nolege 3.1
 
 Magyar többjátékos partikvíz, mobilos fókusznézettel és privát kérdésműhellyel. Node.js, Express és WebSocket; a teljes kérdésbank GitHubon tárolt JSON, a gyors játékbeli készlet külön Render Key Value tárolót használ.
 
 Éles játék: <https://nolege-party-attila314dev.onrender.com/> · Admin: <https://nolege-party-attila314dev.onrender.com/admin>
 
+## Színek, telefon és hangulat
+
+- Zsályazöld, pasztellkék és korallpiros téma. A fejléc három színes négyzete közül a kiválasztott pipát kap; a választás az eszközön megmarad, az adminoldalon is érvényes.
+- A **Telefonra teszem** gomb telepítési segítséget ad. Androidon Chrome → Telepítés / Hozzáadás a kezdőképernyőhöz; iPhone-on Safari → Megosztás → Kezdőképernyőhöz adás, szükség esetén Megnyitás webappként. Saját ikon és külön alkalmazásablak, HTTPS-en. Az élő meccshez internet kell; kapcsolat nélkül újracsatlakozási oldal jelenik meg. A service worker nem tárol API-válaszokat, adminoldalt vagy hitelesített adatokat.
+- Eredeti, helyben előállított halk ambient a kérdések és eredményszünetek alatt. Az első érintés engedélyezi a hangot. Az utolsó öt másodpercben ketyegés, válaszadás után csendesedő sürgetés; a háttérzene halkul a ketyegés alatt.
+- **♪ Hang:** külön zene- és effekthangerő, külön kikapcsolás; meccs közben egyérintéses némítás. A beállítások megmaradnak. Háttérbe tett lapon és megszakadt kapcsolatnál a hang leáll. Ehhez nincs hangfájl-letöltés vagy AI-kérés.
+- A győztes saját képernyőjén konfetti és rövid csilingelés. Pozitív pontszámú holtversenynél minden első helyezett ünnepelhet; frissítés nem ismétli a konfettit. Csökkentett mozgásnál a csillagos győzelmi jelzés animáció nélkül jelenik meg.
+
 ## Kérdésműhely
 
 - Belépéshez kötött `/admin`, nyilvános regisztráció nélkül. Külön tulajdonosi jelszó és asszisztensi bearer-token; a szerver csak ezek hashét tárolja.
-- **940 kérdés:** 140 korábbi, jóváhagyott kérdés és **800 új, ChatGPT-forrású, ellenőrzendő kérdés**, 16 témakörben. A kezdeti cél 1000, a jelenlegi védelmi felső korlát 10 000 kérdés.
+- **940 kérdés:** 140 korábbi és **800 ChatGPT-forrású kérdés**, 16 témakörben. Az induló 800 ellenőrzendőként került be; a tulajdonos azóta jóváhagyta őket. Az aktuális állapotot mindig a tartós bank őrzi. A kezdeti cél 1000, a jelenlegi védelmi felső korlát 10 000 kérdés.
 - Keresés, témakör-, nehézség-, forrás- és állapotszűrés; egyedi szerkesztés, hozzáadás, többes jóváhagyás és archiválás.
 - Eredeti forrás: kézi / ChatGPT / AI-API. A korábbi 140 elem ismeretlen eredetét külön „Korábbi bank” jelöli. Az eredeti készítő és időpont szerkesztéskor megmarad, a módosító külön rögzül.
 - Piszkozat, ellenőrzendő, jóváhagyott, archivált állapot. A közös bankból indított játék csak jóváhagyott kérdéseket kaphat. Egy futó meccs kérdéssora rögzített; egy adminváltozás nem írja át.
@@ -15,7 +23,7 @@ Magyar többjátékos partikvíz, mobilos fókusznézettel és privát kérdésm
 - Teljes, SHA-256 ellenőrzőösszeges JSON-mentés és visszaállítás; GitHub-verzióelőzmények és korábbi bankverzió visszaállítása új commitként. A változásnapló az utolsó 1000 műveletet őrzi a bankban; a korábbi állapotok a Git-előzményekben maradnak.
 - Egyszerre érkező szerkesztéseknél verzióellenőrzés véd a felülírás ellen. Ütközés után a **Bank frissítése** gomb tölti be a legutóbbi távoli állapotot.
 
-Az új 800 kérdés külön szolgáltatói modellhívás nélkül készült. Szerkezetük és egyediségük ellenőrzött; a tények szerkesztői jóváhagyásra várnak. Az eredeti kérdéskártyák a `tools/question-cards/` mappában vannak. A `npm run build:catalog` **újraépíti a teljes induló bankot**, ezért egy már szerkesztett éles bank mentését ne írd felül vele.
+Az új 800 kérdés külön szolgáltatói modellhívás nélkül készült. Szerkezetük és egyediségük ellenőrzött; ez nem teljes körű tényellenőrzés. Az eredeti kérdéskártyák a `tools/question-cards/` mappában vannak. A `npm run build:catalog` **újraépíti a teljes induló bankot**, ezért egy már szerkesztett éles bank mentését ne írd felül vele.
 
 ## Tartós mentés és belépés beállítása
 
@@ -81,6 +89,7 @@ npm test
 npx playwright install chromium
 npm run test:browser
 npm run test:admin-browser
+npm run test:experience-browser
 ```
 
 Az opcionális `.env` sablonja az `.env.example`. A szerver induláskor beolvassa. Helyben a bank atomikusan mentett JSON (`CATALOG_FILE`), Renderben mindig GitHub-tároló. A pool helyben `data/general-pool.json`, Renderben `REDIS_URL`-hoz kapcsolt Key Value. A Free Key Value saját újraindulásakor elveszhet a készlete; a GitHub-bank ettől függetlenül megmarad.

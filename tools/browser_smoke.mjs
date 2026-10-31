@@ -15,7 +15,7 @@ const errors = [];
 const sizes = [[375, 667], [390, 844], [412, 915], [768, 1024], [844, 390], [1365, 900]];
 try {
   for (const [width, height] of sizes) {
-    const context = await browser.newContext({ viewport: { width, height }, isMobile: width < 900, hasTouch: width < 900 });
+    const context = await browser.newContext({ viewport: { width, height }, isMobile: width < 900, hasTouch: width < 900, reducedMotion: 'reduce' });
     const page = await context.newPage();
     page.on('pageerror', error => errors.push(error.message));
     await page.goto(base);
@@ -34,7 +34,7 @@ try {
       await page.reload();
       await page.locator('body.match-focus .question-text').waitFor();
       await mkdir(new URL('../docs/', import.meta.url), { recursive: true });
-      await page.screenshot({ path: new URL('../docs/nolege-v2.1-mobile-focus.png', import.meta.url).pathname, fullPage: true });
+      await page.screenshot({ path: new URL('../docs/nolege-v3.1-mobile-focus.png', import.meta.url).pathname, fullPage: true });
     }
     assert.equal(await page.locator('.sidebar').isVisible(), false);
     assert.equal(await page.locator('.site-header').isVisible(), false);

@@ -1,15 +1,14 @@
-# Nolege 3.0 — ellenőrzés
+# Nolege 3.1 — ellenőrzés
 
-2026. október 28., Node.js 24.22.1.
+2026. október 31., Node.js 24.22.1.
 
-- `npm test`: **69 sikeres teszt, 0 hiba**.
-- `npm audit --omit=dev`: 0 ismert sérülékenység az ellenőrzéskor.
+- `npm test`: **75 sikeres teszt, 0 hiba**.
 - `git diff --check`: sikeres.
 - Az AI-tesztek és az admin böngészőpróbája szimulált szolgáltatót használnak; nem fogyasztanak éles API-kvótát.
 
 ## Adatok és szerver
 
-940 kérdés, ebből 800 új, ChatGPT-forrású, ellenőrzendő elem 16 × 50 elosztásban; 140 eredeti kérdés jóváhagyott. A teszt ellenőrzi a kérdésszövegek egyediségét, a különböző válaszokat, magyarázatot, forrást, készítőt, állapotot és a numerikus kérdések egy részének számítását. Ez nem teljes körű tényellenőrzés; az új tartalom jóváhagyásra vár.
+940 kérdés, ebből 800 ChatGPT-forrású elem 16 × 50 elosztásban; a tulajdonos jelenleg mind a 940 kérdést jóváhagyta. A teszt ellenőrzi a kérdésszövegek egyediségét, a különböző válaszokat, magyarázatot, forrást, készítőt, állapotot és a numerikus kérdések egy részének számítását. Ez nem teljes körű tényellenőrzés. A jóváhagyási munkafolyamat és a készletkimerülés tesztjei külön rögzített mintákkal dolgoznak, az éles bank állapotát nem írják át.
 
 Adminellenőrzések: be nem lépett hozzáférés tiltása; tulajdonosi cookie, CSRF, Origin, módosított cookie elutasítása; belépési próbálkozások korlátozása; külön asszisztensi token; eredeti forrás és készítő megőrzése; verzióütközés; duplikációk kihagyása; jóváhagyott bank frissítése és futó meccs változatlansága; mentés/visszaállítás és sérült ellenőrzőösszeg elutasítása; napló megőrzése.
 
@@ -19,7 +18,7 @@ API-ellenőrzések: állapotfrissítés nem végez modellhívást; explicit kapc
 
 ## Böngésző
 
-A `tools/admin_browser_smoke.mjs` és a `tools/browser_smoke.mjs` valódi Chromiumban futott:
+A `tools/admin_browser_smoke.mjs` és a `tools/browser_smoke.mjs` valódi Chromiumban futott; a háromkérdéses játék csökkentett mozgású nézetben:
 
 | Méret | Admin | Háromkérdéses játék |
 | --- | --- | --- |
@@ -34,6 +33,10 @@ Az adminpróba lefedi a belépést, kérdéslista megnyitását, forrásadatokat
 
 A játékpróba ellenőrzi a válaszokat, eredményszünetek fókusznézetét, chat tiltását és meccs utáni elérését, mobilos túlcsordulást és legalább 44 px-es válaszgombokat. Az első nézetben frissítés után is folytatódik a meccs. A böngészőteszt hosszabb kérdésidőt és 1,5 másodperces eredményszünetet használ, hogy a képernyőmentés ne léptesse át észrevétlenül a rövid tesztablakot.
 
+A `tools/experience_browser_smoke.mjs` normál mozgással külön ellenőrzi mindhárom témát 320 × 568, 375 × 667, 390 × 844, 768 × 1024, 844 × 390 és 1365 × 900 méreten: pipás kiválasztás a megfelelő fejlécpozícióban, újratöltés és oldalváltás utáni megőrzés, adminnézet, telepítési útmutató, vízszintes túlcsordulás hiánya. Valódi service worker: manifest MIME-típus, ikonok, natív telepítési esemény kezelése, offline navigáció, kizárólag nyilvános statikus cache. Külön iPhone-utasítás és tiltott localStorage kezelése.
+
+A két játékosból és egy nézőből álló próba valós Web Audio oszcillátorok létrehozását figyeli: nincs hangkontextus érintés előtt, meccs közben ambient, működő némítás, ketyegés az utolsó öt másodpercben, csak a győztesnél konfettivászon, frissítés után nincs ismétlés, hangerő megőrzése. Az egységtesztek emellett a másodpercenkénti ketyegés ismétlésvédelmét, válaszadás utáni tiltást, háttérbe helyezés és kapcsolatvesztés hangjainak leállítását, holtversenyt, nulla pontot és csökkentett mozgást fedik le.
+
 Újrafuttatás:
 
 ```bash
@@ -42,13 +45,14 @@ npx playwright install chromium
 npm test
 npm run test:browser
 npm run test:admin-browser
+npm run test:experience-browser
 ```
 
 Meglévő böngészőhöz `CHROMIUM_EXECUTABLE` adható meg. A környezetben a Playwright CDN-letöltés hibája miatt npm-ről elérhető Chromium binárissal történt az ellenőrzés. A képernyőméret-emuláció nem fizikai Android/iOS/Safari-próba.
 
-Képek: `docs/nolege-admin-mobile.png`, `docs/nolege-admin-desktop.png`, `docs/nolege-v2.1-mobile-focus.png`.
+Képek: `docs/nolege-admin-mobile.png`, `docs/nolege-admin-desktop.png`, `docs/nolege-v3.1-mobile-focus.png`, `docs/nolege-v3.1-blue-375.png`, `docs/nolege-v3.1-coral-1365.png`, `docs/nolege-v3.1-winner-mobile.png`.
 
-## Éles kiadás
+## Korábbi 3.0 éles kiadások
 
 Az első 3.0 kiadás Render-deployja `dep-dbh1gg8m7kps73f14d3g`, forrása `09a0fd3c`; állapota live. Az éles HTTP-próba ellenőrizte a 3.0.0 verziót, a 940 kérdést, a 800 ChatGPT-forrást, a tulajdonosi Secure/HttpOnly belépést és a külön asszisztensi hozzáférést. Belépés nélkül az admin adatai 401-et adnak, CSRF nélkül a módosítás 403-at. Az export 800 új kérdést, a teljes mentés 940 elemet és érvényes ellenőrzőösszeget adott.
 

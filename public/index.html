@@ -1,8 +1,8 @@
 <!doctype html>
 <html lang="hu">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#0c1519"><title>Nolege · Kvíz a társaságnak</title><link rel="stylesheet" href="/style.css"><script type="module" src="/home.js"></script></head>
-<body>
-  <header class="site-header"><a class="brand" href="/"><span class="brand-mark">n</span>nolege<span class="brand-dot">.</span></a><span class="pill"><span class="live-dot"></span> Együtt, élőben</span></header>
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#0c1519"><title>Nolege · Kvíz a társaságnak</title><link rel="stylesheet" href="/style.css"><script type="module" src="/home.js"></script><link rel="manifest" href="/app.webmanifest"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="/icons/apple-touch-icon.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="Nolege"><script src="/theme.js"></script><link rel="stylesheet" href="/themes.css"><link rel="stylesheet" href="/experience.css"><script type="module" src="/app.js"></script></head>
+<body class="home-body">
+  <header class="site-header"><a class="brand" href="/"><span class="brand-mark">n</span>nolege<span class="brand-dot">.</span></a><div class="theme-switcher" data-theme-switcher role="group" aria-label="Színtéma"></div><span class="pill"><span class="live-dot"></span> Együtt, élőben</span></header>
   <main class="page home-page">
     <section class="hero" id="hero"><span class="eyebrow">A KÖVETKEZŐ JÓ VÁLASZ A TIÉD.</span><h1>Egy társaság.<br><span>Egy jó kvíz.</span></h1><p>Nyiss egy szobát, küldd körbe a linket, és indulhat a játék. Telefonról válaszoltok, a nagy képernyőn mindenki követheti.</p><div class="hero-facts"><span>01 <b>Meghívólink és QR</b></span><span>02 <b>Saját témák</b></span><span>03 <b>Pont minden jó válaszért</b></span></div></section>
     <section id="inviteBanner" class="invite-banner" hidden aria-live="polite"></section>
@@ -20,5 +20,5 @@
     <section class="rooms-section" id="roomsSection"><div class="section-heading"><div><span class="eyebrow">CSATLAKOZZ A TÖBBIEKHEZ</span><h2>Nyitott szobák</h2></div><button class="button quiet" id="refreshRooms" type="button">↻ Frissítés</button></div><div id="roomList" class="room-list" aria-live="polite"><div class="empty-state">Betöltés…</div></div></section>
     <section class="how-it-works"><div><span>1</span><h3>Beléptek</h3><p>Meghívólink vagy szobakód. Nincs regisztráció.</p></div><div><span>2</span><h3>Válaszoltok</h3><p>Négy lehetőség, közös visszaszámlálás.</p></div><div><span>3</span><h3>Pontot gyűjtötök</h3><p>Minden jó válasz pontot ér, a gyorsaság bónuszt ad.</p></div></section>
   </main>
-  <footer class="site-footer"><a class="brand small-brand" href="/">nolege.</a><span>Jó kérdések. Közös pillanatok.</span><a href="/admin">Kérdésműhely · v3.0</a></footer><div id="toast" class="toast" role="status" hidden></div>
+  <footer class="site-footer"><a class="brand small-brand" href="/">nolege.</a><span>Jó kérdések. Közös pillanatok.</span><a href="/admin">Kérdésműhely · v3.1</a><button type="button" class="text-button footer-install" data-install>Telefonra teszem ↗</button></footer><div id="toast" class="toast" role="status" hidden></div>
 </body></html>

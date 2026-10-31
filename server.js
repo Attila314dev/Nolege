@@ -19,7 +19,7 @@ const quiz = createQuizServer({ poolStore, catalog });
 await quiz.ready;
 const port = Number(process.env.PORT || 10000);
 quiz.server.listen(port, '0.0.0.0', () => {
-  console.log(`Nolege 3.0 listening on ${quiz.server.address().port}; catalog store: ${catalogStore.kind}; pool store: ${poolStore.kind}`);
+  console.log(`Nolege 3.1 listening on ${quiz.server.address().port}; catalog store: ${catalogStore.kind}; pool store: ${poolStore.kind}`);
 });
 
 for (const signal of ['SIGTERM', 'SIGINT']) {

@@ -1,0 +1,18 @@
+{
+  "id": "/",
+  "name": "Nolege · Kvíz a társaságnak",
+  "short_name": "Nolege",
+  "lang": "hu",
+  "description": "Jó kérdések. Közös pillanatok. Élő társasági kvíz telefonra.",
+  "start_url": "/?source=homescreen",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#0c1519",
+  "theme_color": "#0c1519",
+  "prefer_related_applications": false,
+  "icons": [
+    { "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/icons/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

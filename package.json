@@ -1,6 +1,6 @@
 {
   "name": "nolege",
-  "version": "3.0.0",
+  "version": "3.1.0",
   "type": "module",
   "engines": {
     "node": ">=22 <25"
@@ -11,7 +11,8 @@
     "test": "node --test",
     "test:browser": "node tools/browser_smoke.mjs",
     "test:admin-browser": "node tools/admin_browser_smoke.mjs",
-    "build:catalog": "node tools/build_catalog.mjs"
+    "build:catalog": "node tools/build_catalog.mjs",
+    "test:experience-browser": "node tools/experience_browser_smoke.mjs"
   },
   "dependencies": {
     "express": "^4.19.2",
